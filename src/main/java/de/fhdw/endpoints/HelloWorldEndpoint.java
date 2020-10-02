@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
 @Path("/api/HelloWorld")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class HelloWorld {
+public class HelloWorldEndpoint {
 
 
     @Path("/get")
