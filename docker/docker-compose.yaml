@@ -13,13 +13,3 @@ services:
     #volumes:
     #  db-data:
     #    driver: local
-
-  keycload:
-    build: ./keycloak
-    env_file:
-      - ./keycloak/keycloak.env # configure keycloak
-    ports:
-      - 8180:8080
-    depends_on:
-      - postgres
-

@@ -12,19 +12,19 @@ import java.time.format.DateTimeFormatter;
 @Path("/api/HelloWorld")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class HelloWorldEndpoint {
+public class HelloWorld {
 
 
     @Path("/get")
     @GET
-    public HelloWorld sendHelloWorld() {
+    public de.fhdw.models.HelloWorld sendHelloWorld() {
         System.out.println("Dies ist der Hello World Test um " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-        return new HelloWorld("Dies ist der Hello World Test um " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+        return new de.fhdw.models.HelloWorld("Dies ist der Hello World Test um " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
     }
 
     @Path("send")
     @POST
-    public HelloWorld getHelloWorld(HelloWorld helloWorld) {
+    public de.fhdw.models.HelloWorld getHelloWorld(de.fhdw.models.HelloWorld helloWorld) {
         System.out.println(helloWorld.value + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
         return helloWorld;
     }
