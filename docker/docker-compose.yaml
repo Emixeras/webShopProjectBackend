@@ -1,0 +1,25 @@
+version: '3'
+services:
+  postgres:
+    build: ./postgres
+
+    env_file:
+      - ./postgres/database.env # configure postgres
+  #  volumes:
+  #    - "./db-data:/var/lib/postgresql/data"
+    ports:
+      - '5432:5432'
+
+    #volumes:
+    #  db-data:
+    #    driver: local
+
+  keycload:
+    build: ./keycloak
+    env_file:
+      - ./keycloak/keycloak.env # configure keycloak
+    ports:
+      - 8180:8080
+    depends_on:
+      - postgres
+
