@@ -1,4 +1,4 @@
-package org.acme;
+package de.fhdw;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
