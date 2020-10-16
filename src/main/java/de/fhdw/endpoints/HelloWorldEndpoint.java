@@ -15,7 +15,7 @@ import java.time.format.DateTimeFormatter;
 public class HelloWorldEndpoint {
 
 
-    @Path("/get")
+    @Path("get")
     @GET
     public de.fhdw.models.HelloWorld sendHelloWorld() {
         System.out.println("Dies ist der Hello World Test um " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
