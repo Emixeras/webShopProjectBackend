@@ -31,13 +31,12 @@ public class UserEndpoint {
     @Transactional
     @Path("/init")
     public List<ShopUser> initTestUser() {
-        if (ShopUser.findById(1L) == null && ShopUser.findById(2L) == null ) {
+        if (ShopUser.findById(1L) == null && ShopUser.findById(2L) == null) {
             ShopUser admin = new ShopUser();
             admin.username = "admin";
             admin.password = "Test1234";
             admin.persist();
             ShopUser shopUser = new ShopUser();
-
             shopUser.username = "user";
             shopUser.password = "Test1234";
             shopUser.birth = new Date(873560374);
