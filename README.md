@@ -1,12 +1,24 @@
 # webshop project
 
 
-# Run locally
+# lokal
 
-install docker (https://docs.docker.com/docker-for-windows/install/)
-change with powershell in ./docker
+Docker starten:
 
-run docker-compose up 
+    docker-compose up 
 
+Docker stoppen:
+    
+    docker-compose down 
+    
+Datenbank zurücksetzen:
+
+    docker-compose down --rmi all
+    
+Docker im Hintergrund starten und laufen lassen:
+
+    docker-compose up -d
+    
+   
 
  
