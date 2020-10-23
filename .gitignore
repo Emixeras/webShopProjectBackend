@@ -34,9 +34,3 @@ pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
 release.properties
-/.gradle/buildOutputCleanup/buildOutputCleanup.lock
-/.gradle/buildOutputCleanup/cache.properties
-/.gradle/checksums/checksums.lock
-/.gradle/6.5/executionHistory/executionHistory.lock
-/.gradle/6.5/fileHashes/fileHashes.lock
-/.gradle/6.5/gc.properties
