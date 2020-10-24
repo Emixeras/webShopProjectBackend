@@ -26,7 +26,6 @@ public class UserEndpoint {
     @Path("list")
     @RolesAllowed("admin")
     public List<ShopUser> returnAllUser() {
-
         LOG.debug("Liste Aller Benutzer abgefragt");
         return ShopUser.listAll();
     }
@@ -55,7 +54,7 @@ public class UserEndpoint {
     }
 
     @GET
-    @RolesAllowed("user")
+    @RolesAllowed("user, admin")
     @Path("login")
     public ShopUser login(@Context SecurityContext securityContext) {
         return ShopUser.findByName(securityContext.getUserPrincipal().getName());
@@ -63,6 +62,7 @@ public class UserEndpoint {
 
     @POST
     @Transactional
+    @PermitAll
     @Path("register")
     public ShopUser register(@NotNull ShopUser shopUser) throws Exception {
         if(ShopUser.findByName(shopUser.username) == null){
