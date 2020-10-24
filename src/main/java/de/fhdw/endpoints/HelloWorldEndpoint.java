@@ -3,9 +3,12 @@ package de.fhdw.endpoints;
 import de.fhdw.models.HelloWorld;
 import org.jboss.logging.Logger;
 
+import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.SecurityContext;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -19,17 +22,23 @@ public class HelloWorldEndpoint {
 
     @Path("get")
     @GET
-    public HelloWorld sendHelloWorld() {
+    public HelloWorld get() {
         LOG.info("Dies ist der Hello World Test um " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-        return new de.fhdw.models.HelloWorld("Dies ist der Hello World Test um " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+        return new HelloWorld("Dies ist der Hello World Test um " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
     }
 
     @Path("post")
     @POST
-    public HelloWorld getHelloWorld(HelloWorld helloWorld) {
+    public HelloWorld post(HelloWorld helloWorld) {
         LOG.info(helloWorld.value + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
         return helloWorld;
     }
 
+    @Path("admin")
+    @GET
+    @RolesAllowed("admin")
+    public HelloWorld getAuthenticated(@Context SecurityContext securityContext){
+        return new HelloWorld("Hallo "+securityContext.getUserPrincipal().getName());
+    }
 
 }
