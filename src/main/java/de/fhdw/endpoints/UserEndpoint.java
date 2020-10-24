@@ -72,4 +72,19 @@ public class UserEndpoint {
         else throw new Exception("Benutzer bereits vorhanden");
     }
 
+    @POST
+    @Transactional
+    @RolesAllowed("user, admin")
+    @Path("edit")
+    public ShopUser editUser(@NotNull ShopUser shopUser, @Context SecurityContext securityContext) throws Exception {
+       ShopUser user =  ShopUser.findByName(securityContext.getUserPrincipal().getName());
+
+       if( user.role == ShopUser.Role.admin || user.id == shopUser.id){
+           shopUser.persist();
+           return shopUser;
+       }
+       else throw new Exception("Permission violation");
+
+    }
+
 }
