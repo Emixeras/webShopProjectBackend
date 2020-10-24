@@ -26,7 +26,7 @@ public class UserEndpoint {
     @Path("list")
     @RolesAllowed("admin")
     public List<ShopUser> returnAllUser() {
-        LOG.debug("Liste Aller Benutzer abgefragt");
+        LOG.info("Liste Aller Benutzer abgefragt");
         return ShopUser.listAll();
     }
 
@@ -40,15 +40,17 @@ public class UserEndpoint {
             admin.username = "admin";
             admin.password = "Test1234";
             admin.role = ShopUser.Role.admin;
-            LOG.debug("Benutzer angelegt: "+admin.toString() );
+            LOG.info("Benutzer angelegt: "+admin.toString() );
             admin.persist();
             ShopUser shopUser = new ShopUser();
             shopUser.username = "user";
             shopUser.password = "Test1234";
+            shopUser.firstName = "Christoph";
+            shopUser.lastName = "Müller";
             shopUser.birth = new Date(873560374);
             shopUser.role = ShopUser.Role.user;
             shopUser.persist();
-            LOG.debug("Benutzer angelegt: "+shopUser.toString() );
+            LOG.info("Benutzer angelegt: "+shopUser.toString() );
         }
         return ShopUser.listAll();
     }

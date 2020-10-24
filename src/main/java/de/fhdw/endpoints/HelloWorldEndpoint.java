@@ -38,6 +38,7 @@ public class HelloWorldEndpoint {
     @GET
     @RolesAllowed("admin")
     public HelloWorld getAuthenticated(@Context SecurityContext securityContext){
+        LOG.info("Hallo +"+securityContext.getUserPrincipal().getName());
         return new HelloWorld("Hallo "+securityContext.getUserPrincipal().getName());
     }
 
