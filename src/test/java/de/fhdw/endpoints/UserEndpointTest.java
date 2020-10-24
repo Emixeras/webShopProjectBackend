@@ -43,4 +43,11 @@ class UserEndpointTest {
     void register() {
         PanacheMock.mock(ShopUser.class);
     }
+
+    @Test
+    void editUser(){
+        PanacheMock.mock(ShopUser.class);
+
+
+    }
 }

@@ -26,6 +26,15 @@ Docker im Hintergrund starten und laufen lassen:
      GET /api/user/init
      Consumes: application/json
      Produces: application/json
+     GET /api/user/login
+     Consumes: application/json
+     Produces: application/json
+     POST /api/user/edit
+     Consumes: application/json
+     Produces: application/json
+     POST /api/user/register
+     Consumes: application/json
+     Produces: application/json
      GET /api/user/list
      Consumes: application/json
      Produces: application/json
@@ -39,8 +48,8 @@ Docker im Hintergrund starten und laufen lassen:
   
   ## Akzeptierte Parameter für einen Benutzer: 
   
-    String: username, password, street, country, postalCode, role;
-    Date:    birth;
+    String: username, password, street, country, postalCode, role, firstName, lastName
+    Date:    birth
     
 Diese Variablen müssen bei der Schnittstelle auch genau so übergeben werden.
    

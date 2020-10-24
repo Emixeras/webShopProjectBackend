@@ -16,7 +16,7 @@ public class ShopUser extends PanacheEntity {
     public String username;
     @Column(nullable = false)
     public String password;
-    public String street, country, postalCode;
+    public String street, country, postalCode, firstName, lastName;
     public Date birth;
     @Column(nullable = false)
     public Role role;
