@@ -79,9 +79,10 @@ public class UserEndpoint {
     public ShopUser editUser(@NotNull ShopUser shopUser, @Context SecurityContext securityContext) throws Exception {
        ShopUser user =  ShopUser.findByName(securityContext.getUserPrincipal().getName());
 
-       if( user.role == ShopUser.Role.admin || user.id == shopUser.id){
-           shopUser.persist();
-           return shopUser;
+       if( user.role == ShopUser.Role.admin || user.id.equals(shopUser.id)){
+           user = shopUser;
+           user.persist();
+           return user;
        }
        else throw new Exception("Permission violation");
 
