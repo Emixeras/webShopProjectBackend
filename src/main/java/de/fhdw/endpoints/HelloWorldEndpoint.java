@@ -3,6 +3,7 @@ package de.fhdw.endpoints;
 import de.fhdw.models.HelloWorld;
 import org.jboss.logging.Logger;
 
+import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.*;
@@ -36,10 +37,9 @@ public class HelloWorldEndpoint {
 
     @Path("admin")
     @GET
-    @RolesAllowed("admin")
-    public HelloWorld getAuthenticated(@Context SecurityContext securityContext){
-        LOG.info("Hallo +"+securityContext.getUserPrincipal().getName());
-        return new HelloWorld("Hallo "+securityContext.getUserPrincipal().getName());
+    @RolesAllowed("user")
+    public String getAuthenticated(@Context SecurityContext securityContext){
+        return securityContext.getUserPrincipal().getName();
     }
 
 }

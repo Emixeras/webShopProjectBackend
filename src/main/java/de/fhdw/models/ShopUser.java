@@ -19,7 +19,7 @@ public class ShopUser extends PanacheEntity {
     public String street, country, postalCode, firstName, lastName;
     public Date birth;
     @Column(nullable = false)
-    public Role role;
+    public String role;
 
     public static ShopUser findByName(String name){
         return find("username", name).firstResult();
