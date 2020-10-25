@@ -37,7 +37,7 @@ public class HelloWorldEndpoint {
 
     @Path("admin")
     @GET
-    @RolesAllowed("user")
+    @RolesAllowed("admin")
     public String getAuthenticated(@Context SecurityContext securityContext){
         return securityContext.getUserPrincipal().getName();
     }
