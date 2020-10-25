@@ -6,11 +6,6 @@ import javax.persistence.Entity;
 
 @Entity
 public class Address extends PanacheEntity {
-
-    public String street, country ;
+    public String street, country;
     public int postalCode;
-
-
-
-
 }

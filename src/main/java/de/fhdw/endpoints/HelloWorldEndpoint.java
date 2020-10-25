@@ -2,8 +2,6 @@ package de.fhdw.endpoints;
 
 import de.fhdw.models.HelloWorld;
 import org.jboss.logging.Logger;
-
-import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.*;
