@@ -14,11 +14,9 @@ services:
     build:
       context:  ./
       dockerfile: ./src/main/docker/Dockerfile.Multistage
-    environment:
-      - quarkus.datasource.jdbc.url=jdbc:postgresql://postgres:5432/shop
-      - quarkus.log.level=INFO
-      - quarkus.log.category."org.hibernate".level=INFO
-      - quarkus.hibernate-orm.database.generation=update
+    image: stormer1911/webshop_backend
+    env_file: 
+      - ./docker/backend/application.properties
     depends_on:
       - postgres
     ports:
