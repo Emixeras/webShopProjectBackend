@@ -1,5 +1,6 @@
 package de.fhdw.endpoints;
 
+import de.fhdw.models.Address;
 import de.fhdw.models.ShopUser;
 import org.jboss.logging.Logger;
 import org.wildfly.common.annotation.NotNull;
@@ -12,6 +13,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.SecurityContext;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -39,7 +41,9 @@ public class UserEndpoint {
             ShopUser admin = new ShopUser();
             admin.username = "admin";
             admin.password = "Test1234";
-            admin.role = "admin";
+            admin.addresses = new ArrayList<Address>();
+
+            admin.role = ShopUser.Role.admin;
             LOG.info("Benutzer angelegt: "+admin.toString() );
             admin.persist();
             ShopUser shopUser = new ShopUser();
@@ -47,8 +51,9 @@ public class UserEndpoint {
             shopUser.password = "Test1234";
             shopUser.firstName = "Christoph";
             shopUser.lastName = "Müller";
+            shopUser.addresses = new ArrayList<Address>();
             shopUser.birth = new Date(873560374);
-            shopUser.role = "user";
+            shopUser.role = ShopUser.Role.user;
             shopUser.persist();
             LOG.info("Benutzer angelegt: "+shopUser.toString() );
         }
@@ -56,7 +61,7 @@ public class UserEndpoint {
     }
 
     @GET
-    @RolesAllowed("admin")
+    @RolesAllowed({"admin", "user"})
     @Path("login")
     public ShopUser login(@Context SecurityContext securityContext) {
         return ShopUser.findByName(securityContext.getUserPrincipal().getName());
@@ -80,14 +85,12 @@ public class UserEndpoint {
     @Path("edit")
     public ShopUser editUser(@NotNull ShopUser shopUser, @Context SecurityContext securityContext) throws Exception {
        ShopUser user =  ShopUser.findByName(securityContext.getUserPrincipal().getName());
-
        if(user.role.equals("admin") || user.id.equals(shopUser.id)){
            user = shopUser;
            user.persist();
            return user;
        }
        else throw new Exception("Permission violation");
-
     }
 
 }
