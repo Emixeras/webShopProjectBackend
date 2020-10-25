@@ -18,6 +18,7 @@ services:
       - quarkus.datasource.jdbc.url=jdbc:postgresql://postgres:5432/shop
       - quarkus.log.level=INFO
       - quarkus.log.category."org.hibernate".level=INFO
+      - quarkus.hibernate-orm.database.generation=update
     depends_on:
       - postgres
     ports:
