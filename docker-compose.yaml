@@ -14,4 +14,11 @@ services:
     build:
       context:  ./
       dockerfile: ./src/main/docker/Dockerfile.Multistage
-    
+    environment:
+      - quarkus.datasource.jdbc.url=jdbc:postgresql://postgres:5432/shop
+      - quarkus.log.level=INFO
+      - quarkus.log.category."org.hibernate".level=INFO
+    depends_on:
+      - postgres
+    ports:
+      - '8080:8080'
