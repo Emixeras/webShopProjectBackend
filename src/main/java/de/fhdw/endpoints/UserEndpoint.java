@@ -56,7 +56,7 @@ public class UserEndpoint {
     }
 
     @GET
-    @RolesAllowed("user, admin")
+    @RolesAllowed("admin")
     @Path("login")
     public ShopUser login(@Context SecurityContext securityContext) {
         return ShopUser.findByName(securityContext.getUserPrincipal().getName());
