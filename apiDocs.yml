@@ -20,6 +20,7 @@ paths:
     get:
       tags:
         - users
+        - admins
       summary: login api returns user object
       operationId: login
       description: |
@@ -31,11 +32,15 @@ paths:
             application/json:
               schema:
                 type: object
-                items:
-                  $ref: '#/components/schemas/UserObject'
+                $ref: '#/components/schemas/UserObject'
         '400':
           description: Object not existent (worst Case) or authentication failed
-
+  /user/edit:
+    put:
+      tags:
+        - users
+        - admins
+      summary: verändert den User der Übertragen wird.
 components:
   schemas:
     UserObject:
@@ -76,7 +81,7 @@ components:
             example: user3
     HelloWorld:
       type: object
-      required: true
+      required: 
         - value
       properties:
         value:

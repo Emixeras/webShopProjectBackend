@@ -11,10 +11,10 @@ services:
       
   backend:
     restart : always
+    image: stormer1911/webshop_backend
     build:
       context:  ./
       dockerfile: ./src/main/docker/Dockerfile.Multistage
-    image: stormer1911/webshop_backend
     env_file: 
       - ./docker/backend/application.properties
     depends_on:
