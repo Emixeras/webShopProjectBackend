@@ -1,0 +1,76 @@
+openapi: 3.0.0
+servers:
+  - description: local Backend Address
+    url: http://localhost:8080/api
+info:
+  description: Dies ist die API des Webshop Backends
+  version: "1.0.0"
+  title: WEBSHOP API
+  contact:
+    email: mirco_christoph.mueller@edu.fhdw.de
+ 
+tags:
+  - name: admins
+    description: Secured Admin-only calls
+  - name: users
+    description: Operations available to regular users
+
+paths:
+  /user/login:
+    get:
+      tags:
+        - users
+      summary: login api returns user object
+      operationId: login
+      description: |
+        by passing the correct user authentication via basic auth you get a json return value containing a json value.
+     
+      responses:
+        '200':
+          description: returning json body with user object
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserObject'
+        '400':
+          description: bad input parameter
+ 
+components:
+  schemas:
+    addressObject:
+      type: object 
+      required:
+      - id
+      - street
+      - postal Code 
+      properties:
+        id:
+          type: number
+          example: 123
+        username:
+          type: string
+          example: user
+    UserObject:
+      type: object
+      required:
+        - id
+        - username
+        - firstName
+        - birth
+        - address
+      properties:
+        id:
+          type: number
+          example: 123
+        username:
+          type: string
+          example: user
+        birth:
+          type: string
+          format: date-time
+          example: '2016-08-29T09:12:33.001Z'
+        address:
+          type: array
+          $ref: '#/components/schemas/addressObject'
