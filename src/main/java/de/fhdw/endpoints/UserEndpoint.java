@@ -43,7 +43,7 @@ public class UserEndpoint {
             admin.password = "Test1234";
             admin.addresses = new ArrayList<Address>();
 
-            admin.role = ShopUser.Role.admin;
+            admin.role = ShopUser.Role.ADMIN;
             LOG.info("Benutzer angelegt: "+admin.toString() );
             admin.persist();
             ShopUser shopUser = new ShopUser();
@@ -53,7 +53,7 @@ public class UserEndpoint {
             shopUser.lastName = "Müller";
             shopUser.addresses = new ArrayList<Address>();
             shopUser.birth = new Date(873560374);
-            shopUser.role = ShopUser.Role.user;
+            shopUser.role = ShopUser.Role.USER;
             shopUser.persist();
             LOG.info("Benutzer angelegt: "+shopUser.toString() );
         }
@@ -85,7 +85,7 @@ public class UserEndpoint {
     @Path("edit")
     public ShopUser editUser(@NotNull ShopUser shopUser, @Context SecurityContext securityContext) throws Exception {
        ShopUser user =  ShopUser.findByName(securityContext.getUserPrincipal().getName());
-       if(user.role.equals("admin") || user.id.equals(shopUser.id)){
+       if(user.role == ShopUser.Role.ADMIN || user.id.equals(shopUser.id)){
            user = shopUser;
            user.persist();
            return user;

@@ -8,7 +8,7 @@ info:
   title: WEBSHOP API
   contact:
     email: mirco_christoph.mueller@edu.fhdw.de
- 
+
 tags:
   - name: admins
     description: Secured Admin-only calls
@@ -24,42 +24,25 @@ paths:
       operationId: login
       description: |
         by passing the correct user authentication via basic auth you get a json return value containing a json value.
-     
       responses:
         '200':
           description: returning json body with user object
           content:
             application/json:
               schema:
-                type: array
+                type: object
                 items:
                   $ref: '#/components/schemas/UserObject'
         '400':
-          description: bad input parameter
- 
+          description: Object not existent (worst Case) or authentication failed
+
 components:
   schemas:
-    addressObject:
-      type: object 
-      required:
-      - id
-      - street
-      - postal Code 
-      properties:
-        id:
-          type: number
-          example: 123
-        username:
-          type: string
-          example: user
     UserObject:
       type: object
       required:
-        - id
         - username
-        - firstName
-        - birth
-        - address
+        - password
       properties:
         id:
           type: number
@@ -71,6 +54,31 @@ components:
           type: string
           format: date-time
           example: '2016-08-29T09:12:33.001Z'
+        password:
+          type: string
+          example: "Test1234"
         address:
-          type: array
           $ref: '#/components/schemas/addressObject'
+    addressObject:
+      type: array
+      items:
+        type: object
+        required:
+          - id
+          - street
+          - postal Code
+        properties:
+          id:
+            type: number
+            example: 123
+          username:
+            type: string
+            example: user3
+    HelloWorld:
+      type: object
+      required: true
+        - value
+      properties:
+        value:
+          type: string
+          example: "dies ist der Hello World Test"
