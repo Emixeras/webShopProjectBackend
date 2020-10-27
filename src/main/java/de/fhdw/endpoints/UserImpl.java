@@ -45,17 +45,9 @@ public class UserImpl implements UserInterface {
     @Override
     public ShopUser post(@NotNull ShopUser shopUser) throws Exception {
         if (ShopUser.findByName(shopUser.username) == null) {
-            shopUser.role = ShopUser.Role.USER;
-            if(shopUser.addresses != null){
-             List<Address> addresses = new ArrayList<>();
-                shopUser.addresses.stream().forEach(i -> {
-                 Address temp = new Address();
-                 temp.street = i.street;
-                 temp.postalCode = i.postalCode;
-                 temp.country = i.country;
-                 addresses.add(temp);
-             });
-                shopUser.addresses = addresses;
+            if(shopUser.addresses != null)
+            {
+                shopUser.addresses.forEach(address -> address.persist());
             }
             shopUser.persist();
             return shopUser;

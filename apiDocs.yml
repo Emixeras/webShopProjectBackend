@@ -178,9 +178,9 @@ components:
           type: string
           format: date-time
           example: '2016-08-29T09:12:33.001Z'
-        address:
-          $ref: '#/components/schemas/address'
-    address:
+        addresses:
+          $ref: '#/components/schemas/addresses'
+    addresses:
       type: array
       items:
         type: object

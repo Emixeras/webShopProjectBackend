@@ -47,6 +47,7 @@ public class TestImpl implements TestInterface {
             address.country="DE";
             address.postalCode = 33333;
             address.street="Carl-Bertelsmann-Stra0e 12";
+            address.persist();
             List<Address> addresses = new ArrayList<>();
             addresses.add(address);
             ShopUser shopUser = new ShopUser();
