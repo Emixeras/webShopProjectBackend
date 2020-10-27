@@ -25,6 +25,7 @@ public class ShopUser extends PanacheEntity {
     public String email;
 
     @OneToMany(
+            cascade = CascadeType.ALL,
             orphanRemoval = true,
             fetch = FetchType.EAGER
     )

@@ -64,10 +64,10 @@ public class UserImpl implements UserInterface {
             user.email = shopUser.email;
             user.lastName = shopUser.lastName;
             user.firstName = shopUser.firstName;
-            if(shopUser.addresses != null){
+         /*   if(shopUser.addresses != null){
                 user.addresses.clear();
                 user.addresses.addAll(shopUser.addresses);
-            }
+            }*/
             user.password = shopUser.password;
             user.birth = shopUser.birth;
             return user;
