@@ -10,9 +10,7 @@ import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.ApplicationScoped;
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.SecurityContext;
+import javax.ws.rs.core.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -49,12 +47,14 @@ public class TestImpl implements TestInterface {
             address.country="DE";
             address.postalCode = 33333;
             address.street="Carl-Bertelsmann-Stra0e 12";
+            List<Address> addresses = new ArrayList<>();
+            addresses.add(address);
             ShopUser shopUser = new ShopUser();
             shopUser.username = "user";
             shopUser.password = "Test1234";
             shopUser.firstName = "Christoph";
             shopUser.lastName = "Müller";
-            shopUser.addresses = null;
+            shopUser.addresses = addresses;
             shopUser.birth = new Date(873560374);
             shopUser.role = ShopUser.Role.USER;
             shopUser.email= "mirco_christoph.mueller@edu.fhdw.de";
@@ -66,7 +66,6 @@ public class TestImpl implements TestInterface {
 
     @Override
     @GET
-    @Path("get")
     public HelloWorld get() {
         LOG.info("Dies ist der Hello World Test um "
                 + LocalDateTime.now().format(DateTimeFormatter.ofPattern(DATEPATTERN)));
@@ -75,7 +74,6 @@ public class TestImpl implements TestInterface {
     }
 
     @POST
-    @Path("post")
     @Override
     public HelloWorld post(HelloWorld helloWorld) {
         LOG.info(helloWorld.value + LocalDateTime.now().format(DateTimeFormatter.ofPattern(DATEPATTERN)));
@@ -85,6 +83,7 @@ public class TestImpl implements TestInterface {
     @Override
     @GET
     @RolesAllowed("admin")
+    @Path("authenticated")
     public String getAuthenticated(@Context SecurityContext securityContext) {
         return securityContext.getUserPrincipal().getName();
     }

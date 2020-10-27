@@ -1,7 +1,7 @@
 openapi: 3.0.0
 servers:
   - description: local Backend Address
-    url: 'http://localhost:8080/api'
+    url: 'http://localhost:8080/'
 info:
   description: Dies ist die API des Webshop Backends
   version: 1.0.0
@@ -16,6 +16,8 @@ tags:
 paths:
   /user/:
     get:
+      security:
+        - basicAuth: [ ]
       tags:
         - user
       summary: login api returns user object
@@ -25,27 +27,23 @@ paths:
         return value containing a json value.
       responses:
         '200':
-          description: returning json body with user object
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/user'
-        '400':
-          description: Object not existent (worst Case) or authentication failed
+          $ref: '#/components/responses/UserObject'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
     put:
+      security:
+        - basicAuth: [ ]
       tags:
         - user
       summary: updates user
       description: if run as admin no user Check is performed
       responses:
         '200':
-          description: returning body with new user Object
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/user'
+          $ref: '#/components/responses/UserObject'
         '400':
           description: something failed
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
       requestBody:
         content:
           application/json:
@@ -56,14 +54,10 @@ paths:
     post:
       tags:
         - user
-      summary: posts a user Object and stores it in Database
+      summary: posts a user Object and stores it in Database could be seen as "register new user"
       responses:
         '200':
-          description: returning body with new user Object
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/user'
+          $ref: '#/components/responses/UserObject'
       requestBody:
         content:
           application/json:
@@ -73,6 +67,8 @@ paths:
         required: true
   '/user/{username}':
     delete:
+      security:
+        - basicAuth: [ ]
       tags:
         - user
       summary: Delete user
@@ -90,22 +86,24 @@ paths:
       responses:
         '400':
           description: Invalid username supplied
+        '200':
+          description: successful
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
   /user/getAll:
     get:
+      security:
+        - basicAuth: [ admin ]
       tags:
         - user
       summary: returns a list of all users - Admin Only
       responses:
         '200':
-          description: successful
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/user'
+          $ref: '#/components/responses/UserArray'
         '400':
           description: Object not existent (worst Case) or authentication failed
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
   /test:
     get:
       tags:
@@ -113,38 +111,26 @@ paths:
       summary: a simple Hello World Get
       responses:
         '200':
-          description: successful
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HelloWorld'
+          $ref: '#/components/responses/HelloWorld'
     post:
       tags:
         - test
       summary: a simple post with value in printed in Backend Log
       responses:
         '200':
-          description: successful
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HelloWorld'
-  /test/testUserData:
+          $ref: '#/components/responses/HelloWorld'
+  /test/userTestData:
     get:
       tags:
         - test
       summary: add init user to database only if they do not exist
       responses:
         '200':
-          description: successful
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/user'
-  /test/autenticated:
+          $ref: '#/components/responses/UserArray'
+  /test/authenticated:
     get:
+      security:
+        - basicAuth: [ ]
       tags:
         - test
       summary: returns the authenticated admin user
@@ -152,7 +138,7 @@ paths:
         '200':
           description: succesful
           content:
-            application/json:
+            text/plain:
               schema:
                 type: string
                 example: admin
@@ -166,7 +152,7 @@ components:
       properties:
         id:
           type: number
-          example: 123
+          example: 2
         username:
           type: string
           example: user
@@ -205,7 +191,7 @@ components:
         properties:
           id:
             type: number
-            example: 123
+            example: 2
           street:
             type: string
             example: Amselweg 7
@@ -215,7 +201,6 @@ components:
           country:
             type: string
             example: DE
-
     HelloWorld:
       type: object
       required:
@@ -224,3 +209,36 @@ components:
         value:
           type: string
           example: dies ist der Hello World Test
+  responses:
+    UnauthorizedError:
+      description: Authentication information is missing or invalid
+      headers:
+        WWW_Authenticate:
+          schema:
+            type: string
+    UserObject:
+      description: returning json body with user object
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/user'
+    UserArray:
+      description: successful
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/user'
+    HelloWorld:
+      description: successful
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HelloWorld'
+
+  securitySchemes:
+    basicAuth: # <-- arbitrary name for the security scheme
+      type: http
+      scheme: basic
+
