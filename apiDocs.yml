@@ -14,36 +14,123 @@ tags:
     description: Secured Admin-only calls
   - name: users
     description: Operations available to regular users
+  - name: everyone
+    description: Operations available to everyone
 
 paths:
-  /user/login:
+  /user/{username}:
     get:
       tags:
         - users
-        - admins
       summary: login api returns user object
       operationId: login
       description: |
         by passing the correct user authentication via basic auth you get a json return value containing a json value.
       responses:
-        '200':
+        "200":
           description: returning json body with user object
           content:
             application/json:
               schema:
                 type: object
-                $ref: '#/components/schemas/UserObject'
-        '400':
-          description: Object not existent (worst Case) or authentication failed
-  /user/edit:
+                $ref: "#/components/schemas/User"
+        "400":
+          description: Object not existent (worst Case) or authentication failed 
     put:
       tags:
         - users
         - admins
-      summary: verändert den User der Übertragen wird.
+      summary: updates user 
+      description: if run as admin no user Check is performed
+      parameters:
+        - name: username
+          in: path
+          description: name that need to be updated
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: returning body with new user Object
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: "#/components/schemas/User"
+        "400":
+          description: something failed
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+        description: Updated user object
+        required: true
+    delete:
+      tags:
+        - users
+        - admins
+      summary: Delete user
+      description: This can only be done by the logged in user. if run as logged in Admin no check will be performed
+      operationId: deleteUser
+      parameters:
+        - name: username
+          in: path
+          description: The name that needs to be deleted
+          required: true
+          schema:
+            type: string
+      responses:
+        '400':
+          description: Invalid username supplied
+    post:
+        tags:
+          - "everyone"
+        summary: posts a user Object and stores it in Database
+        parameters:
+        - name: username
+          in: path
+          description: The name of the new User
+          required: true
+          schema:
+            type: string
+        responses:
+          "200":
+            description: returning body with new user Object
+            content:
+              application/json:
+                schema:
+                  type: object
+                  $ref: "#/components/schemas/User"
+ 
+        requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+          description: Updated user object
+          required: true
+        
+  /user/getAll:
+    get:
+      tags:
+        - "admins"
+      summary: returns a list of all users
+      responses:
+        "200":
+          description: succesfull
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  $ref: "#/components/schemas/User"
+   
+
 components:
   schemas:
-    UserObject:
+    User:
       type: object
       required:
         - username
@@ -58,12 +145,12 @@ components:
         birth:
           type: string
           format: date-time
-          example: '2016-08-29T09:12:33.001Z'
+          example: "2016-08-29T09:12:33.001Z"
         password:
           type: string
           example: "Test1234"
         address:
-          $ref: '#/components/schemas/addressObject'
+          $ref: "#/components/schemas/addressObject"
     addressObject:
       type: array
       items:
@@ -81,7 +168,7 @@ components:
             example: user3
     HelloWorld:
       type: object
-      required: 
+      required:
         - value
       properties:
         value:

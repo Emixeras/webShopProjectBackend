@@ -3,55 +3,29 @@
 
 # lokal
 
-Docker starten:
+Docker image von Dockerhub ziehen:
 
-    docker-compose up 
+    docker-compose pull 
+
+Docker starten:
+    
+    docker-compose up
+
 
 Docker stoppen:
     
     docker-compose down 
-    
+
+
 Datenbank zurücksetzen:
 
     docker-compose down --rmi all
-    
+
+
 Docker im Hintergrund starten und laufen lassen:
 
     docker-compose up -d
     
-   
- # Schnittstellendefinition
- 
-     /api/user
-     GET /api/user/init
-     Consumes: application/json
-     Produces: application/json
-     GET /api/user/login
-     Consumes: application/json
-     Produces: application/json
-     POST /api/user/edit
-     Consumes: application/json
-     Produces: application/json
-     POST /api/user/register
-     Consumes: application/json
-     Produces: application/json
-     GET /api/user/list
-     Consumes: application/json
-     Produces: application/json
-     /api/HelloWorld
-     GET /api/HelloWorld/get
-     Consumes: application/json
-     Produces: application/json
-     POST /api/HelloWorld/send
-     Consumes: application/json
-     Produces: application/json
-  
-  ## Akzeptierte Parameter für einen Benutzer: 
-  
-    String: username, password, street, country, postalCode, role, firstName, lastName
-    Date:    birth
-    
-Diese Variablen müssen bei der Schnittstelle auch genau so übergeben werden.
    
  # Backend Test:
  
