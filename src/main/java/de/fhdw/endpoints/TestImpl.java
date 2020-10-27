@@ -30,27 +30,34 @@ public class TestImpl implements TestInterface {
 
     @Override
     @GET
-    @PermitAll
     @Transactional
     @Path("userTestData")
+    @PermitAll
     public List<ShopUser> userTestData() {
-        if (ShopUser.findById(1L) == null && ShopUser.findById(2L) == null) {
+        if (ShopUser.findById(1L) == null) {
             ShopUser admin = new ShopUser();
             admin.username = "admin";
             admin.password = "Test1234";
-            admin.addresses = new ArrayList<Address>();
+            admin.addresses = null;
 
             admin.role = ShopUser.Role.ADMIN;
             LOG.info("Benutzer angelegt: " + admin.toString());
             admin.persist();
+        }
+        if(ShopUser.findById(2L) == null){
+            Address address = new Address();
+            address.country="DE";
+            address.postalCode = 33333;
+            address.street="Carl-Bertelsmann-Stra0e 12";
             ShopUser shopUser = new ShopUser();
             shopUser.username = "user";
             shopUser.password = "Test1234";
             shopUser.firstName = "Christoph";
             shopUser.lastName = "Müller";
-            shopUser.addresses = new ArrayList<Address>();
+            shopUser.addresses = null;
             shopUser.birth = new Date(873560374);
             shopUser.role = ShopUser.Role.USER;
+            shopUser.email= "mirco_christoph.mueller@edu.fhdw.de";
             shopUser.persist();
             LOG.info("Benutzer angelegt: " + shopUser.toString());
         }
@@ -80,7 +87,6 @@ public class TestImpl implements TestInterface {
     @RolesAllowed("admin")
     public String getAuthenticated(@Context SecurityContext securityContext) {
         return securityContext.getUserPrincipal().getName();
-
     }
 
 }

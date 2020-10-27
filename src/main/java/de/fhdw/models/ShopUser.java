@@ -3,6 +3,7 @@ package de.fhdw.models;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.util.Date;
 import java.util.List;
 
@@ -20,10 +21,13 @@ public class ShopUser extends PanacheEntity {
     public String password;
     public String firstName;
     public String lastName;
+    @Email
+    public String email;
 
     @OneToMany(
             cascade = CascadeType.ALL,
-            orphanRemoval = true
+            orphanRemoval = true,
+            fetch = FetchType.EAGER
     )
     @Column(nullable = true)
     public List<Address> addresses;

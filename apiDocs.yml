@@ -1,77 +1,84 @@
 openapi: 3.0.0
 servers:
   - description: local Backend Address
-    url: http://localhost:8080/api
+    url: 'http://localhost:8080/api'
 info:
   description: Dies ist die API des Webshop Backends
-  version: "1.0.0"
+  version: 1.0.0
   title: WEBSHOP API
   contact:
     email: mirco_christoph.mueller@edu.fhdw.de
-
 tags:
-  - name: admins
-    description: Secured Admin-only calls
-  - name: users
+  - name: user
     description: Operations on User Object
-  - name: everyone
-    description: Operations available to everyone
-
+  - name: test
+    description: test Api
 paths:
   /user/:
     get:
       tags:
-        - users
+        - user
       summary: login api returns user object
       operationId: login
-      description: |
-        by passing the correct user authentication via basic auth you get a json return value containing a json value.
+      description: >
+        by passing the correct user authentication via basic auth you get a json
+        return value containing a json value.
       responses:
-        "200":
+        '200':
           description: returning json body with user object
           content:
             application/json:
               schema:
-                type: object
-                $ref: "#/components/schemas/User"
-        "400":
+                $ref: '#/components/schemas/user'
+        '400':
           description: Object not existent (worst Case) or authentication failed
     put:
       tags:
-        - users
-        - admins
+        - user
       summary: updates user
       description: if run as admin no user Check is performed
-      parameters:
-        - name: username
-          in: path
-          description: name that need to be updated
-          required: true
-          schema:
-            type: string
       responses:
-        "200":
+        '200':
           description: returning body with new user Object
           content:
             application/json:
               schema:
-                type: object
-                $ref: "#/components/schemas/User"
-        "400":
+                $ref: '#/components/schemas/user'
+        '400':
           description: something failed
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/User"
+              $ref: '#/components/schemas/user'
         description: Updated user object
         required: true
+    post:
+      tags:
+        - user
+      summary: posts a user Object and stores it in Database
+      responses:
+        '200':
+          description: returning body with new user Object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user'
+        description: Updated user object
+        required: true
+  '/user/{username}':
     delete:
       tags:
-        - users
-        - admins
+        - user
       summary: Delete user
-      description: This can only be done by the logged in user. if run as logged in Admin no check will be performed
+      description: >-
+        This can only be done by the logged in user. if run as logged in Admin
+        no check will be performed
       operationId: deleteUser
       parameters:
         - name: username
@@ -83,54 +90,75 @@ paths:
       responses:
         '400':
           description: Invalid username supplied
-    post:
-        tags:
-          - "everyone"
-        summary: posts a user Object and stores it in Database
-        parameters:
-        - name: username
-          in: path
-          description: The name of the new User
-          required: true
-          schema:
-            type: string
-        responses:
-          "200":
-            description: returning body with new user Object
-            content:
-              application/json:
-                schema:
-                  type: object
-                  $ref: "#/components/schemas/User"
-
-        requestBody:
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/User"
-          description: Updated user object
-          required: true
-
   /user/getAll:
     get:
       tags:
-        - "admins"
-      summary: returns a list of all users
+        - user
+      summary: returns a list of all users - Admin Only
       responses:
-        "200":
-          description: succesfull
+        '200':
+          description: successful
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/UserObject'
+                  $ref: '#/components/schemas/user'
         '400':
           description: Object not existent (worst Case) or authentication failed
-
+  /test:
+    get:
+      tags:
+        - test
+      summary: a simple Hello World Get
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HelloWorld'
+    post:
+      tags:
+        - test
+      summary: a simple post with value in printed in Backend Log
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HelloWorld'
+  /test/testUserData:
+    get:
+      tags:
+        - test
+      summary: add init user to database only if they do not exist
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/user'
+  /test/autenticated:
+    get:
+      tags:
+        - test
+      summary: returns the authenticated admin user
+      responses:
+        '200':
+          description: succesful
+          content:
+            application/json:
+              schema:
+                type: string
+                example: admin
 components:
   schemas:
-    UserObject:
+    user:
       type: object
       required:
         - username
@@ -142,35 +170,57 @@ components:
         username:
           type: string
           example: user
+        password:
+          type: string
+          example: Test1234
+        firstName:
+          type: string
+          example: Heinz
+        lastName:
+          type: string
+          example: Mayer
+        email:
+          type: string
+          example: test@test.de
+        role:
+          type: string
+          enum:
+            - USER
+            - ADMIN
+          example: USER
         birth:
           type: string
           format: date-time
           example: '2016-08-29T09:12:33.001Z'
-        password:
-          type: string
-          example: "Test1234"
         address:
-          $ref: '#/components/schemas/addressObject'
-    addressObject:
+          $ref: '#/components/schemas/address'
+    address:
       type: array
       items:
         type: object
         required:
           - id
           - street
-          - postal Code
+          - postalCode
         properties:
           id:
             type: number
             example: 123
-          username:
+          street:
             type: string
-            example: user3
+            example: Amselweg 7
+          postalCode:
+            type: number
+            example: 33333
+          country:
+            type: string
+            example: DE
+
     HelloWorld:
       type: object
-      required: true
+      required:
         - value
       properties:
         value:
           type: string
-          example: "dies ist der Hello World Test"
+          example: dies ist der Hello World Test

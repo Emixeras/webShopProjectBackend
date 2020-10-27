@@ -1,11 +1,9 @@
 package de.fhdw.endpoints;
 
-import de.fhdw.models.Address;
 import de.fhdw.models.ShopUser;
 import org.jboss.logging.Logger;
 import org.wildfly.common.annotation.NotNull;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
-
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.ApplicationScoped;
@@ -14,8 +12,6 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.SecurityContext;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @ApplicationScoped
@@ -47,12 +43,13 @@ public class UserImpl implements UserInterface {
     @Override
     public ShopUser post(@NotNull ShopUser shopUser) throws Exception {
         if (ShopUser.findByName(shopUser.username) == null) {
+            shopUser.role = ShopUser.Role.USER;
             shopUser.persist();
             return shopUser;
         } else throw new Exception("Benutzer bereits vorhanden");
     }
 
-    @POST
+    @PUT
     @Transactional
     @RolesAllowed("user, admin")
     @Override
@@ -67,8 +64,16 @@ public class UserImpl implements UserInterface {
 
     @Override
     @Path("{username}")
-    public Boolean delete(String username, SecurityContext securityContext) {
-        return null;
+    @DELETE
+    @Transactional
+    public Boolean delete(@PathParam String username,@Context SecurityContext securityContext) {
+        ShopUser deleted = ShopUser.findByName(username);
+        ShopUser shopUser =  ShopUser.findByName(securityContext.getUserPrincipal().getName());
+        if (shopUser.role == ShopUser.Role.ADMIN || username.equals(deleted.username)){
+            deleted.delete();
+            return true;
+        }
+        return false;
     }
 
 
