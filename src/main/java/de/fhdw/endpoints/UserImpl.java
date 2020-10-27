@@ -4,6 +4,7 @@ import de.fhdw.models.Address;
 import de.fhdw.models.ShopUser;
 import org.jboss.logging.Logger;
 import org.wildfly.common.annotation.NotNull;
+import org.jboss.resteasy.annotations.jaxrs.PathParam;
 
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
@@ -25,7 +26,7 @@ public class UserImpl implements UserInterface {
     private static final Logger LOG = Logger.getLogger(UserImpl.class);
 
     @GET
-    @Path("list")
+    @Path("getAll")
     @RolesAllowed("admin")
     @Override
     public List<ShopUser> getAll() {
@@ -33,11 +34,8 @@ public class UserImpl implements UserInterface {
         return ShopUser.listAll();
     }
 
-  
-
     @GET
     @RolesAllowed({"admin", "user"})
-    @Path("login")
     @Override
     public ShopUser get(@Context SecurityContext securityContext) {
         return ShopUser.findByName(securityContext.getUserPrincipal().getName());
@@ -46,44 +44,32 @@ public class UserImpl implements UserInterface {
     @POST
     @Transactional
     @PermitAll
-    @Path("register")
     @Override
     public ShopUser post(@NotNull ShopUser shopUser) throws Exception {
-        if(ShopUser.findByName(shopUser.username) == null){
+        if (ShopUser.findByName(shopUser.username) == null) {
             shopUser.persist();
             return shopUser;
-        }
-        else throw new Exception("Benutzer bereits vorhanden");
+        } else throw new Exception("Benutzer bereits vorhanden");
     }
 
     @POST
     @Transactional
     @RolesAllowed("user, admin")
+    @Override
+    public ShopUser put(@NotNull ShopUser shopUser, @Context SecurityContext securityContext) throws Exception {
+        ShopUser user = ShopUser.findByName(securityContext.getUserPrincipal().getName());
+        if (user.role == ShopUser.Role.ADMIN || user.id.equals(shopUser.id)) {
+            user = shopUser;
+            user.persist();
+            return user;
+        } else throw new Exception("Permission violation");
+    }
+
+    @Override
     @Path("{username}")
-    @Override
-    public ShopUser put(@PathParam String username, @NotNull ShopUser shopUser, @Context SecurityContext securityContext) throws Exception {
-       ShopUser user =  ShopUser.findByName(securityContext.getUserPrincipal().getName());
-       if(user.role == ShopUser.Role.ADMIN || user.id.equals(shopUser.id)){
-           user = shopUser;
-           user.persist();
-           return user;
-       }
-       else throw new Exception("Permission violation");
-    }
-
-    @Override
-    public Boolean delete(@PathParam String username) {
-        // TODO Auto-generated method stub
+    public Boolean delete(String username, SecurityContext securityContext) {
         return null;
     }
 
-    @Override
-    public ShopUser put(ShopUser shopUser, SecurityContext securityContext) throws Exception {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-
-   
 
 }

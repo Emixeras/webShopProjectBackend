@@ -35,12 +35,12 @@ paths:
                 type: object
                 $ref: "#/components/schemas/User"
         "400":
-          description: Object not existent (worst Case) or authentication failed 
+          description: Object not existent (worst Case) or authentication failed
     put:
       tags:
         - users
         - admins
-      summary: updates user 
+      summary: updates user
       description: if run as admin no user Check is performed
       parameters:
         - name: username
@@ -102,7 +102,7 @@ paths:
                 schema:
                   type: object
                   $ref: "#/components/schemas/User"
- 
+
         requestBody:
           content:
             application/json:
@@ -110,7 +110,7 @@ paths:
                 $ref: "#/components/schemas/User"
           description: Updated user object
           required: true
-        
+
   /user/getAll:
     get:
       tags:
@@ -124,13 +124,13 @@ paths:
               schema:
                 type: array
                 items:
-                  type: object
-                  $ref: "#/components/schemas/User"
-   
+                  $ref: '#/components/schemas/UserObject'
+        '400':
+          description: Object not existent (worst Case) or authentication failed
 
 components:
   schemas:
-    User:
+    UserObject:
       type: object
       required:
         - username
@@ -145,12 +145,12 @@ components:
         birth:
           type: string
           format: date-time
-          example: "2016-08-29T09:12:33.001Z"
+          example: '2016-08-29T09:12:33.001Z'
         password:
           type: string
           example: "Test1234"
         address:
-          $ref: "#/components/schemas/addressObject"
+          $ref: '#/components/schemas/addressObject'
     addressObject:
       type: array
       items:
@@ -168,7 +168,7 @@ components:
             example: user3
     HelloWorld:
       type: object
-      required:
+      required: true
         - value
       properties:
         value:
