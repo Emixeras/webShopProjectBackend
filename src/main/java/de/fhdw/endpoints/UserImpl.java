@@ -39,7 +39,7 @@ public class UserImpl implements UserInterface {
     @RolesAllowed({"admin", "user"})
     @Path("login")
     @Override
-    public ShopUser login(@Context SecurityContext securityContext) {
+    public ShopUser get(@Context SecurityContext securityContext) {
         return ShopUser.findByName(securityContext.getUserPrincipal().getName());
     }
 
@@ -48,7 +48,7 @@ public class UserImpl implements UserInterface {
     @PermitAll
     @Path("register")
     @Override
-    public ShopUser register(@NotNull ShopUser shopUser) throws Exception {
+    public ShopUser post(@NotNull ShopUser shopUser) throws Exception {
         if(ShopUser.findByName(shopUser.username) == null){
             shopUser.persist();
             return shopUser;
@@ -59,9 +59,9 @@ public class UserImpl implements UserInterface {
     @POST
     @Transactional
     @RolesAllowed("user, admin")
-    @Path("edit")
+    @Path("{username}")
     @Override
-    public ShopUser edit(@NotNull ShopUser shopUser, @Context SecurityContext securityContext) throws Exception {
+    public ShopUser put(@PathParam String username, @NotNull ShopUser shopUser, @Context SecurityContext securityContext) throws Exception {
        ShopUser user =  ShopUser.findByName(securityContext.getUserPrincipal().getName());
        if(user.role == ShopUser.Role.ADMIN || user.id.equals(shopUser.id)){
            user = shopUser;
@@ -70,6 +70,19 @@ public class UserImpl implements UserInterface {
        }
        else throw new Exception("Permission violation");
     }
+
+    @Override
+    public Boolean delete(@PathParam String username) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public ShopUser put(ShopUser shopUser, SecurityContext securityContext) throws Exception {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 
    
 

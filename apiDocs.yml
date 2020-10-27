@@ -13,12 +13,12 @@ tags:
   - name: admins
     description: Secured Admin-only calls
   - name: users
-    description: Operations available to regular users
+    description: Operations on User Object
   - name: everyone
     description: Operations available to everyone
 
 paths:
-  /user/{username}:
+  /user/:
     get:
       tags:
         - users
