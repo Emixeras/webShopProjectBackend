@@ -2,16 +2,12 @@ package de.fhdw.models;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
 
-@Entity
+@Entity(name = "Address")
+@Table(name = "address")
 public class Address extends PanacheEntity {
-    public Address(String street, String country, int postalCode) {
-        this.street = street;
-        this.country = country;
-        this.postalCode = postalCode;
-    }
+
 
     public Address() {
     }
@@ -20,4 +16,8 @@ public class Address extends PanacheEntity {
     public String country;
     @Column(nullable = false)
     public int postalCode;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    public ShopUser shopUser;
+
 }

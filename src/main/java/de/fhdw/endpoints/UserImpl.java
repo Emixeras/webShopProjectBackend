@@ -45,10 +45,6 @@ public class UserImpl implements UserInterface {
     @Override
     public ShopUser post(@NotNull ShopUser shopUser) throws Exception {
         if (ShopUser.findByName(shopUser.username) == null) {
-            if(shopUser.addresses != null)
-            {
-                shopUser.addresses.forEach(address -> address.persist());
-            }
             shopUser.persist();
             return shopUser;
         } else throw new Exception("Benutzer bereits vorhanden");

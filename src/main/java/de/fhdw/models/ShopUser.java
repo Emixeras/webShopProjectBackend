@@ -8,7 +8,8 @@ import java.util.Date;
 import java.util.List;
 
 
-@Entity
+@Entity(name = "ShopUser")
+@Table(name = "shopuser")
 public class ShopUser extends PanacheEntity {
 
     public enum Role {
@@ -25,11 +26,11 @@ public class ShopUser extends PanacheEntity {
     public String email;
 
     @OneToMany(
+            mappedBy = "shopUser",
             cascade = CascadeType.ALL,
-            orphanRemoval = true,
-            fetch = FetchType.EAGER
+            orphanRemoval = true
+            //fetch = FetchType.EAGER
     )
-    @Column(nullable = true)
     public List<Address> addresses;
     public Date birth;
 
