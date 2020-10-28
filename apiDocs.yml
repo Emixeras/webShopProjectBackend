@@ -152,10 +152,10 @@ components:
       properties:
         id:
           type: number
-          example: 2
+
         username:
           type: string
-          example: user
+          example: user5
         password:
           type: string
           example: Test1234
@@ -191,7 +191,7 @@ components:
         properties:
           id:
             type: number
-            example: 2
+
           street:
             type: string
             example: Amselweg 7
