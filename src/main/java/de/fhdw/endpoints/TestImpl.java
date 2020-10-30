@@ -34,8 +34,14 @@ public class TestImpl implements TestInterface {
         if (ShopUser.findById(1L) == null) {
             ShopUser admin = new ShopUser();
             admin.email = "admin@admin.de";
+            admin.firstName = "Daniel";
+            admin.lastName = "Pilot";
             admin.password = "Test1234";
             admin.role = ShopUser.Role.ADMIN;
+            admin.birth = new Date(773560374);
+            admin.street = "amselweg";
+            admin.streetNumber = 123;
+            admin.postalCode = 33330;
             LOG.info("Benutzer angelegt: " + admin.toString());
             admin.persist();
         }

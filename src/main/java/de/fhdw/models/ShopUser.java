@@ -25,7 +25,6 @@ public class ShopUser extends PanacheEntity {
     public String firstName;
     @Column(nullable = false)
     public String lastName;
-
     public String street;
     public int streetNumber;
     public String town;
