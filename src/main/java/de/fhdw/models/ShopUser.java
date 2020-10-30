@@ -14,21 +14,23 @@ import java.util.List;
 public class ShopUser extends PanacheEntity {
 
     public enum Role {
-        ADMIN, USER
+        ADMIN, EMPLOYEE, USER
     }
 
     @Column(nullable = false, unique = true)
     public String email;
     @Column(nullable = false)
     public String password;
+    @Column(nullable = false)
     public String firstName;
+    @Column(nullable = false)
     public String lastName;
-
 
     public String street;
     public int streetNumber;
     public String town;
     public int postalCode;
+    @Column(nullable = false)
     public Date birth;
 
     @JsonbTransient

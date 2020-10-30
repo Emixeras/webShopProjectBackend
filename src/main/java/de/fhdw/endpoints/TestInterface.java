@@ -12,6 +12,7 @@ public interface TestInterface {
     public  List<ShopUser> userTestData();
     public HelloWorld get();
     public HelloWorld post(HelloWorld helloWorld);
-    public String getAuthenticated(@Context SecurityContext securityContext);
-
+    public String getAdmin(@Context SecurityContext securityContext);
+    public String getUser(@Context SecurityContext securityContext);
+    public String getEmployee(@Context SecurityContext securityContext);
     }

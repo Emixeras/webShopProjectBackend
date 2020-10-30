@@ -32,7 +32,7 @@ public class UserImpl implements UserInterface {
     }
 
     @GET
-    @RolesAllowed({"admin", "user"})
+    @RolesAllowed({"admin", "user", "employee"})
     @Override
     public ShopUser get(@Context SecurityContext securityContext) {
         return ShopUser.findbyEmail(securityContext.getUserPrincipal().getName());
@@ -51,7 +51,7 @@ public class UserImpl implements UserInterface {
 
     @PUT
     @Transactional
-    @RolesAllowed({"user", "admin"})
+    @RolesAllowed({"user", "admin", "employee"})
     @Override
     public ShopUser put(@NotNull ShopUser shopUser, @Context SecurityContext securityContext) throws Exception {
         ShopUser user = ShopUser.findbyEmail(securityContext.getUserPrincipal().getName());
@@ -59,10 +59,9 @@ public class UserImpl implements UserInterface {
             user.email = shopUser.email;
             user.lastName = shopUser.lastName;
             user.firstName = shopUser.firstName;
-         /*   if(shopUser.addresses != null){
-                user.addresses.clear();
-                user.addresses.addAll(shopUser.addresses);
-            }*/
+            user.postalCode = shopUser.postalCode;
+            user.streetNumber = shopUser.streetNumber;
+            user.town = shopUser.town;
             user.password = shopUser.password;
             user.birth = shopUser.birth;
             return user;
@@ -72,6 +71,7 @@ public class UserImpl implements UserInterface {
     @Override
     @Path("{email}")
     @DELETE
+    @RolesAllowed({"user", "admin", "employee"})
     @Transactional
     public Boolean delete(@PathParam String email, @Context SecurityContext securityContext) {
         ShopUser deleted = ShopUser.findbyEmail(email);

@@ -75,8 +75,24 @@ public class TestImpl implements TestInterface {
     @Override
     @GET
     @RolesAllowed("admin")
-    @Path("authenticated")
-    public String getAuthenticated(@Context SecurityContext securityContext) {
+    @Path("admin")
+    public String getAdmin(@Context SecurityContext securityContext) {
+        return securityContext.getUserPrincipal().getName();
+    }
+
+    @Override
+    @GET
+    @RolesAllowed("admin")
+    @Path("employee")
+    public String getEmployee(@Context SecurityContext securityContext) {
+        return securityContext.getUserPrincipal().getName();
+    }
+
+    @Override
+    @GET
+    @RolesAllowed("admin")
+    @Path("user")
+    public String getUser(@Context SecurityContext securityContext) {
         return securityContext.getUserPrincipal().getName();
     }
 

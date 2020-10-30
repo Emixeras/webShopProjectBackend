@@ -127,7 +127,7 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/UserArray'
-  /test/authenticated:
+  /test/getAdmin:
     get:
       security:
         - basicAuth: [ ]
@@ -142,6 +142,42 @@ paths:
               schema:
                 type: string
                 example: admin
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /test/getUser:
+    get:
+      security:
+        - basicAuth: [ ]
+      tags:
+        - test
+      summary: returns the authenticated admin user
+      responses:
+        '200':
+          description: succesful
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: User
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /test/getEmployee:
+    get:
+      security:
+        - basicAuth: [ ]
+      tags:
+        - test
+      summary: returns the authenticated admin user
+      responses:
+        '200':
+          description: succesful
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: employee
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
 components:
   schemas:
     user:
