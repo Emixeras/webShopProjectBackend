@@ -1,6 +1,5 @@
 package de.fhdw.endpoints;
 
-import de.fhdw.models.Address;
 import de.fhdw.models.HelloWorld;
 import de.fhdw.models.ShopUser;
 import org.jboss.logging.Logger;
@@ -34,31 +33,23 @@ public class TestImpl implements TestInterface {
     public List<ShopUser> userTestData() {
         if (ShopUser.findById(1L) == null) {
             ShopUser admin = new ShopUser();
-            admin.username = "admin";
+            admin.email = "admin@admin.de";
             admin.password = "Test1234";
-            admin.addresses = null;
-
             admin.role = ShopUser.Role.ADMIN;
             LOG.info("Benutzer angelegt: " + admin.toString());
             admin.persist();
         }
         if(ShopUser.findById(2L) == null){
-            Address address = new Address();
-            address.country="DE";
-            address.postalCode = 33333;
-            address.street="Carl-Bertelsmann-Stra0e 12";
-            address.persist();
-            List<Address> addresses = new ArrayList<>();
-            addresses.add(address);
             ShopUser shopUser = new ShopUser();
-            shopUser.username = "user";
+            shopUser.email = "user@user.de";
             shopUser.password = "Test1234";
             shopUser.firstName = "Christoph";
             shopUser.lastName = "Müller";
-            shopUser.addresses = addresses;
             shopUser.birth = new Date(873560374);
             shopUser.role = ShopUser.Role.USER;
-            shopUser.email= "mirco_christoph.mueller@edu.fhdw.de";
+            shopUser.street = "amselweg";
+            shopUser.streetNumber = 123;
+            shopUser.postalCode = 33330;
             shopUser.persist();
             LOG.info("Benutzer angelegt: " + shopUser.toString());
         }

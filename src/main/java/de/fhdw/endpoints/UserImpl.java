@@ -1,6 +1,5 @@
 package de.fhdw.endpoints;
 
-import de.fhdw.models.Address;
 import de.fhdw.models.ShopUser;
 import org.jboss.logging.Logger;
 import org.wildfly.common.annotation.NotNull;
@@ -36,7 +35,7 @@ public class UserImpl implements UserInterface {
     @RolesAllowed({"admin", "user"})
     @Override
     public ShopUser get(@Context SecurityContext securityContext) {
-        return ShopUser.findByName(securityContext.getUserPrincipal().getName());
+        return ShopUser.findbyEmail(securityContext.getUserPrincipal().getName());
     }
 
     @POST
@@ -44,7 +43,7 @@ public class UserImpl implements UserInterface {
     @PermitAll
     @Override
     public ShopUser post(@NotNull ShopUser shopUser) throws Exception {
-        if (ShopUser.findByName(shopUser.username) == null) {
+        if (ShopUser.findbyEmail(shopUser.email) == null) {
             shopUser.persist();
             return shopUser;
         } else throw new Exception("Benutzer bereits vorhanden");
@@ -55,7 +54,7 @@ public class UserImpl implements UserInterface {
     @RolesAllowed({"user", "admin"})
     @Override
     public ShopUser put(@NotNull ShopUser shopUser, @Context SecurityContext securityContext) throws Exception {
-        ShopUser user = ShopUser.findByName(securityContext.getUserPrincipal().getName());
+        ShopUser user = ShopUser.findbyEmail(securityContext.getUserPrincipal().getName());
         if (user.role == ShopUser.Role.ADMIN || user.id.equals(shopUser.id)) {
             user.email = shopUser.email;
             user.lastName = shopUser.lastName;
@@ -71,13 +70,13 @@ public class UserImpl implements UserInterface {
     }
 
     @Override
-    @Path("{username}")
+    @Path("{email}")
     @DELETE
     @Transactional
-    public Boolean delete(@PathParam String username, @Context SecurityContext securityContext) {
-        ShopUser deleted = ShopUser.findByName(username);
-        ShopUser shopUser = ShopUser.findByName(securityContext.getUserPrincipal().getName());
-        if (shopUser.role == ShopUser.Role.ADMIN || username.equals(deleted.username)) {
+    public Boolean delete(@PathParam String email, @Context SecurityContext securityContext) {
+        ShopUser deleted = ShopUser.findbyEmail(email);
+        ShopUser shopUser = ShopUser.findbyEmail(securityContext.getUserPrincipal().getName());
+        if (shopUser.role == ShopUser.Role.ADMIN || email.equals(deleted.email)) {
             deleted.delete();
             return true;
         }

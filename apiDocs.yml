@@ -152,10 +152,9 @@ components:
       properties:
         id:
           type: number
-
-        username:
+        email:
           type: string
-          example: user5
+          example: test@test.de
         password:
           type: string
           example: Test1234
@@ -165,9 +164,6 @@ components:
         lastName:
           type: string
           example: Mayer
-        email:
-          type: string
-          example: test@test.de
         role:
           type: string
           enum:
@@ -178,29 +174,15 @@ components:
           type: string
           format: date-time
           example: '2016-08-29T09:12:33.001Z'
-        addresses:
-          $ref: '#/components/schemas/addresses'
-    addresses:
-      type: array
-      items:
-        type: object
-        required:
-          - id
-          - street
-          - postalCode
-        properties:
-          id:
-            type: number
-
-          street:
-            type: string
-            example: Amselweg 7
-          postalCode:
-            type: number
-            example: 33333
-          country:
-            type: string
-            example: DE
+        street:
+          type: string
+          example: Amselweg
+        streetNumber:
+          type: integer
+          example: 123
+        postalCode:
+          type: integer
+          example: 33330
     HelloWorld:
       type: object
       required:

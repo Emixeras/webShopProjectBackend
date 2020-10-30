@@ -2,6 +2,7 @@ package de.fhdw.models;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.util.Date;
@@ -17,29 +18,25 @@ public class ShopUser extends PanacheEntity {
     }
 
     @Column(nullable = false, unique = true)
-    public String username;
+    public String email;
     @Column(nullable = false)
     public String password;
     public String firstName;
     public String lastName;
-    @Email
-    public String email;
 
-    @OneToMany(
-            mappedBy = "shopUser",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-            //fetch = FetchType.EAGER
-    )
-    public List<Address> addresses;
+
+    public String street;
+    public int streetNumber;
+    public String town;
+    public int postalCode;
     public Date birth;
 
-    @Column(nullable = false)
+    @JsonbTransient
     public Role role;
 
 
-    public static ShopUser findByName(String name) {
-        return find("username", name).firstResult();
+    public static ShopUser findbyEmail(String name) {
+        return find("email", name).firstResult();
     }
 
 }
