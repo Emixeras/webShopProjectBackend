@@ -183,7 +183,10 @@ components:
     user:
       type: object
       required:
-        - username
+        - email
+        - firstName
+        - lastName
+        - birth
         - password
       properties:
         id:

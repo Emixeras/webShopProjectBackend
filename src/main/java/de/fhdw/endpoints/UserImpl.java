@@ -83,5 +83,15 @@ public class UserImpl implements UserInterface {
         return false;
     }
 
+    @Override
+    public ShopUser promoteToEmployee(String email, SecurityContext securityContext) {
+        return null;
+    }
+
+    @Override
+    public ShopUser promotoToAdmin(String email, SecurityContext securityContext) {
+        return null;
+    }
+
 
 }
