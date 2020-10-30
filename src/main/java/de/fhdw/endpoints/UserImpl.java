@@ -84,10 +84,28 @@ public class UserImpl implements UserInterface {
     }
 
     @Override
-    public ShopUser promoteToEmployee(String email, SecurityContext securityContext) {
+    @Transactional
+    @Path("promote/employee/{email}")
+    @RolesAllowed({"admin", "employee"})
+    public ShopUser promoteToEmployee(String email, SecurityContext securityContext) throws Exception {
+        ShopUser  promotedUser, requestedUser;
+        try {
+            promotedUser = ShopUser.findbyEmail(email);
+            requestedUser = ShopUser.findbyEmail(securityContext.getUserPrincipal().getName());
+        }
+        catch (Exception e){
+            throw new Exception("Benutzer nicht vorhanden");
+        }
+        if(ShopUser.findbyEmail(email) != null )
+        {
+return null;
+        }
         return null;
     }
 
+    @Path("promote/admin/{email}")
+    @RolesAllowed({"admin"})
+    @Transactional
     @Override
     public ShopUser promotoToAdmin(String email, SecurityContext securityContext) {
         return null;
