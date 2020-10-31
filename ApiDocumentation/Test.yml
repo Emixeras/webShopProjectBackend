@@ -1,0 +1,172 @@
+openapi: 3.0.0
+servers:
+  - description: local Backend Address
+    url: 'http://localhost:8080/'
+info:
+  description: Dies ist die API des Webshop Backends
+  version: 1.0.0
+  title: WEBSHOP API
+  contact:
+    email: mirco_christoph.mueller@edu.fhdw.de
+tags:
+  - name: test
+    description: test Api
+paths:
+  /test:
+    get:
+      tags:
+        - test
+      summary: a simple Hello World Get
+      responses:
+        '200':
+          $ref: '#/components/responses/HelloWorld'
+    post:
+      tags:
+        - test
+      summary: a simple post with value in printed in Backend Log
+      responses:
+        '200':
+          $ref: '#/components/responses/HelloWorld'
+  /test/userTestData:
+    get:
+      tags:
+        - test
+      summary: add init user to database only if they do not exist
+      responses:
+        '200':
+          $ref: '#/components/responses/UserArray'
+  /test/getAdmin:
+    get:
+      security:
+        - basicAuth: [ ]
+      tags:
+        - test
+      summary: returns the authenticated admin user
+      responses:
+        '200':
+          description: succesful
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: admin
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /test/getUser:
+    get:
+      security:
+        - basicAuth: [ ]
+      tags:
+        - test
+      summary: returns the authenticated admin user
+      responses:
+        '200':
+          description: succesful
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: User
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /test/getEmployee:
+    get:
+      security:
+        - basicAuth: [ ]
+      tags:
+        - test
+      summary: returns the authenticated admin user
+      responses:
+        '200':
+          description: succesful
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: employee
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+components:
+  schemas:
+    user:
+      type: object
+      required:
+        - email
+        - firstName
+        - lastName
+        - birth
+        - password
+      properties:
+        id:
+          type: number
+          description: Dies ist die Tabellen ID, diese wir nur mitgeliefert ein Explizites setzen oder Filtern funktioniert nicht.
+        email:
+          type: string
+          example: test@test.de
+        password:
+          type: string
+          example: Test1234
+        firstName:
+          type: string
+          example: Heinz
+        lastName:
+          type: string
+          example: Mayer
+        role:
+          type: string
+          enum:
+            - USER
+            - ADMIN
+            - EMPLOYEE
+          example: USER
+        birth:
+          type: string
+          format: date-time
+          example: '2016-08-29T09:12:33.001Z'
+        street:
+          type: string
+          example: Amselweg
+        streetNumber:
+          type: integer
+          example: 123
+        postalCode:
+          type: integer
+          example: 33330
+        town:
+          type: string
+          example: Gütersloh
+    HelloWorld:
+      type: object
+      required:
+        - value
+      properties:
+        value:
+          type: string
+          example: dies ist der Hello World Test
+  responses:
+    UnauthorizedError:
+      description: Authentication information is missing or invalid
+      headers:
+        WWW_Authenticate:
+          schema:
+            type: string
+    UserArray:
+      description: successful
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/user'
+    HelloWorld:
+      description: successful
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HelloWorld'
+
+  securitySchemes:
+    basicAuth: # <-- arbitrary name for the security scheme
+      type: http
+      scheme: basic
+

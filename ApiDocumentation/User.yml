@@ -11,8 +11,6 @@ info:
 tags:
   - name: user
     description: Operations on User Object
-  - name: test
-    description: test Api
 paths:
   /user/:
     get:
@@ -35,8 +33,8 @@ paths:
         - basicAuth: [ ]
       tags:
         - user
-      summary: updates user
-      description: if run as admin no user Check is performed
+      summary: updates userinformation and Role assignment
+      description: this endpoint takes the Full or a partial Amount of the User Object, if a Role other than user is passed a validation check by the trequesting user is performed. if the requesting user is requesting a role assigment greater than it's own privileges e.g employee to admin then nothing will happen.
       responses:
         '200':
           $ref: '#/components/responses/UserObject'
@@ -65,7 +63,7 @@ paths:
               $ref: '#/components/schemas/user'
         description: Updated user object
         required: true
-  '/user/{username}':
+  /user/{email}:
     delete:
       security:
         - basicAuth: [ ]
@@ -104,80 +102,6 @@ paths:
           description: Object not existent (worst Case) or authentication failed
         '401':
           $ref: '#/components/responses/UnauthorizedError'
-  /test:
-    get:
-      tags:
-        - test
-      summary: a simple Hello World Get
-      responses:
-        '200':
-          $ref: '#/components/responses/HelloWorld'
-    post:
-      tags:
-        - test
-      summary: a simple post with value in printed in Backend Log
-      responses:
-        '200':
-          $ref: '#/components/responses/HelloWorld'
-  /test/userTestData:
-    get:
-      tags:
-        - test
-      summary: add init user to database only if they do not exist
-      responses:
-        '200':
-          $ref: '#/components/responses/UserArray'
-  /test/getAdmin:
-    get:
-      security:
-        - basicAuth: [ ]
-      tags:
-        - test
-      summary: returns the authenticated admin user
-      responses:
-        '200':
-          description: succesful
-          content:
-            text/plain:
-              schema:
-                type: string
-                example: admin
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-  /test/getUser:
-    get:
-      security:
-        - basicAuth: [ ]
-      tags:
-        - test
-      summary: returns the authenticated admin user
-      responses:
-        '200':
-          description: succesful
-          content:
-            text/plain:
-              schema:
-                type: string
-                example: User
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-  /test/getEmployee:
-    get:
-      security:
-        - basicAuth: [ ]
-      tags:
-        - test
-      summary: returns the authenticated admin user
-      responses:
-        '200':
-          description: succesful
-          content:
-            text/plain:
-              schema:
-                type: string
-                example: employee
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
 components:
   schemas:
     user:
@@ -191,6 +115,7 @@ components:
       properties:
         id:
           type: number
+          description: Dies ist die Tabellen ID, diese wir nur mitgeliefert ein Explizites setzen oder Filtern funktioniert nicht.
         email:
           type: string
           example: test@test.de
@@ -208,6 +133,7 @@ components:
           enum:
             - USER
             - ADMIN
+            - EMPLOYEE
           example: USER
         birth:
           type: string
@@ -222,14 +148,9 @@ components:
         postalCode:
           type: integer
           example: 33330
-    HelloWorld:
-      type: object
-      required:
-        - value
-      properties:
-        value:
+        town:
           type: string
-          example: dies ist der Hello World Test
+          example: Gütersloh
   responses:
     UnauthorizedError:
       description: Authentication information is missing or invalid
@@ -251,12 +172,6 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/user'
-    HelloWorld:
-      description: successful
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/HelloWorld'
 
   securitySchemes:
     basicAuth: # <-- arbitrary name for the security scheme

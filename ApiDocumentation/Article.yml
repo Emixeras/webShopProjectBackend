@@ -1,0 +1,112 @@
+openapi: 3.0.0
+servers:
+  - description: local Backend Address
+    url: 'http://localhost:8080/'
+info:
+  description: Dies ist die API des Webshop Backends
+  version: 1.0.0
+  title: WEBSHOP API
+  contact:
+    email: mirco_christoph.mueller@edu.fhdw.de
+tags:
+  - name: article
+    description: Operations on Article Object
+paths:
+  /article/{id}/:
+    get:
+      tags:
+        - article
+      summary: get a single Article Object
+      description: this is the Endpoint returning a single Article Object, it converts the picture if existent to a binary stream.
+      responses:
+        '200':
+          $ref: '#/components/responses/ArticleObject'
+  /article/:
+    post:
+      summary: post a new Article Object
+      tags:
+        - article
+      responses:
+        '200':
+          $ref: '#/components/responses/ArticleObject'
+      requestBody:
+        $ref: '#/components/requestBodies/UploadArticlewithPicture'
+
+components:
+  schemas:
+    ArticleMetadata:
+      type: object
+      required:
+        - title
+        - interpret
+        - genre
+        - price
+        - picture
+      properties:
+        id:
+          type: number
+        title:
+          type: string
+          example: Nach Uns Die Sintflut
+        artist:
+          type: string
+          example: Die Ärzte
+        price:
+          type: number
+          example: 12,99
+        description:
+          type: string
+          example: Die Single ist nur einseitig bespielt, auf der Rückseite befinden sich die eingeritzten Autogramme der Ärzte.
+        ean:
+          type: number
+          example: 5099746311919
+        genre:
+          $ref: '#/components/schemas/ArticleGenre'
+    Picture:
+      type: object
+      required:
+        -picture
+      properties:
+        picture:
+          type: string
+          format: binary
+    ArticleGenre:
+      type: object
+      required:
+        - name
+        - description
+      properties:
+        name:
+          type: string
+          example: Rock
+        description:
+          type: string
+          example: kurz auch Rock, dient als Oberbegriff für Musikrichtungen, die sich seit Ende der 1960er Jahre aus der Vermischung des Rock ’n’ Roll der späten 1950er und frühen 1960er Jahre und anderen Musikstilen wie z. B. Beatmusik und Blues entwickelt haben.
+  requestBodies:
+    UploadArticlewithPicture:
+      description: Multipart Upload welcher den gleichzeitigen Upload mit einem Bild erlaubt
+      content:
+        multipart/form-data:
+          schema:
+            type: object
+            properties:
+              ArticleMetadata:
+                $ref: '#/components/schemas/ArticleMetadata'
+              ArticlePicture:
+                $ref: '#/components/schemas/Picture'
+  responses:
+    ArticleObject:
+      description: returning a single Article Object
+      content:
+        multipart/form-data:
+          schema:
+            type: object
+            properties:
+              ArticleMetadata:
+                $ref: '#/components/schemas/ArticleMetadata'
+              ArticlePicture:
+                $ref: '#/components/schemas/Picture'
+          encoding: # The same level as schema
+            ArticlePicture: # Property name (see above)
+              contentType: image/png, image/jpeg
+

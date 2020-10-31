@@ -1,0 +1,357 @@
+openapi: 3.0.0
+servers:
+  - description: local Backend Address
+    url: 'http://localhost:8080/'
+info:
+  description: Dies ist die API des Webshop Backends
+  version: 1.0.0
+  title: WEBSHOP API
+  contact:
+    email: mirco_christoph.mueller@edu.fhdw.de
+tags:
+  - name: user
+    description: Operations on User Object
+  - name: test
+    description: test Api
+  - name: article
+    description: Operations on Article Object
+paths:
+  /article/{id}/:
+    get:
+      tags:
+        - article
+      summary: get a single Article Object
+      description: this is the Endpoint returning a single Article Object, it converts the picture if existent to a binary stream.
+      responses:
+        '200':
+          $ref: '#/components/responses/ArticleObject'
+  /article/:
+    post:
+      summary: post a new Article Object
+      tags:
+        - article
+      responses:
+        '200':
+          description: blub
+
+      requestBody:
+        $ref: '#/components/requestBodies/UploadArticlewithPicture'
+
+  /user/:
+    get:
+      security:
+        - basicAuth: [ ]
+      tags:
+        - user
+      summary: login api returns user object
+      operationId: login
+      description: >
+        by passing the correct user authentication via basic auth you get a json
+        return value containing a json value.
+      responses:
+        '200':
+          $ref: '#/components/responses/UserObject'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+    put:
+      security:
+        - basicAuth: [ ]
+      tags:
+        - user
+      summary: updates userinformation and Role assignment
+      description: this endpoint takes the Full or a partial Amount of the User Object, if a Role other than user is passed a validation check by the trequesting user is performed. if the requesting user is requesting a role assigment greater than it's own privileges e.g employee to admin then nothing will happen.
+      responses:
+        '200':
+          $ref: '#/components/responses/UserObject'
+        '400':
+          description: something failed
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user'
+        description: Updated user object
+        required: true
+    post:
+      tags:
+        - user
+      summary: posts a user Object and stores it in Database could be seen as "register new user"
+      responses:
+        '200':
+          $ref: '#/components/responses/UserObject'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user'
+        description: Updated user object
+        required: true
+  /user/{email}:
+    delete:
+      security:
+        - basicAuth: [ ]
+      tags:
+        - user
+      summary: Delete user
+      description: >-
+        This can only be done by the logged in user. if run as logged in Admin
+        no check will be performed
+      operationId: deleteUser
+      parameters:
+        - name: username
+          in: path
+          description: The name that needs to be deleted
+          required: true
+          schema:
+            type: string
+      responses:
+        '400':
+          description: Invalid username supplied
+        '200':
+          description: successful
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+
+  /user/getAll:
+    get:
+      security:
+        - basicAuth: [ admin ]
+      tags:
+        - user
+      summary: returns a list of all users - Admin Only
+      responses:
+        '200':
+          $ref: '#/components/responses/UserArray'
+        '400':
+          description: Object not existent (worst Case) or authentication failed
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /test:
+    get:
+      tags:
+        - test
+      summary: a simple Hello World Get
+      responses:
+        '200':
+          $ref: '#/components/responses/HelloWorld'
+    post:
+      tags:
+        - test
+      summary: a simple post with value in printed in Backend Log
+      responses:
+        '200':
+          $ref: '#/components/responses/HelloWorld'
+  /test/userTestData:
+    get:
+      tags:
+        - test
+      summary: add init user to database only if they do not exist
+      responses:
+        '200':
+          $ref: '#/components/responses/UserArray'
+  /test/getAdmin:
+    get:
+      security:
+        - basicAuth: [ ]
+      tags:
+        - test
+      summary: returns the authenticated admin user
+      responses:
+        '200':
+          description: succesful
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: admin
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /test/getUser:
+    get:
+      security:
+        - basicAuth: [ ]
+      tags:
+        - test
+      summary: returns the authenticated admin user
+      responses:
+        '200':
+          description: succesful
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: User
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /test/getEmployee:
+    get:
+      security:
+        - basicAuth: [ ]
+      tags:
+        - test
+      summary: returns the authenticated admin user
+      responses:
+        '200':
+          description: succesful
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: employee
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+components:
+  schemas:
+    user:
+      type: object
+      required:
+        - email
+        - firstName
+        - lastName
+        - birth
+        - password
+      properties:
+        id:
+          type: number
+          description: Dies ist die Tabellen ID, diese wir nur mitgeliefert ein Explizites setzen oder Filtern funktioniert nicht.
+        email:
+          type: string
+          example: test@test.de
+        password:
+          type: string
+          example: Test1234
+        firstName:
+          type: string
+          example: Heinz
+        lastName:
+          type: string
+          example: Mayer
+        role:
+          type: string
+          enum:
+            - USER
+            - ADMIN
+            - EMPLOYEE
+          example: USER
+        birth:
+          type: string
+          format: date-time
+          example: '2016-08-29T09:12:33.001Z'
+        street:
+          type: string
+          example: Amselweg
+        streetNumber:
+          type: integer
+          example: 123
+        postalCode:
+          type: integer
+          example: 33330
+        town:
+          type: string
+          example: Gütersloh
+    ArticleMetadata:
+      type: object
+      required:
+        - title
+        - interpret
+        - genre
+        - price
+        - picture
+      properties:
+        id:
+          type: number
+        title:
+          type: string
+          example: Nach Uns Die Sintflut
+        artist:
+          type: string
+          example: Die Ärzte
+        price:
+          type: number
+          example: 12,99
+        description:
+          type: string
+          example: Die Single ist nur einseitig bespielt, auf der Rückseite befinden sich die eingeritzten Autogramme der Ärzte.
+        ean:
+          type: number
+          example: 5099746311919
+        picture:
+          type: string
+          format: binary
+
+    ArticleGenre:
+      type: object
+      required:
+        - name
+        - description
+      properties:
+        name:
+          type: string
+          example: Rock
+        description:
+          type: string
+          example:  kurz auch Rock, dient als Oberbegriff für Musikrichtungen, die sich seit Ende der 1960er Jahre aus der Vermischung des Rock ’n’ Roll der späten 1950er und frühen 1960er Jahre und anderen Musikstilen wie z. B. Beatmusik und Blues entwickelt haben.
+
+
+    HelloWorld:
+      type: object
+      required:
+        - value
+      properties:
+        value:
+          type: string
+          example: dies ist der Hello World Test
+  requestBodies:
+    UploadArticlewithPicture:
+      description: Multipart Upload welcher den gleichzeitigen Upload mit einem Bild erlaubt
+      content:
+        multipart/form-data:
+          schema:
+            type: object
+            properties:
+              ArticleMetadata:
+                $ref: '#/components/schemas/ArticleMetadata'
+              fileName:
+                type: string
+                format: binary
+  responses:
+    UnauthorizedError:
+      description: Authentication information is missing or invalid
+      headers:
+        WWW_Authenticate:
+          schema:
+            type: string
+    UserObject:
+      description: returning json body with user object
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/user'
+    UserArray:
+      description: successful
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/user'
+    HelloWorld:
+      description: successful
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HelloWorld'
+    ArticleObject:
+      description: returning a single Article Object
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ArticleMetadata'
+
+  securitySchemes:
+    basicAuth: # <-- arbitrary name for the security scheme
+      type: http
+      scheme: basic
+

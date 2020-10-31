@@ -1,12 +1,7 @@
 package de.fhdw.models;
-
-import io.quarkus.hibernate.orm.panache.PanacheEntity;
-
-import javax.json.bind.annotation.JsonbTransient;
+import io.quarkus.hibernate.orm.panache.*;
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 
 @Entity(name = "ShopUser")
@@ -31,8 +26,6 @@ public class ShopUser extends PanacheEntity {
     public int postalCode;
     @Column(nullable = false)
     public Date birth;
-
-    @JsonbTransient
     public Role role;
 
 

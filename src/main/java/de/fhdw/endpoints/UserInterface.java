@@ -17,8 +17,6 @@ public interface UserInterface {
     public ShopUser get(@Context SecurityContext securityContext);
     public ShopUser put(@NotNull ShopUser shopUser, @Context SecurityContext securityContext) throws Exception;
     public Boolean delete(@PathParam String email, @Context SecurityContext securityContext);
-    public ShopUser promoteToEmployee(@PathParam String email, @Context SecurityContext securityContext) throws Exception;
-    public ShopUser promotoToAdmin(@PathParam String email, @Context SecurityContext securityContext);
     public ShopUser post(@NotNull ShopUser shopUser) throws Exception;
     public List<ShopUser> getAll();
 

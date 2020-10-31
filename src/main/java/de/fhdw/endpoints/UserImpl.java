@@ -53,19 +53,41 @@ public class UserImpl implements UserInterface {
     @Transactional
     @RolesAllowed({"user", "admin", "employee"})
     @Override
-    public ShopUser put(@NotNull ShopUser shopUser, @Context SecurityContext securityContext) throws Exception {
-        ShopUser user = ShopUser.findbyEmail(securityContext.getUserPrincipal().getName());
-        if (user.role == ShopUser.Role.ADMIN || user.id.equals(shopUser.id)) {
-            user.email = shopUser.email;
-            user.lastName = shopUser.lastName;
-            user.firstName = shopUser.firstName;
-            user.postalCode = shopUser.postalCode;
-            user.streetNumber = shopUser.streetNumber;
-            user.town = shopUser.town;
-            user.password = shopUser.password;
-            user.birth = shopUser.birth;
-            return user;
+    public ShopUser put(@NotNull ShopUser newUserInformation, @Context SecurityContext securityContext) throws Exception {
+        ShopUser requestingUser = ShopUser.findbyEmail(securityContext.getUserPrincipal().getName());
+        ShopUser changedUser;
+        try {
+            changedUser = ShopUser.findbyEmail(newUserInformation.email);
+        } catch (Exception e) {
+            throw new Exception("User does not exist");
+        }
+        //update Informations
+        if (requestingUser.role == ShopUser.Role.ADMIN || requestingUser.id.equals(newUserInformation.id)) {
+            changedUser.email = newUserInformation.email;
+            changedUser.lastName = newUserInformation.lastName;
+            changedUser.firstName = newUserInformation.firstName;
+            changedUser.postalCode = newUserInformation.postalCode;
+            changedUser.streetNumber = newUserInformation.streetNumber;
+            changedUser.town = newUserInformation.town;
+            changedUser.password = newUserInformation.password;
+            changedUser.birth = newUserInformation.birth;
         } else throw new Exception("Permission violation");
+        //Prüfe ob Rollen im neuen Objekt differieren und ob Benutzer Admin oder Employee ist
+        if ((newUserInformation.role != changedUser.role) && (requestingUser.role == ShopUser.Role.ADMIN || requestingUser.role == ShopUser.Role.EMPLOYEE)) {
+            //Wenn neue Benutzerrolle Employee dann setze Sie einfach
+            if (newUserInformation.role == ShopUser.Role.EMPLOYEE) {
+                LOG.debug("Benutzer zu Employee promotet");
+                changedUser.role = ShopUser.Role.EMPLOYEE;
+                return changedUser;
+            }
+            //Wenn Benutzerrolle Admin ist, dann prüfe das erneut und setze es dann erst
+            else if (newUserInformation.role == ShopUser.Role.ADMIN && requestingUser.role == ShopUser.Role.ADMIN) {
+                changedUser.role = ShopUser.Role.ADMIN;
+                LOG.debug("Benutzer zu Admin promotet");
+                return changedUser;
+            }
+        }
+        return changedUser;
     }
 
     @Override
@@ -81,34 +103,6 @@ public class UserImpl implements UserInterface {
             return true;
         }
         return false;
-    }
-
-    @Override
-    @Transactional
-    @Path("promote/employee/{email}")
-    @RolesAllowed({"admin", "employee"})
-    public ShopUser promoteToEmployee(String email, SecurityContext securityContext) throws Exception {
-        ShopUser  promotedUser, requestedUser;
-        try {
-            promotedUser = ShopUser.findbyEmail(email);
-            requestedUser = ShopUser.findbyEmail(securityContext.getUserPrincipal().getName());
-        }
-        catch (Exception e){
-            throw new Exception("Benutzer nicht vorhanden");
-        }
-        if(ShopUser.findbyEmail(email) != null )
-        {
-return null;
-        }
-        return null;
-    }
-
-    @Path("promote/admin/{email}")
-    @RolesAllowed({"admin"})
-    @Transactional
-    @Override
-    public ShopUser promotoToAdmin(String email, SecurityContext securityContext) {
-        return null;
     }
 
 
