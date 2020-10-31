@@ -41,6 +41,7 @@ public class TestImpl implements TestInterface {
             admin.birth = new Date(773560374);
             admin.street = "amselweg";
             admin.streetNumber = 123;
+            admin.town = "Gütersloh";
             admin.postalCode = 33330;
             LOG.info("Benutzer angelegt: " + admin.toString());
             admin.persist();
@@ -54,6 +55,7 @@ public class TestImpl implements TestInterface {
             shopUser.birth = new Date(873560374);
             shopUser.role = ShopUser.Role.USER;
             shopUser.street = "amselweg";
+            shopUser.town = "Paderborn";
             shopUser.streetNumber = 123;
             shopUser.postalCode = 33330;
             shopUser.persist();

@@ -31,7 +31,6 @@ paths:
           $ref: '#/components/responses/ArticleObject'
       requestBody:
         $ref: '#/components/requestBodies/UploadArticlewithPicture'
-
 components:
   schemas:
     ArticleMetadata:
@@ -92,8 +91,13 @@ components:
             properties:
               ArticleMetadata:
                 $ref: '#/components/schemas/ArticleMetadata'
-              ArticlePicture:
-                $ref: '#/components/schemas/Picture'
+              fileName:
+                type: string
+                format: binary
+          encoding:
+            ArticlePicture:
+              contentType: image/png, image/jpeg
+
   responses:
     ArticleObject:
       description: returning a single Article Object

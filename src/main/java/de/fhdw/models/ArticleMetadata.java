@@ -11,14 +11,14 @@ public class ArticleMetadata extends PanacheEntity {
     @Column(nullable = false)
     public String title;
     @Column(nullable = false)
-    public String artist;
-    @Column(nullable = false)
     public double price;
     @ManyToMany
     @Column(nullable = false)
     public List<ArticleGenre> articleGenres;
     public int ean;
     public String description;
+    @ManyToOne()
+    public ArticleArtist articleArtists;
 
 
 }

@@ -10,7 +10,7 @@ import javax.persistence.OneToOne;
 @Entity
 public class ArticlePicture extends PanacheEntity {
 
-    public Byte[] picture;
+    public byte[] picture;
     @OneToOne(fetch = FetchType.LAZY)
     @MapsId
     public ArticleMetadata articleMetadata;

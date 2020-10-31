@@ -7,9 +7,10 @@ import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartOutput;
 
 import javax.ws.rs.core.Response;
+import java.io.IOException;
 
 public interface ArticleInterface {
-    public MultipartOutput createArticle(@MultipartForm ArticleForm data);
+    public String createArticle(@MultipartForm ArticleForm data) throws IOException;
     public Response ChangeArticle();
     public MultipartOutput getArticle();
 
