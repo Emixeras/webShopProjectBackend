@@ -9,6 +9,7 @@ import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartOutput;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -21,16 +22,16 @@ public class ArticleImpl implements ArticleInterface{
     private static final Logger LOG = Logger.getLogger(ArticleImpl.class);
 
     @Override
-    @Path("test")
     @POST
     @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Transactional
     public String createArticle(@MultipartForm ArticleForm data) throws IOException {
-        LOG.info("ich Hurensohn wurde aufgerufen");
-        ArticleMetadata articleMetadata = data.article;
-        articleMetadata.persist();
+        LOG.info("ich wurde aufgerufen");
+        data.article.persist();
         ArticlePicture articlePicture = new ArticlePicture();
         articlePicture.picture = IOUtils.toByteArray(data.file);
-        articlePicture.articleMetadata = articleMetadata;
+        articlePicture.articleMetadata = data.article;
         articlePicture.persist();
         return "Upload Erfolgreich";
     }
