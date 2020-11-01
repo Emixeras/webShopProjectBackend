@@ -14,6 +14,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
+import java.util.List;
 
 @ApplicationScoped
 @Path("article")
@@ -28,12 +29,21 @@ public class ArticleImpl implements ArticleInterface{
     @Transactional
     public String createArticle(@MultipartForm ArticleForm data) throws IOException {
         LOG.info("ich wurde aufgerufen");
+        LOG.info(data.article.articleGenre);
         data.article.persist();
+
         ArticlePicture articlePicture = new ArticlePicture();
         articlePicture.picture = IOUtils.toByteArray(data.file);
         articlePicture.articleMetadata = data.article;
         articlePicture.persist();
         return "Upload Erfolgreich";
+    }
+
+    @GET
+    @Path("all")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<ArticleMetadata> GetAllArticleMetadata(){
+        return  ArticleMetadata.listAll();
     }
 
 

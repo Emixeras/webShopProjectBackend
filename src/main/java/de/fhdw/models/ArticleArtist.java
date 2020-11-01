@@ -13,6 +13,6 @@ public class ArticleArtist extends PanacheEntity {
 
     public String name;
 
-   @OneToMany(mappedBy = "articleArtists" )
-    public List<ArticleMetadata> articleMetadataList;
+  // @OneToMany(mappedBy = "articleArtists" )
+  //  public List<ArticleMetadata> articleMetadataList;
 }

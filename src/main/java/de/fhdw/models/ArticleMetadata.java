@@ -4,18 +4,18 @@ import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class ArticleMetadata extends PanacheEntity {
-    @Column(nullable = false)
+  //  @Column(nullable = false)
     public String title;
-    @Column(nullable = false)
+  //  @Column(nullable = false)
     public double price;
-    @OneToMany(mappedBy = "articleMetadataList", fetch = FetchType.EAGER, orphanRemoval = false)
-    @Column(nullable = false)
-    public List<ArticleGenre> articleGenres;
+    @ManyToOne(cascade = CascadeType.ALL)
+    public ArticleGenre articleGenre;
     public int ean;
     public String description;
-    @ManyToOne()
-    public ArticleArtist articleArtists;
+  //  @ManyToOne()
+  //  public ArticleArtist articleArtists;
 }
