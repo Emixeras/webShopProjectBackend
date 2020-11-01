@@ -44,6 +44,10 @@ public class UserImpl implements UserInterface {
     @Override
     public ShopUser post(@NotNull ShopUser shopUser) throws Exception {
         if (ShopUser.findbyEmail(shopUser.email) == null) {
+            shopUser.role = ShopUser.Role.USER;
+            if(shopUser.firstName.equals("") || shopUser.lastName.equals("")){
+                throw new Exception("Benutername nicht vorhanden");
+            }
             shopUser.persist();
             return shopUser;
         } else throw new Exception("Benutzer bereits vorhanden");

@@ -26,8 +26,8 @@ public class ShopUser extends PanacheEntity {
     public int postalCode;
     @Column(nullable = false)
     public Date birth;
+    @Column(nullable = false)
     public Role role;
-
 
     public static ShopUser findbyEmail(String name) {
         return find("email", name).firstResult();

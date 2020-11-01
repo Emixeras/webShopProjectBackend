@@ -112,6 +112,7 @@ components:
         - lastName
         - birth
         - password
+        - role
       properties:
         id:
           type: number
