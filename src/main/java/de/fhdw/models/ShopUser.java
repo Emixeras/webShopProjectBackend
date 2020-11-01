@@ -6,7 +6,7 @@ import java.util.*;
 
 @Entity(name = "ShopUser")
 @Table(name = "shopuser")
-public class ShopUser extends PanacheEntity {
+public class ShopUser extends PanacheEntity implements AbstractModelClass {
 
     public enum Role {
         ADMIN, EMPLOYEE, USER

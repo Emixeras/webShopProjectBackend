@@ -20,7 +20,7 @@ import java.util.*;
 @Path("/user")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class UserImpl implements UserInterface {
+public class UserImpl implements UserInterface  {
     private static final Logger LOG = Logger.getLogger(UserImpl.class);
 
     @GET
@@ -71,6 +71,7 @@ public class UserImpl implements UserInterface {
         }
         //update Informations
         if (requestingUser.role == ShopUser.Role.ADMIN || requestingUser.id.equals(newUserInformation.id)) {
+          //changedUser.getChangesFrom(newUserInformation);
             changedUser.email = newUserInformation.email;
             changedUser.lastName = newUserInformation.lastName;
             changedUser.firstName = newUserInformation.firstName;
