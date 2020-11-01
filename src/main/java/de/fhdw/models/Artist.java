@@ -23,7 +23,6 @@ public class Artist extends PanacheEntity {
             fetch = FetchType.EAGER
     )
     @JsonbTransient
-
     public List<Article> articleList;
     public static Artist findByName(String name) {
         return find("name", name).firstResult();

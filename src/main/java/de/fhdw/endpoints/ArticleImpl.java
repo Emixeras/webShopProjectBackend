@@ -2,9 +2,12 @@ package de.fhdw.endpoints;
 
 import de.fhdw.forms.ArticleForm;
 import de.fhdw.models.Article;
+import de.fhdw.models.Artist;
+import de.fhdw.models.Genre;
 import de.fhdw.models.Picture;
 import org.apache.commons.io.IOUtils;
 import org.jboss.logging.Logger;
+import org.jboss.resteasy.annotations.jaxrs.PathParam;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartOutput;
 
@@ -19,7 +22,7 @@ import java.util.List;
 @ApplicationScoped
 @Path("article")
 @Consumes(MediaType.MULTIPART_FORM_DATA)
-public class ArticleImpl implements ArticleInterface{
+public class ArticleImpl implements ArticleInterface {
     private static final Logger LOG = Logger.getLogger(ArticleImpl.class);
 
     @Override
@@ -27,37 +30,67 @@ public class ArticleImpl implements ArticleInterface{
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Transactional
-    public String createArticle(@MultipartForm ArticleForm data) throws IOException {
+    public Response post(@MultipartForm ArticleForm data) throws IOException {
         LOG.info("ich wurde aufgerufen");
-        LOG.info(data.article.genre);
-        data.article.persist();
+        Article article = data.article;
+        if (article.genre != null) {
+            if (Genre.findByName(article.genre.name) != null) {
+                article.genre = Genre.findByName(article.genre.name);
+            } else {
+                Genre genre = new Genre(article.genre.name);
+                genre.persist();
+                article.genre = genre;
+            }
+        }
+        LOG.info(data.article.genre.name);
+        if (article.artists != null) {
+            if (Artist.findByName(article.artists.name) != null) {
+                article.artists = Artist.findByName(article.artists.name);
+            } else {
+                Artist artist = new Artist(article.artists.name);
+                artist.persist();
+                article.artists = artist;
+            }
+        }
+        LOG.info(data.article.artists.name);
+        article.persist();
         Picture picture = new Picture();
         picture.value = IOUtils.toByteArray(data.file);
-        picture.article = data.article;
+        article.picture = picture;
         picture.persist();
-        return "Upload Erfolgreich";
+        return Response.accepted(data.article.id).build();
     }
 
     @GET
     @Path("all")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Article> GetAllArticleMetadata(){
-        return  Article.listAll();
+    public List<Article> get() {
+        return Article.listAll();
+    }
+
+    @Override
+    @Path("{id}")
+    public Response delete(@PathParam long id) {
+        Article article = Article.findById(id);
+        article.delete();
+        return Response.ok("true").build();
     }
 
 
     @Override
-    public Response ChangeArticle() {
+    public Response put() {
         return null;
     }
 
     @Override
     @GET
+    @Path("{id}")
     @Produces(MediaType.MULTIPART_FORM_DATA)
-    public MultipartOutput getArticle() {
+    public MultipartOutput get(@PathParam long id) {
         MultipartOutput output = new MultipartOutput();
-        output.addPart("bill", MediaType.valueOf(MediaType.TEXT_PLAIN));
-        output.addPart("monica",MediaType.valueOf(MediaType.TEXT_PLAIN));
+        Article article = Article.findById(id);
+        output.addPart(article, MediaType.valueOf(MediaType.APPLICATION_JSON));
+        output.addPart(article.picture.value, MediaType.valueOf(MediaType.APPLICATION_OCTET_STREAM));
         return output;
     }
 }

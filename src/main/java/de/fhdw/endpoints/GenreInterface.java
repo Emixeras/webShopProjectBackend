@@ -6,14 +6,17 @@ import org.jboss.resteasy.annotations.jaxrs.PathParam;
 
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.SecurityContext;
+import java.util.List;
 
 public interface GenreInterface {
     public Genre get(@PathParam long id) throws Exception;
+
+    public List<Genre> get() throws Exception;
 
     public Genre put(Genre genre, @Context SecurityContext securityContext) throws Exception;
 
     public Genre post(Genre genre, @Context SecurityContext securityContext) throws Exception;
 
-    public Boolean delete(@PathParam long id, @Context SecurityContext securityContext) throws Exception;
+    public Boolean delete(Genre genre, @Context SecurityContext securityContext) throws Exception;
 
 }

@@ -7,6 +7,7 @@ import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.SecurityContext;
+import java.util.List;
 
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -21,6 +22,11 @@ public class GenreImpl implements GenreInterface {
         } catch (Exception e) {
             throw new Exception("id not found");
         }
+    }
+
+    @Override
+    public List<Genre> get() throws Exception {
+        return Genre.listAll();
     }
 
     @Override
@@ -50,12 +56,11 @@ public class GenreImpl implements GenreInterface {
 
     @Override
     @DELETE
-    @Path("{id}")
     @RolesAllowed({"employee", "admin"})
-    public Boolean delete(long id, SecurityContext securityContext) throws Exception {
+    public Boolean delete(Genre genre, SecurityContext securityContext) throws Exception {
         Genre deletedID;
         try {
-            deletedID = Genre.findById(id);
+            deletedID = Genre.findById(genre.id);
             deletedID.delete();
             return true;
         } catch (Exception e) {

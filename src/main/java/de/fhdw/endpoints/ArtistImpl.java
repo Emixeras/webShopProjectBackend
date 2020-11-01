@@ -11,6 +11,8 @@ import javax.ws.rs.core.SecurityContext;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
 import org.wildfly.common.annotation.NotNull;
 
+import java.util.List;
+
 
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -27,6 +29,12 @@ public class ArtistImpl implements ArtistInterface {
             throw new Exception("id not found");
         }
     }
+
+    @Override
+    public List<Artist> get() {
+        return Artist.listAll();
+    }
+
 
     @Override
     @PUT
@@ -55,16 +63,15 @@ public class ArtistImpl implements ArtistInterface {
 
     @Override
     @DELETE
-    @Path("{id}")
     @RolesAllowed({"employee", "admin"})
-    public Boolean delete(long id, @Context SecurityContext securityContext) throws Exception {
+    public Boolean delete(Artist artist, @Context SecurityContext securityContext) throws Exception {
         Artist deletedID;
         try {
-            deletedID = Artist.findById(id);
+            deletedID = Artist.findById(artist.id);
             deletedID.delete();
             return true;
         } catch (Exception e) {
-            throw new Exception("User does not exist");
+            throw new Exception("Artist does not exist");
         }
     }
 }
