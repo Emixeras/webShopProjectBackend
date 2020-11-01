@@ -1,6 +1,7 @@
 package de.fhdw.endpoints;
 
 import de.fhdw.models.ShopUser;
+import org.hibernate.annotations.common.util.impl.Log;
 import org.jboss.logging.Logger;
 import org.wildfly.common.annotation.NotNull;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
@@ -60,8 +61,11 @@ public class UserImpl implements UserInterface {
     public ShopUser put(@NotNull ShopUser newUserInformation, @Context SecurityContext securityContext) throws Exception {
         ShopUser requestingUser = ShopUser.findbyEmail(securityContext.getUserPrincipal().getName());
         ShopUser changedUser;
+        LOG.info(newUserInformation.email);
+
         try {
-            changedUser = ShopUser.findbyEmail(newUserInformation.email);
+            changedUser = ShopUser.findById(newUserInformation.id);
+            LOG.info(changedUser.email);
         } catch (Exception e) {
             throw new Exception("User does not exist");
         }
@@ -72,6 +76,7 @@ public class UserImpl implements UserInterface {
             changedUser.firstName = newUserInformation.firstName;
             changedUser.postalCode = newUserInformation.postalCode;
             changedUser.streetNumber = newUserInformation.streetNumber;
+            changedUser.street = newUserInformation.street;
             changedUser.town = newUserInformation.town;
             changedUser.password = newUserInformation.password;
             changedUser.birth = newUserInformation.birth;
@@ -79,9 +84,9 @@ public class UserImpl implements UserInterface {
         //Prüfe ob Rollen im neuen Objekt differieren und ob Benutzer Admin oder Employee ist
         if ((newUserInformation.role != changedUser.role) && (requestingUser.role == ShopUser.Role.ADMIN || requestingUser.role == ShopUser.Role.EMPLOYEE)) {
             //Wenn neue Benutzerrolle Employee dann setze Sie einfach
-            if (newUserInformation.role == ShopUser.Role.EMPLOYEE) {
+            if ((newUserInformation.role == ShopUser.Role.EMPLOYEE) || newUserInformation.role == ShopUser.Role.USER) {
                 LOG.debug("Benutzer zu Employee promotet");
-                changedUser.role = ShopUser.Role.EMPLOYEE;
+                changedUser.role = newUserInformation.role;
                 return changedUser;
             }
             //Wenn Benutzerrolle Admin ist, dann prüfe das erneut und setze es dann erst
