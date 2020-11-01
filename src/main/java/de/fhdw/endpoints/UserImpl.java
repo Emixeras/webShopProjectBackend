@@ -1,7 +1,6 @@
 package de.fhdw.endpoints;
 
 import de.fhdw.models.ShopUser;
-import org.hibernate.annotations.common.util.impl.Log;
 import org.jboss.logging.Logger;
 import org.wildfly.common.annotation.NotNull;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
@@ -71,7 +70,7 @@ public class UserImpl implements UserInterface  {
         }
         //update Informations
         if (requestingUser.role == ShopUser.Role.ADMIN || requestingUser.id.equals(newUserInformation.id)) {
-          //changedUser.getChangesFrom(newUserInformation);
+          //changedUser.getChangesFrom(newUserInformation); //todo: check why reflections donÄt work
             changedUser.email = newUserInformation.email;
             changedUser.lastName = newUserInformation.lastName;
             changedUser.firstName = newUserInformation.firstName;
