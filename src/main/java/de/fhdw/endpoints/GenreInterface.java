@@ -13,10 +13,10 @@ public interface GenreInterface {
 
     public List<Genre> get() throws Exception;
 
-    public Genre put(Genre genre, @Context SecurityContext securityContext) throws Exception;
+    public Genre put(Genre genre, @Context SecurityContext securityContext) ;
 
-    public Genre post(Genre genre, @Context SecurityContext securityContext) throws Exception;
+    public Genre post(Genre genre, @Context SecurityContext securityContext);
 
-    public Boolean delete(Genre genre, @Context SecurityContext securityContext) throws Exception;
+    public Boolean delete(Genre genre, @Context SecurityContext securityContext);
 
 }

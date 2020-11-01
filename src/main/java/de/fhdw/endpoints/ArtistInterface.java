@@ -8,13 +8,13 @@ import javax.ws.rs.core.SecurityContext;
 import java.util.List;
 
 public interface ArtistInterface {
-    public Artist get(@PathParam long id) throws Exception;
+    public Artist get(@PathParam long id);
 
     public List<Artist> get();
 
-    public Artist put(Artist artist, @Context SecurityContext securityContext) throws Exception;
+    public Artist put(Artist artist, @Context SecurityContext securityContext);
 
-    public Artist post(Artist artist, @Context SecurityContext securityContext) throws Exception;
+    public Artist post(Artist artist, @Context SecurityContext securityContext);
 
-    public Boolean delete(Artist artist, @Context SecurityContext securityContext) throws Exception;
+    public Boolean delete(Artist artist, @Context SecurityContext securityContext);
 }

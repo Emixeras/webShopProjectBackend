@@ -12,6 +12,7 @@ import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import java.util.*;
 
@@ -42,32 +43,32 @@ public class UserImpl implements UserInterface  {
     @Transactional
     @PermitAll
     @Override
-    public ShopUser post(@NotNull ShopUser shopUser) throws Exception {
+    public ShopUser post(@NotNull ShopUser shopUser) {
         if (ShopUser.findbyEmail(shopUser.email) == null) {
             shopUser.role = ShopUser.Role.USER;
             if(shopUser.firstName.equals("") || shopUser.lastName.equals("")){
-                throw new Exception("Benutername nicht vorhanden");
+                throw new WebApplicationException(Response.Status.NO_CONTENT);
             }
             shopUser.persist();
             return shopUser;
-        } else throw new Exception("Benutzer bereits vorhanden");
+        } else throw new WebApplicationException(Response.Status.valueOf("Benutzername bereits vorhanden"));
     }
 
     @PUT
     @Transactional
     @RolesAllowed({"user", "admin", "employee"})
     @Override
-    public ShopUser put(@NotNull ShopUser newUserInformation, @Context SecurityContext securityContext) throws Exception {
+    public ShopUser put(@NotNull ShopUser newUserInformation, @Context SecurityContext securityContext) {
         ShopUser requestingUser = ShopUser.findbyEmail(securityContext.getUserPrincipal().getName());
         ShopUser changedUser;
         LOG.info(newUserInformation.email);
 
-        try {
             changedUser = ShopUser.findById(newUserInformation.id);
+         if(changedUser == null){
+             throw new WebApplicationException(Response.Status.NOT_FOUND);
+         }
+
             LOG.info(changedUser.email);
-        } catch (Exception e) {
-            throw new Exception("User does not exist");
-        }
         //update Informations
         if (requestingUser.role == ShopUser.Role.ADMIN || requestingUser.id.equals(newUserInformation.id)) {
           //changedUser.getChangesFrom(newUserInformation); //todo: check why reflections donÄt work
@@ -80,7 +81,7 @@ public class UserImpl implements UserInterface  {
             changedUser.town = newUserInformation.town;
             changedUser.password = newUserInformation.password;
             changedUser.birth = newUserInformation.birth;
-        } else throw new Exception("Permission violation");
+        } else throw new WebApplicationException(Response.Status.FORBIDDEN);
         //Prüfe ob Rollen im neuen Objekt differieren und ob Benutzer Admin oder Employee ist
         if ((newUserInformation.role != changedUser.role) && (requestingUser.role == ShopUser.Role.ADMIN || requestingUser.role == ShopUser.Role.EMPLOYEE)) {
             //Wenn neue Benutzerrolle Employee dann setze Sie einfach
@@ -95,6 +96,9 @@ public class UserImpl implements UserInterface  {
                 LOG.debug("Benutzer zu Admin promotet");
                 return changedUser;
             }
+            else {
+                throw new WebApplicationException(Response.Status.FORBIDDEN);
+            }
         }
         return changedUser;
     }
@@ -107,8 +111,16 @@ public class UserImpl implements UserInterface  {
     public Boolean delete(@PathParam String email, @Context SecurityContext securityContext) {
         ShopUser deleted = ShopUser.findbyEmail(email);
         ShopUser shopUser = ShopUser.findbyEmail(securityContext.getUserPrincipal().getName());
+        if(deleted == null || shopUser == null){
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
         if (shopUser.role == ShopUser.Role.ADMIN || email.equals(deleted.email)) {
-            deleted.delete();
+            try {
+
+                deleted.delete();
+            }catch (Exception e){
+                throw new WebApplicationException(Response.Status.EXPECTATION_FAILED);
+            }
             return true;
         }
         return false;

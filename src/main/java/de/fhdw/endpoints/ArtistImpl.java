@@ -6,6 +6,7 @@ import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
@@ -22,12 +23,12 @@ public class ArtistImpl implements ArtistInterface {
     @Override
     @GET
     @Path("{id}")
-    public Artist get(@PathParam long id) throws Exception {
-        try {
-            return Artist.findById(id);
-        } catch (Exception e) {
-            throw new Exception("id not found");
+    public Artist get(@PathParam long id) {
+        Artist a = Artist.findById(id);
+        if (a == null) {
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
+        return Artist.findById(id);
     }
 
     @Override
@@ -39,39 +40,42 @@ public class ArtistImpl implements ArtistInterface {
     @Override
     @PUT
     @RolesAllowed({"employee", "admin"})
-    public Artist put(Artist artist, @Context SecurityContext securityContext) throws Exception {
-        try {
+    public Artist put(Artist artist, @Context SecurityContext securityContext)  {
             Artist old = Artist.findById(artist.id);
+            if(old == null){
+                throw new WebApplicationException(Response.Status.NOT_FOUND);
+            }
+
             old.name = artist.name;
             return old;
-        } catch (Exception E) {
-            throw new Exception("Fehlgeschlagen");
-        }
     }
 
     @Override
     @POST
     @RolesAllowed({"employee", "admin"})
-    public Artist post(@NotNull Artist artist, @Context SecurityContext securityContext) throws Exception {
+    public Artist post(@NotNull Artist artist, @Context SecurityContext securityContext)  {
         try {
             artist.persist();
             return artist;
         } catch (Exception e) {
-            throw new Exception("could not persist user");
+            throw new WebApplicationException(Response.Status.NOT_ACCEPTABLE);
         }
     }
 
     @Override
     @DELETE
     @RolesAllowed({"employee", "admin"})
-    public Boolean delete(Artist artist, @Context SecurityContext securityContext) throws Exception {
+    public Boolean delete(Artist artist, @Context SecurityContext securityContext)  {
         Artist deletedID;
+        deletedID = Artist.findById(artist.id);
+        if(deletedID == null){
+            throw new WebApplicationException(Response.Status.NOT_ACCEPTABLE);
+        }
         try {
-            deletedID = Artist.findById(artist.id);
             deletedID.delete();
             return true;
         } catch (Exception e) {
-            throw new Exception("Artist does not exist");
+            throw new WebApplicationException(Response.Status.EXPECTATION_FAILED);
         }
     }
 }

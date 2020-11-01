@@ -35,26 +35,7 @@ public class ArticleImpl implements ArticleInterface {
     public Response post(@MultipartForm ArticleForm data) throws IOException {
         LOG.info("ich wurde aufgerufen");
         Article article = data.article;
-        if (article.genre != null) {
-            if (Genre.findByName(article.genre.name) != null) {
-                article.genre = Genre.findByName(article.genre.name);
-            } else {
-                Genre genre = new Genre(article.genre.name);
-                genre.persist();
-                article.genre = genre;
-            }
-        }
-        LOG.info(data.article.genre.name);
-        if (article.artists != null) {
-            if (Artist.findByName(article.artists.name) != null) {
-                article.artists = Artist.findByName(article.artists.name);
-            } else {
-                Artist artist = new Artist(article.artists.name);
-                artist.persist();
-                article.artists = artist;
-            }
-        }
-        LOG.info(data.article.artists.name);
+        setNewValues(data, article);
         article.persist();
         Picture picture = new Picture();
         picture.value = IOUtils.toByteArray(data.file);
@@ -74,10 +55,12 @@ public class ArticleImpl implements ArticleInterface {
     @GET
     @Path("{id}")
     @Produces(MediaType.MULTIPART_FORM_DATA)
-
     public MultipartOutput get(@PathParam long id) {
         MultipartOutput output = new MultipartOutput();
         Article article = Article.findById(id);
+        if (article == null) {
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
         output.addPart(article, MediaType.valueOf(MediaType.APPLICATION_JSON));
         output.addPart(article.picture.value, MediaType.valueOf(MediaType.APPLICATION_OCTET_STREAM));
         return output;
@@ -86,10 +69,16 @@ public class ArticleImpl implements ArticleInterface {
     @Override
     @Path("{id}")
     //todo: @RolesAllowed({"admin", "employee"})
-
     public Response delete(@PathParam long id) {
         Article article = Article.findById(id);
-        article.delete();
+        if (article == null) {
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
+        try {
+            article.delete();
+        } catch (Exception e) {
+            throw new WebApplicationException(Response.Status.EXPECTATION_FAILED);
+        }
         return Response.ok("true").build();
     }
 
@@ -98,6 +87,20 @@ public class ArticleImpl implements ArticleInterface {
     //todo: @RolesAllowed({"admin", "employee"})
     public Response put(@MultipartForm ArticleForm data) throws IOException {
         Article article = Article.findById(data.article.id);
+        setNewValues(data, article);
+        article.artists = data.article.artists;
+        article.genre = data.article.genre;
+        article.title = data.article.title;
+        article.price = data.article.price;
+        article.ean = data.article.ean;
+        article.description = data.article.description;
+        Picture picture = article.picture;
+        picture.value = IOUtils.toByteArray(data.file);
+        article.picture = picture;
+        return Response.accepted(data.article.id).build();
+    }
+
+    private void setNewValues(@MultipartForm ArticleForm data, Article article) {
         if (article.genre != null) {
             if (Genre.findByName(article.genre.name) != null) {
                 article.genre = Genre.findByName(article.genre.name);
@@ -118,16 +121,6 @@ public class ArticleImpl implements ArticleInterface {
             }
         }
         LOG.info(data.article.artists.name);
-        article.artists = data.article.artists;
-        article.genre = data.article.genre;
-        article.title = data.article.title;
-        article.price = data.article.price;
-        article.ean = data.article.ean;
-        article.description = data.article.description;
-        Picture picture = article.picture;
-        picture.value = IOUtils.toByteArray(data.file);
-        article.picture = picture;
-        return Response.accepted(data.article.id).build();
     }
 
 
