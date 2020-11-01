@@ -11,6 +11,7 @@ import org.jboss.resteasy.annotations.jaxrs.PathParam;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartOutput;
 
+import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.ApplicationScoped;
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
@@ -29,6 +30,7 @@ public class ArticleImpl implements ArticleInterface {
     @POST
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.MULTIPART_FORM_DATA)
+    //todo: @RolesAllowed({"admin", "employee"})
     @Transactional
     public Response post(@MultipartForm ArticleForm data) throws IOException {
         LOG.info("ich wurde aufgerufen");
@@ -69,7 +71,22 @@ public class ArticleImpl implements ArticleInterface {
     }
 
     @Override
+    @GET
     @Path("{id}")
+    @Produces(MediaType.MULTIPART_FORM_DATA)
+
+    public MultipartOutput get(@PathParam long id) {
+        MultipartOutput output = new MultipartOutput();
+        Article article = Article.findById(id);
+        output.addPart(article, MediaType.valueOf(MediaType.APPLICATION_JSON));
+        output.addPart(article.picture.value, MediaType.valueOf(MediaType.APPLICATION_OCTET_STREAM));
+        return output;
+    }
+
+    @Override
+    @Path("{id}")
+    //todo: @RolesAllowed({"admin", "employee"})
+
     public Response delete(@PathParam long id) {
         Article article = Article.findById(id);
         article.delete();
@@ -78,19 +95,40 @@ public class ArticleImpl implements ArticleInterface {
 
 
     @Override
-    public Response put() {
-        return null;
+    //todo: @RolesAllowed({"admin", "employee"})
+    public Response put(@MultipartForm ArticleForm data) throws IOException {
+        Article article = Article.findById(data.article.id);
+        if (article.genre != null) {
+            if (Genre.findByName(article.genre.name) != null) {
+                article.genre = Genre.findByName(article.genre.name);
+            } else {
+                Genre genre = new Genre(article.genre.name);
+                genre.persist();
+                article.genre = genre;
+            }
+        }
+        LOG.info(data.article.genre.name);
+        if (article.artists != null) {
+            if (Artist.findByName(article.artists.name) != null) {
+                article.artists = Artist.findByName(article.artists.name);
+            } else {
+                Artist artist = new Artist(article.artists.name);
+                artist.persist();
+                article.artists = artist;
+            }
+        }
+        LOG.info(data.article.artists.name);
+        article.artists = data.article.artists;
+        article.genre = data.article.genre;
+        article.title = data.article.title;
+        article.price = data.article.price;
+        article.ean = data.article.ean;
+        article.description = data.article.description;
+        Picture picture = article.picture;
+        picture.value = IOUtils.toByteArray(data.file);
+        article.picture = picture;
+        return Response.accepted(data.article.id).build();
     }
 
-    @Override
-    @GET
-    @Path("{id}")
-    @Produces(MediaType.MULTIPART_FORM_DATA)
-    public MultipartOutput get(@PathParam long id) {
-        MultipartOutput output = new MultipartOutput();
-        Article article = Article.findById(id);
-        output.addPart(article, MediaType.valueOf(MediaType.APPLICATION_JSON));
-        output.addPart(article.picture.value, MediaType.valueOf(MediaType.APPLICATION_OCTET_STREAM));
-        return output;
-    }
+
 }
