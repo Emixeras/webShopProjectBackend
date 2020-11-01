@@ -1,7 +1,6 @@
 package de.fhdw.endpoints;
 
-import de.fhdw.models.HelloWorld;
-import de.fhdw.models.ShopUser;
+import de.fhdw.models.*;
 import org.jboss.logging.Logger;
 
 import javax.annotation.security.PermitAll;
@@ -46,7 +45,7 @@ public class TestImpl implements TestInterface {
             LOG.info("Benutzer angelegt: " + admin.toString());
             admin.persist();
         }
-        if(ShopUser.findById(2L) == null){
+        if (ShopUser.findById(2L) == null) {
             ShopUser shopUser = new ShopUser();
             shopUser.email = "user@user.de";
             shopUser.password = "Test1234";
@@ -62,6 +61,56 @@ public class TestImpl implements TestInterface {
             LOG.info("Benutzer angelegt: " + shopUser.toString());
         }
         return ShopUser.listAll();
+    }
+
+    @Override
+    @GET
+    @Transactional
+    @Path("articleTestData")
+    public List<Article> articleTestData() {
+        Genre genre = new Genre("rock");
+        Artist artist = new Artist("Die Ärzte");
+        if (Artist.findByName("Die Ärzte") == null) {
+            artist.persist();
+        }
+
+        if(Genre.findByName("rock")==null){
+            genre.persist();
+        }
+
+
+        if (Article.findById(1L) == null) {
+            Article art1 = new Article();
+            art1.description = "blub";
+            art1.ean = 123;
+            art1.price = 12.99;
+            art1.title = "desc1";
+            art1.artists = Artist.findByName("Die Ärzte");
+            art1.genre = Genre.findByName("rock");
+            art1.persist();
+        }
+        if (Article.findById(2L) == null) {
+            Article art2 = new Article();
+            art2.artists = Artist.findByName("Die Ärzte");
+            art2.description = "blub";
+            art2.ean = 123;
+            art2.price = 12.99;
+            art2.title = "desc2";
+            art2.genre = Genre.findByName("rock");
+            art2.persist();
+        }
+        if (Article.findById(3L) == null) {
+            Article art3 = new Article();
+            art3.artists = Artist.findByName("Die Ärzte");
+            art3.description = "blub";
+            art3.ean = 123;
+            art3.price = 12.99;
+            art3.title = "desc3";
+            art3.genre = Genre.findByName("rock");
+            art3.persist();
+        }
+        return Article.listAll();
+
     }
 
     @Override

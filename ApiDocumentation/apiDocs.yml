@@ -16,27 +16,6 @@ tags:
   - name: article
     description: Operations on Article Object
 paths:
-  /article/{id}/:
-    get:
-      tags:
-        - article
-      summary: get a single Article Object
-      description: this is the Endpoint returning a single Article Object, it converts the picture if existent to a binary stream.
-      responses:
-        '200':
-          $ref: '#/components/responses/ArticleObject'
-  /article/:
-    post:
-      summary: post a new Article Object
-      tags:
-        - article
-      responses:
-        '200':
-          description: blub
-
-      requestBody:
-        $ref: '#/components/requestBodies/UploadArticlewithPicture'
-
   /user/:
     get:
       security:
@@ -113,7 +92,6 @@ paths:
           description: successful
         '401':
           $ref: '#/components/responses/UnauthorizedError'
-
   /user/getAll:
     get:
       security:
@@ -280,22 +258,6 @@ components:
         picture:
           type: string
           format: binary
-
-
-    ArticleGenre:
-      type: object
-      required:
-        - name
-        - description
-      properties:
-        name:
-          type: string
-          example: Rock
-        description:
-          type: string
-          example:  kurz auch Rock, dient als Oberbegriff für Musikrichtungen, die sich seit Ende der 1960er Jahre aus der Vermischung des Rock ’n’ Roll der späten 1950er und frühen 1960er Jahre und anderen Musikstilen wie z. B. Beatmusik und Blues entwickelt haben.
-
-
     HelloWorld:
       type: object
       required:
@@ -305,18 +267,6 @@ components:
           type: string
           example: dies ist der Hello World Test
   requestBodies:
-    UploadArticlewithPicture:
-      description: Multipart Upload welcher den gleichzeitigen Upload mit einem Bild erlaubt
-      content:
-        multipart/form-data:
-          schema:
-            type: object
-            properties:
-              ArticleMetadata:
-                $ref: '#/components/schemas/ArticleMetadata'
-              fileName:
-                type: string
-                format: binary
   responses:
     UnauthorizedError:
       description: Authentication information is missing or invalid
@@ -344,13 +294,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/HelloWorld'
-    ArticleObject:
-      description: returning a single Article Object
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ArticleMetadata'
-
   securitySchemes:
     basicAuth: # <-- arbitrary name for the security scheme
       type: http

@@ -31,9 +31,20 @@ paths:
           $ref: '#/components/responses/ArticleObject'
       requestBody:
         $ref: '#/components/requestBodies/UploadArticlewithPicture'
+  /article/all:
+
+    get:
+      summary: gets All Article Metadata Objects
+      tags:
+        - article
+      responses:
+        '200':
+          $ref: '#/components/responses/ArticleMetadataList'
+
+
 components:
   schemas:
-    ArticleMetadata:
+    articleMetadata:
       type: object
       required:
         - title
@@ -48,8 +59,7 @@ components:
           type: string
           example: Nach Uns Die Sintflut
         artist:
-          type: string
-          example: Die Ärzte
+          $ref: '#/components/schemas/ArticleArtist'
         price:
           type: number
           example: 12,99
@@ -59,9 +69,9 @@ components:
         ean:
           type: number
           example: 5099746311919
-        genre:
-          $ref: '#/components/schemas/ArticleGenre'
-    Picture:
+        articlegenre:
+          $ref: '#/components/schemas/articleGenre'
+    articlePicture:
       type: object
       required:
         -picture
@@ -69,18 +79,22 @@ components:
         picture:
           type: string
           format: binary
-    ArticleGenre:
+    articleGenre:
       type: object
       required:
         - name
-        - description
       properties:
         name:
           type: string
           example: Rock
-        description:
+    ArticleArtist:
+      type: object
+      required:
+        - name
+      properties:
+        name:
           type: string
-          example: kurz auch Rock, dient als Oberbegriff für Musikrichtungen, die sich seit Ende der 1960er Jahre aus der Vermischung des Rock ’n’ Roll der späten 1950er und frühen 1960er Jahre und anderen Musikstilen wie z. B. Beatmusik und Blues entwickelt haben.
+          example: Die Ärzte
   requestBodies:
     UploadArticlewithPicture:
       description: Multipart Upload welcher den gleichzeitigen Upload mit einem Bild erlaubt
@@ -90,14 +104,13 @@ components:
             type: object
             properties:
               ArticleMetadata:
-                $ref: '#/components/schemas/ArticleMetadata'
+                $ref: '#/components/schemas/articleMetadata'
               fileName:
                 type: string
                 format: binary
           encoding:
             ArticlePicture:
               contentType: image/png, image/jpeg
-
   responses:
     ArticleObject:
       description: returning a single Article Object
@@ -107,10 +120,19 @@ components:
             type: object
             properties:
               ArticleMetadata:
-                $ref: '#/components/schemas/ArticleMetadata'
+                $ref: '#/components/schemas/articleMetadata'
               ArticlePicture:
-                $ref: '#/components/schemas/Picture'
+                $ref: '#/components/schemas/articlePicture'
           encoding: # The same level as schema
             ArticlePicture: # Property name (see above)
               contentType: image/png, image/jpeg
+    ArticleMetadataList:
+      description: Returns a List of All Metadata Objects
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/articleMetadata'
+
 

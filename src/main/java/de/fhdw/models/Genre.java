@@ -7,26 +7,25 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class ArticleGenre extends PanacheEntity {
+public class Genre extends PanacheEntity {
 
-    public ArticleGenre() {
+    public Genre() {
+    }
+
+    public Genre(String name) {
+        this.name = name;
     }
 
     @Column(nullable = false, unique = true)
     public String name;
-    @Column(nullable = false)
-    public String description;
 
 
     @OneToMany(
-            mappedBy = "articleGenre",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER
+            mappedBy = "genre"
     )
     @JsonbTransient
-    public List<ArticleMetadata> articleMetadata;
-
-    public static ArticleGenre findByName(String name) {
+    public List<Article> articles;
+    public static Genre findByName(String name) {
         return find("name", name).firstResult();
     }
 

@@ -8,10 +8,10 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
 @Entity
-public class ArticlePicture extends PanacheEntity {
+public class Picture extends PanacheEntity {
 
-    public byte[] picture;
+    public byte[] value;
     @OneToOne(fetch = FetchType.LAZY)
     @MapsId
-    public ArticleMetadata articleMetadata;
+    public Article article;
 }

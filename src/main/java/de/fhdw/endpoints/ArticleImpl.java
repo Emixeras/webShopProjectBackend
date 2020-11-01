@@ -1,8 +1,8 @@
 package de.fhdw.endpoints;
 
 import de.fhdw.forms.ArticleForm;
-import de.fhdw.models.ArticleMetadata;
-import de.fhdw.models.ArticlePicture;
+import de.fhdw.models.Article;
+import de.fhdw.models.Picture;
 import org.apache.commons.io.IOUtils;
 import org.jboss.logging.Logger;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
@@ -29,21 +29,20 @@ public class ArticleImpl implements ArticleInterface{
     @Transactional
     public String createArticle(@MultipartForm ArticleForm data) throws IOException {
         LOG.info("ich wurde aufgerufen");
-        LOG.info(data.article.articleGenre);
+        LOG.info(data.article.genre);
         data.article.persist();
-
-        ArticlePicture articlePicture = new ArticlePicture();
-        articlePicture.picture = IOUtils.toByteArray(data.file);
-        articlePicture.articleMetadata = data.article;
-        articlePicture.persist();
+        Picture picture = new Picture();
+        picture.value = IOUtils.toByteArray(data.file);
+        picture.article = data.article;
+        picture.persist();
         return "Upload Erfolgreich";
     }
 
     @GET
     @Path("all")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<ArticleMetadata> GetAllArticleMetadata(){
-        return  ArticleMetadata.listAll();
+    public List<Article> GetAllArticleMetadata(){
+        return  Article.listAll();
     }
 
 
