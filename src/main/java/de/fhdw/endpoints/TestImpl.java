@@ -2,14 +2,12 @@ package de.fhdw.endpoints;
 
 import de.fhdw.models.*;
 import org.jboss.logging.Logger;
-
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.ApplicationScoped;
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -72,12 +70,9 @@ public class TestImpl implements TestInterface {
         if (Artist.findByName("Die Ärzte") == null) {
             artist.persist();
         }
-
         if(Genre.findByName("rock")==null){
             genre.persist();
         }
-
-
         if (Article.findById(1L) == null) {
             Article art1 = new Article();
             art1.description = "blub";
@@ -109,7 +104,6 @@ public class TestImpl implements TestInterface {
             art3.persist();
         }
         return Article.listAll();
-
     }
 
     @Override

@@ -88,6 +88,9 @@ public class ArticleImpl implements ArticleInterface {
     //todo: @RolesAllowed({"admin", "employee"})
     public Response put(@MultipartForm ArticleForm data) throws IOException {
         Article article = Article.findById(data.article.id);
+        if(article == null){
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
         setNewValues(data, article);
         article.artists = data.article.artists;
         article.genre = data.article.genre;
