@@ -286,6 +286,14 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/UserArray'
+  /test/articleTestData:
+    get:
+      tags:
+        - test
+      summary: add init articles, genres, artist to database only if they do not exist
+      responses:
+        '200':
+          $ref: '#/components/responses/ArticleMetadataList'
   /test/getAdmin:
     get:
       security:
@@ -389,7 +397,7 @@ components:
         town:
           type: string
           example: Gütersloh
-    articleMetadata:
+    article:
       type: object
       required:
         - title
@@ -404,7 +412,9 @@ components:
           type: string
           example: Nach Uns Die Sintflut
         artist:
-          $ref: '#/components/schemas/Artist'
+          $ref: '#/components/schemas/artist'
+        genre:
+          $ref: '#/components/schemas/genre'
         price:
           type: number
           example: '12,99'
@@ -417,15 +427,15 @@ components:
           type: number
           example: 5099746311919
         articlegenre:
-          $ref: '#/components/schemas/Genre'
-    articlePicture:
+          $ref: '#/components/schemas/genre'
+    picture:
       type: object
       required: '-picture'
       properties:
         picture:
           type: string
           format: binary
-    Genre:
+    genre:
       type: object
       required:
         - name
@@ -433,7 +443,7 @@ components:
         name:
           type: string
           example: Rock
-    Artist:
+    artist:
       type: object
       required:
         - name
@@ -441,7 +451,7 @@ components:
         name:
           type: string
           example: Die Ärzte
-    HelloWorld:
+    helloWorld:
       type: object
       required:
         - value
@@ -460,7 +470,7 @@ components:
             type: object
             properties:
               ArticleMetadata:
-                $ref: '#/components/schemas/articleMetadata'
+                $ref: '#/components/schemas/article'
               fileName:
                 type: string
                 format: binary
@@ -472,13 +482,13 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Genre'
+            $ref: '#/components/schemas/genre'
     RegisterArtist:
       description: erstellt einen neuen Artist Eintrag
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Artist'
+            $ref: '#/components/schemas/artist'
   responses:
     UnauthorizedError:
       description: Authentication information is missing or invalid
@@ -505,7 +515,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/HelloWorld'
+            $ref: '#/components/schemas/helloWorld'
     ArticleObject:
       description: returning a single Article Object
       content:
@@ -514,9 +524,9 @@ components:
             type: object
             properties:
               ArticleMetadata:
-                $ref: '#/components/schemas/articleMetadata'
+                $ref: '#/components/schemas/article'
               ArticlePicture:
-                $ref: '#/components/schemas/articlePicture'
+                $ref: '#/components/schemas/picture'
           encoding:
             ArticlePicture:
               contentType: 'image/png, image/jpeg'
@@ -527,13 +537,13 @@ components:
           schema:
             type: array
             items:
-              $ref: '#/components/schemas/articleMetadata'
+              $ref: '#/components/schemas/article'
     Artist:
       description: returns single Artist Object
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Artist'
+            $ref: '#/components/schemas/artist'
     ArtistList:
       description: returns a List of ArtistObjects
       content:
@@ -541,13 +551,13 @@ components:
           schema:
             type: array
             items:
-              $ref: '#/components/schemas/Artist'
+              $ref: '#/components/schemas/artist'
     Genre:
       description: returns a single Genre Object
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Genre'
+            $ref: '#/components/schemas/genre'
     GenreList:
       description: returns a List of GenreObjects
       content:
@@ -555,7 +565,7 @@ components:
           schema:
             type: array
             items:
-              $ref: '#/components/schemas/Genre'
+              $ref: '#/components/schemas/genre'
   securitySchemes:
     basicAuth:
       type: http
