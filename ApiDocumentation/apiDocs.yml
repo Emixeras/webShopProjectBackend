@@ -155,7 +155,7 @@ paths:
       tags:
         - article
       responses:
-        200:
+        '200':
           $ref: '#/components/responses/ArticleObject'
       requestBody:
         $ref: '#/components/requestBodies/UploadArticleWithPicture'
@@ -164,20 +164,18 @@ paths:
       tags:
         - article
       responses:
-        200:
+        '200':
           description: success
           content:
-                text/plain:
-                  example:
-                    true
-
-  /artist/{id}:
+            text/plain:
+              example: true
+  '/artist/{id}':
     get:
       summary: get all single Artist Object
       tags:
         - artist
       responses:
-        200:
+        '200':
           $ref: '#/components/responses/Artist'
   /artist/:
     get:
@@ -185,48 +183,48 @@ paths:
       tags:
         - artist
       responses:
-        200:
+        '200':
           $ref: '#/components/responses/ArtistList'
     put:
-      summary: changed an Article Object, based on the id in the json
+      summary: 'changed an Article Object, based on the id in the json'
       security:
-        - basicAuth: [ ]
+        - basicAuth: []
       tags:
         - artist
       parameters:
         - $ref: '#/components/responses/Artist'
       responses:
-        200:
+        '200':
           $ref: '#/components/responses/Artist'
     post:
       summary: adds a new Artist Object
       security:
-        - basicAuth: [ ]
+        - basicAuth: []
       tags:
         - artist
       requestBody:
         $ref: '#/components/requestBodies/RegisterArtist'
       responses:
-        200:
+        '200':
           $ref: '#/components/responses/Artist'
     delete:
       summary: löscht einen Artikel
       security:
-        - basicAuth: [ ]
+        - basicAuth: []
       tags:
         - artist
       parameters:
         - $ref: '#/components/responses/Artist'
       responses:
-        200:
+        '200':
           description: success
-  /genre/{id}:
+  '/genre/{id}':
     get:
       summary: get all single Artist Object
       tags:
         - genre
       responses:
-        200:
+        '200':
           $ref: '#/components/responses/Genre'
   /genre/:
     get:
@@ -234,38 +232,37 @@ paths:
       tags:
         - genre
       responses:
-        200:
+        '200':
           $ref: '#/components/responses/GenreList'
     put:
-      summary: changed an Article Object, based on the id in the json
+      summary: 'changed an Article Object, based on the id in the json'
       security:
-        - basicAuth: [ ]
+        - basicAuth: []
       tags:
         - genre
       responses:
-        200:
+        '200':
           $ref: '#/components/responses/Genre'
     post:
       summary: adds a new Artist Object
       security:
-        - basicAuth: [ ]
+        - basicAuth: []
       tags:
         - genre
       requestBody:
         $ref: '#/components/requestBodies/RegisterGenre'
       responses:
-        200:
+        '200':
           $ref: '#/components/responses/Genre'
     delete:
       summary: löscht einen Artikel
       security:
-        - basicAuth: [ ]
+        - basicAuth: []
       tags:
         - genre
       responses:
-        200:
+        '200':
           description: success
-
   /test:
     get:
       tags:
@@ -471,21 +468,17 @@ components:
             ArticlePicture:
               contentType: 'image/png, image/jpeg'
     RegisterGenre:
-      description: >-
-        erstellt einen neuen Genre Eintrag
+      description: erstellt einen neuen Genre Eintrag
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Genre'
     RegisterArtist:
-      description: >-
-        erstellt einen neuen Artist Eintrag
+      description: erstellt einen neuen Artist Eintrag
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Artist'
-
-
   responses:
     UnauthorizedError:
       description: Authentication information is missing or invalid
@@ -563,7 +556,6 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/Genre'
-
   securitySchemes:
     basicAuth:
       type: http
