@@ -5,7 +5,6 @@ import de.fhdw.models.Genre;
 import org.jboss.resteasy.annotations.cache.Cache;
 
 import javax.annotation.security.RolesAllowed;
-import javax.persistence.Cacheable;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;

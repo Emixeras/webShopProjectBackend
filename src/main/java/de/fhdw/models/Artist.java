@@ -14,7 +14,7 @@ public class Artist extends PanacheEntity {
 
     public Artist() {
     }
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     public String name;
 
     @OneToMany(

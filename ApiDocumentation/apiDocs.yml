@@ -3,7 +3,11 @@ servers:
   - description: local Backend Address
     url: 'http://localhost:8080/'
 info:
-  description: Dies ist die API des Webshop Backends
+  description: >-
+    Dies ist die API des Webshop Backends Die Enpunkte welche lediglich Basic
+    Aut Calls Akzeptieren, enthalten nochmal eine gesonderte Beschreibung
+    welcheRechte im Speziellen benötigt werden, dies ist im jeweiligen Enpunkt
+    ersichtlich-
   version: 1.0.0
   title: WEBSHOP API
   contact:
@@ -12,14 +16,18 @@ tags:
   - name: user
     description: Operations on User Object
   - name: test
-    description: test Api
+    description: test Api - provides basic test Functions and example Data
   - name: article
     description: Operations on Article Object
+  - name: artist
+    description: Operations on Artist Objects
+  - name: genre
+    description: Operations on Genre Objects
 paths:
   /user/:
     get:
       security:
-        - basicAuth: [ ]
+        - basicAuth: []
       tags:
         - user
       summary: login api returns user object
@@ -34,11 +42,16 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
     put:
       security:
-        - basicAuth: [ ]
+        - basicAuth: []
       tags:
         - user
       summary: updates userinformation and Role assignment
-      description: this endpoint takes the Full or a partial Amount of the User Object, if a Role other than user is passed a validation check by the trequesting user is performed. if the requesting user is requesting a role assigment greater than it's own privileges e.g employee to admin then nothing will happen.
+      description: >-
+        this endpoint takes the Full or a partial Amount of the User Object, if
+        a Role other than user is passed a validation check by the trequesting
+        user is performed. if the requesting user is requesting a role assigment
+        greater than it's own privileges e.g employee to admin then nothing will
+        happen.
       responses:
         '200':
           $ref: '#/components/responses/UserObject'
@@ -56,7 +69,9 @@ paths:
     post:
       tags:
         - user
-      summary: posts a user Object and stores it in Database could be seen as "register new user"
+      summary: >-
+        posts a user Object and stores it in Database could be seen as "register
+        new user"
       responses:
         '200':
           $ref: '#/components/responses/UserObject'
@@ -67,10 +82,10 @@ paths:
               $ref: '#/components/schemas/user'
         description: Updated user object
         required: true
-  /user/{email}:
+  '/user/{email}':
     delete:
       security:
-        - basicAuth: [ ]
+        - basicAuth: []
       tags:
         - user
       summary: Delete user
@@ -86,16 +101,17 @@ paths:
           schema:
             type: string
       responses:
-        '400':
-          description: Invalid username supplied
         '200':
           description: successful
+        '400':
+          description: Invalid username supplied
         '401':
           $ref: '#/components/responses/UnauthorizedError'
   /user/getAll:
     get:
       security:
-        - basicAuth: [ admin ]
+        - basicAuth:
+            - admin
       tags:
         - user
       summary: returns a list of all users - Admin Only
@@ -106,6 +122,150 @@ paths:
           description: Object not existent (worst Case) or authentication failed
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+  '/article/{id}/':
+    get:
+      tags:
+        - article
+      summary: get a single Article Object
+      description: >-
+        this is the Endpoint returning a single Article Object, it converts the
+        picture if existent to a binary stream.
+      responses:
+        '200':
+          $ref: '#/components/responses/ArticleObject'
+  /article/:
+    get:
+      summary: gets All Article Metadata Objects
+      tags:
+        - article
+      responses:
+        '200':
+          $ref: '#/components/responses/ArticleMetadataList'
+    post:
+      summary: post a new Article Object
+      tags:
+        - article
+      responses:
+        '200':
+          $ref: '#/components/responses/ArticleObject'
+      requestBody:
+        $ref: '#/components/requestBodies/UploadArticleWithPicture'
+    put:
+      summary: post an new Article Object with Picture
+      tags:
+        - article
+      responses:
+        200:
+          $ref: '#/components/responses/ArticleObject'
+      requestBody:
+        $ref: '#/components/requestBodies/UploadArticleWithPicture'
+    delete:
+      summary: deletes an article with Picture
+      tags:
+        - article
+      responses:
+        200:
+          description: success
+          content:
+                text/plain:
+                  example:
+                    true
+
+  /artist/{id}:
+    get:
+      summary: get all single Artist Object
+      tags:
+        - artist
+      responses:
+        200:
+          $ref: '#/components/responses/Artist'
+  /artist/:
+    get:
+      summary: get all Artist Objects
+      tags:
+        - artist
+      responses:
+        200:
+          $ref: '#/components/responses/ArtistList'
+    put:
+      summary: changed an Article Object, based on the id in the json
+      security:
+        - basicAuth: [ ]
+      tags:
+        - artist
+      parameters:
+        - $ref: '#/components/responses/Artist'
+      responses:
+        200:
+          $ref: '#/components/responses/Artist'
+    post:
+      summary: adds a new Artist Object
+      security:
+        - basicAuth: [ ]
+      tags:
+        - artist
+      requestBody:
+        $ref: '#/components/requestBodies/RegisterArtist'
+      responses:
+        200:
+          $ref: '#/components/responses/Artist'
+    delete:
+      summary: löscht einen Artikel
+      security:
+        - basicAuth: [ ]
+      tags:
+        - artist
+      parameters:
+        - $ref: '#/components/responses/Artist'
+      responses:
+        200:
+          description: success
+  /genre/{id}:
+    get:
+      summary: get all single Artist Object
+      tags:
+        - genre
+      responses:
+        200:
+          $ref: '#/components/responses/Genre'
+  /genre/:
+    get:
+      summary: get all Artist Objects
+      tags:
+        - genre
+      responses:
+        200:
+          $ref: '#/components/responses/GenreList'
+    put:
+      summary: changed an Article Object, based on the id in the json
+      security:
+        - basicAuth: [ ]
+      tags:
+        - genre
+      responses:
+        200:
+          $ref: '#/components/responses/Genre'
+    post:
+      summary: adds a new Artist Object
+      security:
+        - basicAuth: [ ]
+      tags:
+        - genre
+      requestBody:
+        $ref: '#/components/requestBodies/RegisterGenre'
+      responses:
+        200:
+          $ref: '#/components/responses/Genre'
+    delete:
+      summary: löscht einen Artikel
+      security:
+        - basicAuth: [ ]
+      tags:
+        - genre
+      responses:
+        200:
+          description: success
+
   /test:
     get:
       tags:
@@ -132,7 +292,7 @@ paths:
   /test/getAdmin:
     get:
       security:
-        - basicAuth: [ ]
+        - basicAuth: []
       tags:
         - test
       summary: returns the authenticated admin user
@@ -149,7 +309,7 @@ paths:
   /test/getUser:
     get:
       security:
-        - basicAuth: [ ]
+        - basicAuth: []
       tags:
         - test
       summary: returns the authenticated admin user
@@ -166,7 +326,7 @@ paths:
   /test/getEmployee:
     get:
       security:
-        - basicAuth: [ ]
+        - basicAuth: []
       tags:
         - test
       summary: returns the authenticated admin user
@@ -190,10 +350,13 @@ components:
         - lastName
         - birth
         - password
+        - role
       properties:
         id:
           type: number
-          description: Dies ist die Tabellen ID, diese wir nur mitgeliefert ein Explizites setzen oder Filtern funktioniert nicht.
+          description: >-
+            Dies ist die Tabellen ID, diese wir nur mitgeliefert ein Explizites
+            setzen oder Filtern funktioniert nicht.
         email:
           type: string
           example: test@test.de
@@ -229,7 +392,7 @@ components:
         town:
           type: string
           example: Gütersloh
-    ArticleMetadata:
+    articleMetadata:
       type: object
       required:
         - title
@@ -244,20 +407,43 @@ components:
           type: string
           example: Nach Uns Die Sintflut
         artist:
-          type: string
-          example: Die Ärzte
+          $ref: '#/components/schemas/Artist'
         price:
           type: number
-          example: 12,99
+          example: '12,99'
         description:
           type: string
-          example: Die Single ist nur einseitig bespielt, auf der Rückseite befinden sich die eingeritzten Autogramme der Ärzte.
+          example: >-
+            Die Single ist nur einseitig bespielt, auf der Rückseite befinden
+            sich die eingeritzten Autogramme der Ärzte.
         ean:
           type: number
           example: 5099746311919
+        articlegenre:
+          $ref: '#/components/schemas/Genre'
+    articlePicture:
+      type: object
+      required: '-picture'
+      properties:
         picture:
           type: string
           format: binary
+    Genre:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          example: Rock
+    Artist:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          example: Die Ärzte
     HelloWorld:
       type: object
       required:
@@ -267,6 +453,39 @@ components:
           type: string
           example: dies ist der Hello World Test
   requestBodies:
+    UploadArticleWithPicture:
+      description: >-
+        Multipart Upload welcher den gleichzeitigen Upload mit einem Bild
+        erlaubt
+      content:
+        multipart/form-data:
+          schema:
+            type: object
+            properties:
+              ArticleMetadata:
+                $ref: '#/components/schemas/articleMetadata'
+              fileName:
+                type: string
+                format: binary
+          encoding:
+            ArticlePicture:
+              contentType: 'image/png, image/jpeg'
+    RegisterGenre:
+      description: >-
+        erstellt einen neuen Genre Eintrag
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Genre'
+    RegisterArtist:
+      description: >-
+        erstellt einen neuen Artist Eintrag
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Artist'
+
+
   responses:
     UnauthorizedError:
       description: Authentication information is missing or invalid
@@ -294,8 +513,58 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/HelloWorld'
+    ArticleObject:
+      description: returning a single Article Object
+      content:
+        multipart/form-data:
+          schema:
+            type: object
+            properties:
+              ArticleMetadata:
+                $ref: '#/components/schemas/articleMetadata'
+              ArticlePicture:
+                $ref: '#/components/schemas/articlePicture'
+          encoding:
+            ArticlePicture:
+              contentType: 'image/png, image/jpeg'
+    ArticleMetadataList:
+      description: Returns a List of All Metadata Objects
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/articleMetadata'
+    Artist:
+      description: returns single Artist Object
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Artist'
+    ArtistList:
+      description: returns a List of ArtistObjects
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Artist'
+    Genre:
+      description: returns a single Genre Object
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Genre'
+    GenreList:
+      description: returns a List of GenreObjects
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Genre'
+
   securitySchemes:
-    basicAuth: # <-- arbitrary name for the security scheme
+    basicAuth:
       type: http
       scheme: basic
-

@@ -23,12 +23,12 @@ import java.util.List;
 @ApplicationScoped
 @Path("article")
 @Consumes(MediaType.MULTIPART_FORM_DATA)
+@Produces(MediaType.APPLICATION_JSON)
 public class ArticleImpl implements ArticleInterface {
     private static final Logger LOG = Logger.getLogger(ArticleImpl.class);
 
     @Override
     @POST
-    @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     //todo: @RolesAllowed({"admin", "employee"})
     @Transactional
@@ -44,9 +44,8 @@ public class ArticleImpl implements ArticleInterface {
         return Response.accepted(data.article.id).build();
     }
 
+    @Override
     @GET
-    @Path("all")
-    @Produces(MediaType.APPLICATION_JSON)
     public List<Article> get() {
         return Article.listAll();
     }
@@ -68,6 +67,7 @@ public class ArticleImpl implements ArticleInterface {
 
     @Override
     @Path("{id}")
+    @DELETE
     //todo: @RolesAllowed({"admin", "employee"})
     public Response delete(@PathParam long id) {
         Article article = Article.findById(id);
@@ -84,6 +84,7 @@ public class ArticleImpl implements ArticleInterface {
 
 
     @Override
+    @PUT
     //todo: @RolesAllowed({"admin", "employee"})
     public Response put(@MultipartForm ArticleForm data) throws IOException {
         Article article = Article.findById(data.article.id);
