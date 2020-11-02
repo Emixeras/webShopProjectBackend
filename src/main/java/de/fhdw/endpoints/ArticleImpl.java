@@ -17,6 +17,7 @@ import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.List;
 
@@ -54,15 +55,15 @@ public class ArticleImpl implements ArticleInterface {
     @GET
     @Path("{id}")
     @Produces(MediaType.MULTIPART_FORM_DATA)
-    public MultipartOutput get(@PathParam long id) {
-        MultipartOutput output = new MultipartOutput();
+    public ArticleForm get(@PathParam long id) {
         Article article = Article.findById(id);
         if (article == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
-        output.addPart(article, MediaType.valueOf(MediaType.APPLICATION_JSON));
-        output.addPart(article.picture.value, MediaType.valueOf(MediaType.APPLICATION_OCTET_STREAM));
-        return output;
+       ArticleForm articleForm = new ArticleForm();
+        articleForm.article = article;
+        articleForm.file = new ByteArrayInputStream(article.picture.value);
+        return articleForm;
     }
 
     @Override

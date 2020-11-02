@@ -16,7 +16,7 @@ public interface ArticleInterface {
 
     public Response put(@MultipartForm ArticleForm data) throws IOException;
 
-    public MultipartOutput get(@PathParam long id);
+    public ArticleForm get(@PathParam long id);
 
     public List<Article> get();
 
