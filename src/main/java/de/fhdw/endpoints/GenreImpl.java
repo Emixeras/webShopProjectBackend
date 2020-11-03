@@ -2,6 +2,7 @@ package de.fhdw.endpoints;
 
 import de.fhdw.models.Artist;
 import de.fhdw.models.Genre;
+import org.jboss.logging.Logger;
 import org.jboss.resteasy.annotations.cache.Cache;
 
 import javax.annotation.security.RolesAllowed;
@@ -15,6 +16,8 @@ import java.util.List;
 @Consumes(MediaType.APPLICATION_JSON)
 @Path("genre")
 public class GenreImpl implements GenreInterface {
+    private static final Logger LOG = Logger.getLogger(GenreImpl.class);
+
     @Override
     @GET
     @Path("{id}")
@@ -52,6 +55,7 @@ public class GenreImpl implements GenreInterface {
     public Genre post(Genre genre, SecurityContext securityContext) {
         try {
             genre.persist();
+            LOG.info("added: "+genre.toString());
             return genre;
         } catch (Exception e) {
             throw new WebApplicationException(Response.Status.NOT_ACCEPTABLE);

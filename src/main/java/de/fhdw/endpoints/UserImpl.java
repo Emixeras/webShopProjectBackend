@@ -50,6 +50,7 @@ public class UserImpl implements UserInterface  {
                 throw new WebApplicationException(Response.Status.NO_CONTENT);
             }
             shopUser.persist();
+            LOG.info("added: "+shopUser.toString());
             return shopUser;
         } else throw new WebApplicationException(Response.Status.valueOf("Benutzername bereits vorhanden"));
     }

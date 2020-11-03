@@ -20,7 +20,7 @@ public class Article extends PanacheEntityBase {
     public String title;
     @Column(nullable = false)
     public double price;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(nullable = false)
     public Genre genre;
     public int ean;
@@ -30,13 +30,25 @@ public class Article extends PanacheEntityBase {
     public Artist artists;
 
     @JsonbTransient
-    @OneToOne()
-    // @JoinColumn(nullable = false) //todo: Uncomment after tests are finished
-    public Picture picture;
+    public byte[] picture;
+
+
+
 
     public static Artist findbyName(String title) {
         return find("title", title).firstResult();
     }
 
-
+    @Override
+    public String toString() {
+        return "Article{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", price=" + price +
+                ", genre=" + genre +
+                ", ean=" + ean +
+                ", description='" + description + '\'' +
+                ", artists=" + artists +
+                '}';
+    }
 }

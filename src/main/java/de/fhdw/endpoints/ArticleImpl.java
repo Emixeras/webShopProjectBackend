@@ -4,7 +4,6 @@ import de.fhdw.forms.ArticleForm;
 import de.fhdw.models.Article;
 import de.fhdw.models.Artist;
 import de.fhdw.models.Genre;
-import de.fhdw.models.Picture;
 import org.apache.tika.detect.Detector;
 import org.apache.tika.metadata.Metadata;
 import org.apache.tika.parser.AutoDetectParser;
@@ -12,7 +11,6 @@ import org.jboss.logging.Logger;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
-import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.ApplicationScoped;
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
@@ -44,16 +42,14 @@ public class ArticleImpl implements ArticleInterface {
         Metadata md = new Metadata();
         md.add(Metadata.RESOURCE_NAME_KEY, "Picture");
         org.apache.tika.mime.MediaType mediaType = detector.detect(bis, md);
-        LOG.info(mediaType.toString());
+        LOG.info("Picture Type: "+mediaType.toString());
 
         if(mediaType.toString().equals("image/png") || mediaType.toString().equals("image/jpeg")){
             Article article = data.article;
             setNewValues(data, article);
+            LOG.info("added: "+article.toString());
             article.persist();
-            Picture picture = new Picture();
-            picture.value = data.getFile();
-            article.picture = picture;
-            picture.persist();
+            article.picture = data.getFile();
             return Response.accepted(data.article.id).build();
         }
         throw new WebApplicationException(Response.Status.BAD_REQUEST);
@@ -78,7 +74,7 @@ public class ArticleImpl implements ArticleInterface {
         }
        ArticleForm articleForm = new ArticleForm();
         articleForm.article = article;
-        articleForm.setFile(article.picture.value);
+        articleForm.setFile(article.picture);
         return articleForm;
     }
 
@@ -115,9 +111,7 @@ public class ArticleImpl implements ArticleInterface {
         article.price = data.article.price;
         article.ean = data.article.ean;
         article.description = data.article.description;
-        Picture picture = article.picture;
-        picture.value = data.getFile();
-        article.picture = picture;
+        article.picture = data.getFile();
         return Response.accepted(data.article.id).build();
     }
 

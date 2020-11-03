@@ -82,6 +82,7 @@ public class TestImpl implements TestInterface {
             art1.artists = Artist.findByName("Die Ärzte");
             art1.genre = Genre.findByName("rock");
             art1.persist();
+            LOG.info("added: "+art1.toString());
         }
         if (Article.findById(2L) == null) {
             Article art2 = new Article();
@@ -92,6 +93,8 @@ public class TestImpl implements TestInterface {
             art2.title = "desc2";
             art2.genre = Genre.findByName("rock");
             art2.persist();
+            LOG.info("added: "+art2.toString());
+
         }
         if (Article.findById(3L) == null) {
             Article art3 = new Article();
@@ -102,6 +105,8 @@ public class TestImpl implements TestInterface {
             art3.title = "desc3";
             art3.genre = Genre.findByName("rock");
             art3.persist();
+            LOG.info("added: "+art3.toString());
+
         }
         return Article.listAll();
     }

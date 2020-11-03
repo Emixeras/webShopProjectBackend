@@ -9,6 +9,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
+import org.jboss.logging.Logger;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
 import org.wildfly.common.annotation.NotNull;
 
@@ -19,6 +20,7 @@ import java.util.List;
 @Consumes(MediaType.APPLICATION_JSON)
 @Path("artist")
 public class ArtistImpl implements ArtistInterface {
+    private static final Logger LOG = Logger.getLogger(ArtistImpl.class);
 
     @Override
     @GET
@@ -45,7 +47,6 @@ public class ArtistImpl implements ArtistInterface {
             if(old == null){
                 throw new WebApplicationException(Response.Status.NOT_FOUND);
             }
-
             old.name = artist.name;
             return old;
     }
@@ -56,6 +57,8 @@ public class ArtistImpl implements ArtistInterface {
     public Artist post(@NotNull Artist artist, @Context SecurityContext securityContext)  {
         try {
             artist.persist();
+            LOG.info("added: "+artist.toString());
+
             return artist;
         } catch (Exception e) {
             throw new WebApplicationException(Response.Status.NOT_ACCEPTABLE);

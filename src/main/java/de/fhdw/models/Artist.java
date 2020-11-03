@@ -1,6 +1,5 @@
 package de.fhdw.models;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
 import javax.json.bind.annotation.JsonbTransient;
@@ -34,4 +33,11 @@ public class Artist extends PanacheEntityBase {
         return find("name", name).firstResult();
     }
 
+    @Override
+    public String toString() {
+        return "Artist{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

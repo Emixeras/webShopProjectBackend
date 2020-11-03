@@ -1,7 +1,6 @@
 package de.fhdw.models;
 import io.quarkus.hibernate.orm.panache.*;
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import java.util.*;
 
@@ -41,4 +40,21 @@ public class ShopUser extends PanacheEntityBase  {
         return find("email", name).firstResult();
     }
 
+
+    @Override
+    public String toString() {
+        return "ShopUser{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", street='" + street + '\'' +
+                ", streetNumber=" + streetNumber +
+                ", town='" + town + '\'' +
+                ", postalCode=" + postalCode +
+                ", birth=" + birth +
+                ", role=" + role +
+                '}';
+    }
 }
