@@ -30,7 +30,7 @@ public class ArticleImpl implements ArticleInterface {
     @Override
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
-    //todo: @RolesAllowed({"admin", "employee"})
+    @RolesAllowed({"admin", "employee"})
     @Transactional
     public Response post(@MultipartForm ArticleForm data) throws IOException {
         if(data.article == null){
@@ -81,7 +81,7 @@ public class ArticleImpl implements ArticleInterface {
     @Override
     @Path("{id}")
     @DELETE
-    //todo: @RolesAllowed({"admin", "employee"})
+    @RolesAllowed({"admin", "employee"})
     public Response delete(@PathParam long id) {
         Article article = Article.findById(id);
         if (article == null) {
@@ -98,7 +98,7 @@ public class ArticleImpl implements ArticleInterface {
 
     @Override
     @PUT
-    //todo: @RolesAllowed({"admin", "employee"})
+    @RolesAllowed({"admin", "employee"})
     public Response put(@MultipartForm ArticleForm data) throws IOException {
         Article article = Article.findById(data.article.id);
         if(article == null){
