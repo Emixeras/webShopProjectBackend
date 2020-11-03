@@ -1,14 +1,15 @@
 package de.fhdw.models;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.MapsId;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity
-public class Picture extends PanacheEntity {
+public class Picture extends PanacheEntityBase {
+
+    @Id
+    @GeneratedValue
+    public Long id;
 
     public byte[] value;
 

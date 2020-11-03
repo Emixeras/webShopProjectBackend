@@ -34,7 +34,6 @@ public class ArticleImpl implements ArticleInterface {
     //todo: @RolesAllowed({"admin", "employee"})
     @Transactional
     public Response post(@MultipartForm ArticleForm data) throws IOException {
-        LOG.info("ich wurde aufgerufen");
         Article article = data.article;
         setNewValues(data, article);
         article.persist();

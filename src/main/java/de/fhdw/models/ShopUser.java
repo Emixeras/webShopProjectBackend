@@ -1,17 +1,24 @@
 package de.fhdw.models;
 import io.quarkus.hibernate.orm.panache.*;
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import java.util.*;
 
 
 @Entity(name = "ShopUser")
 @Table(name = "shopuser")
-public class ShopUser extends PanacheEntity implements AbstractModelClass {
+public class ShopUser extends PanacheEntityBase  {
+
+
+    @Id
+    @GeneratedValue
+    public Long id;
 
     public enum Role {
         ADMIN, EMPLOYEE, USER
     }
-
+    @NotBlank(message = "email may not be Blank")
     @Column(nullable = false, unique = true)
     public String email;
     @Column(nullable = false)

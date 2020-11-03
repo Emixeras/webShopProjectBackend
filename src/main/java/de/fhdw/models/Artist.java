@@ -1,16 +1,21 @@
 package de.fhdw.models;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class Artist extends PanacheEntity {
+public class Artist extends PanacheEntityBase {
     public Artist(String name) {
         this.name = name;
     }
+
+    @Id
+    @GeneratedValue
+    public Long id;
 
     public Artist() {
     }

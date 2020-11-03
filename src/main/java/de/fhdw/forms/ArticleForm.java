@@ -14,7 +14,9 @@ public class ArticleForm {
     @PartType(MediaType.APPLICATION_JSON)
     public Article article;
 
-    @FormParam("ArticlePicture")
+    @FormParam("Picture")
     @PartType(MediaType.APPLICATION_OCTET_STREAM)
     public InputStream file;
+
+
 }
