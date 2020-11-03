@@ -12,7 +12,8 @@ public class Article extends PanacheEntityBase {
 
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     public Long id;
 
     @Column(nullable = false)

@@ -12,7 +12,8 @@ public class ShopUser extends PanacheEntityBase  {
 
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     public Long id;
 
     public enum Role {

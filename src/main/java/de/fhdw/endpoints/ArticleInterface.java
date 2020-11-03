@@ -4,7 +4,6 @@ import de.fhdw.forms.ArticleForm;
 import de.fhdw.models.Article;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
-import org.jboss.resteasy.plugins.providers.multipart.MultipartOutput;
 
 import javax.ws.rs.core.Response;
 import java.io.IOException;

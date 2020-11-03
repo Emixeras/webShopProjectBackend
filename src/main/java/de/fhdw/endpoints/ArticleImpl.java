@@ -5,11 +5,12 @@ import de.fhdw.models.Article;
 import de.fhdw.models.Artist;
 import de.fhdw.models.Genre;
 import de.fhdw.models.Picture;
-import org.apache.commons.io.IOUtils;
+import org.apache.tika.detect.Detector;
+import org.apache.tika.metadata.Metadata;
+import org.apache.tika.parser.AutoDetectParser;
 import org.jboss.logging.Logger;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
-import org.jboss.resteasy.plugins.providers.multipart.MultipartOutput;
 
 import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.ApplicationScoped;
@@ -17,7 +18,7 @@ import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.io.ByteArrayInputStream;
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.util.List;
 
@@ -34,14 +35,30 @@ public class ArticleImpl implements ArticleInterface {
     //todo: @RolesAllowed({"admin", "employee"})
     @Transactional
     public Response post(@MultipartForm ArticleForm data) throws IOException {
-        Article article = data.article;
-        setNewValues(data, article);
-        article.persist();
-        Picture picture = new Picture();
-        picture.value = IOUtils.toByteArray(data.file);
-        article.picture = picture;
-        picture.persist();
-        return Response.accepted(data.article.id).build();
+        if(data.article == null){
+            throw new WebApplicationException(Response.Status.BAD_REQUEST);
+        }
+        BufferedInputStream bis = new BufferedInputStream(data.getFileAsStream());
+        AutoDetectParser parser = new AutoDetectParser();
+        Detector detector = parser.getDetector();
+        Metadata md = new Metadata();
+        md.add(Metadata.RESOURCE_NAME_KEY, "Picture");
+        org.apache.tika.mime.MediaType mediaType = detector.detect(bis, md);
+        LOG.info(mediaType.toString());
+
+        if(mediaType.toString().equals("image/png") || mediaType.toString().equals("image/jpeg")){
+            Article article = data.article;
+            setNewValues(data, article);
+            article.persist();
+            Picture picture = new Picture();
+            picture.value = data.getFile();
+            article.picture = picture;
+            picture.persist();
+            return Response.accepted(data.article.id).build();
+        }
+        throw new WebApplicationException(Response.Status.BAD_REQUEST);
+
+
     }
 
     @Override
@@ -61,7 +78,7 @@ public class ArticleImpl implements ArticleInterface {
         }
        ArticleForm articleForm = new ArticleForm();
         articleForm.article = article;
-        articleForm.file = new ByteArrayInputStream(article.picture.value);
+        articleForm.setFile(article.picture.value);
         return articleForm;
     }
 
@@ -99,7 +116,7 @@ public class ArticleImpl implements ArticleInterface {
         article.ean = data.article.ean;
         article.description = data.article.description;
         Picture picture = article.picture;
-        picture.value = IOUtils.toByteArray(data.file);
+        picture.value = data.getFile();
         article.picture = picture;
         return Response.accepted(data.article.id).build();
     }
@@ -114,7 +131,7 @@ public class ArticleImpl implements ArticleInterface {
                 article.genre = genre;
             }
         }
-        LOG.info(data.article.genre.name);
+        LOG.debug(data.article.genre.name);
         if (article.artists != null) {
             if (Artist.findByName(article.artists.name) != null) {
                 article.artists = Artist.findByName(article.artists.name);
@@ -124,7 +141,7 @@ public class ArticleImpl implements ArticleInterface {
                 article.artists = artist;
             }
         }
-        LOG.info(data.article.artists.name);
+        LOG.debug(data.article.artists.name);
     }
 
 

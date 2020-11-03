@@ -14,7 +14,8 @@ public class Artist extends PanacheEntityBase {
     }
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     public Long id;
 
     public Artist() {

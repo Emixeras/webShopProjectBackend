@@ -11,7 +11,8 @@ import java.util.List;
 public class Genre extends PanacheEntityBase {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     public Long id;
 
     public Genre() {

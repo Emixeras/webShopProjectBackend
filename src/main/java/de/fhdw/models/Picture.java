@@ -8,7 +8,7 @@ import javax.persistence.*;
 public class Picture extends PanacheEntityBase {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
     public byte[] value;
