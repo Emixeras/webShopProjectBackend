@@ -30,6 +30,7 @@ public class TestImpl implements TestInterface {
         if (ShopUser.findById(1L) == null) {
             ShopUser admin = new ShopUser();
             admin.email = "admin@admin.de";
+            admin.salutation = ShopUser.Salutation.BENUTZERDEFINIERT;
             admin.firstName = "Daniel";
             admin.lastName = "Pilot";
             admin.password = "Test1234";
@@ -44,6 +45,7 @@ public class TestImpl implements TestInterface {
         }
         if (ShopUser.findById(2L) == null) {
             ShopUser shopUser = new ShopUser();
+            shopUser.salutation = ShopUser.Salutation.HERR;
             shopUser.email = "user@user.de";
             shopUser.password = "Test1234";
             shopUser.firstName = "Christoph";

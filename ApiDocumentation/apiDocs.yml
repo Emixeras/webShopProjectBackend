@@ -426,8 +426,7 @@ components:
         ean:
           type: number
           example: 5099746311919
-        articlegenre:
-          $ref: '#/components/schemas/genre'
+
     picture:
       type: object
       required: '-picture'

@@ -18,11 +18,17 @@ public class ShopUser extends PanacheEntityBase  {
     public enum Role {
         ADMIN, EMPLOYEE, USER
     }
+    public enum Salutation{
+        HERR, FRAU, PROFESSOR, DOKTOR, BENUTZERDEFINIERT, APACHE
+    }
+
     @NotBlank(message = "email may not be Blank")
     @Column(nullable = false, unique = true)
     public String email;
     @Column(nullable = false)
     public String password;
+    @Column(nullable = false)
+    public Salutation salutation;
     @Column(nullable = false)
     public String firstName;
     @Column(nullable = false)
