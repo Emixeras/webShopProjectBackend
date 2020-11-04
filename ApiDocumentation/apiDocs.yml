@@ -356,6 +356,7 @@ components:
         - birth
         - password
         - role
+        - salutation
       properties:
         id:
           type: number
@@ -380,6 +381,15 @@ components:
             - USER
             - ADMIN
             - EMPLOYEE
+        salutation:
+          type: string
+          enum:
+            - HERR
+            - FRAU
+            - DOKTOR
+            - PROFESSOR
+            - BENUTZERDEFINIERT
+            - APACHE
           example: USER
         birth:
           type: string
