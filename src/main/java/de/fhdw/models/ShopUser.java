@@ -18,7 +18,7 @@ public class ShopUser extends PanacheEntityBase  {
     public enum Role {
         ADMIN, EMPLOYEE, USER
     }
-    public enum Salutation{
+    public enum Title {
         HERR, FRAU, PROFESSOR, DOKTOR, BENUTZERDEFINIERT, APACHE
     }
 
@@ -28,7 +28,7 @@ public class ShopUser extends PanacheEntityBase  {
     @Column(nullable = false)
     public String password;
     @Column(nullable = false)
-    public Salutation salutation;
+    public Title title;
     @Column(nullable = false)
     public String firstName;
     @Column(nullable = false)

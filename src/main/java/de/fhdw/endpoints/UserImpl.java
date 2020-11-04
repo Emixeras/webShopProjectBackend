@@ -80,8 +80,10 @@ public class UserImpl implements UserInterface  {
             changedUser.streetNumber = newUserInformation.streetNumber;
             changedUser.street = newUserInformation.street;
             changedUser.town = newUserInformation.town;
+            changedUser.title = newUserInformation.title;
             changedUser.password = newUserInformation.password;
             changedUser.birth = newUserInformation.birth;
+            LOG.info("new User: "+changedUser.toString());
         } else throw new WebApplicationException(Response.Status.FORBIDDEN);
         //Prüfe ob Rollen im neuen Objekt differieren und ob Benutzer Admin oder Employee ist
         if ((newUserInformation.role != changedUser.role) && (requestingUser.role == ShopUser.Role.ADMIN || requestingUser.role == ShopUser.Role.EMPLOYEE)) {
