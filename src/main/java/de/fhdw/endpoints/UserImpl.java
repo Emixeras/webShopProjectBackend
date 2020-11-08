@@ -1,6 +1,7 @@
 package de.fhdw.endpoints;
 
 import de.fhdw.models.ShopUser;
+import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.jboss.logging.Logger;
 import org.wildfly.common.annotation.NotNull;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
@@ -20,6 +21,7 @@ import java.util.*;
 @Path("/user")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
+@Tag(name="User", description = "Operations on User Object")
 public class UserImpl implements UserInterface  {
     private static final Logger LOG = Logger.getLogger(UserImpl.class);
 

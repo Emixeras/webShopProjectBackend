@@ -63,7 +63,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/user'
+              $ref: '#/components/schemas/ShopUser'
         description: Updated user object
         required: true
     post:
@@ -79,7 +79,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/user'
+              $ref: '#/components/schemas/ShopUser'
         description: Updated user object
         required: true
   '/user/{email}':
@@ -171,15 +171,16 @@ paths:
               example: true
   '/artist/{id}':
     get:
-      summary: get all single Artist Object
+      summary: get all single Artist Object with Picture
       tags:
         - artist
       responses:
         '200':
-          $ref: '#/components/responses/Artist'
+          $ref: '#/components/responses/ArtistObject'
+
   /artist/:
     get:
-      summary: get all Artist Objects
+      summary: get all Artist Objects as json with Picture
       tags:
         - artist
       responses:
@@ -347,127 +348,127 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
 components:
   schemas:
-    user:
+    Article:
       type: object
-      required:
-        - email
-        - firstName
-        - lastName
-        - birth
-        - password
-        - role
-        - salutation
       properties:
-        id:
-          type: number
-          description: >-
-            Dies ist die Tabellen ID, diese wir nur mitgeliefert ein Explizites
-            setzen oder Filtern funktioniert nicht.
-        email:
+        artists:
+          $ref: '#/components/schemas/Artist'
+        description:
           type: string
-          example: test@test.de
-        password:
-          type: string
-          example: Test1234
-        firstName:
-          type: string
-          example: Heinz
-        lastName:
-          type: string
-          example: Mayer
-        role:
-          type: string
-          enum:
-            - USER
-            - ADMIN
-            - EMPLOYEE
-        salutation:
-          type: string
-          enum:
-            - HERR
-            - FRAU
-            - DOKTOR
-            - PROFESSOR
-            - BENUTZERDEFINIERT
-            - APACHE
-          example: USER
-        birth:
-          type: string
-          format: date-time
-          example: '2016-08-29T09:12:33.001Z'
-        street:
-          type: string
-          example: Amselweg
-        streetNumber:
+        ean:
+          format: int32
           type: integer
-          example: 123
-        postalCode:
-          type: integer
-          example: 33330
-        town:
-          type: string
-          example: Gütersloh
-    article:
-      type: object
-      required:
-        - title
-        - interpret
-        - genre
-        - price
-        - picture
-      properties:
+        genre:
+          $ref: '#/components/schemas/Genre'
         id:
+          format: int64
+          type: integer
+        image:
+          $ref: '#/components/schemas/Picture'
+        price:
+          format: double
           type: number
         title:
           type: string
-          example: Nach Uns Die Sintflut
+    ListArticle:
+      type: array
+      items:
+        $ref: '#/components/schemas/Article'
+    Artist:
+      type: object
+      properties:
+        id:
+          format: int64
+          type: integer
+        name:
+          type: string
+        image:
+    Genre:
+      type: object
+      properties:
+        id:
+          format: int64
+          type: integer
+        name:
+          type: string
+    Picture:
+      type: object
+      properties:
+        article:
+          $ref: '#/components/schemas/ListArticle'
         artist:
-          $ref: '#/components/schemas/artist'
+          $ref: '#/components/schemas/ListArtist'
         genre:
-          $ref: '#/components/schemas/genre'
-        price:
-          type: number
-          example: '12,99'
-        description:
-          type: string
-          example: >-
-            Die Single ist nur einseitig bespielt, auf der Rückseite befinden
-            sich die eingeritzten Autogramme der Ärzte.
-        ean:
-          type: number
-          example: 5099746311919
+          $ref: '#/components/schemas/ListGenre'
+        id:
+          format: int64
+          type: integer
+    ListArtist:
+      type: array
+      items:
+        $ref: '#/components/schemas/Artist'
+    ListGenre:
+      type: array
+      items:
+        $ref: '#/components/schemas/Genre'
 
-    picture:
+    HelloWorld:
       type: object
-      required: '-picture'
-      properties:
-        picture:
-          type: string
-          format: binary
-    genre:
-      type: object
-      required:
-        - name
-      properties:
-        name:
-          type: string
-          example: Rock
-    artist:
-      type: object
-      required:
-        - name
-      properties:
-        name:
-          type: string
-          example: Die Ärzte
-    helloWorld:
-      type: object
-      required:
-        - value
       properties:
         value:
           type: string
-          example: dies ist der Hello World Test
+    ShopUser:
+      type: object
+      properties:
+        birth:
+          $ref: '#/components/schemas/Date'
+        email:
+          pattern: \S
+          type: string
+          nullable: false
+        firstName:
+          type: string
+        id:
+          format: int64
+          type: integer
+        lastName:
+          type: string
+        password:
+          type: string
+        postalCode:
+          format: int32
+          type: integer
+        role:
+          $ref: '#/components/schemas/Role'
+        street:
+          type: string
+        streetNumber:
+          format: int32
+          type: integer
+        title:
+          $ref: '#/components/schemas/Title'
+        town:
+          type: string
+
+    Date:
+      format: date
+      type: string
+    Role:
+      enum:
+        - ADMIN
+        - EMPLOYEE
+        - USER
+      type: string
+    Title:
+      enum:
+        - APACHE
+        - BENUTZERDEFINIERT
+        - DOKTOR
+        - FRAU
+        - HERR
+        - PROFESSOR
+      type: string
+
   requestBodies:
     UploadArticleWithPicture:
       description: >-
@@ -478,8 +479,42 @@ components:
           schema:
             type: object
             properties:
+              Article:
+                $ref: '#/components/schemas/Article'
+              fileName:
+                type: string
+                format: binary
+          encoding:
+            ArticlePicture:
+              contentType: 'image/png, image/jpeg'
+    UploadGenreWithPicture:
+      description: >-
+        Multipart Upload welcher den gleichzeitigen Upload mit einem Bild
+        erlaubt
+      content:
+        multipart/form-data:
+          schema:
+            type: object
+            properties:
+              Genre:
+                $ref: '#/components/schemas/Genre'
+              fileName:
+                type: string
+                format: binary
+          encoding:
+            ArticlePicture:
+              contentType: 'image/png, image/jpeg'
+    UploadArtistWithPicture:
+      description: >-
+        Multipart Upload welcher den gleichzeitigen Upload mit einem Bild
+        erlaubt
+      content:
+        multipart/form-data:
+          schema:
+            type: object
+            properties:
               ArticleMetadata:
-                $ref: '#/components/schemas/article'
+                $ref: '#/components/schemas/Artist'
               fileName:
                 type: string
                 format: binary
@@ -491,13 +526,13 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/genre'
+            $ref: '#/components/schemas/Genre'
     RegisterArtist:
       description: erstellt einen neuen Artist Eintrag
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/artist'
+            $ref: '#/components/schemas/Artist'
   responses:
     UnauthorizedError:
       description: Authentication information is missing or invalid
@@ -510,7 +545,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/user'
+            $ref: '#/components/schemas/ShopUser'
     UserArray:
       description: successful
       content:
@@ -518,13 +553,13 @@ components:
           schema:
             type: array
             items:
-              $ref: '#/components/schemas/user'
+              $ref: '#/components/schemas/ShopUser'
     HelloWorld:
       description: successful
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/helloWorld'
+            $ref: '#/components/schemas/HelloWorld'
     ArticleObject:
       description: returning a single Article Object
       content:
@@ -533,9 +568,9 @@ components:
             type: object
             properties:
               ArticleMetadata:
-                $ref: '#/components/schemas/article'
+                $ref: '#/components/schemas/Article'
               ArticlePicture:
-                $ref: '#/components/schemas/picture'
+                $ref: '#/components/schemas/Picture'
           encoding:
             ArticlePicture:
               contentType: 'image/png, image/jpeg'
@@ -546,13 +581,24 @@ components:
           schema:
             type: array
             items:
-              $ref: '#/components/schemas/article'
+              $ref: '#/components/schemas/Article'
     Artist:
       description: returns single Artist Object
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/artist'
+            $ref: '#/components/schemas/Artist'
+    ArtistObject:
+      description: returning a single Article Object
+      content:
+        multipart/form-data:
+          schema:
+            type: object
+            properties:
+              ArticleMetadata:
+                $ref: '#/components/schemas/Artist'
+              ArticlePicture:
+                $ref: '#/components/schemas/Picture'
     ArtistList:
       description: returns a List of ArtistObjects
       content:
@@ -560,13 +606,13 @@ components:
           schema:
             type: array
             items:
-              $ref: '#/components/schemas/artist'
+              $ref: '#/components/schemas/Artist'
     Genre:
       description: returns a single Genre Object
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/genre'
+            $ref: '#/components/schemas/Genre'
     GenreList:
       description: returns a List of GenreObjects
       content:
@@ -574,7 +620,7 @@ components:
           schema:
             type: array
             items:
-              $ref: '#/components/schemas/genre'
+              $ref: '#/components/schemas/Genre'
   securitySchemes:
     basicAuth:
       type: http

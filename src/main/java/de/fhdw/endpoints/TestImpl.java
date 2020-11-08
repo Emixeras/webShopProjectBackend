@@ -1,6 +1,7 @@
 package de.fhdw.endpoints;
 
 import de.fhdw.models.*;
+import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.jboss.logging.Logger;
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
@@ -17,6 +18,8 @@ import java.util.List;
 @Path("/test")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
+@Tag(name="Test", description = "div Test Data and basic Backend Operations")
+
 public class TestImpl implements TestInterface {
     private static final Logger LOG = Logger.getLogger(TestImpl.class);
     private static final String DATEPATTERN = "yyyy-MM-dd HH:mm:ss";

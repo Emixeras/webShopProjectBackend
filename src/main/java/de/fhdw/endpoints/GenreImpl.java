@@ -4,6 +4,10 @@ import de.fhdw.forms.GenreForm;
 import de.fhdw.models.Genre;
 import de.fhdw.models.Picture;
 import de.fhdw.util.PictureHandler;
+import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.info.Info;
+import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
+import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.jboss.logging.Logger;
 import org.jboss.resteasy.annotations.cache.Cache;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
@@ -19,6 +23,7 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @Path("genre")
+@Tag(name="Genre", description = "Operations on Genre object")
 public class GenreImpl implements GenreInterface {
     private static final Logger LOG = Logger.getLogger(GenreImpl.class);
 
@@ -44,6 +49,7 @@ public class GenreImpl implements GenreInterface {
     @Override
     @PUT
     @RolesAllowed({"employee", "admin"})
+    @Operation(summary = "put", description = "put")
     public Genre put(Genre data, @Context SecurityContext securityContext) {
         Genre old = Genre.findById(data.id);
         if (old == null) {
@@ -56,6 +62,7 @@ public class GenreImpl implements GenreInterface {
     @Override
     @PUT
     @RolesAllowed({"employee", "admin"})
+    @Operation(summary = "put2", description = "put2")
     public Response put(@MultipartForm GenreForm data, @Context SecurityContext securityContext) {
         Genre old = Genre.findById(data.genre.id);
         if (old == null) {

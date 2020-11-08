@@ -6,6 +6,7 @@ import de.fhdw.models.Artist;
 import de.fhdw.models.Genre;
 import de.fhdw.models.Picture;
 import de.fhdw.util.PictureHandler;
+import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.jboss.logging.Logger;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
@@ -23,6 +24,7 @@ import java.util.List;
 @Path("article")
 @Consumes(MediaType.MULTIPART_FORM_DATA)
 @Produces(MediaType.APPLICATION_JSON)
+@Tag(name="Article",description = "Operations on Article object")
 public class ArticleImpl implements ArticleInterface {
     private static final Logger LOG = Logger.getLogger(ArticleImpl.class);
 
@@ -56,6 +58,7 @@ public class ArticleImpl implements ArticleInterface {
 
     @Override
     @GET
+
     public List<Article> get() {
         return Article.listAll();
     }

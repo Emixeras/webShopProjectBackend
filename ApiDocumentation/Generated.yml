@@ -20,10 +20,13 @@ paths:
             schema:
               type: object
               properties:
-                ArticleMetadata:
+                Article:
                   $ref: '#/components/schemas/Article'
                 Picture:
-                  $ref: '#/components/schemas/InputStream'
+                  type: array
+                  items:
+                    format: byte
+                    type: string
       responses:
         "200":
           description: OK
@@ -34,10 +37,13 @@ paths:
             schema:
               type: object
               properties:
-                ArticleMetadata:
+                Article:
                   $ref: '#/components/schemas/Article'
                 Picture:
-                  $ref: '#/components/schemas/InputStream'
+                  type: array
+                  items:
+                    format: byte
+                    type: string
       responses:
         "200":
           description: OK
@@ -94,14 +100,18 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Artist'
+              type: object
+              properties:
+                Artist:
+                  $ref: '#/components/schemas/Artist'
+                Picture:
+                  type: array
+                  items:
+                    format: byte
+                    type: string
       responses:
         "200":
           description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Artist'
     delete:
       requestBody:
         content:
@@ -130,7 +140,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Artist'
+                $ref: '#/components/schemas/ArtistForm'
     parameters:
       - name: id
         in: path
@@ -157,14 +167,18 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Genre'
+              type: object
+              properties:
+                Genre:
+                  $ref: '#/components/schemas/Genre'
+                Picture:
+                  type: array
+                  items:
+                    format: byte
+                    type: string
       responses:
         "200":
           description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Genre'
     delete:
       requestBody:
         content:
@@ -349,6 +363,8 @@ components:
         id:
           format: int64
           type: integer
+        image:
+          $ref: '#/components/schemas/Picture'
         price:
           format: double
           type: number
@@ -374,6 +390,26 @@ components:
           type: integer
         name:
           type: string
+    Picture:
+      type: object
+      properties:
+        article:
+          $ref: '#/components/schemas/ListArticle'
+        artist:
+          $ref: '#/components/schemas/ListArtist'
+        genre:
+          $ref: '#/components/schemas/ListGenre'
+        id:
+          format: int64
+          type: integer
+    ListArtist:
+      type: array
+      items:
+        $ref: '#/components/schemas/Artist'
+    ListGenre:
+      type: array
+      items:
+        $ref: '#/components/schemas/Genre'
     InputStream:
       type: object
     ArticleForm:
@@ -382,6 +418,23 @@ components:
         article:
           $ref: '#/components/schemas/Article'
         file:
+          type: array
+          items:
+            format: byte
+            type: string
+        fileAsStream:
+          $ref: '#/components/schemas/InputStream'
+    ArtistForm:
+      type: object
+      properties:
+        artist:
+          $ref: '#/components/schemas/Artist'
+        file:
+          type: array
+          items:
+            format: byte
+            type: string
+        fileAsStream:
           $ref: '#/components/schemas/InputStream'
     HelloWorld:
       type: object
@@ -416,6 +469,8 @@ components:
         streetNumber:
           format: int32
           type: integer
+        title:
+          $ref: '#/components/schemas/Title'
         town:
           type: string
     ListShopUser:
@@ -431,4 +486,12 @@ components:
         - EMPLOYEE
         - USER
       type: string
-
+    Title:
+      enum:
+        - APACHE
+        - BENUTZERDEFINIERT
+        - DOKTOR
+        - FRAU
+        - HERR
+        - PROFESSOR
+      type: string

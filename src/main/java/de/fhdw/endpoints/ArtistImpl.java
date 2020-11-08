@@ -6,6 +6,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import de.fhdw.models.Picture;
 import de.fhdw.util.PictureHandler;
+import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.jboss.logging.Logger;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
@@ -14,6 +15,8 @@ import java.util.List;
 
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
+@Tag(name="Artist", description = "Operations on Artist object")
+
 @Path("artist")
 public class ArtistImpl implements ArtistInterface {
     private static final Logger LOG = Logger.getLogger(ArtistImpl.class);
