@@ -12,7 +12,6 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.jboss.logging.Logger;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
-import org.jboss.resteasy.annotations.providers.multipart.PartType;
 
 import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.ApplicationScoped;
@@ -50,13 +49,13 @@ public class ArticleImpl implements ArticleInterface {
         } catch (Exception e) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
-        if (media.equals("image/png") || media.equals("image/jpeg")) {
+        if (media.equals("png") || media.equals("JPEG")) {
             Article article = data.article;
             setNewValues(data, article);
             LOG.info("added: " + article.toString());
             try {
-                String type = media.equals("image/jpeg") ? "jpg" : "png";
-                Picture picture = new Picture(data.getFile(), pictureHandler.scaleAbleImage(data.getFileAsStream(), type));
+                String type = media.equals("JPEG") ? "jpg" : "png";
+                Picture picture = new Picture(data.getFile(), pictureHandler.scaleImage(data.getFileAsStream(), type));
                 picture.persist();
                 article.image = picture;
                 article.persist();
@@ -172,7 +171,7 @@ public class ArticleImpl implements ArticleInterface {
         PictureHandler pictureHandler = new PictureHandler();
         try {
             String media = pictureHandler.checkImageFormat(data.getFileAsStream());
-            if (media.equals("image/png") || media.equals("image/jpeg")) {
+            if (media.equals("png") || media.equals("JPEG")) {
                 article.image.rawData = data.getFile();
             }
 

@@ -86,11 +86,11 @@ public class GenreImpl implements GenreInterface {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
 
-        if (media.equals("image/png") || media.equals("image/jpeg")) {
+        if (media.equals("png") || media.equals("JPEG")) {
            try {
                Genre genre = data.genre;
-               String type = media.equals("image/jpeg") ? "jpg":"png";
-               Picture picture = new Picture(data.getFile(), pictureHandler.scaleAbleImage(data.getFileAsStream(), type));
+               String type = media.equals("JPEG") ? "jpg":"png";
+               Picture picture = new Picture(data.getFile(), pictureHandler.scaleImage(data.getFileAsStream(), type));
                picture.persist();
                genre.image = picture;
                genre.persist();

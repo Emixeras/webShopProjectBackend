@@ -1,35 +1,31 @@
 package de.fhdw.util;
 
-import org.apache.tika.detect.Detector;
-import org.apache.tika.metadata.Metadata;
-import org.apache.tika.parser.AutoDetectParser;
 import org.jboss.logging.Logger;
 
 import javax.imageio.ImageIO;
+import javax.imageio.ImageReader;
+import javax.imageio.stream.ImageInputStream;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
-import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Iterator;
 
 public class PictureHandler {
     private static final org.jboss.logging.Logger LOG = Logger.getLogger(PictureHandler.class);
 
 
     public String checkImageFormat(InputStream stream) throws IOException {
-        BufferedInputStream bis = new BufferedInputStream(stream);
-        AutoDetectParser parser = new AutoDetectParser();
-        Detector detector = parser.getDetector();
-        Metadata md = new Metadata();
-        md.add(Metadata.RESOURCE_NAME_KEY, "Picture");
-        org.apache.tika.mime.MediaType mediaType = detector.detect(bis, md);
-        LOG.info("Picture Type: " + mediaType.toString());
-        return mediaType.toString();
+        ImageInputStream iis = ImageIO.createImageInputStream(stream);
+        Iterator<ImageReader> readers = ImageIO.getImageReaders(iis);
+            ImageReader reader = readers.next();
+            LOG.info(reader.getFormatName());
+            return reader.getFormatName();
     }
 
-    public byte[] scaleAbleImage(InputStream source, String type) throws IOException {
+    public byte[] scaleImage(InputStream source, String type) throws IOException {
         BufferedImage bImageFromConvert = ImageIO.read(source);
         bImageFromConvert = scale(bImageFromConvert, 0.25);
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();

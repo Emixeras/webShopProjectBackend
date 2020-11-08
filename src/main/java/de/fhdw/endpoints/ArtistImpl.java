@@ -84,11 +84,11 @@ public class ArtistImpl implements ArtistInterface {
         } catch (Exception e) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
-        if (media.equals("image/png") || media.equals("image/jpeg")) {
+        if (media.equals("png") || media.equals("JPEG")) {
             try {
                 Artist artist = data.artist;
-                String type = media.equals("image/jpeg") ? "jpg":"png";
-                Picture picture = new Picture(data.getFile(), pictureHandler.scaleAbleImage(data.getFileAsStream(), type));
+                String type = media.equals("JPEG") ? "jpg":"png";
+                Picture picture = new Picture(data.getFile(), pictureHandler.scaleImage(data.getFileAsStream(), type));
                 picture.persist();
                 artist.image = picture;
                 artist.persist();
