@@ -12,29 +12,31 @@ public class Article extends PanacheEntityBase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     public Long id;
 
     @Column(nullable = false)
     public String title;
+
     @Column(nullable = false)
     public double price;
+
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(nullable = false)
     public Genre genre;
+
     public int ean;
+
     public String description;
+
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(nullable = false)
     public Artist artists;
 
-    @JsonbTransient
-    public byte[] picture;
+    //@JsonbTransient
+    @ManyToOne(cascade = CascadeType.ALL)
+    public Picture image;
 
-
-
-
-    public static Artist findbyName(String title) {
+    public static Artist findByName(String title) {
         return find("title", title).firstResult();
     }
 

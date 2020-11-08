@@ -14,7 +14,6 @@ public class Artist extends PanacheEntityBase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     public Long id;
 
     public Artist() {
@@ -29,6 +28,11 @@ public class Artist extends PanacheEntityBase {
     )
     @JsonbTransient
     public List<Article> articleList;
+
+    @JsonbTransient
+    @ManyToOne(cascade = CascadeType.MERGE)
+    public Picture image;
+
     public static Artist findByName(String name) {
         return find("name", name).firstResult();
     }

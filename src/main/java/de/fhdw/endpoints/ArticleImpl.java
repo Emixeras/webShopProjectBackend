@@ -4,6 +4,8 @@ import de.fhdw.forms.ArticleForm;
 import de.fhdw.models.Article;
 import de.fhdw.models.Artist;
 import de.fhdw.models.Genre;
+import de.fhdw.models.Picture;
+import de.fhdw.util.PictureHandler;
 import org.apache.tika.detect.Detector;
 import org.apache.tika.metadata.Metadata;
 import org.apache.tika.parser.AutoDetectParser;
@@ -28,29 +30,27 @@ import java.util.List;
 public class ArticleImpl implements ArticleInterface {
     private static final Logger LOG = Logger.getLogger(ArticleImpl.class);
 
+
     @Override
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
-    @RolesAllowed({"admin", "employee"})
+    // @RolesAllowed({"admin", "employee"})
     @Transactional
     public Response post(@MultipartForm ArticleForm data) throws IOException {
-        if(data.article == null){
+        if (data.article == null) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
-        BufferedInputStream bis = new BufferedInputStream(data.getFileAsStream());
-        AutoDetectParser parser = new AutoDetectParser();
-        Detector detector = parser.getDetector();
-        Metadata md = new Metadata();
-        md.add(Metadata.RESOURCE_NAME_KEY, "Picture");
-        org.apache.tika.mime.MediaType mediaType = detector.detect(bis, md);
-        LOG.info("Picture Type: "+mediaType.toString());
+        PictureHandler pictureHandler = new PictureHandler();
+        String media = pictureHandler.checkImageFormat(data.getFileAsStream());
 
-        if(mediaType.toString().equals("image/png") || mediaType.toString().equals("image/jpeg")){
+        if (media.equals("image/png") || media.equals("image/jpeg")) {
             Article article = data.article;
             setNewValues(data, article);
-            LOG.info("added: "+article.toString());
+            LOG.info("added: " + article.toString());
+            Picture picture = new Picture(data.getFile());
+            picture.persist();
+            article.image = picture;
             article.persist();
-            article.picture = data.getFile();
             return Response.accepted(data.article.id).build();
         }
         throw new WebApplicationException(Response.Status.BAD_REQUEST);
@@ -73,9 +73,9 @@ public class ArticleImpl implements ArticleInterface {
         if (article == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
-       ArticleForm articleForm = new ArticleForm();
+        ArticleForm articleForm = new ArticleForm();
         articleForm.article = article;
-        articleForm.setFile(article.picture);
+        articleForm.setFile(article.image.data);
         return articleForm;
     }
 
@@ -89,6 +89,8 @@ public class ArticleImpl implements ArticleInterface {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
         try {
+            Picture picture = article.image;
+            picture.delete();
             article.delete();
         } catch (Exception e) {
             throw new WebApplicationException(Response.Status.EXPECTATION_FAILED);
@@ -102,7 +104,7 @@ public class ArticleImpl implements ArticleInterface {
     @RolesAllowed({"admin", "employee"})
     public Response put(@MultipartForm ArticleForm data) throws IOException {
         Article article = Article.findById(data.article.id);
-        if(article == null){
+        if (article == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
         setNewValues(data, article);
@@ -112,7 +114,13 @@ public class ArticleImpl implements ArticleInterface {
         article.price = data.article.price;
         article.ean = data.article.ean;
         article.description = data.article.description;
-        article.picture = data.getFile();
+
+        PictureHandler pictureHandler = new PictureHandler();
+        String media = pictureHandler.checkImageFormat(data.getFileAsStream());
+        if (media.equals("image/png") || media.equals("image/jpeg")) {
+            article.image.data = data.getFile();
+        }
+
         return Response.accepted(data.article.id).build();
     }
 
