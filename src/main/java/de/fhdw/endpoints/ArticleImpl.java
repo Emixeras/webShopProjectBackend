@@ -12,6 +12,7 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.jboss.logging.Logger;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
+import org.jboss.resteasy.annotations.providers.multipart.PartType;
 
 import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.ApplicationScoped;
@@ -20,7 +21,9 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @ApplicationScoped
 @Path("article")
@@ -33,7 +36,7 @@ public class ArticleImpl implements ArticleInterface {
     @Override
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
-    @RolesAllowed({"admin", "employee"})
+    //@RolesAllowed({"admin", "employee"})
     @Transactional
     @Operation(summary = "registers a new Article Object")
     public Response post(@MultipartForm ArticleForm data) {
@@ -51,21 +54,40 @@ public class ArticleImpl implements ArticleInterface {
             Article article = data.article;
             setNewValues(data, article);
             LOG.info("added: " + article.toString());
-            Picture picture = new Picture(data.getFile());
-            picture.persist();
-            article.image = picture;
-            article.persist();
-            return Response.accepted(data.article.id).build();
+            try {
+                String type = media.equals("image/jpeg") ? "jpg" : "png";
+                Picture picture = new Picture(data.getFile(), pictureHandler.scaleAbleImage(data.getFileAsStream(), type));
+                picture.persist();
+                article.image = picture;
+                article.persist();
+                return Response.accepted(data.article.id).build();
+            } catch (Exception e) {
+                LOG.info(e.toString());
+                throw new WebApplicationException(Response.Status.BAD_REQUEST);
+            }
         }
         throw new WebApplicationException(Response.Status.BAD_REQUEST);
     }
 
+   // @Produces(MediaType.MULTIPART_FORM_DATA)
     @Override
+
+   // @PartType("application/xml")
+  //  @PartType(MediaType.APPLICATION_FORM_URLENCODED)
     @GET
     @Path("all")
     @Operation(summary = "returns all Articles Objects as json with no picture")
-    public List<Article> getAll() {
-        return Article.listAll();
+    public Map<String, ArticleForm> getAll() {
+        Map<String, ArticleForm> map = new HashMap<String, ArticleForm>();
+
+        List<Article> articles = Article.listAll();
+        for (Article article : articles) {
+            ArticleForm articleForm = new ArticleForm();
+            articleForm.setFile(article.image.thumbnail);
+            articleForm.article = article;
+            map.put(article.id.toString(), articleForm);
+        }
+        return map;
     }
 
     @GET
@@ -80,7 +102,7 @@ public class ArticleImpl implements ArticleInterface {
         articles.forEach(i -> {
             ArticleForm articleForm = new ArticleForm();
             articleForm.article = i;
-            articleForm.setFile(i.image.data);
+            articleForm.setFile(i.image.thumbnail);
             articleForms.add(articleForm);
         });
         return articleForms;
@@ -106,7 +128,7 @@ public class ArticleImpl implements ArticleInterface {
         }
         ArticleForm articleForm = new ArticleForm();
         articleForm.article = article;
-        articleForm.setFile(article.image.data);
+        articleForm.setFile(article.image.rawData);
         return articleForm;
     }
 
@@ -151,7 +173,7 @@ public class ArticleImpl implements ArticleInterface {
         try {
             String media = pictureHandler.checkImageFormat(data.getFileAsStream());
             if (media.equals("image/png") || media.equals("image/jpeg")) {
-                article.image.data = data.getFile();
+                article.image.rawData = data.getFile();
             }
 
             return Response.accepted(data.article.id).build();

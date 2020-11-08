@@ -8,6 +8,7 @@ import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 public interface ArticleInterface {
 
@@ -17,7 +18,7 @@ public interface ArticleInterface {
 
     ArticleForm getSingle(@PathParam long id);
 
-    List<Article> getAll();
+    Map<String,ArticleForm> getAll();
 
     List<ArticleForm> getRange(int start, int end);
 

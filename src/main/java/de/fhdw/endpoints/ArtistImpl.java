@@ -39,7 +39,7 @@ public class ArtistImpl implements ArtistInterface {
         }
         ArtistForm artistForm = new ArtistForm();
         artistForm.artist = a;
-        artistForm.setFile(a.image.data);
+        artistForm.setFile(a.image.rawData);
         return artistForm;
     }
 
@@ -65,7 +65,7 @@ public class ArtistImpl implements ArtistInterface {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
         if (media.equals("image/png") || media.equals("image/jpeg")) {
-            old.image.data = data.getFile();
+            old.image.rawData = data.getFile();
         }
         return Response.ok().build();
     }
@@ -85,13 +85,20 @@ public class ArtistImpl implements ArtistInterface {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
         if (media.equals("image/png") || media.equals("image/jpeg")) {
-            Artist artist = data.artist;
-            Picture picture = new Picture(data.getFile());
-            picture.persist();
-            artist.image = picture;
-            artist.persist();
-            LOG.info("added: " + artist.toString());
-            return Response.accepted(data.artist.id).build();
+            try {
+                Artist artist = data.artist;
+                String type = media.equals("image/jpeg") ? "jpg":"png";
+                Picture picture = new Picture(data.getFile(), pictureHandler.scaleAbleImage(data.getFileAsStream(), type));
+                picture.persist();
+                artist.image = picture;
+                artist.persist();
+                LOG.info("added: " + artist.toString());
+                return Response.accepted(data.artist.id).build();
+            } catch (Exception e) {
+                LOG.info(e.toString());
+                throw new WebApplicationException(Response.Status.BAD_REQUEST);
+            }
+
         }
         throw new WebApplicationException(Response.Status.BAD_REQUEST);
     }
