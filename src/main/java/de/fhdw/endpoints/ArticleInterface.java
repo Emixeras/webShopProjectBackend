@@ -15,9 +15,17 @@ public interface ArticleInterface {
 
     public Response put(@MultipartForm ArticleForm data) throws IOException;
 
-    public ArticleForm get(@PathParam long id);
+    public ArticleForm getSingle(@PathParam long id);
 
-    public List<Article> get();
+    public List<Article> getAll();
+
+    public List<ArticleForm> getRange(int start, int end);
+
+    public List<ArticleForm> getByGenre(int start, int end);
+
+    public List<ArticleForm> getByArtist(int start, int end);
+
+    public Long getCount();
 
     public Response delete(@PathParam long id);
 

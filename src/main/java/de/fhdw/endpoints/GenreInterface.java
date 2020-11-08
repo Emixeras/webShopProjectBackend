@@ -14,7 +14,6 @@ public interface GenreInterface {
 
     public List<Genre> get();
 
-    public Genre put(Genre genre, @Context SecurityContext securityContext) ;
     public Response put(GenreForm data, @Context SecurityContext securityContext) ;
 
     public Response post(GenreForm data, @Context SecurityContext securityContext);

@@ -49,19 +49,6 @@ public class GenreImpl implements GenreInterface {
     @Override
     @PUT
     @RolesAllowed({"employee", "admin"})
-    @Operation(summary = "put", description = "put")
-    public Genre put(Genre data, @Context SecurityContext securityContext) {
-        Genre old = Genre.findById(data.id);
-        if (old == null) {
-            throw new WebApplicationException(Response.Status.NOT_FOUND);
-        }
-        old.name = data.name;
-        return old;
-    }
-
-    @Override
-    @PUT
-    @RolesAllowed({"employee", "admin"})
     @Operation(summary = "put2", description = "put2")
     public Response put(@MultipartForm GenreForm data, @Context SecurityContext securityContext) {
         Genre old = Genre.findById(data.genre.id);

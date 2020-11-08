@@ -34,7 +34,6 @@ public class GenreForm {
     }
 
     @FormParam("Picture")
-    @PartType(MediaType.APPLICATION_OCTET_STREAM)
     private byte[] file;
 
 }

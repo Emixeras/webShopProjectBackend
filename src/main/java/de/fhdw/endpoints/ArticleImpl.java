@@ -6,6 +6,11 @@ import de.fhdw.models.Artist;
 import de.fhdw.models.Genre;
 import de.fhdw.models.Picture;
 import de.fhdw.util.PictureHandler;
+import io.quarkus.hibernate.orm.panache.PanacheQuery;
+import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
+import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
+import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.jboss.logging.Logger;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
@@ -18,6 +23,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @ApplicationScoped
@@ -28,12 +34,12 @@ import java.util.List;
 public class ArticleImpl implements ArticleInterface {
     private static final Logger LOG = Logger.getLogger(ArticleImpl.class);
 
-
     @Override
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
-    // @RolesAllowed({"admin", "employee"})
+    @RolesAllowed({"admin", "employee"})
     @Transactional
+    @Operation(summary = "registers a new Article Object")
     public Response post(@MultipartForm ArticleForm data) throws IOException {
         if (data.article == null) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
@@ -56,18 +62,63 @@ public class ArticleImpl implements ArticleInterface {
 
     }
 
+
     @Override
     @GET
-
-    public List<Article> get() {
+    @Path("all")
+    @Operation(summary = "returns all Articles Objects as json with no picture")
+    public List<Article> getAll() {
         return Article.listAll();
+    }
+
+
+    @GET
+    @Override
+    @Path("range")
+    @Operation(summary = "returns a Range of ArticleForm Objects, including Pictures", description = "example: http://localhost:8080/article/range;start=0;end=20")
+    public List<ArticleForm> getRange(@MatrixParam("start") int start,@MatrixParam("end") int end) {
+
+
+        PanacheQuery<Article> panacheQuery = Article.findAll();
+        panacheQuery.range(start,end);
+
+        List<Article> articles = panacheQuery.list();
+        List<ArticleForm> articleForms = new ArrayList<>();
+
+        articles.forEach(i->{
+            ArticleForm articleForm = new ArticleForm();
+            articleForm.article = i;
+            articleForm.setFile(i.image.data);
+            articleForms.add(articleForm);
+        });
+
+        return articleForms;
+    }
+
+    @Override
+    public List<ArticleForm> getByGenre(int start, int end) {
+        return null;
+    }
+
+    @Override
+    public List<ArticleForm> getByArtist(int start, int end) {
+        return null;
+    }
+
+    @Override
+    @Path("count")
+    @Operation(summary = "the total number of available Articles")
+    @GET
+    public Long getCount() {
+        return Article.count();
     }
 
     @Override
     @GET
     @Path("{id}")
     @Produces(MediaType.MULTIPART_FORM_DATA)
-    public ArticleForm get(@PathParam long id) {
+    @Operation(summary = "returns a single Article Object as Multipart Form including the Picture as Byte Array")
+    public ArticleForm getSingle(@PathParam long id) {
         Article article = Article.findById(id);
         if (article == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
@@ -81,6 +132,7 @@ public class ArticleImpl implements ArticleInterface {
     @Override
     @Path("{id}")
     @DELETE
+    @Operation(summary = "removes an Article identified by the supplied ID")
     @RolesAllowed({"admin", "employee"})
     public Response delete(@PathParam long id) {
         Article article = Article.findById(id);
@@ -101,6 +153,8 @@ public class ArticleImpl implements ArticleInterface {
     @Override
     @PUT
     @RolesAllowed({"admin", "employee"})
+    @Operation(summary = "changes a Article Object", description = "needs a Multipart Form Picture can be empty")
+
     public Response put(@MultipartForm ArticleForm data) throws IOException {
         Article article = Article.findById(data.article.id);
         if (article == null) {

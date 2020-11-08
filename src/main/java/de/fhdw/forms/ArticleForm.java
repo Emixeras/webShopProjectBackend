@@ -8,6 +8,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import de.fhdw.models.Picture;
 import org.apache.commons.io.IOUtils;
 import org.jboss.resteasy.annotations.providers.multipart.PartType;
 
@@ -34,8 +35,8 @@ public class ArticleForm {
     }
 
     @FormParam("Picture")
-    @PartType(MediaType.APPLICATION_OCTET_STREAM)
     private byte[] file;
+
 
 
 }

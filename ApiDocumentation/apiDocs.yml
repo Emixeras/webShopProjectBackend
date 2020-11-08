@@ -383,6 +383,7 @@ components:
         name:
           type: string
         image:
+          format: byte
     Genre:
       type: object
       properties:
