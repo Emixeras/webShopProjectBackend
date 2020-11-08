@@ -8,19 +8,11 @@ import java.util.List;
 
 @Entity
 public class Artist extends PanacheEntityBase {
-    public Artist(String name) {
-        this.name = name;
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
-
-    public Artist() {
-    }
     @Column(unique = true, nullable = false)
     public String name;
-
     @OneToMany(
             mappedBy = "artists",
             cascade = CascadeType.ALL,
@@ -28,10 +20,16 @@ public class Artist extends PanacheEntityBase {
     )
     @JsonbTransient
     public List<Article> articleList;
-
     @JsonbTransient
     @ManyToOne(cascade = CascadeType.MERGE)
     public Picture image;
+
+    public Artist(String name) {
+        this.name = name;
+    }
+
+    public Artist() {
+    }
 
     public static Artist findByName(String name) {
         return find("name", name).firstResult();

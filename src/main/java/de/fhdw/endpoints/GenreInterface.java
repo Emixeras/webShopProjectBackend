@@ -10,14 +10,14 @@ import javax.ws.rs.core.SecurityContext;
 import java.util.List;
 
 public interface GenreInterface {
-    public Genre get(@PathParam long id) ;
+    Genre get(@PathParam long id);
 
-    public List<Genre> get();
+    List<Genre> get();
 
-    public Response put(GenreForm data, @Context SecurityContext securityContext) ;
+    Response put(GenreForm data, @Context SecurityContext securityContext);
 
-    public Response post(GenreForm data, @Context SecurityContext securityContext);
+    Response post(GenreForm data, @Context SecurityContext securityContext);
 
-    public Boolean delete(Genre genre, @Context SecurityContext securityContext);
+    Boolean delete(Genre genre, @Context SecurityContext securityContext);
 
 }

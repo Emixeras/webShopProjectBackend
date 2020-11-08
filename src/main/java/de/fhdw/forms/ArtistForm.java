@@ -16,7 +16,13 @@ public class ArtistForm {
     @FormParam("Artist")
     @PartType(MediaType.APPLICATION_JSON)
     public Artist artist;
+    @FormParam("Picture")
+    @PartType(MediaType.APPLICATION_OCTET_STREAM)
+    private byte[] file;
 
+    public byte[] getFile() {
+        return file;
+    }
 
     public void setFile(InputStream file) throws IOException {
         this.file = IOUtils.toByteArray(file);
@@ -26,15 +32,7 @@ public class ArtistForm {
         this.file = file;
     }
 
-    public byte[] getFile() {
-        return file;
-    }
-
     public InputStream getFileAsStream() {
         return new ByteArrayInputStream(file);
     }
-
-    @FormParam("Picture")
-    @PartType(MediaType.APPLICATION_OCTET_STREAM)
-    private byte[] file;
 }

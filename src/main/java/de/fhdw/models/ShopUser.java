@@ -1,8 +1,10 @@
 package de.fhdw.models;
-import io.quarkus.hibernate.orm.panache.*;
+
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.util.*;
+import java.util.Date;
 
 
 @Entity(name = "ShopUser")

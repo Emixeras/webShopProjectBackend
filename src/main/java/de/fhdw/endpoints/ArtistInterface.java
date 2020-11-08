@@ -11,14 +11,15 @@ import javax.ws.rs.core.SecurityContext;
 import java.util.List;
 
 public interface ArtistInterface {
-    public ArtistForm get(@PathParam long id);
+    ArtistForm get(@PathParam long id);
 
-    public List<Artist> get();
+    List<Artist> get();
 
-    public Response put(@MultipartForm ArtistForm data, @Context SecurityContext securityContext);
-    public Artist put(Artist artist, @Context SecurityContext securityContext);
+    Response put(@MultipartForm ArtistForm data, @Context SecurityContext securityContext);
 
-    public Response post(@MultipartForm ArtistForm data, @Context SecurityContext securityContext);
+    Artist put(Artist artist, @Context SecurityContext securityContext);
 
-    public Boolean delete(Artist artist, @Context SecurityContext securityContext);
+    Response post(@MultipartForm ArtistForm data, @Context SecurityContext securityContext);
+
+    Boolean delete(Artist artist, @Context SecurityContext securityContext);
 }

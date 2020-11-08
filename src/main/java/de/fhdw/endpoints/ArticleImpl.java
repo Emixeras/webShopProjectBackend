@@ -8,9 +8,6 @@ import de.fhdw.models.Picture;
 import de.fhdw.util.PictureHandler;
 import io.quarkus.hibernate.orm.panache.PanacheQuery;
 import org.eclipse.microprofile.openapi.annotations.Operation;
-import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
-import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
-import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.jboss.logging.Logger;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
@@ -22,7 +19,6 @@ import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +26,7 @@ import java.util.List;
 @Path("article")
 @Consumes(MediaType.MULTIPART_FORM_DATA)
 @Produces(MediaType.APPLICATION_JSON)
-@Tag(name="Article",description = "Operations on Article object")
+@Tag(name = "Article", description = "Operations on Article object")
 public class ArticleImpl implements ArticleInterface {
     private static final Logger LOG = Logger.getLogger(ArticleImpl.class);
 
@@ -40,13 +36,17 @@ public class ArticleImpl implements ArticleInterface {
     @RolesAllowed({"admin", "employee"})
     @Transactional
     @Operation(summary = "registers a new Article Object")
-    public Response post(@MultipartForm ArticleForm data) throws IOException {
+    public Response post(@MultipartForm ArticleForm data) {
         if (data.article == null) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
         PictureHandler pictureHandler = new PictureHandler();
-        String media = pictureHandler.checkImageFormat(data.getFileAsStream());
-
+        String media;
+        try {
+            media = pictureHandler.checkImageFormat(data.getFileAsStream());
+        } catch (Exception e) {
+            throw new WebApplicationException(Response.Status.BAD_REQUEST);
+        }
         if (media.equals("image/png") || media.equals("image/jpeg")) {
             Article article = data.article;
             setNewValues(data, article);
@@ -58,10 +58,7 @@ public class ArticleImpl implements ArticleInterface {
             return Response.accepted(data.article.id).build();
         }
         throw new WebApplicationException(Response.Status.BAD_REQUEST);
-
-
     }
-
 
     @Override
     @GET
@@ -71,38 +68,22 @@ public class ArticleImpl implements ArticleInterface {
         return Article.listAll();
     }
 
-
     @GET
     @Override
     @Path("range")
     @Operation(summary = "returns a Range of ArticleForm Objects, including Pictures", description = "example: http://localhost:8080/article/range;start=0;end=20")
-    public List<ArticleForm> getRange(@MatrixParam("start") int start,@MatrixParam("end") int end) {
-
-
+    public List<ArticleForm> getRange(@MatrixParam("start") int start, @MatrixParam("end") int end) {
         PanacheQuery<Article> panacheQuery = Article.findAll();
-        panacheQuery.range(start,end);
-
+        panacheQuery.range(start, end);
         List<Article> articles = panacheQuery.list();
         List<ArticleForm> articleForms = new ArrayList<>();
-
-        articles.forEach(i->{
+        articles.forEach(i -> {
             ArticleForm articleForm = new ArticleForm();
             articleForm.article = i;
             articleForm.setFile(i.image.data);
             articleForms.add(articleForm);
         });
-
         return articleForms;
-    }
-
-    @Override
-    public List<ArticleForm> getByGenre(int start, int end) {
-        return null;
-    }
-
-    @Override
-    public List<ArticleForm> getByArtist(int start, int end) {
-        return null;
     }
 
     @Override
@@ -154,27 +135,30 @@ public class ArticleImpl implements ArticleInterface {
     @PUT
     @RolesAllowed({"admin", "employee"})
     @Operation(summary = "changes a Article Object", description = "needs a Multipart Form Picture can be empty")
-
-    public Response put(@MultipartForm ArticleForm data) throws IOException {
+    public Response put(@MultipartForm ArticleForm data) {
         Article article = Article.findById(data.article.id);
         if (article == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
-        setNewValues(data, article);
+        setNewValues(data, article); //todo: remove this after article and genre Page is ready
         article.artists = data.article.artists;
         article.genre = data.article.genre;
         article.title = data.article.title;
         article.price = data.article.price;
         article.ean = data.article.ean;
         article.description = data.article.description;
-
         PictureHandler pictureHandler = new PictureHandler();
-        String media = pictureHandler.checkImageFormat(data.getFileAsStream());
-        if (media.equals("image/png") || media.equals("image/jpeg")) {
-            article.image.data = data.getFile();
+        try {
+            String media = pictureHandler.checkImageFormat(data.getFileAsStream());
+            if (media.equals("image/png") || media.equals("image/jpeg")) {
+                article.image.data = data.getFile();
+            }
+
+            return Response.accepted(data.article.id).build();
+        } catch (Exception e) {
+            throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
 
-        return Response.accepted(data.article.id).build();
     }
 
     private void setNewValues(@MultipartForm ArticleForm data, Article article) {

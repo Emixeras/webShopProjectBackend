@@ -34,47 +34,11 @@ Docker im Hintergrund starten und laufen lassen:
  
     {"value":"Dies ist der Hello World Test um 2020-10-23 17:42:28"}
     
- ## User 
-initiale Benutzerdaten laden: 
+# Dokumentation
 
-    curl -i -X GET http://localhost:8080/api/user/init
-    
-    HTTP/1.1 200 OK
-    Content-Length: 140
-    Content-Type: application/json
-    
-    [{"id":1,"password":"Test1234","username":"admin"},{"id":2,"birth":"1970-01-11T02:39:20.374Z[UTC]","password":"Test1234"
-    
-    
-Liste Aller Benutzer 
+entweder die Dokumentation über das Intelij Plugin aufrugen unter /ApiDocs
 
-    curl -i -X GET http://localhost:8080/api/user/list
-    
-    HTTP/1.1 200 OK
-    Content-Length: 140
-    Content-Type: application/json
-    
-    [{"id":1,"password":"Test1234","username":"admin"},{"id":2,"birth":"1970-01-11T02:39:20.374Z[UTC]","password":"Test1234"
-    
+oder über das laufende Backend eine automatisch generierte Konfiguration: 
+        http://localhost:8080/swagger-ui/#/
 
-Benutzer Registrieren:
-
-Template: {
-               
-                  "password": "Test1234",
-                  "role": "admin",
-                  "username": "admin"
-          }
-          
-per Post Request an: 
-    
-    localhost:8080/api/user/register
-    
-sofern der Benutzer bereits vorhanden ist kommt diese Exception: 
-
-    Caused by: java.lang.Exception: Benutzer bereits vorhanden
-
-
-          
-          
- 
+Vorteil der manuellen ist die integrierte Basic Auth Funktion, die automatisch generierte ist aber natürlich aktueller  

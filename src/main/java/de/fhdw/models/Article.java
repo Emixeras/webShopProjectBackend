@@ -2,12 +2,10 @@ package de.fhdw.models;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
-import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 
 @Entity
 public class Article extends PanacheEntityBase {
-
 
 
     @Id

@@ -15,7 +15,12 @@ public class GenreForm {
     @FormParam("Genre")
     @PartType(MediaType.APPLICATION_JSON)
     public Genre genre;
+    @FormParam("Picture")
+    private byte[] file;
 
+    public byte[] getFile() {
+        return file;
+    }
 
     public void setFile(InputStream file) throws IOException {
         this.file = IOUtils.toByteArray(file);
@@ -25,15 +30,8 @@ public class GenreForm {
         this.file = file;
     }
 
-    public byte[] getFile() {
-        return file;
-    }
-
     public InputStream getFileAsStream() {
         return new ByteArrayInputStream(file);
     }
-
-    @FormParam("Picture")
-    private byte[] file;
 
 }

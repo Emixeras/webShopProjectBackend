@@ -5,8 +5,6 @@ import de.fhdw.models.Genre;
 import de.fhdw.models.Picture;
 import de.fhdw.util.PictureHandler;
 import org.eclipse.microprofile.openapi.annotations.Operation;
-import org.eclipse.microprofile.openapi.annotations.info.Info;
-import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.jboss.logging.Logger;
 import org.jboss.resteasy.annotations.cache.Cache;
@@ -23,7 +21,7 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @Path("genre")
-@Tag(name="Genre", description = "Operations on Genre object")
+@Tag(name = "Genre", description = "Operations on Genre object")
 public class GenreImpl implements GenreInterface {
     private static final Logger LOG = Logger.getLogger(GenreImpl.class);
 
@@ -100,9 +98,9 @@ public class GenreImpl implements GenreInterface {
     @Override
     @DELETE
     @RolesAllowed({"employee", "admin"})
-    public Boolean delete(Genre genre, SecurityContext securityContext)  {
+    public Boolean delete(Genre genre, SecurityContext securityContext) {
         Genre deletedID = Genre.findById(genre.id);
-        if(deletedID == null){
+        if (deletedID == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
         try {

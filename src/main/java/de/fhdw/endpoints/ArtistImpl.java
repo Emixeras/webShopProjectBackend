@@ -1,21 +1,26 @@
 package de.fhdw.endpoints;
+
 import de.fhdw.forms.ArtistForm;
 import de.fhdw.models.Artist;
-import javax.annotation.security.RolesAllowed;
-import javax.ws.rs.*;
-import javax.ws.rs.core.*;
 import de.fhdw.models.Picture;
 import de.fhdw.util.PictureHandler;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.jboss.logging.Logger;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
+
+import javax.annotation.security.RolesAllowed;
+import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.SecurityContext;
 import java.util.List;
 
 
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-@Tag(name="Artist", description = "Operations on Artist object")
+@Tag(name = "Artist", description = "Operations on Artist object")
 
 @Path("artist")
 public class ArtistImpl implements ArtistInterface {

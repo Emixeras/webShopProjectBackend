@@ -3,12 +3,15 @@ package de.fhdw.endpoints;
 import de.fhdw.models.*;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.jboss.logging.Logger;
+
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.ApplicationScoped;
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
-import javax.ws.rs.core.*;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.SecurityContext;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -18,7 +21,7 @@ import java.util.List;
 @Path("/test")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-@Tag(name="Test", description = "div Test Data and basic Backend Operations")
+@Tag(name = "Test", description = "div Test Data and basic Backend Operations")
 
 public class TestImpl implements TestInterface {
     private static final Logger LOG = Logger.getLogger(TestImpl.class);
@@ -75,7 +78,7 @@ public class TestImpl implements TestInterface {
         if (Artist.findByName("Die Ärzte") == null) {
             artist.persist();
         }
-        if(Genre.findByName("rock")==null){
+        if (Genre.findByName("rock") == null) {
             genre.persist();
         }
         if (Article.findById(1L) == null) {
@@ -87,7 +90,7 @@ public class TestImpl implements TestInterface {
             art1.artists = Artist.findByName("Die Ärzte");
             art1.genre = Genre.findByName("rock");
             art1.persist();
-            LOG.info("added: "+art1.toString());
+            LOG.info("added: " + art1.toString());
         }
         if (Article.findById(2L) == null) {
             Article art2 = new Article();
@@ -98,7 +101,7 @@ public class TestImpl implements TestInterface {
             art2.title = "desc2";
             art2.genre = Genre.findByName("rock");
             art2.persist();
-            LOG.info("added: "+art2.toString());
+            LOG.info("added: " + art2.toString());
 
         }
         if (Article.findById(3L) == null) {
@@ -110,7 +113,7 @@ public class TestImpl implements TestInterface {
             art3.title = "desc3";
             art3.genre = Genre.findByName("rock");
             art3.persist();
-            LOG.info("added: "+art3.toString());
+            LOG.info("added: " + art3.toString());
 
         }
         return Article.listAll();

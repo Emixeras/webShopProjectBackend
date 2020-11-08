@@ -1,4 +1,5 @@
 package de.fhdw.util;
+
 import org.apache.tika.detect.Detector;
 import org.apache.tika.metadata.Metadata;
 import org.apache.tika.parser.AutoDetectParser;
