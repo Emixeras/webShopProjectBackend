@@ -1,6 +1,7 @@
 package de.fhdw.endpoints;
 
 import de.fhdw.models.*;
+import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.jboss.logging.Logger;
 
@@ -32,6 +33,7 @@ public class TestImpl implements TestInterface {
     @Transactional
     @Path("userTestData")
     @PermitAll
+    @Operation(summary = "generates a few Basic User")
     public List<ShopUser> userTestData() {
         if (ShopUser.findById(1L) == null) {
             ShopUser admin = new ShopUser();
@@ -72,6 +74,7 @@ public class TestImpl implements TestInterface {
     @GET
     @Transactional
     @Path("articleTestData")
+    @Operation(summary = "generates Article Test Data")
     public List<Article> articleTestData() {
         Genre genre = new Genre("rock");
         Artist artist = new Artist("Die Ärzte");
@@ -121,6 +124,7 @@ public class TestImpl implements TestInterface {
 
     @Override
     @GET
+    @Operation(summary = "Basic Hello World Object")
     public HelloWorld get() {
         LOG.info("Dies ist der Hello World Test um "
                 + LocalDateTime.now().format(DateTimeFormatter.ofPattern(DATEPATTERN)));
@@ -130,6 +134,7 @@ public class TestImpl implements TestInterface {
 
     @POST
     @Override
+    @Operation(summary = "Basic Hello World Object printed in BackendLog")
     public HelloWorld post(HelloWorld helloWorld) {
         LOG.info(helloWorld.value + LocalDateTime.now().format(DateTimeFormatter.ofPattern(DATEPATTERN)));
         return helloWorld;
@@ -139,6 +144,7 @@ public class TestImpl implements TestInterface {
     @GET
     @RolesAllowed("admin")
     @Path("admin")
+    @Operation(summary = "Basic Endpoint Accepts an Admin User")
     public String getAdmin(@Context SecurityContext securityContext) {
         return securityContext.getUserPrincipal().getName();
     }
@@ -147,6 +153,7 @@ public class TestImpl implements TestInterface {
     @GET
     @RolesAllowed("admin")
     @Path("employee")
+    @Operation(summary = "Basic Endpoint Accepts an Employee User")
     public String getEmployee(@Context SecurityContext securityContext) {
         return securityContext.getUserPrincipal().getName();
     }
@@ -155,6 +162,7 @@ public class TestImpl implements TestInterface {
     @GET
     @RolesAllowed("admin")
     @Path("user")
+    @Operation(summary = "Basic Endpoint Accepts a User")
     public String getUser(@Context SecurityContext securityContext) {
         return securityContext.getUserPrincipal().getName();
     }

@@ -4,6 +4,7 @@ import de.fhdw.forms.ArtistForm;
 import de.fhdw.models.Artist;
 import de.fhdw.models.Picture;
 import de.fhdw.util.PictureHandler;
+import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.jboss.logging.Logger;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
@@ -30,6 +31,7 @@ public class ArtistImpl implements ArtistInterface {
     @Override
     @GET
     @Path("{id}")
+    @Operation(summary = "gets a Single Object identified by id", description = "Returns a MultiPart Object")
     public ArtistForm get(@PathParam long id) {
         Artist a = Artist.findById(id);
         if (a == null) {
@@ -42,21 +44,9 @@ public class ArtistImpl implements ArtistInterface {
     }
 
     @Override
+    @Operation(summary = "gets a Single Object identified by id", description = "Returns a MultiPart Object")
     public List<Artist> get() {
         return Artist.listAll();
-    }
-
-
-    @Override
-    @PUT
-    @RolesAllowed({"employee", "admin"})
-    public Artist put(Artist data, @Context SecurityContext securityContext) {
-        Artist old = Artist.findById(data.id);
-        if (old == null) {
-            throw new WebApplicationException(Response.Status.NOT_FOUND);
-        }
-        old.name = data.name;
-        return old;
     }
 
     @Override
@@ -78,18 +68,15 @@ public class ArtistImpl implements ArtistInterface {
             old.image.data = data.getFile();
         }
         return Response.ok().build();
-
     }
 
     @Override
     @POST
     @RolesAllowed({"employee", "admin"})
     public Response post(@MultipartForm ArtistForm data, @Context SecurityContext securityContext) {
-
         if (data.artist == null) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
-
         PictureHandler pictureHandler = new PictureHandler();
         String media;
         try {
@@ -97,7 +84,6 @@ public class ArtistImpl implements ArtistInterface {
         } catch (Exception e) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
-
         if (media.equals("image/png") || media.equals("image/jpeg")) {
             Artist artist = data.artist;
             Picture picture = new Picture(data.getFile());

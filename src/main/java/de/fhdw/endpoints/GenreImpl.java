@@ -28,14 +28,16 @@ public class GenreImpl implements GenreInterface {
     @Override
     @GET
     @Path("{id}")
-    public Genre get(long id) {
-
+    @Operation(summary = "gets a Single Object identified by id", description = "Returns a MultiPart Object")
+    public GenreForm get(long id) {
+        GenreForm genreForm = new GenreForm();
         Genre genre = Genre.findById(id);
         if (genre == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
-
-        return Genre.findById(id);
+        genreForm.genre = genre;
+        genreForm.setFile(genre.image.data);
+        return genreForm;
     }
 
     @Override
@@ -47,7 +49,7 @@ public class GenreImpl implements GenreInterface {
     @Override
     @PUT
     @RolesAllowed({"employee", "admin"})
-    @Operation(summary = "put2", description = "put2")
+    @Operation(summary = "modifes a Genre Object", description = "Accepts a Multipart Object")
     public Response put(@MultipartForm GenreForm data, @Context SecurityContext securityContext) {
         Genre old = Genre.findById(data.genre.id);
         if (old == null) {
@@ -70,6 +72,7 @@ public class GenreImpl implements GenreInterface {
     @Override
     @POST
     @RolesAllowed({"employee", "admin"})
+    @Operation(summary = "creates a new Genre Object", description = "Accepts a Multipart Object")
     public Response post(@MultipartForm GenreForm data, @Context SecurityContext securityContext) {
 
         if (data.genre == null) {
@@ -98,6 +101,7 @@ public class GenreImpl implements GenreInterface {
     @Override
     @DELETE
     @RolesAllowed({"employee", "admin"})
+    @Operation(summary = "deletes a Genre Object", description = "Deletes an object identified by id")
     public Boolean delete(Genre genre, SecurityContext securityContext) {
         Genre deletedID = Genre.findById(genre.id);
         if (deletedID == null) {

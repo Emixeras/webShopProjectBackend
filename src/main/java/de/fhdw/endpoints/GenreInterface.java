@@ -10,7 +10,7 @@ import javax.ws.rs.core.SecurityContext;
 import java.util.List;
 
 public interface GenreInterface {
-    Genre get(@PathParam long id);
+    GenreForm get(@PathParam long id);
 
     List<Genre> get();
 

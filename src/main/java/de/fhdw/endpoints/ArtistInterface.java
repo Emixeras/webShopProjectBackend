@@ -17,8 +17,6 @@ public interface ArtistInterface {
 
     Response put(@MultipartForm ArtistForm data, @Context SecurityContext securityContext);
 
-    Artist put(Artist artist, @Context SecurityContext securityContext);
-
     Response post(@MultipartForm ArtistForm data, @Context SecurityContext securityContext);
 
     Boolean delete(Artist artist, @Context SecurityContext securityContext);

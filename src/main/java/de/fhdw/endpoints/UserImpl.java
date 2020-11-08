@@ -1,6 +1,7 @@
 package de.fhdw.endpoints;
 
 import de.fhdw.models.ShopUser;
+import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.jboss.logging.Logger;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
@@ -29,6 +30,7 @@ public class UserImpl implements UserInterface {
     @Path("getAll")
     @RolesAllowed("admin")
     @Override
+    @Operation(summary = "Returns all User as Json List")
     public List<ShopUser> getAll() {
         LOG.info("Liste Aller Benutzer abgefragt");
         return ShopUser.listAll();
@@ -37,6 +39,7 @@ public class UserImpl implements UserInterface {
     @GET
     @RolesAllowed({"admin", "user", "employee"})
     @Override
+    @Operation(summary = "Returns a single User identified by id")
     public ShopUser get(@Context SecurityContext securityContext) {
         return ShopUser.findbyEmail(securityContext.getUserPrincipal().getName());
     }
@@ -45,6 +48,7 @@ public class UserImpl implements UserInterface {
     @Transactional
     @PermitAll
     @Override
+    @Operation(summary = "registers a new User in Database")
     public ShopUser post(@NotNull ShopUser shopUser) {
         if (ShopUser.findbyEmail(shopUser.email) == null) {
             shopUser.role = ShopUser.Role.USER;
@@ -61,6 +65,7 @@ public class UserImpl implements UserInterface {
     @Transactional
     @RolesAllowed({"user", "admin", "employee"})
     @Override
+    @Operation(summary = "modifies a User")
     public ShopUser put(@NotNull ShopUser newUserInformation, @Context SecurityContext securityContext) {
         ShopUser requestingUser = ShopUser.findbyEmail(securityContext.getUserPrincipal().getName());
         ShopUser changedUser;
@@ -112,6 +117,7 @@ public class UserImpl implements UserInterface {
     @DELETE
     @RolesAllowed({"user", "admin", "employee"})
     @Transactional
+    @Operation(summary = "deletes a user identified by id if permissions are correct")
     public Boolean delete(@PathParam String email, @Context SecurityContext securityContext) {
         ShopUser deleted = ShopUser.findbyEmail(email);
         ShopUser shopUser = ShopUser.findbyEmail(securityContext.getUserPrincipal().getName());
