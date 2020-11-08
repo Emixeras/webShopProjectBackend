@@ -6,9 +6,6 @@ import de.fhdw.models.Artist;
 import de.fhdw.models.Genre;
 import de.fhdw.models.Picture;
 import de.fhdw.util.PictureHandler;
-import org.apache.tika.detect.Detector;
-import org.apache.tika.metadata.Metadata;
-import org.apache.tika.parser.AutoDetectParser;
 import org.jboss.logging.Logger;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
@@ -19,7 +16,6 @@ import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.util.List;
 
