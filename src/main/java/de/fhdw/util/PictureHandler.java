@@ -1,5 +1,6 @@
 package de.fhdw.util;
 
+import io.quarkus.runtime.annotations.RegisterForReflection;
 import org.jboss.logging.Logger;
 
 import javax.imageio.ImageIO;
