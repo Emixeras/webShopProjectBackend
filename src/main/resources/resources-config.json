@@ -4,6 +4,12 @@
       "pattern": ".*\\.xml$"
     },
     {
+      "pattern": ".*\\.png$"
+    },
+    {
+      "pattern": ".*\\.jpg$"
+    },
+    {
       "pattern": ".*\\.json$"
     }
   ]

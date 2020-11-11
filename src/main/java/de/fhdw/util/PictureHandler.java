@@ -1,5 +1,6 @@
 package de.fhdw.util;
 
+import io.quarkus.runtime.annotations.RegisterForReflection;
 import org.jboss.logging.Logger;
 
 import javax.imageio.ImageIO;
@@ -13,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
 
+@RegisterForReflection
 public class PictureHandler {
     private static final org.jboss.logging.Logger LOG = Logger.getLogger(PictureHandler.class);
 
@@ -31,11 +33,16 @@ public class PictureHandler {
     }
 
     public byte[] scaleImage(InputStream source, String type) throws IOException {
-        BufferedImage bImageFromConvert = ImageIO.read(source);
-        bImageFromConvert = scale(bImageFromConvert, 0.25);
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        ImageIO.write(bImageFromConvert, type, byteArrayOutputStream);
-        return byteArrayOutputStream.toByteArray();
+       try {
+           BufferedImage bImageFromConvert = ImageIO.read(source);
+           bImageFromConvert = scale(bImageFromConvert, 0.25);
+           ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+           ImageIO.write(bImageFromConvert, type, byteArrayOutputStream);
+           return byteArrayOutputStream.toByteArray();
+       }catch (Exception e){
+           return null;
+       }
+
     }
 
     private BufferedImage scale(BufferedImage source, double ratio) {
