@@ -2,6 +2,7 @@ package de.fhdw.endpoints;
 
 import de.fhdw.models.*;
 import de.fhdw.util.PictureHandler;
+import io.quarkus.runtime.annotations.RegisterForReflection;
 import org.apache.commons.io.IOUtils;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
@@ -16,15 +17,12 @@ import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.IntStream;
 
 @ApplicationScoped
@@ -32,7 +30,7 @@ import java.util.stream.IntStream;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @Tag(name = "Test", description = "div Test Data and basic Backend Operations")
-
+@RegisterForReflection
 public class TestImpl implements TestInterface {
     private static final Logger LOG = Logger.getLogger(TestImpl.class);
     private static final String DATEPATTERN = "yyyy-MM-dd HH:mm:ss";
@@ -179,11 +177,11 @@ public class TestImpl implements TestInterface {
     @GET
     @Path("init")
     @Operation(summary = "inits TestData")
-    @Transactional
+    @Transactional()
     public List<Article> Articles() throws IOException {
 
         final String articleFilename = "TestData/article.json";
-        final String genreFilename = "TestData/genre.json";
+        final String genreFilename = "Genre/genre.json";
         final String artistFilename = "TestData/artist.json";
 
         ClassLoader classLoader = getClass().getClassLoader();
@@ -201,8 +199,6 @@ public class TestImpl implements TestInterface {
                 e.printStackTrace();
             }
         });
-
-
 
         //Link Genre Images
         final String genreClassic = "Genre/classic.png";
@@ -235,7 +231,7 @@ public class TestImpl implements TestInterface {
         List<Article> articles = jsonb.fromJson(new FileInputStream(articleFile), new ArrayList<Article>() {
         }.getClass().getGenericSuperclass());
 
-        if (Genre.count() == 0){
+        if (Genre.count() == 0) {
             genres.forEach(i -> {
                 Genre genre = new Genre(i.name);
                 genre.persist();
@@ -243,15 +239,6 @@ public class TestImpl implements TestInterface {
             });
             LOG.info("added Genres:" + Genre.count());
         }
-
-
-
-
-
-
-
-
-
 
         try {
             //add Classic Cover to Genre
@@ -275,7 +262,7 @@ public class TestImpl implements TestInterface {
             edm.picture = picture;
 
             File fgHipHop = new File(Objects.requireNonNull(classLoader.getResource(genreHipHop)).getFile());
-            Genre hipHop = Genre.findByName("Electronic dance music");
+            Genre hipHop = Genre.findByName("Hip-hop");
             picture = new Picture(IOUtils.toByteArray(new FileInputStream(fgHipHop)), pictureHandler.scaleImage(new FileInputStream(fgHipHop), pictureHandler.checkImageFormat(new FileInputStream(fgHipHop))));
             picture.persist();
             hipHop.picture = picture;
@@ -355,33 +342,61 @@ public class TestImpl implements TestInterface {
             industrial.picture = picture;
 
         } catch (Exception e) {
-           LOG.info(e.toString());
+            LOG.info(e.toString());
         }
 
-
-        artists.forEach(i -> {
-            Artist artist = new Artist(i.name);
-            artist.persist();
-            LOG.debug("added Artist: " + artist.toString());
-        });
-
-
+        if (Artist.count() == 0) {
+            artists.forEach(i -> {
+                Artist artist = new Artist(i.name);
+                artist.persist();
+                LOG.debug("added Artist: " + artist.toString());
+            });
+        }
         LOG.info("added Artists: " + Artist.count());
-        articles.forEach(i -> {
-            Article article = new Article();
-            LOG.info(i.picture.toString());
-            article.picture = i.picture;
-            article.title = i.title;
-            article.genre = i.genre;
-            article.artists = i.artists;
-            article.price = i.price;
-            article.ean = i.ean;
-            article.persist();
-            LOG.debug("added article: " + article.toString());
-        });
-        LOG.info("added Articles: " + Article.count());
+        if (Article.count() == 0) {
+            articles.forEach(i -> {
+                Article article = new Article();
+                article.picture = Picture.findById(Integer.toUnsignedLong(ThreadLocalRandom.current().nextInt(1, 10 + 1)));
+                article.title = i.title;
+                article.genre = i.genre;
+                article.artists = i.artists;
+                article.price = i.price;
+                article.description = i.description;
+                article.ean = i.ean;
+                article.persist();
+                LOG.debug("added article: " + article.toString());
+            });
+            LOG.info("added Articles: " + Article.count());
+        }
         return Article.listAll();
     }
 
 
+    @GET
+    @Path("file/{parm}")
+    @Operation(summary = "gets a single file from Classpath")
+    public List<String> fileTest(@PathParam("parm") String test) throws IOException {
+        List<String> filenames = new ArrayList<>();
+
+        String path = test != null ? "" : null;
+        InputStream in = getResourceAsStream(path);
+        BufferedReader br = new BufferedReader(new InputStreamReader(in));
+        String resource;
+
+        while ((resource = br.readLine()) != null) {
+            filenames.add(resource);
+        }
+
+        return filenames;
+    }
+
+
+    private InputStream getResourceAsStream(String resource) {
+        final InputStream in = getContextClassLoader().getResourceAsStream(resource);
+        return in == null ? getClass().getResourceAsStream(resource) : in;
+    }
+
+    private ClassLoader getContextClassLoader() {
+        return Thread.currentThread().getContextClassLoader();
+    }
 }

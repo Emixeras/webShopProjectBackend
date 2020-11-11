@@ -37,8 +37,5 @@ public class Picture extends PanacheEntityBase {
     public void setId(Long id) {
     }
 
-    @Override
-    public String toString() {
-       return id.toString();
-    }
+
 }

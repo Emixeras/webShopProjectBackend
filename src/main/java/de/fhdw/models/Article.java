@@ -2,6 +2,7 @@ package de.fhdw.models;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 
 @Entity
@@ -18,6 +19,7 @@ public class Article extends PanacheEntityBase {
     @Column(nullable = false)
     public double price;
 
+    @ManyToOne()
     @JoinColumn(nullable = false)
     public Genre genre;
 
@@ -26,11 +28,12 @@ public class Article extends PanacheEntityBase {
 
     public String description;
 
+    @ManyToOne()
     @JoinColumn(nullable = false)
     public Artist artists;
 
-    //@JsonbTransient
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @JsonbTransient
+    @ManyToOne()
     public Picture picture;
 
     public static Artist findByName(String title) {
