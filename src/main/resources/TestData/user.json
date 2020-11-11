@@ -1,0 +1,30 @@
+[
+  {
+    "birth": "1970-01-09T22:52:40.374Z[UTC]",
+    "email": "admin@admin.de",
+    "firstName": "Daniel",
+    "id": 1,
+    "lastName": "Pilot",
+    "password": "Test1234",
+    "postalCode": 33330,
+    "role": "ADMIN",
+    "street": "amselweg",
+    "streetNumber": 123,
+    "title": "BENUTZERDEFINIERT",
+    "town": "Gütersloh"
+  },
+  {
+    "birth": "1970-01-11T02:39:20.374Z[UTC]",
+    "email": "user@user.de",
+    "firstName": "Christoph",
+    "id": 2,
+    "lastName": "Müller",
+    "password": "Test1234",
+    "postalCode": 33330,
+    "role": "USER",
+    "street": "amselweg",
+    "streetNumber": 123,
+    "title": "HERR",
+    "town": "Paderborn"
+  }
+]
