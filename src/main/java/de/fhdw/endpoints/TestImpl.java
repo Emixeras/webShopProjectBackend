@@ -1,3 +1,4 @@
+/*
 package de.fhdw.endpoints;
 
 import de.fhdw.models.*;
@@ -191,7 +192,7 @@ public class TestImpl implements TestInterface {
         IntStream.range(1, 11).forEach(i -> {
             String name = "TestData/Images/cat" + i + ".jpg";
             File file = new File(Objects.requireNonNull(classLoader.getResource(name)).getFile());
-            LOG.info("File Found " + i  + " : " + file.exists());
+            LOG.debug("File Found " + i + " : " + file.exists());
             try {
                 PictureHandler pictureHandler = new PictureHandler();
                 Picture picture = new Picture(IOUtils.toByteArray(new FileInputStream(file)), pictureHandler.scaleImage(new FileInputStream(file), pictureHandler.checkImageFormat(new FileInputStream(file))));
@@ -206,9 +207,9 @@ public class TestImpl implements TestInterface {
         File genreFile = new File(Objects.requireNonNull(classLoader.getResource(genreFilename)).getFile());
         File artistFile = new File(Objects.requireNonNull(classLoader.getResource(artistFilename)).getFile());
         //File is found
-        LOG.info("File Found : " + articleFile.exists());
-        LOG.info("File Found : " + genreFile.exists());
-        LOG.info("File Found : " + artistFile.exists());
+        LOG.debug("File Found : " + articleFile.exists());
+        LOG.debug("File Found : " + genreFile.exists());
+        LOG.debug("File Found : " + artistFile.exists());
 
         InputStream articleStream = new FileInputStream(articleFile);
         InputStream genreStream = new FileInputStream(genreFile);
@@ -228,33 +229,30 @@ public class TestImpl implements TestInterface {
         genres.forEach(i -> {
             Genre genre = new Genre(i.name);
             genre.persist();
-            LOG.info("added Genres: "+genre.toString());
-
+            LOG.debug("added Genres: " + genre.toString());
         });
+        LOG.info("added Genres:" + Genre.count());
         artists.forEach(i -> {
             Artist artist = new Artist(i.name);
             artist.persist();
-            LOG.info("added Artist: "+artist.toString());
+            LOG.debug("added Artist: " + artist.toString());
         });
+        LOG.info("added Artists: " + Artist.count());
 
 
-        articles.forEach(i ->{
-          try {
-              Article article = new Article();
-              LOG.info(i.image);
-              article.image = i.image;
-              article.title = i.title;
-              article.genre = i.genre;
-              article.artists = i.artists;
-              article.price = i.price;
-              article.ean = i.ean;
-              article.persist();
-              LOG.info("added article: "+article.toString());
+        articles.forEach(i -> {
 
-          }catch (Exception e){
-              LOG.info(e.toString());
-          }
-        } );
+            Article article = new Article();
+            article.image = i.image;
+            article.title = i.title;
+            article.genre = i.genre;
+            article.artists = i.artists;
+            article.price = i.price;
+            article.ean = i.ean;
+            article.persist();
+            LOG.debug("added article: " + article.toString());
+        });
+            LOG.info("added Articles: "+Article.count());
 
 
         return Article.listAll();
@@ -262,3 +260,4 @@ public class TestImpl implements TestInterface {
 
 
 }
+*/

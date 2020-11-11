@@ -22,10 +22,10 @@ public class PictureHandler {
             ImageInputStream iis = ImageIO.createImageInputStream(stream);
             Iterator<ImageReader> readers = ImageIO.getImageReaders(iis);
             ImageReader reader = readers.next();
-            LOG.info(reader.getFormatName());
+            LOG.debug(reader.getFormatName());
             return reader.getFormatName();
         }catch (Exception e){
-            LOG.info(e.toString());
+            LOG.debug(e.toString());
         }
         return null;
     }

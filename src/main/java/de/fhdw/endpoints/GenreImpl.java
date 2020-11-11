@@ -41,7 +41,7 @@ public class GenreImpl implements GenreInterface {
     }
 
     @Override
-    @Cache
+    @GET
     public List<Genre> get() {
         return Genre.listAll();
     }
@@ -103,6 +103,7 @@ public class GenreImpl implements GenreInterface {
         }
         throw new WebApplicationException(Response.Status.BAD_REQUEST);
     }
+
 
     @Override
     @DELETE
