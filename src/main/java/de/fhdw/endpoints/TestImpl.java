@@ -24,6 +24,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -190,10 +191,12 @@ public class TestImpl implements TestInterface {
     @GET
     @Path("init")
     @Operation(summary = "inits TestData")
-    @Transactional
-    public List<Article> articles() {
+    @Transactional()
+    public List<Article> Articles() throws IOException {
 
-        Jsonb jsonb = JsonbBuilder.create();
+
+
+
         //put Pictures in DB
         IntStream.range(1, 11).forEach(i -> {
             String name = "/TestData/cat+"+i+".jpg";
@@ -206,7 +209,7 @@ public class TestImpl implements TestInterface {
                 LOG.error(i);
             }
         });
-
+        Jsonb jsonb = JsonbBuilder.create();
         List<Genre> genres = jsonb.fromJson(getClass().getResourceAsStream("/TestData/genre.json"), new ArrayList<Genre>() {
         }.getClass().getGenericSuperclass());
         genres.forEach(i -> {
@@ -243,73 +246,8 @@ public class TestImpl implements TestInterface {
 
         return Article.listAll();
 
-/*
-
-        //put Pictures in DB
-        IntStream.range(1, 11).forEach(i -> {
-            String name = "/TestData/Imagescat" + i + ".jpg";
-            File file = new File(Objects.requireNonNull(getClass().getResource(name)).getFile());
-            LOG.info("File Found " + i  + " : " + file.exists());
-            try {
-                PictureHandler pictureHandler = new PictureHandler();
-                Picture picture = new Picture(IOUtils.toByteArray(new FileInputStream(file)), pictureHandler.scaleImage(new FileInputStream(file), pictureHandler.checkImageFormat(new FileInputStream(file))));
-                picture.persist();
-            } catch (IOException e) {
-                LOG.info(e.toString());
-            }
-        });
-*/
-
-      /*  File articleFile = new File(getClass().getResource(articleFilename).getFile());
-        File artistFile = new File(Objects.requireNonNull(getClass().getResource(artistFilename)).getFile());
-        //File is found
-        LOG.info("File Found : " + articleFile.exists());
-        LOG.info("File Found : " + genreFile.exists());
-        LOG.info("File Found : " + artistFile.exists());
-
-        InputStream articleStream = new FileInputStream(articleFile);
-        InputStream genreStream = new FileInputStream(genreFile);
-        InputStream artistStream = new FileInputStream(artistFile);
-
-
-
-
-
-
-        List<Artist> artists = jsonb.fromJson(artistStream, new ArrayList<Artist>() {
-        }.getClass().getGenericSuperclass());
-        List<Article> articles = jsonb.fromJson(articleStream, new ArrayList<Article>() {
-        }.getClass().getGenericSuperclass());
-
-
-        artists.forEach(i -> {
-            Artist artist = new Artist(i.name);
-            artist.persist();
-            LOG.info("added Artist: "+artist.toString());
-        });
-
-
-        articles.forEach(i ->{
-          try {
-              Article article = new Article();
-              LOG.info(i.image);
-              article.image = i.image;
-              article.title = i.title;
-              article.genre = i.genre;
-              article.artists = i.artists;
-              article.price = i.price;
-              article.ean = i.ean;
-              article.persist();
-              LOG.info("added article: "+article.toString());
-
-          }catch (Exception e){
-              LOG.info(e.toString());
-          }
-        } );
-
-
-        return Article.listAll();*/
     }
+
 
 
 }

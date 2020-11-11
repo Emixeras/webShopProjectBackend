@@ -7,7 +7,6 @@ import de.fhdw.util.PictureHandler;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.jboss.logging.Logger;
-import org.jboss.resteasy.annotations.cache.Cache;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
 import javax.annotation.security.RolesAllowed;
@@ -16,7 +15,9 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -40,10 +41,19 @@ public class GenreImpl implements GenreInterface {
         return genreForm;
     }
 
+    @GET
     @Override
-    @Cache
-    public List<Genre> get() {
-        return Genre.listAll();
+    @Operation(summary = "returns all Genres with Picture")
+    public Map<String, GenreForm> getAll() {
+        Map<String, GenreForm> map = new HashMap<String, GenreForm>();
+        List<Genre> genres = Genre.listAll();
+        for (Genre genre : genres) {
+            GenreForm genreForm = new GenreForm();
+            genreForm.setFile(genre.picture.thumbnail);
+            genreForm.genre = genre;
+            map.put(genre.id.toString(), genreForm);
+        }
+        return map;
     }
 
     @Override
@@ -103,6 +113,7 @@ public class GenreImpl implements GenreInterface {
         }
         throw new WebApplicationException(Response.Status.BAD_REQUEST);
     }
+
 
     @Override
     @DELETE

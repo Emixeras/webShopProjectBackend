@@ -8,11 +8,12 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import java.util.List;
+import java.util.Map;
 
 public interface GenreInterface {
     GenreForm get(@PathParam long id);
 
-    List<Genre> get();
+    Map<String, GenreForm> getAll();
 
     Response put(GenreForm data, @Context SecurityContext securityContext);
 

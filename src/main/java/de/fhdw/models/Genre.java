@@ -27,6 +27,11 @@ public class Genre extends PanacheEntityBase {
     public Genre() {
     }
 
+    public Genre(String name, Picture image) {
+        this.name = name;
+        this.picture = image;
+    }
+
     public Genre(String name) {
         this.name = name;
     }

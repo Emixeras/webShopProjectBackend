@@ -21,7 +21,9 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @ApplicationScoped
 @Path("article")
@@ -34,7 +36,7 @@ public class ArticleImpl implements ArticleInterface {
     @Override
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
-    //@RolesAllowed({"admin", "employee"})
+    @RolesAllowed({"admin", "employee"})
     @Transactional
     @Operation(summary = "registers a new Article Object")
     public Response post(@MultipartForm ArticleForm data) {
@@ -141,12 +143,14 @@ public class ArticleImpl implements ArticleInterface {
     @PUT
     @RolesAllowed({"admin", "employee"})
     @Operation(summary = "changes a Article Object", description = "needs a Multipart Form Picture can be empty")
-    public Response put(@MultipartForm ArticleForm data) {
+    @Transactional
+    public Article put(@MultipartForm ArticleForm data) {
         Article article = Article.findById(data.article.id);
         if (article == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
-        setNewValues(data, article); //todo: remove this after article and genre Page is ready
+        //  setNewValues(data, article); //todo: remove this after article and genre Page is ready
+
         article.artists = data.article.artists;
         article.genre = data.article.genre;
         article.title = data.article.title;
@@ -160,10 +164,14 @@ public class ArticleImpl implements ArticleInterface {
                 article.picture.rawData = data.getFile();
             }
 
-            return Response.accepted(data.article.id).build();
+
         } catch (Exception e) {
+            LOG.info(e.toString());
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
+
+        return Article.findById(data.article.id);
+
 
     }
 
