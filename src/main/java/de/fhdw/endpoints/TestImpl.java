@@ -116,15 +116,17 @@ public class TestImpl  {
             //put Pictures in DB
             IntStream.range(1, 11).forEach(i -> {
                 String name = "/TestData/Images/cat"+i+".jpg";
-                try {
+
                     LOG.debug(i+" "+name);
                     PictureHandler pictureHandler = new PictureHandler();
-                    Picture picture = new Picture(IOUtils.toByteArray(getClass().getResourceAsStream(name)), pictureHandler.scaleImage(getClass().getResourceAsStream(name), "jpg"));
-                    picture.persist();
+                Picture picture = null;
+                try {
+                    picture = new Picture(IOUtils.toByteArray(getClass().getResourceAsStream(name)), pictureHandler.scaleImage(getClass().getResourceAsStream(name), "jpg"));
                 } catch (IOException e) {
-                    LOG.error(e.toString());
-                    LOG.error(i);
+                    e.printStackTrace();
                 }
+                picture.persist();
+
             });
                 LOG.info(Picture.count()+" Bilder angelegt");
 

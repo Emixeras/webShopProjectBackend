@@ -36,7 +36,7 @@ public class ArticleImpl implements ArticleInterface {
     @Override
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
-    @RolesAllowed({"admin", "employee"})
+   // @RolesAllowed({"admin", "employee"})
     @Transactional
     @Operation(summary = "registers a new Article Object")
     public Response post(@MultipartForm ArticleForm data) {
