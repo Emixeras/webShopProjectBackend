@@ -12,14 +12,17 @@ public class Genre extends PanacheEntityBase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
+
     @Column(nullable = false, unique = true)
     public String name;
+
     @JsonbTransient
     @OneToMany(mappedBy = "genre")
     public List<Article> articles;
+
     @JsonbTransient
     @ManyToOne(cascade = CascadeType.MERGE)
-    public Picture image;
+    public Picture picture;
 
     public Genre() {
     }

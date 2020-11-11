@@ -32,7 +32,7 @@ public class Article extends PanacheEntityBase {
 
     //@JsonbTransient
     @ManyToOne(cascade = CascadeType.ALL)
-    public Picture image;
+    public Picture picture;
 
     public static Artist findByName(String title) {
         return find("title", title).firstResult();

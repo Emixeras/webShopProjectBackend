@@ -36,7 +36,7 @@ public class GenreImpl implements GenreInterface {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
         genreForm.genre = genre;
-        genreForm.setFile(genre.image.rawData);
+        genreForm.setFile(genre.picture.rawData);
         return genreForm;
     }
 
@@ -63,7 +63,7 @@ public class GenreImpl implements GenreInterface {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
         if (media.equals("image/png") || media.equals("image/jpeg")) {
-            old.image.rawData = data.getFile();
+            old.picture.rawData = data.getFile();
         }
         return Response.ok().build();
 
@@ -92,7 +92,7 @@ public class GenreImpl implements GenreInterface {
                String type = media.equals("JPEG") ? "jpg":"png";
                Picture picture = new Picture(data.getFile(), pictureHandler.scaleImage(data.getFileAsStream(), type));
                picture.persist();
-               genre.image = picture;
+               genre.picture = picture;
                genre.persist();
                LOG.info("added: " + genre.toString());
                return Response.accepted(data.genre.id).build();

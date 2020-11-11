@@ -17,13 +17,13 @@ public class Picture extends PanacheEntityBase {
     @JsonbTransient
     public byte[] thumbnail;
     @JsonbTransient
-    @OneToMany(mappedBy = "image")
+    @OneToMany(mappedBy = "picture")
     public List<Article> article;
     @JsonbTransient
-    @OneToMany(mappedBy = "image")
+    @OneToMany(mappedBy = "picture")
     public List<Artist> artist;
     @JsonbTransient
-    @OneToMany(mappedBy = "image")
+    @OneToMany(mappedBy = "picture")
     public List<Genre> genre;
 
     public Picture() {

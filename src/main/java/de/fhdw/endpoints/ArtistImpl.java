@@ -39,7 +39,7 @@ public class ArtistImpl implements ArtistInterface {
         }
         ArtistForm artistForm = new ArtistForm();
         artistForm.artist = a;
-        artistForm.setFile(a.image.rawData);
+        artistForm.setFile(a.picture.rawData);
         return artistForm;
     }
 
@@ -65,7 +65,7 @@ public class ArtistImpl implements ArtistInterface {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
         if (media.equals("image/png") || media.equals("image/jpeg")) {
-            old.image.rawData = data.getFile();
+            old.picture.rawData = data.getFile();
         }
         return Response.ok().build();
     }
@@ -90,7 +90,7 @@ public class ArtistImpl implements ArtistInterface {
                 String type = media.equals("JPEG") ? "jpg":"png";
                 Picture picture = new Picture(data.getFile(), pictureHandler.scaleImage(data.getFileAsStream(), type));
                 picture.persist();
-                artist.image = picture;
+                artist.picture = picture;
                 artist.persist();
                 LOG.info("added: " + artist.toString());
                 return Response.accepted(data.artist.id).build();

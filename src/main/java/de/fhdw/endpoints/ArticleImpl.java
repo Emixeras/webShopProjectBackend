@@ -21,9 +21,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @ApplicationScoped
 @Path("article")
@@ -58,7 +56,7 @@ public class ArticleImpl implements ArticleInterface {
                 String type = media.equals("JPEG") ? "jpg" : "png";
                 Picture picture = new Picture(data.getFile(), pictureHandler.scaleImage(data.getFileAsStream(), type));
                 picture.persist();
-                article.image = picture;
+                article.picture = picture;
                 article.persist();
                 return Response.accepted(data.article.id).build();
             } catch (Exception e) {
@@ -89,7 +87,7 @@ public class ArticleImpl implements ArticleInterface {
         articles.forEach(i -> {
             ArticleForm articleForm = new ArticleForm();
             articleForm.article = i;
-            articleForm.setFile(i.image.thumbnail);
+            articleForm.setFile(i.picture.thumbnail);
             articleForms.add(articleForm);
         });
         return articleForms;
@@ -114,7 +112,7 @@ public class ArticleImpl implements ArticleInterface {
         }
         ArticleForm articleForm = new ArticleForm();
         articleForm.article = article;
-        articleForm.setFile(article.image.rawData);
+        articleForm.setFile(article.picture.rawData);
         return articleForm;
     }
 
@@ -129,7 +127,7 @@ public class ArticleImpl implements ArticleInterface {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
         try {
-            Picture picture = article.image;
+            Picture picture = article.picture;
             picture.delete();
             article.delete();
         } catch (Exception e) {
@@ -159,7 +157,7 @@ public class ArticleImpl implements ArticleInterface {
         try {
             String media = pictureHandler.checkImageFormat(data.getFileAsStream());
             if (media.equals("png") || media.equals("JPEG")) {
-                article.image.rawData = data.getFile();
+                article.picture.rawData = data.getFile();
             }
 
             return Response.accepted(data.article.id).build();
