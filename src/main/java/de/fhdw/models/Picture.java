@@ -33,4 +33,7 @@ public class Picture extends PanacheEntityBase {
         this.rawData = rawData;
         this.thumbnail = thumbnail;
     }
+
+    public void setId(Long id) {
+    }
 }

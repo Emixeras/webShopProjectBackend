@@ -18,7 +18,7 @@ public interface ArticleInterface {
 
     ArticleForm getSingle(@PathParam long id);
 
-    Map<String,ArticleForm> getAll();
+    List<Article> getAll();
 
     List<ArticleForm> getRange(int start, int end);
 

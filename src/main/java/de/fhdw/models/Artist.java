@@ -23,7 +23,6 @@ public class Artist extends PanacheEntityBase {
     @JsonbTransient
     @ManyToOne(cascade = CascadeType.MERGE)
     public Picture image;
-
     public Artist(String name) {
         this.name = name;
     }

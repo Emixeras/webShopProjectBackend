@@ -9,21 +9,13 @@ import java.util.Date;
 
 @Entity(name = "ShopUser")
 @Table(name = "shopuser")
-public class ShopUser extends PanacheEntityBase  {
+public class ShopUser extends PanacheEntityBase {
 
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     public Long id;
-
-    public enum Role {
-        ADMIN, EMPLOYEE, USER
-    }
-    public enum Title {
-        HERR, FRAU, PROFESSOR, DOKTOR, BENUTZERDEFINIERT, APACHE
-    }
-
     @NotBlank(message = "email may not be Blank")
     @Column(nullable = false, unique = true)
     public String email;
@@ -48,6 +40,8 @@ public class ShopUser extends PanacheEntityBase  {
         return find("email", name).firstResult();
     }
 
+    public void setId(Long id) {
+    }
 
     @Override
     public String toString() {
@@ -64,5 +58,13 @@ public class ShopUser extends PanacheEntityBase  {
                 ", birth=" + birth +
                 ", role=" + role +
                 '}';
+    }
+
+    public enum Role {
+        ADMIN, EMPLOYEE, USER
+    }
+
+    public enum Title {
+        HERR, FRAU, PROFESSOR, DOKTOR, BENUTZERDEFINIERT, APACHE
     }
 }

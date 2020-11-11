@@ -18,11 +18,16 @@ public class PictureHandler {
 
 
     public String checkImageFormat(InputStream stream) throws IOException {
-        ImageInputStream iis = ImageIO.createImageInputStream(stream);
-        Iterator<ImageReader> readers = ImageIO.getImageReaders(iis);
+        try {
+            ImageInputStream iis = ImageIO.createImageInputStream(stream);
+            Iterator<ImageReader> readers = ImageIO.getImageReaders(iis);
             ImageReader reader = readers.next();
             LOG.info(reader.getFormatName());
             return reader.getFormatName();
+        }catch (Exception e){
+            LOG.info(e.toString());
+        }
+        return null;
     }
 
     public byte[] scaleImage(InputStream source, String type) throws IOException {

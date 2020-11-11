@@ -10,6 +10,7 @@ import io.quarkus.hibernate.orm.panache.PanacheQuery;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.jboss.logging.Logger;
+import org.jboss.resteasy.annotations.cache.Cache;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
@@ -68,25 +69,12 @@ public class ArticleImpl implements ArticleInterface {
         throw new WebApplicationException(Response.Status.BAD_REQUEST);
     }
 
-   // @Produces(MediaType.MULTIPART_FORM_DATA)
     @Override
-
-   // @PartType("application/xml")
-  //  @PartType(MediaType.APPLICATION_FORM_URLENCODED)
     @GET
-    @Path("all")
+    @Cache(maxAge = 5)
     @Operation(summary = "returns all Articles Objects as json with no picture")
-    public Map<String, ArticleForm> getAll() {
-        Map<String, ArticleForm> map = new HashMap<String, ArticleForm>();
-
-        List<Article> articles = Article.listAll();
-        for (Article article : articles) {
-            ArticleForm articleForm = new ArticleForm();
-            articleForm.setFile(article.image.thumbnail);
-            articleForm.article = article;
-            map.put(article.id.toString(), articleForm);
-        }
-        return map;
+    public List<Article> getAll() {
+        return Article.listAll();
     }
 
     @GET
@@ -118,7 +106,6 @@ public class ArticleImpl implements ArticleInterface {
     @Override
     @GET
     @Path("{id}")
-    @Produces(MediaType.MULTIPART_FORM_DATA)
     @Operation(summary = "returns a single Article Object as Multipart Form including the Picture as Byte Array")
     public ArticleForm getSingle(@PathParam long id) {
         Article article = Article.findById(id);
