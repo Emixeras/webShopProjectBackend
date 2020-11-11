@@ -36,7 +36,7 @@ public class ArticleImpl implements ArticleInterface {
     @Override
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
-    //@RolesAllowed({"admin", "employee"})
+    @RolesAllowed({"admin", "employee"})
     @Transactional
     @Operation(summary = "registers a new Article Object")
     public Response post(@MultipartForm ArticleForm data) {
@@ -58,7 +58,7 @@ public class ArticleImpl implements ArticleInterface {
                 String type = media.equals("JPEG") ? "jpg" : "png";
                 Picture picture = new Picture(data.getFile(), pictureHandler.scaleImage(data.getFileAsStream(), type));
                 picture.persist();
-                article.image = picture;
+                article.picture = picture;
                 article.persist();
                 return Response.accepted(data.article.id).build();
             } catch (Exception e) {
@@ -89,7 +89,7 @@ public class ArticleImpl implements ArticleInterface {
         articles.forEach(i -> {
             ArticleForm articleForm = new ArticleForm();
             articleForm.article = i;
-            articleForm.setFile(i.image.thumbnail);
+            articleForm.setFile(i.picture.thumbnail);
             articleForms.add(articleForm);
         });
         return articleForms;
@@ -114,7 +114,7 @@ public class ArticleImpl implements ArticleInterface {
         }
         ArticleForm articleForm = new ArticleForm();
         articleForm.article = article;
-        articleForm.setFile(article.image.rawData);
+        articleForm.setFile(article.picture.rawData);
         return articleForm;
     }
 
@@ -129,7 +129,7 @@ public class ArticleImpl implements ArticleInterface {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
         try {
-            Picture picture = article.image;
+            Picture picture = article.picture;
             picture.delete();
             article.delete();
         } catch (Exception e) {
@@ -143,29 +143,40 @@ public class ArticleImpl implements ArticleInterface {
     @PUT
     @RolesAllowed({"admin", "employee"})
     @Operation(summary = "changes a Article Object", description = "needs a Multipart Form Picture can be empty")
-    public Response put(@MultipartForm ArticleForm data) {
+    @Transactional
+    public Article put(@MultipartForm ArticleForm data) {
         Article article = Article.findById(data.article.id);
         if (article == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
-        setNewValues(data, article); //todo: remove this after article and genre Page is ready
+        //  setNewValues(data, article); //todo: remove this after article and genre Page is ready
+
         article.artists = data.article.artists;
         article.genre = data.article.genre;
         article.title = data.article.title;
         article.price = data.article.price;
         article.ean = data.article.ean;
         article.description = data.article.description;
-        PictureHandler pictureHandler = new PictureHandler();
+
         try {
-            String media = pictureHandler.checkImageFormat(data.getFileAsStream());
-            if (media.equals("png") || media.equals("JPEG")) {
-                article.image.rawData = data.getFile();
+            PictureHandler pictureHandler = new PictureHandler();
+
+            if ((pictureHandler.checkImageFormat(data.getFileAsStream()).equals("png")) || pictureHandler.checkImageFormat(data.getFileAsStream()).equals("jpg")) {
+                Picture picture = Picture.findById(article.picture.id);
+
+                picture.thumbnail = pictureHandler.scaleImage(data.getFileAsStream(), pictureHandler.checkImageFormat(data.getFileAsStream()));
+                picture.rawData = data.getFile();
+
+                return article;
             }
 
-            return Response.accepted(data.article.id).build();
         } catch (Exception e) {
+            LOG.info(e.toString());
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
+
+        return Article.findById(data.article.id);
+
 
     }
 

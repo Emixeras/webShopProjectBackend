@@ -18,21 +18,20 @@ public class Article extends PanacheEntityBase {
     @Column(nullable = false)
     public double price;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(nullable = false)
     public Genre genre;
 
+    @Column(unique = true)
     public int ean;
 
     public String description;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(nullable = false)
     public Artist artists;
 
     //@JsonbTransient
-    @ManyToOne(cascade = CascadeType.ALL)
-    public Picture image;
+    @ManyToOne(cascade = CascadeType.MERGE)
+    public Picture picture;
 
     public static Artist findByName(String title) {
         return find("title", title).firstResult();

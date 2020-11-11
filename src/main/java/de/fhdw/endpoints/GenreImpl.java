@@ -7,7 +7,6 @@ import de.fhdw.util.PictureHandler;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.jboss.logging.Logger;
-import org.jboss.resteasy.annotations.cache.Cache;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
 import javax.annotation.security.RolesAllowed;
@@ -16,7 +15,9 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -36,14 +37,23 @@ public class GenreImpl implements GenreInterface {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
         genreForm.genre = genre;
-        genreForm.setFile(genre.image.rawData);
+        genreForm.setFile(genre.picture.rawData);
         return genreForm;
     }
 
-    @Override
     @GET
-    public List<Genre> get() {
-        return Genre.listAll();
+    @Override
+    @Operation(summary = "returns all Genres with Picture")
+    public Map<String, GenreForm> getAll() {
+        Map<String, GenreForm> map = new HashMap<String, GenreForm>();
+        List<Genre> genres = Genre.listAll();
+        for (Genre genre : genres) {
+            GenreForm genreForm = new GenreForm();
+            genreForm.setFile(genre.picture.thumbnail);
+            genreForm.genre = genre;
+            map.put(genre.id.toString(), genreForm);
+        }
+        return map;
     }
 
     @Override
@@ -63,7 +73,7 @@ public class GenreImpl implements GenreInterface {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
         if (media.equals("image/png") || media.equals("image/jpeg")) {
-            old.image.rawData = data.getFile();
+            old.picture.rawData = data.getFile();
         }
         return Response.ok().build();
 
@@ -92,7 +102,7 @@ public class GenreImpl implements GenreInterface {
                String type = media.equals("JPEG") ? "jpg":"png";
                Picture picture = new Picture(data.getFile(), pictureHandler.scaleImage(data.getFileAsStream(), type));
                picture.persist();
-               genre.image = picture;
+               genre.picture = picture;
                genre.persist();
                LOG.info("added: " + genre.toString());
                return Response.accepted(data.genre.id).build();

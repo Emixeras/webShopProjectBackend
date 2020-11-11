@@ -14,7 +14,7 @@ public interface ArticleInterface {
 
     Response post(@MultipartForm ArticleForm data) throws IOException;
 
-    Response put(@MultipartForm ArticleForm data) throws IOException;
+    Article put(@MultipartForm ArticleForm data) throws IOException;
 
     ArticleForm getSingle(@PathParam long id);
 

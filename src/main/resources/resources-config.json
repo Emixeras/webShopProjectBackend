@@ -1,0 +1,16 @@
+{
+  "resources": [
+    {
+      "pattern": ".*\\.xml$"
+    },
+    {
+      "pattern": ".*\\.jpg$"
+    },
+    {
+      "pattern": ".*\\.png$"
+    },
+    {
+      "pattern": ".*\\.json$"
+    }
+  ]
+}

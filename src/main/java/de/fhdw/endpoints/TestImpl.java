@@ -1,4 +1,3 @@
-/*
 package de.fhdw.endpoints;
 
 import de.fhdw.models.*;
@@ -17,6 +16,7 @@ import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import java.io.*;
 import java.time.LocalDateTime;
@@ -203,47 +203,174 @@ public class TestImpl implements TestInterface {
         });
 
 
+
+        //Link Genre Images
+        final String genreClassic = "Genre/classic.png";
+        final String genreCountry = "Genre/country.png";
+        final String genreEdm = "Genre/edm.png";
+        final String genreIndieRock = "Genre/IndieRock.png";
+        final String genreIndustrial = "Genre/industrial.png";
+        final String genreJazz = "Genre/jazz.png";
+        final String genrekpop = "Genre/kpop.png";
+        final String genreMetal = "Genre/metal.png";
+        final String genreOldies = "Genre/oldies.png";
+        final String genrePop = "Genre/pop.png";
+        final String genreBlues = "Genre/blues.png";
+        final String genreRap = "Genre/rap.png";
+        final String genreReggae = "Genre/reggae.png";
+        final String genreRock = "Genre/rock.png";
+        final String genreTechno = "Genre/techno.png";
+        final String genreHipHop = "Genre/hiphop.png";
+
         File articleFile = new File(Objects.requireNonNull(classLoader.getResource(articleFilename)).getFile());
         File genreFile = new File(Objects.requireNonNull(classLoader.getResource(genreFilename)).getFile());
         File artistFile = new File(Objects.requireNonNull(classLoader.getResource(artistFilename)).getFile());
-        //File is found
-        LOG.debug("File Found : " + articleFile.exists());
-        LOG.debug("File Found : " + genreFile.exists());
-        LOG.debug("File Found : " + artistFile.exists());
-
-        InputStream articleStream = new FileInputStream(articleFile);
-        InputStream genreStream = new FileInputStream(genreFile);
-        InputStream artistStream = new FileInputStream(artistFile);
 
 
         Jsonb jsonb = JsonbBuilder.create();
-
-
-        List<Genre> genres = jsonb.fromJson(genreStream, new ArrayList<Genre>() {
+        List<Genre> genres = jsonb.fromJson(new FileInputStream(genreFile), new ArrayList<Genre>() {
         }.getClass().getGenericSuperclass());
-        List<Artist> artists = jsonb.fromJson(artistStream, new ArrayList<Artist>() {
+        List<Artist> artists = jsonb.fromJson(new FileInputStream(artistFile), new ArrayList<Artist>() {
         }.getClass().getGenericSuperclass());
-        List<Article> articles = jsonb.fromJson(articleStream, new ArrayList<Article>() {
+        List<Article> articles = jsonb.fromJson(new FileInputStream(articleFile), new ArrayList<Article>() {
         }.getClass().getGenericSuperclass());
 
-        genres.forEach(i -> {
-            Genre genre = new Genre(i.name);
-            genre.persist();
-            LOG.debug("added Genres: " + genre.toString());
-        });
-        LOG.info("added Genres:" + Genre.count());
+        if (Genre.count() == 0){
+            genres.forEach(i -> {
+                Genre genre = new Genre(i.name);
+                genre.persist();
+                LOG.debug("added Genres: " + genre.toString());
+            });
+            LOG.info("added Genres:" + Genre.count());
+        }
+
+
+
+
+
+
+
+
+
+
+        try {
+            //add Classic Cover to Genre
+            File fgclassic = new File(Objects.requireNonNull(classLoader.getResource(genreClassic)).getFile());
+            PictureHandler pictureHandler = new PictureHandler();
+            Genre classic = Genre.findByName("Classical");
+            Picture picture = new Picture(IOUtils.toByteArray(new FileInputStream(fgclassic)), pictureHandler.scaleImage(new FileInputStream(fgclassic), pictureHandler.checkImageFormat(new FileInputStream(fgclassic))));
+            picture.persist();
+            classic.picture = picture;
+
+            File fgcountry = new File(Objects.requireNonNull(classLoader.getResource(genreCountry)).getFile());
+            Genre country = Genre.findByName("Country");
+            picture = new Picture(IOUtils.toByteArray(new FileInputStream(fgcountry)), pictureHandler.scaleImage(new FileInputStream(fgcountry), pictureHandler.checkImageFormat(new FileInputStream(fgcountry))));
+            picture.persist();
+            country.picture = picture;
+
+            File fgEDM = new File(Objects.requireNonNull(classLoader.getResource(genreEdm)).getFile());
+            Genre edm = Genre.findByName("Electronic dance music");
+            picture = new Picture(IOUtils.toByteArray(new FileInputStream(fgEDM)), pictureHandler.scaleImage(new FileInputStream(fgEDM), pictureHandler.checkImageFormat(new FileInputStream(fgEDM))));
+            picture.persist();
+            edm.picture = picture;
+
+            File fgHipHop = new File(Objects.requireNonNull(classLoader.getResource(genreHipHop)).getFile());
+            Genre hipHop = Genre.findByName("Electronic dance music");
+            picture = new Picture(IOUtils.toByteArray(new FileInputStream(fgHipHop)), pictureHandler.scaleImage(new FileInputStream(fgHipHop), pictureHandler.checkImageFormat(new FileInputStream(fgHipHop))));
+            picture.persist();
+            hipHop.picture = picture;
+
+            File fgIndieRock = new File(Objects.requireNonNull(classLoader.getResource(genreIndieRock)).getFile());
+            Genre indieRock = Genre.findByName("Indie rock");
+            picture = new Picture(IOUtils.toByteArray(new FileInputStream(fgIndieRock)), pictureHandler.scaleImage(new FileInputStream(fgIndieRock), pictureHandler.checkImageFormat(new FileInputStream(fgIndieRock))));
+            picture.persist();
+            indieRock.picture = picture;
+
+            File fgJazz = new File(Objects.requireNonNull(classLoader.getResource(genreJazz)).getFile());
+            Genre jazz = Genre.findByName("Jazz");
+            picture = new Picture(IOUtils.toByteArray(new FileInputStream(fgJazz)), pictureHandler.scaleImage(new FileInputStream(fgJazz), pictureHandler.checkImageFormat(new FileInputStream(fgJazz))));
+            picture.persist();
+            jazz.picture = picture;
+
+            File fgKpop = new File(Objects.requireNonNull(classLoader.getResource(genrekpop)).getFile());
+            Genre kpop = Genre.findByName("K-pop");
+            picture = new Picture(IOUtils.toByteArray(new FileInputStream(fgKpop)), pictureHandler.scaleImage(new FileInputStream(fgKpop), pictureHandler.checkImageFormat(new FileInputStream(fgKpop))));
+            picture.persist();
+            kpop.picture = picture;
+
+            File fgMetal = new File(Objects.requireNonNull(classLoader.getResource(genreMetal)).getFile());
+            Genre metal = Genre.findByName("Metal");
+            picture = new Picture(IOUtils.toByteArray(new FileInputStream(fgMetal)), pictureHandler.scaleImage(new FileInputStream(fgMetal), pictureHandler.checkImageFormat(new FileInputStream(fgMetal))));
+            picture.persist();
+            metal.picture = picture;
+
+            File fgOldies = new File(Objects.requireNonNull(classLoader.getResource(genreOldies)).getFile());
+            Genre oldies = Genre.findByName("Oldies");
+            picture = new Picture(IOUtils.toByteArray(new FileInputStream(fgOldies)), pictureHandler.scaleImage(new FileInputStream(fgOldies), pictureHandler.checkImageFormat(new FileInputStream(fgOldies))));
+            picture.persist();
+            oldies.picture = picture;
+
+            File fgPop = new File(Objects.requireNonNull(classLoader.getResource(genrePop)).getFile());
+            Genre pop = Genre.findByName("Pop");
+            picture = new Picture(IOUtils.toByteArray(new FileInputStream(fgPop)), pictureHandler.scaleImage(new FileInputStream(fgPop), pictureHandler.checkImageFormat(new FileInputStream(fgPop))));
+            picture.persist();
+            pop.picture = picture;
+
+            File fgRap = new File(Objects.requireNonNull(classLoader.getResource(genreRap)).getFile());
+            Genre Rap = Genre.findByName("Rap");
+            picture = new Picture(IOUtils.toByteArray(new FileInputStream(fgRap)), pictureHandler.scaleImage(new FileInputStream(fgRap), pictureHandler.checkImageFormat(new FileInputStream(fgRap))));
+            picture.persist();
+            Rap.picture = picture;
+
+            File fgBlues = new File(Objects.requireNonNull(classLoader.getResource(genreBlues)).getFile());
+            Genre rythm = Genre.findByName("Rhythm and blues");
+            picture = new Picture(IOUtils.toByteArray(new FileInputStream(fgBlues)), pictureHandler.scaleImage(new FileInputStream(fgBlues), pictureHandler.checkImageFormat(new FileInputStream(fgBlues))));
+            picture.persist();
+            rythm.picture = picture;
+
+            File fgRock = new File(Objects.requireNonNull(classLoader.getResource(genreRock)).getFile());
+            Genre rock = Genre.findByName("Rock");
+            picture = new Picture(IOUtils.toByteArray(new FileInputStream(fgRock)), pictureHandler.scaleImage(new FileInputStream(fgRock), pictureHandler.checkImageFormat(new FileInputStream(fgRock))));
+            picture.persist();
+            rock.picture = picture;
+
+            File fgTechno = new File(Objects.requireNonNull(classLoader.getResource(genreTechno)).getFile());
+            Genre techno = Genre.findByName("Techno");
+            picture = new Picture(IOUtils.toByteArray(new FileInputStream(fgTechno)), pictureHandler.scaleImage(new FileInputStream(fgTechno), pictureHandler.checkImageFormat(new FileInputStream(fgTechno))));
+            picture.persist();
+            techno.picture = picture;
+
+
+            File fgReggae = new File(Objects.requireNonNull(classLoader.getResource(genreReggae)).getFile());
+            Genre reggae = Genre.findByName("Reggae");
+            picture = new Picture(IOUtils.toByteArray(new FileInputStream(fgReggae)), pictureHandler.scaleImage(new FileInputStream(fgReggae), pictureHandler.checkImageFormat(new FileInputStream(fgReggae))));
+            picture.persist();
+            reggae.picture = picture;
+
+
+            File fgIndustrial = new File(Objects.requireNonNull(classLoader.getResource(genreIndustrial)).getFile());
+            Genre industrial = Genre.findByName("Industrial");
+            picture = new Picture(IOUtils.toByteArray(new FileInputStream(fgIndustrial)), pictureHandler.scaleImage(new FileInputStream(fgIndustrial), pictureHandler.checkImageFormat(new FileInputStream(fgIndustrial))));
+            picture.persist();
+            industrial.picture = picture;
+
+        } catch (Exception e) {
+           LOG.info(e.toString());
+        }
+
+
         artists.forEach(i -> {
             Artist artist = new Artist(i.name);
             artist.persist();
             LOG.debug("added Artist: " + artist.toString());
         });
+
+
         LOG.info("added Artists: " + Artist.count());
-
-
         articles.forEach(i -> {
-
             Article article = new Article();
-            article.image = i.image;
+            LOG.info(i.picture.toString());
+            article.picture = i.picture;
             article.title = i.title;
             article.genre = i.genre;
             article.artists = i.artists;
@@ -252,12 +379,9 @@ public class TestImpl implements TestInterface {
             article.persist();
             LOG.debug("added article: " + article.toString());
         });
-            LOG.info("added Articles: "+Article.count());
-
-
+        LOG.info("added Articles: " + Article.count());
         return Article.listAll();
     }
 
 
 }
-*/

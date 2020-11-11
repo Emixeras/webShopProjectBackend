@@ -79,7 +79,6 @@ public class UserImpl implements UserInterface {
         LOG.info(changedUser.email);
         //update Informations
         if (requestingUser.role == ShopUser.Role.ADMIN || requestingUser.id.equals(newUserInformation.id)) {
-            //changedUser.getChangesFrom(newUserInformation); //todo: check why reflections donÄt work
             changedUser.email = newUserInformation.email;
             changedUser.lastName = newUserInformation.lastName;
             changedUser.firstName = newUserInformation.firstName;
