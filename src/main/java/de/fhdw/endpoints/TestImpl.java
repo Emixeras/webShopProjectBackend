@@ -195,11 +195,9 @@ public class TestImpl implements TestInterface {
     public List<Article> Articles() throws IOException {
 
 
-
-
         //put Pictures in DB
         IntStream.range(1, 11).forEach(i -> {
-            String name = "/TestData/cat+"+i+".jpg";
+            String name = "/TestData/Images/cat"+i+".jpg";
             try {
                 PictureHandler pictureHandler = new PictureHandler();
                 Picture picture = new Picture(IOUtils.toByteArray(getClass().getResourceAsStream(name)), pictureHandler.scaleImage(getClass().getResourceAsStream(name), pictureHandler.checkImageFormat(getClass().getResourceAsStream(name))));
@@ -218,7 +216,7 @@ public class TestImpl implements TestInterface {
             LOG.debug("added Genres: " + genre.toString());
         });
 
-        List<Artist> artists = jsonb.fromJson(getClass().getResourceAsStream("/TestData/artist.json"), new ArrayList<Genre>() {
+        List<Artist> artists = jsonb.fromJson(getClass().getResourceAsStream("/TestData/artist.json"), new ArrayList<Artist>() {
         }.getClass().getGenericSuperclass());
         artists.forEach(i -> {
             Artist artist = new Artist(i.name);
@@ -226,7 +224,7 @@ public class TestImpl implements TestInterface {
             LOG.debug("added Genres: " + artist.toString());
         });
 
-        List<Article> articles = jsonb.fromJson(getClass().getResourceAsStream("/TestData/article.json"), new ArrayList<Genre>() {
+        List<Article> articles = jsonb.fromJson(getClass().getResourceAsStream("/TestData/article.json"), new ArrayList<Article>() {
         }.getClass().getGenericSuperclass());
         articles.forEach(i -> {
             Article article = new Article();

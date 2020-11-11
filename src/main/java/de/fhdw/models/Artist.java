@@ -11,14 +11,16 @@ public class Artist extends PanacheEntityBase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
+
     @Column(unique = true, nullable = false)
     public String name;
+
+    @JsonbTransient
     @OneToMany(
             mappedBy = "artists",
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER
     )
-    @JsonbTransient
     public List<Article> articleList;
 
     @JsonbTransient
