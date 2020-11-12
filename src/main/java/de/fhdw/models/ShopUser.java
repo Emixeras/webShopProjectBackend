@@ -42,8 +42,6 @@ public class ShopUser extends PanacheEntityBase {
         return find("email", name).firstResult();
     }
 
-    public void setId(Long id) {
-    }
 
     @Override
     public String toString() {

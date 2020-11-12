@@ -1,6 +1,5 @@
 package de.fhdw.endpoints;
 
-import de.fhdw.forms.ArtistForm;
 import de.fhdw.models.Artist;
 import de.fhdw.models.Picture;
 import de.fhdw.util.PictureHandler;
@@ -32,15 +31,12 @@ public class ArtistImpl implements ArtistInterface {
     @GET
     @Path("{id}")
     @Operation(summary = "gets a Single Object identified by id", description = "Returns a MultiPart Object")
-    public ArtistForm get(@PathParam long id) {
+    public Artist get(@PathParam long id) {
         Artist a = Artist.findById(id);
         if (a == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
-        ArtistForm artistForm = new ArtistForm();
-        artistForm.artist = a;
-        artistForm.setFile(a.picture.rawData);
-        return artistForm;
+        return a;
     }
 
     @Override
@@ -53,47 +49,25 @@ public class ArtistImpl implements ArtistInterface {
     @Override
     @PUT
     @RolesAllowed({"employee", "admin"})
-    public Artist put(@MultipartForm ArtistForm data, @Context SecurityContext securityContext) {
+    public Artist put(Artist artist, @Context SecurityContext securityContext) {
 
-        Artist old = Artist.findById(data.artist.id);
-
+        Artist old = Artist.findById(artist.id);
         if (old == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
-
-        try {
-            old.name = data.artist.name;
-            PictureHandler pictureHandler = new PictureHandler();
-            old.picture.rawData = data.getFile();
-            old.picture.thumbnail = pictureHandler.scaleImage(data.getFileAsStream());
-        } catch (Exception e) {
-            LOG.error(e.toString());
-            throw new WebApplicationException(Response.Status.BAD_REQUEST);
-        }
-
+        old.name = artist.name;
         return old;
     }
 
     @Override
     @POST
     @RolesAllowed({"employee", "admin"})
-    public Response post(@MultipartForm ArtistForm data, @Context SecurityContext securityContext) {
-        if (data.artist == null) {
+    public Response post(Artist artist, @Context SecurityContext securityContext) {
+        if (artist == null) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
-        try {
-            PictureHandler pictureHandler = new PictureHandler();
-            Artist artist = data.artist;
-            Picture picture = new Picture(data.getFile(), pictureHandler.scaleImage(data.getFileAsStream()));
-            picture.persist();
-            artist.picture = picture;
-            artist.persist();
-            LOG.info("added: " + artist.toString());
-            return Response.accepted(data.artist.id).build();
-        } catch (Exception e) {
-            LOG.info(e.toString());
-            throw new WebApplicationException(Response.Status.BAD_REQUEST);
-        }
+        artist.persist();
+        return Response.accepted().build();
     }
 
     @Override
