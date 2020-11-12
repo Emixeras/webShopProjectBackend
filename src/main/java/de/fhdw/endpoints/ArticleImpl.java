@@ -44,18 +44,24 @@ public class ArticleImpl implements ArticleInterface {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
         PictureHandler pictureHandler = new PictureHandler();
-        Article article = data.article;
+       Article article = new Article();
         try {
             Picture picture = new Picture(data.getFile(), pictureHandler.scaleImage(data.getFileAsStream()));
             picture.persist();
             article.picture = picture;
+            article.artists =data.article.artists;
+            article.genre = data.article.genre;
+            article.title = data.article.title;
+            article.description = data.article.description;
+            article.ean = data.article.ean;
+            article.price = data.article.price;
             article.persist();
             LOG.debug("added: " + article.toString());
-            return Response.accepted(data.article.id).build();
         } catch (Exception e) {
             LOG.info(e.toString());
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
+        return Response.accepted(article.id).build();
     }
 
     @Override
