@@ -15,7 +15,7 @@ public interface ArtistInterface {
 
     List<Artist> get();
 
-    Response put(@MultipartForm ArtistForm data, @Context SecurityContext securityContext);
+    Artist put(@MultipartForm ArtistForm data, @Context SecurityContext securityContext);
 
     Response post(@MultipartForm ArtistForm data, @Context SecurityContext securityContext);
 

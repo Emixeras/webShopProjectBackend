@@ -36,7 +36,7 @@ public class ArticleImpl implements ArticleInterface {
     @Override
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
-   // @RolesAllowed({"admin", "employee"})
+    @RolesAllowed({"admin", "employee"})
     @Transactional
     @Operation(summary = "registers a new Article Object")
     public Response post(@MultipartForm ArticleForm data) {
@@ -44,29 +44,18 @@ public class ArticleImpl implements ArticleInterface {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
         PictureHandler pictureHandler = new PictureHandler();
-        String media;
+        Article article = data.article;
         try {
-            media = pictureHandler.checkImageFormat(data.getFileAsStream());
+            Picture picture = new Picture(data.getFile(), pictureHandler.scaleImage(data.getFileAsStream()));
+            picture.persist();
+            article.picture = picture;
+            article.persist();
+            LOG.debug("added: " + article.toString());
+            return Response.accepted(data.article.id).build();
         } catch (Exception e) {
+            LOG.info(e.toString());
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
-        if (media.equals("png") || media.equals("JPEG")) {
-            Article article = data.article;
-            setNewValues(data, article);
-            LOG.info("added: " + article.toString());
-            try {
-                String type = media.equals("JPEG") ? "jpg" : "png";
-                Picture picture = new Picture(data.getFile(), pictureHandler.scaleImage(data.getFileAsStream(), type));
-                picture.persist();
-                article.picture = picture;
-                article.persist();
-                return Response.accepted(data.article.id).build();
-            } catch (Exception e) {
-                LOG.info(e.toString());
-                throw new WebApplicationException(Response.Status.BAD_REQUEST);
-            }
-        }
-        throw new WebApplicationException(Response.Status.BAD_REQUEST);
     }
 
     @Override
@@ -138,7 +127,6 @@ public class ArticleImpl implements ArticleInterface {
         return Response.ok("true").build();
     }
 
-
     @Override
     @PUT
     @RolesAllowed({"admin", "employee"})
@@ -149,7 +137,6 @@ public class ArticleImpl implements ArticleInterface {
         if (article == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
-        //  setNewValues(data, article); //todo: remove this after article and genre Page is ready
 
         article.artists = data.article.artists;
         article.genre = data.article.genre;
@@ -157,45 +144,16 @@ public class ArticleImpl implements ArticleInterface {
         article.price = data.article.price;
         article.ean = data.article.ean;
         article.description = data.article.description;
-        PictureHandler pictureHandler = new PictureHandler();
         try {
-            String media = pictureHandler.checkImageFormat(data.getFileAsStream());
-            if (media.equals("png") || media.equals("JPEG")) {
-                article.picture.rawData = data.getFile();
-            }
-
-
+            PictureHandler pictureHandler = new PictureHandler();
+            article.picture.rawData = data.getFile();
+            article.picture.thumbnail = pictureHandler.scaleImage(data.getFileAsStream());
         } catch (Exception e) {
-            LOG.info(e.toString());
+
+            LOG.error(e.toString());
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
-
         return Article.findById(data.article.id);
-
-
-    }
-
-    private void setNewValues(@MultipartForm ArticleForm data, Article article) {
-        if (article.genre != null) {
-            if (Genre.findByName(article.genre.name) != null) {
-                article.genre = Genre.findByName(article.genre.name);
-            } else {
-                Genre genre = new Genre(article.genre.name);
-                genre.persist();
-                article.genre = genre;
-            }
-        }
-        LOG.debug(data.article.genre.name);
-        if (article.artists != null) {
-            if (Artist.findByName(article.artists.name) != null) {
-                article.artists = Artist.findByName(article.artists.name);
-            } else {
-                Artist artist = new Artist(article.artists.name);
-                artist.persist();
-                article.artists = artist;
-            }
-        }
-        LOG.debug(data.article.artists.name);
     }
 
 

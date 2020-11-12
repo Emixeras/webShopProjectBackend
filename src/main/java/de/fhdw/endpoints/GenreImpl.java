@@ -60,23 +60,21 @@ public class GenreImpl implements GenreInterface {
     @PUT
     @RolesAllowed({"employee", "admin"})
     @Operation(summary = "modifes a Genre Object", description = "Accepts a Multipart Object")
-    public Response put(@MultipartForm GenreForm data, @Context SecurityContext securityContext) {
+    public Genre put(@MultipartForm GenreForm data, @Context SecurityContext securityContext) {
         Genre old = Genre.findById(data.genre.id);
         if (old == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
-        PictureHandler pictureHandler = new PictureHandler();
-        String media;
         try {
-            media = pictureHandler.checkImageFormat(data.getFileAsStream());
+            old.name = data.genre.name;
+            PictureHandler pictureHandler = new PictureHandler();
+            old.picture.rawData = data.getFile();
+            old.picture.thumbnail = pictureHandler.scaleImage(data.getFileAsStream());
         } catch (Exception e) {
+            LOG.error(e.toString());
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
-        if (media.equals("image/png") || media.equals("image/jpeg")) {
-            old.picture.rawData = data.getFile();
-        }
-        return Response.ok().build();
-
+        return old;
     }
 
     @Override
@@ -84,34 +82,21 @@ public class GenreImpl implements GenreInterface {
     @RolesAllowed({"employee", "admin"})
     @Operation(summary = "creates a new Genre Object", description = "Accepts a Multipart Object")
     public Response post(@MultipartForm GenreForm data, @Context SecurityContext securityContext) {
-
         if (data.genre == null) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
-        PictureHandler pictureHandler = new PictureHandler();
-        String media;
         try {
-            media = pictureHandler.checkImageFormat(data.getFileAsStream());
+            PictureHandler pictureHandler = new PictureHandler();
+            Picture picture = new Picture(data.getFile(), pictureHandler.scaleImage(data.getFileAsStream()));
+            picture.persist();
+            data.genre.picture = picture;
+            data.genre.persist();
+            LOG.info("added: " + data.genre.toString());
+            return Response.accepted(data.genre.id).build();
         } catch (Exception e) {
-            throw new WebApplicationException(Response.Status.BAD_REQUEST);
+            LOG.error(e.toString());
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
-
-        if (media.equals("png") || media.equals("JPEG")) {
-           try {
-               Genre genre = data.genre;
-               String type = media.equals("JPEG") ? "jpg":"png";
-               Picture picture = new Picture(data.getFile(), pictureHandler.scaleImage(data.getFileAsStream(), type));
-               picture.persist();
-               genre.picture = picture;
-               genre.persist();
-               LOG.info("added: " + genre.toString());
-               return Response.accepted(data.genre.id).build();
-           }catch (Exception e){
-               LOG.info(e.toString());
-               throw new WebApplicationException(Response.Status.NOT_FOUND);
-           }
-        }
-        throw new WebApplicationException(Response.Status.BAD_REQUEST);
     }
 
 

@@ -15,7 +15,7 @@ public interface GenreInterface {
 
     Map<String, GenreForm> getAll();
 
-    Response put(GenreForm data, @Context SecurityContext securityContext);
+    Genre put(GenreForm data, @Context SecurityContext securityContext);
 
     Response post(GenreForm data, @Context SecurityContext securityContext);
 

@@ -4,6 +4,7 @@ import de.fhdw.models.*;
 import de.fhdw.util.PictureHandler;
 import io.quarkus.runtime.annotations.RegisterForReflection;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.logging.Log;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.jboss.logging.Logger;
@@ -27,7 +28,6 @@ import java.util.stream.IntStream;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @Tag(name = "init", description = "div Test Data and basic Backend Operations for Shop initialization")
-@RegisterForReflection
 public class TestImpl  {
     private static final Logger LOG = Logger.getLogger(TestImpl.class);
 
@@ -73,7 +73,6 @@ public class TestImpl  {
         return ShopUser.listAll();
     }
 
-
     @GET
     @Path("file")
     public String buffer() throws IOException {
@@ -113,22 +112,26 @@ public class TestImpl  {
                 });
                 LOG.info(ShopUser.count()+" Benutzer angelegt");
 
-            //put Pictures in DB
-            IntStream.range(1, 11).forEach(i -> {
-                String name = "/TestData/Images/cat"+i+".jpg";
-
-                    LOG.debug(i+" "+name);
-                    PictureHandler pictureHandler = new PictureHandler();
-                Picture picture = null;
                 try {
-                    picture = new Picture(IOUtils.toByteArray(getClass().getResourceAsStream(name)), pictureHandler.scaleImage(getClass().getResourceAsStream(name), "jpg"));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                picture.persist();
+                    //put Pictures in DB
+                    IntStream.range(1, 11).forEach(i -> {
+                        String name = "/TestData/Images/cat"+i+".jpg";
 
-            });
-                LOG.info(Picture.count()+" Bilder angelegt");
+                        LOG.debug(i+" "+name);
+                        PictureHandler pictureHandler = new PictureHandler();
+                        Picture picture = null;
+                        try {
+                            picture = new Picture(IOUtils.toByteArray(getClass().getResourceAsStream(name)), pictureHandler.scaleImage(getClass().getResourceAsStream(name)));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        picture.persist();
+
+                    });
+                    LOG.info(Picture.count()+" Bilder angelegt");
+                }catch (Exception e){
+                    LOG.error(e.toString());
+                }
 
 
                 //add Genre

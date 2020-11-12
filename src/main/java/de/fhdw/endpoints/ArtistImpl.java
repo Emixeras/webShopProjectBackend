@@ -44,6 +44,7 @@ public class ArtistImpl implements ArtistInterface {
     }
 
     @Override
+    @GET
     @Operation(summary = "gets a Single Object identified by id", description = "Returns a MultiPart Object")
     public List<Artist> get() {
         return Artist.listAll();
@@ -52,22 +53,25 @@ public class ArtistImpl implements ArtistInterface {
     @Override
     @PUT
     @RolesAllowed({"employee", "admin"})
-    public Response put(@MultipartForm ArtistForm data, @Context SecurityContext securityContext) {
+    public Artist put(@MultipartForm ArtistForm data, @Context SecurityContext securityContext) {
+
         Artist old = Artist.findById(data.artist.id);
+
         if (old == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
-        PictureHandler pictureHandler = new PictureHandler();
-        String media;
+
         try {
-            media = pictureHandler.checkImageFormat(data.getFileAsStream());
+            old.name = data.artist.name;
+            PictureHandler pictureHandler = new PictureHandler();
+            old.picture.rawData = data.getFile();
+            old.picture.thumbnail = pictureHandler.scaleImage(data.getFileAsStream());
         } catch (Exception e) {
+            LOG.error(e.toString());
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
-        if (media.equals("image/png") || media.equals("image/jpeg")) {
-            old.picture.rawData = data.getFile();
-        }
-        return Response.ok().build();
+
+        return old;
     }
 
     @Override
@@ -77,30 +81,19 @@ public class ArtistImpl implements ArtistInterface {
         if (data.artist == null) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
-        PictureHandler pictureHandler = new PictureHandler();
-        String media;
         try {
-            media = pictureHandler.checkImageFormat(data.getFileAsStream());
+            PictureHandler pictureHandler = new PictureHandler();
+            Artist artist = data.artist;
+            Picture picture = new Picture(data.getFile(), pictureHandler.scaleImage(data.getFileAsStream()));
+            picture.persist();
+            artist.picture = picture;
+            artist.persist();
+            LOG.info("added: " + artist.toString());
+            return Response.accepted(data.artist.id).build();
         } catch (Exception e) {
+            LOG.info(e.toString());
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
-        if (media.equals("png") || media.equals("JPEG")) {
-            try {
-                Artist artist = data.artist;
-                String type = media.equals("JPEG") ? "jpg":"png";
-                Picture picture = new Picture(data.getFile(), pictureHandler.scaleImage(data.getFileAsStream(), type));
-                picture.persist();
-                artist.picture = picture;
-                artist.persist();
-                LOG.info("added: " + artist.toString());
-                return Response.accepted(data.artist.id).build();
-            } catch (Exception e) {
-                LOG.info(e.toString());
-                throw new WebApplicationException(Response.Status.BAD_REQUEST);
-            }
-
-        }
-        throw new WebApplicationException(Response.Status.BAD_REQUEST);
     }
 
     @Override
