@@ -26,62 +26,66 @@ public class SysInit {
 
     @Transactional
     void onStart(@Observes StartupEvent event) {
-        LOG.info("Systemtabelle aufgebaut: " + initSysTable());
+        LOG.info("systable initialized: " + initSysTable());
         if (Boolean.TRUE.equals(demoData)) {
-            List<ShopSys> shopSys = ShopSys.listAll();
-            shopSys.forEach(i -> {
-                        if (Boolean.TRUE.equals(i.initialized)) {
-                            LOG.info(i.value + " is initialized: " + i.initialized);
-                        } else {
-                            switch (i.value) {
-                                case "user":
-                                    if (Boolean.FALSE.equals(i.initialized)) {
-                                        LOG.info("initializing user:");
-                                        i.initialized = initUser();
-                                        LOG.info("DONE " + i.initialized);
-                                    }
-                                    break;
-                                case "genre":
-                                    if (Boolean.FALSE.equals(i.initialized)) {
-                                        LOG.info("initializing genres:");
-                                        i.initialized = initGenre();
-                                        LOG.info("DONE " + i.initialized);
-                                    }
-                                    break;
-                                case "artist":
-                                    if (Boolean.FALSE.equals(i.initialized)) {
-                                        LOG.info("initializing artists:");
-                                        i.initialized = initArtist();
-                                        LOG.info("DONE " + i.initialized);
-                                    }
-                                    break;
-                                case "article":
-                                    if (Boolean.FALSE.equals(i.initialized)) {
-                                        LOG.info("initializing Articles:");
-                                        i.initialized = initArticles();
-                                        LOG.info("DONE " + i.initialized);
-                                    }
-                                    break;
-                                default:
-                                    LOG.error("Error in System Table" + i.value + "not recognized");
-                                    System.exit(1);
-                            }
-
-                        }
-                    }
-            );
+            initDemoData();
         } else {
-            LOG.info("demo data will not be initialized set \"demo.data=true\" in Enviorement to initialize");
+            LOG.info("demo data will not be initialized");
         }
 
+    }
+
+    private void initDemoData() {
+        List<ShopSys> shopSys = ShopSys.listAll();
+        shopSys.forEach(i -> {
+                    if (Boolean.TRUE.equals(i.initialized)) {
+                        LOG.info(i.value + " is initialized: " + i.initialized);
+                    } else {
+                        switch (i.value) {
+                            case "user":
+                                if (Boolean.FALSE.equals(i.initialized)) {
+                                    LOG.info("initializing user:");
+                                    i.initialized = initUser();
+                                    LOG.info("DONE " + i.initialized);
+                                }
+                                break;
+                            case "genre":
+                                if (Boolean.FALSE.equals(i.initialized)) {
+                                    LOG.info("initializing genres:");
+                                    i.initialized = initGenre();
+                                    LOG.info("DONE " + i.initialized);
+                                }
+                                break;
+                            case "artist":
+                                if (Boolean.FALSE.equals(i.initialized)) {
+                                    LOG.info("initializing artists:");
+                                    i.initialized = initArtist();
+                                    LOG.info("DONE " + i.initialized);
+                                }
+                                break;
+                            case "article":
+                                if (Boolean.FALSE.equals(i.initialized)) {
+                                    LOG.info("initializing Articles:");
+                                    i.initialized = initArticles();
+                                    LOG.info("DONE " + i.initialized);
+                                }
+                                break;
+                            default:
+                                LOG.error("Error in System Table" + i.value + "not recognized");
+                                System.exit(1);
+                        }
+
+                    }
+                }
+        );
     }
 
     private boolean initSysTable() {
         List<ShopSys> shopSys = new ArrayList<>();
         shopSys.add(ShopSys.findByName("user") != null ? ShopSys.findByName("user") : new ShopSys("user", false));
-        shopSys.add(ShopSys.findByName("user") != null ? ShopSys.findByName("artist") : new ShopSys("artist", false));
-        shopSys.add(ShopSys.findByName("user") != null ? ShopSys.findByName("genre") : new ShopSys("genre", false));
-        shopSys.add(ShopSys.findByName("user") != null ? ShopSys.findByName("article") : new ShopSys("article", false));
+        shopSys.add(ShopSys.findByName("artist") != null ? ShopSys.findByName("artist") : new ShopSys("artist", false));
+        shopSys.add(ShopSys.findByName("genre") != null ? ShopSys.findByName("genre") : new ShopSys("genre", false));
+        shopSys.add(ShopSys.findByName("article") != null ? ShopSys.findByName("article") : new ShopSys("article", false));
         shopSys.forEach(i -> {
             if (!i.isPersistent()) {
                 i.persist();
