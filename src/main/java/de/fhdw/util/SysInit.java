@@ -3,13 +3,13 @@ package de.fhdw.util;
 import de.fhdw.models.*;
 import io.quarkus.runtime.StartupEvent;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.logging.Log;
 import org.jboss.logging.Logger;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
 import javax.json.bind.Jsonb;
 import javax.json.bind.JsonbBuilder;
+import javax.transaction.Transactional;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,44 +20,59 @@ import java.util.stream.IntStream;
 public class SysInit {
     private static final Logger LOG = Logger.getLogger(SysInit.class);
 
+    @Transactional
     void onStart(@Observes StartupEvent event) {
         LOG.info("Systemtabelle aufgebaut: " + initSysTable());
         List<ShopSys> shopSys = ShopSys.listAll();
         shopSys.forEach(i -> {
-            if (i.initialized) {
-                LOG.info(i.value + " ist initialisiert:" + i.value);
-            }
-            switch (i.value) {
-                case "user":
-                    if (i.initialized) {
-                        initUser();
-                        i.initialized = true;
-                        LOG.info("Benutzer wurden initialisiert");
-                    }
-                case "genre":
-                    if (i.initialized) {
-                        initGenre();
-                        i.initialized = true;
-                        LOG.info("Artikel wurden initialisiert");
-                    }
-                case "article":
-                    if (i.initialized) {
-                        initArticles();
-                        i.initialized = true;
-                        LOG.info("Artikel wurden initialisiert");
-                    }
+                    if (Boolean.TRUE.equals(i.initialized)) {
+                        LOG.info(i.value + " ist initialisiert: " + i.initialized);
+                    } else {
+                        switch (i.value) {
+                            case "user":
+                                if (Boolean.FALSE.equals(i.initialized)) {
+                                    LOG.info("initializing user");
+                                    i.initialized = initUser();
+                                    LOG.info("DONE " + i.initialized);
+                                }
+                                break;
+                            case "genre":
+                                if (Boolean.FALSE.equals(i.initialized)) {
+                                    LOG.info("initializing genres");
+                                    i.initialized = initGenre();
+                                    LOG.info("DONE " + i.initialized);
+                                }
+                                break;
+                            case "artist":
+                                if (Boolean.FALSE.equals(i.initialized)) {
+                                    LOG.info("initializing artists");
+                                    i.initialized = initArtist();
+                                    LOG.info("DONE " + i.initialized);
+                                }
+                                break;
+                            case "article":
+                                if (Boolean.FALSE.equals(i.initialized)) {
+                                    LOG.info("initializing Articles");
+                                    i.initialized = initArticles();
+                                    LOG.info("DONE " + i.initialized);
+                                }
+                                break;
+                            default:
+                                LOG.error("Error in System Table" + i.value + "not recognized");
+                                System.exit(1);
+                        }
 
-            }
-
-        });
+                    }
+                }
+        );
     }
 
     private boolean initSysTable() {
         List<ShopSys> shopSys = new ArrayList<>();
         shopSys.add(ShopSys.findByName("user") != null ? ShopSys.findByName("user") : new ShopSys("user", false));
-        shopSys.add(ShopSys.findByName("user") != null ? ShopSys.findByName("article") : new ShopSys("article", false));
         shopSys.add(ShopSys.findByName("user") != null ? ShopSys.findByName("artist") : new ShopSys("artist", false));
         shopSys.add(ShopSys.findByName("user") != null ? ShopSys.findByName("genre") : new ShopSys("genre", false));
+        shopSys.add(ShopSys.findByName("user") != null ? ShopSys.findByName("article") : new ShopSys("article", false));
         shopSys.forEach(i -> {
             if (!i.isPersistent()) {
                 i.persist();
@@ -66,6 +81,7 @@ public class SysInit {
         return true;
     }
 
+    @Transactional
     public boolean initUser() {
         try (Jsonb jsonb = JsonbBuilder.create()) {
             //add Users
@@ -94,6 +110,7 @@ public class SysInit {
         return true;
     }
 
+    @Transactional
     public boolean initGenre() {
         try (Jsonb jsonb = JsonbBuilder.create()) {
             List<Genre> genres = jsonb.fromJson(getClass().getResourceAsStream("/TestData/genre.json"), new ArrayList<Genre>() {
@@ -107,6 +124,7 @@ public class SysInit {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                assert picture != null;
                 picture.persist();
                 Genre genre = new Genre(i.name);
                 genre.picture = picture;
@@ -121,6 +139,7 @@ public class SysInit {
         }
     }
 
+    @Transactional
     public boolean initArtist() {
         try (Jsonb jsonb = JsonbBuilder.create()) {
             //add Artists
@@ -131,7 +150,7 @@ public class SysInit {
                 artist.persist();
                 LOG.debug("added Genres: " + artist.toString());
             });
-            LOG.info(Artist.count() + " Artists angelegt");
+            LOG.debug(Artist.count() + " Artists angelegt");
         } catch (Exception e) {
             LOG.error("Fehler beim Artist erstellen: " + e.toString());
             return false;
@@ -139,7 +158,7 @@ public class SysInit {
         return true;
     }
 
-
+    @Transactional
     public boolean initArticles() {
         try (Jsonb jsonb = JsonbBuilder.create()) {
             //put Article Pictures in DB
@@ -154,15 +173,16 @@ public class SysInit {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                assert picture != null;
                 picture.persist();
             });
-            LOG.info(Picture.count() + " Bilder angelegt");
+            LOG.debug(Picture.count() + " Bilder angelegt");
             //add Articles
             List<Article> articles = jsonb.fromJson(getClass().getResourceAsStream("/TestData/article.json"), new ArrayList<Article>() {
             }.getClass().getGenericSuperclass());
             articles.forEach(i -> {
                 Article article = new Article();
-                LOG.info(i.picture);
+                LOG.debug(i.picture);
                 article.picture = i.picture;
                 article.title = i.title;
                 article.genre = i.genre;
