@@ -15,10 +15,10 @@ public interface GenreInterface {
 
     Map<String, GenreForm> getAll();
 
-    Genre put(GenreForm data, @Context SecurityContext securityContext);
+    Genre updateGenre(GenreForm data, @Context SecurityContext securityContext);
 
-    Response post(GenreForm data, @Context SecurityContext securityContext);
+    Response registerNewGenre(GenreForm data, @Context SecurityContext securityContext);
 
-    Boolean delete(Genre genre, @Context SecurityContext securityContext);
+    Boolean deleteGenre(Genre genre, @Context SecurityContext securityContext);
 
 }

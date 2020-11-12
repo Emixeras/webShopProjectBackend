@@ -31,28 +31,28 @@ public class SysInit {
                         switch (i.value) {
                             case "user":
                                 if (Boolean.FALSE.equals(i.initialized)) {
-                                    LOG.info("initializing user");
+                                    LOG.info("initializing user:");
                                     i.initialized = initUser();
                                     LOG.info("DONE " + i.initialized);
                                 }
                                 break;
                             case "genre":
                                 if (Boolean.FALSE.equals(i.initialized)) {
-                                    LOG.info("initializing genres");
+                                    LOG.info("initializing genres:");
                                     i.initialized = initGenre();
                                     LOG.info("DONE " + i.initialized);
                                 }
                                 break;
                             case "artist":
                                 if (Boolean.FALSE.equals(i.initialized)) {
-                                    LOG.info("initializing artists");
+                                    LOG.info("initializing artists:");
                                     i.initialized = initArtist();
                                     LOG.info("DONE " + i.initialized);
                                 }
                                 break;
                             case "article":
                                 if (Boolean.FALSE.equals(i.initialized)) {
-                                    LOG.info("initializing Articles");
+                                    LOG.info("initializing Articles:");
                                     i.initialized = initArticles();
                                     LOG.info("DONE " + i.initialized);
                                 }
@@ -103,7 +103,7 @@ public class SysInit {
                 shopUser.persist();
                 LOG.debug("added User: " + shopUser.toString());
             });
-            LOG.debug(ShopUser.count() + " Benutzer angelegt");
+            LOG.info(ShopUser.count() + " Benutzer angelegt");
         } catch (Exception e) {
             LOG.error("Fehler bei Benutzer Initialisierung: " + e.toString());
         }
@@ -131,7 +131,7 @@ public class SysInit {
                 genre.persist();
                 LOG.debug("added Genres: " + genre.toString());
             });
-            LOG.debug(Genre.count() + " Genres angelegt");
+            LOG.info(Genre.count() + " Genres angelegt");
             return true;
         } catch (Exception e) {
             LOG.error("Fehler beim Genre erstellen" + e.toString());
@@ -150,7 +150,7 @@ public class SysInit {
                 artist.persist();
                 LOG.debug("added Genres: " + artist.toString());
             });
-            LOG.debug(Artist.count() + " Artists angelegt");
+            LOG.info(Artist.count() + " Artists angelegt");
         } catch (Exception e) {
             LOG.error("Fehler beim Artist erstellen: " + e.toString());
             return false;

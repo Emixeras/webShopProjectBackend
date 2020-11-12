@@ -34,7 +34,7 @@ public class ArticleImpl implements ArticleInterface {
     @RolesAllowed({"admin", "employee"})
     @Transactional
     @Operation(summary = "registers a new Article Object")
-    public Response post(@MultipartForm ArticleForm data) {
+    public Response RegisterNewArticleWithPicture(@MultipartForm ArticleForm data) {
         if (data.article == null) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
@@ -63,7 +63,7 @@ public class ArticleImpl implements ArticleInterface {
     @GET
     @Cache(maxAge = 5)
     @Operation(summary = "returns all Articles Objects as json with no picture")
-    public List<Article> getAll() {
+    public List<Article> getAllArticlesAsJson() {
         return Article.listAll();
     }
 
@@ -71,7 +71,7 @@ public class ArticleImpl implements ArticleInterface {
     @Override
     @Path("range")
     @Operation(summary = "returns a Range of ArticleForm Objects, including Pictures", description = "example: http://localhost:8080/article/range;start=0;end=20")
-    public List<ArticleForm> getRange(@MatrixParam("start") int start, @MatrixParam("end") int end) {
+    public List<ArticleForm> getArticleRange(@MatrixParam("start") int start, @MatrixParam("end") int end) {
         PanacheQuery<Article> panacheQuery = Article.findAll();
         panacheQuery.range(start, end);
         List<Article> articles = panacheQuery.list();
@@ -89,7 +89,7 @@ public class ArticleImpl implements ArticleInterface {
     @Path("count")
     @Operation(summary = "the total number of available Articles")
     @GET
-    public Long getCount() {
+    public Long countAllArticles() {
         return Article.count();
     }
 
@@ -97,7 +97,7 @@ public class ArticleImpl implements ArticleInterface {
     @GET
     @Path("{id}")
     @Operation(summary = "returns a single Article Object as Multipart Form including the Picture as Byte Array")
-    public ArticleForm getSingle(@PathParam long id) {
+    public ArticleForm getSIngleArticle(@PathParam long id) {
         Article article = Article.findById(id);
         if (article == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
@@ -113,7 +113,7 @@ public class ArticleImpl implements ArticleInterface {
     @DELETE
     @Operation(summary = "removes an Article identified by the supplied ID")
     @RolesAllowed({"admin", "employee"})
-    public Response delete(@PathParam long id) {
+    public Response deleteArticle(@PathParam long id) {
         Article article = Article.findById(id);
         if (article == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
@@ -133,7 +133,7 @@ public class ArticleImpl implements ArticleInterface {
     @RolesAllowed({"admin", "employee"})
     @Operation(summary = "changes a Article Object", description = "needs a Multipart Form Picture can be empty")
     @Transactional
-    public Article put(@MultipartForm ArticleForm data) {
+    public Article changeArticle(@MultipartForm ArticleForm data) {
         Article article = Article.findById(data.article.id);
         if (article == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);

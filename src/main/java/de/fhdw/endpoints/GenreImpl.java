@@ -60,7 +60,7 @@ public class GenreImpl implements GenreInterface {
     @PUT
     @RolesAllowed({"employee", "admin"})
     @Operation(summary = "modifes a Genre Object", description = "Accepts a Multipart Object")
-    public Genre put(@MultipartForm GenreForm data, @Context SecurityContext securityContext) {
+    public Genre updateGenre(@MultipartForm GenreForm data, @Context SecurityContext securityContext) {
         Genre old = Genre.findById(data.genre.id);
         if (old == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
@@ -81,7 +81,7 @@ public class GenreImpl implements GenreInterface {
     @POST
     @RolesAllowed({"employee", "admin"})
     @Operation(summary = "creates a new Genre Object", description = "Accepts a Multipart Object")
-    public Response post(@MultipartForm GenreForm data, @Context SecurityContext securityContext) {
+    public Response registerNewGenre(@MultipartForm GenreForm data, @Context SecurityContext securityContext) {
         if (data.genre == null) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
@@ -104,7 +104,7 @@ public class GenreImpl implements GenreInterface {
     @DELETE
     @RolesAllowed({"employee", "admin"})
     @Operation(summary = "deletes a Genre Object", description = "Deletes an object identified by id")
-    public Boolean delete(Genre genre, SecurityContext securityContext) {
+    public Boolean deleteGenre(Genre genre, SecurityContext securityContext) {
         Genre deletedID = Genre.findById(genre.id);
         if (deletedID == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);

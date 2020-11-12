@@ -14,9 +14,9 @@ public interface ArtistInterface {
 
     List<Artist> get();
 
-    Artist put(Artist artist, @Context SecurityContext securityContext);
+    Artist changeArtist(Artist artist, @Context SecurityContext securityContext);
 
-    Response post(Artist artist, @Context SecurityContext securityContext);
+    Response registerNewArtist(Artist artist, @Context SecurityContext securityContext);
 
-    Response delete( long id, @Context SecurityContext securityContext);
+    Response deleteArtist(long id, @Context SecurityContext securityContext);
 }

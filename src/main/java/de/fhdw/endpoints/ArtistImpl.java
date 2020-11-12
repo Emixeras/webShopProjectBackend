@@ -47,7 +47,7 @@ public class ArtistImpl implements ArtistInterface {
     @PUT
     @RolesAllowed({"employee", "admin"})
     @Operation(summary = "gets a Single Object identified by id", description = "Returns a MultiPart Object")
-    public Artist put(Artist artist, @Context SecurityContext securityContext) {
+    public Artist changeArtist(Artist artist, @Context SecurityContext securityContext) {
 
         Artist old = Artist.findById(artist.id);
         if (old == null) {
@@ -61,7 +61,7 @@ public class ArtistImpl implements ArtistInterface {
     @POST
     @RolesAllowed({"employee", "admin"})
     @Operation(summary = "reggister new Artist", description = "only allowed by Admins and Employees")
-    public Response post(Artist artist, @Context SecurityContext securityContext) {
+    public Response registerNewArtist(Artist artist, @Context SecurityContext securityContext) {
         if (artist == null) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
@@ -74,7 +74,7 @@ public class ArtistImpl implements ArtistInterface {
     @RolesAllowed({"employee", "admin"})
     @Path("{id}")
     @Operation(summary = "delete Artist identified by ID", description = "only allowed by Admins and Employees")
-    public Response delete(@PathParam long id, @Context SecurityContext securityContext) {
+    public Response deleteArtist(@PathParam long id, @Context SecurityContext securityContext) {
         Artist deletedID;
         deletedID = Artist.findById(id);
         if (deletedID == null) {

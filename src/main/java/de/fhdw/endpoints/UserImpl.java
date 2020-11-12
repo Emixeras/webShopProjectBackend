@@ -27,11 +27,11 @@ public class UserImpl implements UserInterface {
     private static final Logger LOG = Logger.getLogger(UserImpl.class);
 
     @GET
-    @Path("getAll")
+    @Path("all")
     @RolesAllowed("admin")
     @Override
     @Operation(summary = "Returns all User as Json List")
-    public List<ShopUser> getAll() {
+    public List<ShopUser> getAllUser() {
         LOG.info("Liste Aller Benutzer abgefragt");
         return ShopUser.listAll();
     }
@@ -40,7 +40,7 @@ public class UserImpl implements UserInterface {
     @RolesAllowed({"admin", "user", "employee"})
     @Override
     @Operation(summary = "Returns a single User identified by id")
-    public ShopUser get(@Context SecurityContext securityContext) {
+    public ShopUser getCurrentUser(@Context SecurityContext securityContext) {
         return ShopUser.findbyEmail(securityContext.getUserPrincipal().getName());
     }
 
@@ -49,7 +49,7 @@ public class UserImpl implements UserInterface {
     @PermitAll
     @Override
     @Operation(summary = "registers a new User in Database")
-    public ShopUser post(@NotNull ShopUser shopUser) {
+    public ShopUser registerNewUser(@NotNull ShopUser shopUser) {
         if (ShopUser.findbyEmail(shopUser.email) == null) {
             shopUser.role = ShopUser.Role.USER;
             if (shopUser.firstName.equals("") || shopUser.lastName.equals("")) {
@@ -66,7 +66,7 @@ public class UserImpl implements UserInterface {
     @RolesAllowed({"user", "admin", "employee"})
     @Override
     @Operation(summary = "modifies a User")
-    public ShopUser put(@NotNull ShopUser newUserInformation, @Context SecurityContext securityContext) {
+    public ShopUser updateUser(@NotNull ShopUser newUserInformation, @Context SecurityContext securityContext) {
         ShopUser requestingUser = ShopUser.findbyEmail(securityContext.getUserPrincipal().getName());
         ShopUser changedUser;
         LOG.info(newUserInformation.email);
@@ -117,7 +117,7 @@ public class UserImpl implements UserInterface {
     @RolesAllowed({"user", "admin", "employee"})
     @Transactional
     @Operation(summary = "deletes a user identified by id if permissions are correct")
-    public Boolean delete(@PathParam String email, @Context SecurityContext securityContext) {
+    public Boolean deleteUser(@PathParam String email, @Context SecurityContext securityContext) {
         ShopUser deleted = ShopUser.findbyEmail(email);
         ShopUser shopUser = ShopUser.findbyEmail(securityContext.getUserPrincipal().getName());
         if (deleted == null || shopUser == null) {

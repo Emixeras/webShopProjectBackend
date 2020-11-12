@@ -12,20 +12,20 @@ import java.util.Map;
 
 public interface ArticleInterface {
 
-    Response post(@MultipartForm ArticleForm data) throws IOException;
+    Response RegisterNewArticleWithPicture(@MultipartForm ArticleForm data) throws IOException;
 
-    Article put(@MultipartForm ArticleForm data) throws IOException;
+    Article changeArticle(@MultipartForm ArticleForm data) throws IOException;
 
-    ArticleForm getSingle(@PathParam long id);
+    ArticleForm getSIngleArticle(@PathParam long id);
 
-    List<Article> getAll();
+    List<Article> getAllArticlesAsJson();
 
-    List<ArticleForm> getRange(int start, int end);
+    List<ArticleForm> getArticleRange(int start, int end);
 
 
-    Long getCount();
+    Long countAllArticles();
 
-    Response delete(@PathParam long id);
+    Response deleteArticle(@PathParam long id);
 
 
 }

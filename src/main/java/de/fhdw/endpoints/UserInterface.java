@@ -9,14 +9,14 @@ import javax.ws.rs.core.SecurityContext;
 import java.util.List;
 
 public interface UserInterface {
-    ShopUser get(@Context SecurityContext securityContext);
+    ShopUser getCurrentUser(@Context SecurityContext securityContext);
 
-    ShopUser put(@NotNull ShopUser shopUser, @Context SecurityContext securityContext);
+    ShopUser updateUser(@NotNull ShopUser shopUser, @Context SecurityContext securityContext);
 
-    Boolean delete(@PathParam String email, @Context SecurityContext securityContext);
+    Boolean deleteUser(@PathParam String email, @Context SecurityContext securityContext);
 
-    ShopUser post(@NotNull ShopUser shopUser);
+    ShopUser registerNewUser(@NotNull ShopUser shopUser);
 
-    List<ShopUser> getAll();
+    List<ShopUser> getAllUser();
 
 }
