@@ -3,6 +3,7 @@ package de.fhdw.util;
 import de.fhdw.models.*;
 import io.quarkus.runtime.StartupEvent;
 import org.apache.commons.io.IOUtils;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.jboss.logging.Logger;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -20,51 +21,59 @@ import java.util.stream.IntStream;
 public class SysInit {
     private static final Logger LOG = Logger.getLogger(SysInit.class);
 
+    @ConfigProperty(name = "demo.data", defaultValue = "false")
+    boolean demoData;
+
     @Transactional
     void onStart(@Observes StartupEvent event) {
         LOG.info("Systemtabelle aufgebaut: " + initSysTable());
-        List<ShopSys> shopSys = ShopSys.listAll();
-        shopSys.forEach(i -> {
-                    if (Boolean.TRUE.equals(i.initialized)) {
-                        LOG.info(i.value + " is initialized: " + i.initialized);
-                    } else {
-                        switch (i.value) {
-                            case "user":
-                                if (Boolean.FALSE.equals(i.initialized)) {
-                                    LOG.info("initializing user:");
-                                    i.initialized = initUser();
-                                    LOG.info("DONE " + i.initialized);
-                                }
-                                break;
-                            case "genre":
-                                if (Boolean.FALSE.equals(i.initialized)) {
-                                    LOG.info("initializing genres:");
-                                    i.initialized = initGenre();
-                                    LOG.info("DONE " + i.initialized);
-                                }
-                                break;
-                            case "artist":
-                                if (Boolean.FALSE.equals(i.initialized)) {
-                                    LOG.info("initializing artists:");
-                                    i.initialized = initArtist();
-                                    LOG.info("DONE " + i.initialized);
-                                }
-                                break;
-                            case "article":
-                                if (Boolean.FALSE.equals(i.initialized)) {
-                                    LOG.info("initializing Articles:");
-                                    i.initialized = initArticles();
-                                    LOG.info("DONE " + i.initialized);
-                                }
-                                break;
-                            default:
-                                LOG.error("Error in System Table" + i.value + "not recognized");
-                                System.exit(1);
-                        }
+        if (Boolean.TRUE.equals(demoData)) {
+            List<ShopSys> shopSys = ShopSys.listAll();
+            shopSys.forEach(i -> {
+                        if (Boolean.TRUE.equals(i.initialized)) {
+                            LOG.info(i.value + " is initialized: " + i.initialized);
+                        } else {
+                            switch (i.value) {
+                                case "user":
+                                    if (Boolean.FALSE.equals(i.initialized)) {
+                                        LOG.info("initializing user:");
+                                        i.initialized = initUser();
+                                        LOG.info("DONE " + i.initialized);
+                                    }
+                                    break;
+                                case "genre":
+                                    if (Boolean.FALSE.equals(i.initialized)) {
+                                        LOG.info("initializing genres:");
+                                        i.initialized = initGenre();
+                                        LOG.info("DONE " + i.initialized);
+                                    }
+                                    break;
+                                case "artist":
+                                    if (Boolean.FALSE.equals(i.initialized)) {
+                                        LOG.info("initializing artists:");
+                                        i.initialized = initArtist();
+                                        LOG.info("DONE " + i.initialized);
+                                    }
+                                    break;
+                                case "article":
+                                    if (Boolean.FALSE.equals(i.initialized)) {
+                                        LOG.info("initializing Articles:");
+                                        i.initialized = initArticles();
+                                        LOG.info("DONE " + i.initialized);
+                                    }
+                                    break;
+                                default:
+                                    LOG.error("Error in System Table" + i.value + "not recognized");
+                                    System.exit(1);
+                            }
 
+                        }
                     }
-                }
-        );
+            );
+        } else {
+            LOG.info("demo data will not be initialized set \"demo.data=true\" in Enviorement to initialize");
+        }
+
     }
 
     private boolean initSysTable() {

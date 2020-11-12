@@ -2,21 +2,24 @@ version: '3'
 services:
   postgres:
     restart: always
-    build: 
+    build:
       context: ./docker/postgres
     env_file:
       - ./docker/postgres/database.env # configure postgres
     ports:
       - '5432:5432'
-      
+
   backend:
-    restart : always
+    restart: always
     image: stormer1911/webshop_backend
     build:
-      context:  ./
+      context: ./
       dockerfile: src/main/docker/Dockerfile.fast-jar
-    env_file: 
-      - ./docker/backend/application.properties
+    environment:
+      - quarkus.datasource.jdbc.url=jdbc:postgresql://postgres:5432/shop
+      - quarkus.hibernate-orm.database.generation=drop-and-create
+      - quarkus.log.level=INFO
+      - demo.data=true
     depends_on:
       - postgres
     ports:
