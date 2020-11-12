@@ -26,7 +26,7 @@ public class SysInit {
         List<ShopSys> shopSys = ShopSys.listAll();
         shopSys.forEach(i -> {
                     if (Boolean.TRUE.equals(i.initialized)) {
-                        LOG.info(i.value + " ist initialisiert: " + i.initialized);
+                        LOG.info(i.value + " is initialized: " + i.initialized);
                     } else {
                         switch (i.value) {
                             case "user":
