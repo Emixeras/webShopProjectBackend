@@ -159,8 +159,9 @@ public class TestImpl  {
                 }.getClass().getGenericSuperclass());
                 articles.forEach(i -> {
                     Article article = new Article();
-                    LOG.debug(i.picture);
+                    LOG.info(i.picture);
                     article.picture = i.picture;
+                    //   article.picture = Picture.findById(i.picture.id);
                     article.title = i.title;
                     article.genre = i.genre;
                     article.artists = i.artists;

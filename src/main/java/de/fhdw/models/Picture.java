@@ -4,7 +4,6 @@ import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 public class Picture extends PanacheEntityBase {
@@ -12,19 +11,13 @@ public class Picture extends PanacheEntityBase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
+
     @JsonbTransient
     public byte[] rawData;
+
     @JsonbTransient
     public byte[] thumbnail;
-    @JsonbTransient
-    @OneToMany(mappedBy = "picture")
-    public List<Article> article;
-    @JsonbTransient
-    @OneToMany(mappedBy = "picture")
-    public List<Artist> artist;
-    @JsonbTransient
-    @OneToMany(mappedBy = "picture")
-    public List<Genre> genre;
+
 
     public Picture() {
     }
@@ -34,8 +27,7 @@ public class Picture extends PanacheEntityBase {
         this.thumbnail = thumbnail;
     }
 
-    public void setId(Long id) {
-    }
+
 
 
 }
