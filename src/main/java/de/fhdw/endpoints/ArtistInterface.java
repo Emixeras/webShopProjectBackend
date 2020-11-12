@@ -18,5 +18,5 @@ public interface ArtistInterface {
 
     Response post(Artist artist, @Context SecurityContext securityContext);
 
-    Boolean delete(Artist artist, @Context SecurityContext securityContext);
+    Response delete( long id, @Context SecurityContext securityContext);
 }

@@ -30,7 +30,7 @@ public class ArtistImpl implements ArtistInterface {
     @Override
     @GET
     @Path("{id}")
-    @Operation(summary = "gets a Single Object identified by id", description = "Returns a MultiPart Object")
+    @Operation(summary = "gets a Single  Artist Object identified by id")
     public Artist get(@PathParam long id) {
         Artist a = Artist.findById(id);
         if (a == null) {
@@ -41,7 +41,7 @@ public class ArtistImpl implements ArtistInterface {
 
     @Override
     @GET
-    @Operation(summary = "gets a Single Object identified by id", description = "Returns a MultiPart Object")
+    @Operation(summary = "returns all Artists")
     public List<Artist> get() {
         return Artist.listAll();
     }
@@ -49,6 +49,7 @@ public class ArtistImpl implements ArtistInterface {
     @Override
     @PUT
     @RolesAllowed({"employee", "admin"})
+    @Operation(summary = "gets a Single Object identified by id", description = "Returns a MultiPart Object")
     public Artist put(Artist artist, @Context SecurityContext securityContext) {
 
         Artist old = Artist.findById(artist.id);
@@ -62,6 +63,7 @@ public class ArtistImpl implements ArtistInterface {
     @Override
     @POST
     @RolesAllowed({"employee", "admin"})
+    @Operation(summary = "reggister new Artist", description = "only allowed by Admins and Employees")
     public Response post(Artist artist, @Context SecurityContext securityContext) {
         if (artist == null) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
@@ -73,15 +75,17 @@ public class ArtistImpl implements ArtistInterface {
     @Override
     @DELETE
     @RolesAllowed({"employee", "admin"})
-    public Boolean delete(Artist artist, @Context SecurityContext securityContext) {
+    @Path("{id}")
+    @Operation(summary = "delete Artist identified by ID", description = "only allowed by Admins and Employees")
+    public Response delete(@PathParam long id, @Context SecurityContext securityContext) {
         Artist deletedID;
-        deletedID = Artist.findById(artist.id);
+        deletedID = Artist.findById(id);
         if (deletedID == null) {
             throw new WebApplicationException(Response.Status.NOT_ACCEPTABLE);
         }
         try {
             deletedID.delete();
-            return true;
+            return Response.ok().build();
         } catch (Exception e) {
             throw new WebApplicationException(Response.Status.EXPECTATION_FAILED);
         }
