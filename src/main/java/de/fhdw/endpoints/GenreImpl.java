@@ -49,7 +49,7 @@ public class GenreImpl implements GenreInterface {
         List<Genre> genres = Genre.listAll();
         for (Genre genre : genres) {
             GenreForm genreForm = new GenreForm();
-            genreForm.setFile(genre.picture.thumbnail);
+            genreForm.setFile(genre.picture.rawData);
             genreForm.genre = genre;
             map.put(genre.id.toString(), genreForm);
         }

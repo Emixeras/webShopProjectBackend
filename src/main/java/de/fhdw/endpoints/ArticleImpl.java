@@ -2,8 +2,6 @@ package de.fhdw.endpoints;
 
 import de.fhdw.forms.ArticleForm;
 import de.fhdw.models.Article;
-import de.fhdw.models.Artist;
-import de.fhdw.models.Genre;
 import de.fhdw.models.Picture;
 import de.fhdw.util.PictureHandler;
 import io.quarkus.hibernate.orm.panache.PanacheQuery;
@@ -13,7 +11,6 @@ import org.jboss.logging.Logger;
 import org.jboss.resteasy.annotations.cache.Cache;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
-
 import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.ApplicationScoped;
 import javax.transaction.Transactional;
@@ -21,9 +18,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @ApplicationScoped
 @Path("article")

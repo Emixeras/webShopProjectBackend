@@ -1,10 +1,7 @@
 package de.fhdw.models;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
-
-import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 public class Genre extends PanacheEntityBase {
@@ -16,12 +13,12 @@ public class Genre extends PanacheEntityBase {
     @Column(nullable = false, unique = true)
     public String name;
 
-    @JsonbTransient
-    @OneToMany(mappedBy = "genre")
-    public List<Article> articles;
+    public Picture getPicture() {
+        return picture;
+    }
 
-    @JsonbTransient
     @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(nullable = false)
     public Picture picture;
 
     public Genre() {

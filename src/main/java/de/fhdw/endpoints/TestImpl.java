@@ -28,7 +28,7 @@ import java.util.stream.IntStream;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @Tag(name = "init", description = "div Test Data and basic Backend Operations for Shop initialization")
-public class TestImpl  {
+public class TestImpl {
     private static final Logger LOG = Logger.getLogger(TestImpl.class);
 
     @GET
@@ -110,14 +110,14 @@ public class TestImpl  {
                     shopUser.persist();
                     LOG.debug("added User: " + shopUser.toString());
                 });
-                LOG.info(ShopUser.count()+" Benutzer angelegt");
+                LOG.info(ShopUser.count() + " Benutzer angelegt");
 
                 try {
-                    //put Pictures in DB
+                    //put Article Pictures in DB
                     IntStream.range(1, 11).forEach(i -> {
-                        String name = "/TestData/Images/cat"+i+".jpg";
+                        String name = "/TestData/Images/cat" + i + ".jpg";
 
-                        LOG.debug(i+" "+name);
+                        LOG.debug(i + " " + name);
                         PictureHandler pictureHandler = new PictureHandler();
                         Picture picture = null;
                         try {
@@ -128,8 +128,8 @@ public class TestImpl  {
                         picture.persist();
 
                     });
-                    LOG.info(Picture.count()+" Bilder angelegt");
-                }catch (Exception e){
+                    LOG.info(Picture.count() + " Bilder angelegt");
+                } catch (Exception e) {
                     LOG.error(e.toString());
                 }
 
@@ -138,11 +138,21 @@ public class TestImpl  {
                 List<Genre> genres = jsonb.fromJson(getClass().getResourceAsStream("/TestData/genre.json"), new ArrayList<Genre>() {
                 }.getClass().getGenericSuperclass());
                 genres.forEach(i -> {
+                    String name = "/TestData/genre/genre" + i.id + ".png";
+                    PictureHandler pictureHandler = new PictureHandler();
+                    Picture picture = null;
+                    try {
+                        picture = new Picture(IOUtils.toByteArray(getClass().getResourceAsStream(name)), pictureHandler.scaleImage(getClass().getResourceAsStream(name)));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    picture.persist();
                     Genre genre = new Genre(i.name);
+                    genre.picture = picture;
                     genre.persist();
                     LOG.debug("added Genres: " + genre.toString());
                 });
-                LOG.info(Genre.count()+" Genres angelegt");
+                LOG.info(Genre.count() + " Genres angelegt");
 
                 //add Artists
                 List<Artist> artists = jsonb.fromJson(getClass().getResourceAsStream("/TestData/artist.json"), new ArrayList<Artist>() {
@@ -152,10 +162,10 @@ public class TestImpl  {
                     artist.persist();
                     LOG.debug("added Genres: " + artist.toString());
                 });
-                LOG.info(Artist.count()+" Artists angelegt");
+                LOG.info(Artist.count() + " Artists angelegt");
 
                 //add Articles
-               List<Article> articles = jsonb.fromJson(getClass().getResourceAsStream("/TestData/article.json"), new ArrayList<Article>() {
+                List<Article> articles = jsonb.fromJson(getClass().getResourceAsStream("/TestData/article.json"), new ArrayList<Article>() {
                 }.getClass().getGenericSuperclass());
                 articles.forEach(i -> {
                     Article article = new Article();
@@ -170,20 +180,18 @@ public class TestImpl  {
                     article.persist();
                     LOG.debug("added article: " + article.toString());
                 });
-                LOG.info(Article.count()+" Artikel angelegt");
+                LOG.info(Article.count() + " Artikel angelegt");
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             LOG.error(e.toString());
         }
 
 
-
         return Article.listAll();
 
     }
-
 
 
 }

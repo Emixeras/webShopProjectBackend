@@ -4,7 +4,9 @@ import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 
 @Entity(name = "ShopUser")
