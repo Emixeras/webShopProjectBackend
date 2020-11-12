@@ -1,13 +1,10 @@
 package de.fhdw.endpoints;
 
 import de.fhdw.models.Artist;
-import de.fhdw.models.Picture;
-import de.fhdw.util.PictureHandler;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.jboss.logging.Logger;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
-import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.*;
