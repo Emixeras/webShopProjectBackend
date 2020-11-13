@@ -18,6 +18,7 @@ services:
     environment:
       - quarkus.datasource.jdbc.url=jdbc:postgresql://postgres:5432/shop
       - quarkus.log.level=INFO
+      - demo.data.lazy=true
       - demo.data=true
     depends_on:
       - postgres

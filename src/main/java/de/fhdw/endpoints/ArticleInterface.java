@@ -20,7 +20,7 @@ public interface ArticleInterface {
 
     List<Article> getAllArticlesAsJson();
 
-    List<ArticleDownloadForm> getArticleRange(int start, int end);
+    List<ArticleDownloadForm> getArticleRange(int start, int end, int quality);
 
     Long countAllArticles();
 

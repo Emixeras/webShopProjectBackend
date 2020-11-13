@@ -1,5 +1,7 @@
 package de.fhdw.models;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 
 @Entity
@@ -32,7 +34,7 @@ public class Article extends PanacheEntityBase {
     @JoinColumn(nullable = false)
     public Picture picture;
 
-   // @JsonbTransient
+    @JsonbTransient
     public Picture getPicture() {
         return picture;
     }
@@ -43,6 +45,10 @@ public class Article extends PanacheEntityBase {
 
     public static Artist findByName(String title) {
         return find("title", title).firstResult();
+    }
+
+    public static Artist findRange(long start, long end) {
+        return find("select * f").firstResult();
     }
 
     @Override

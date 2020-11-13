@@ -13,6 +13,7 @@ public class Genre extends PanacheEntityBase {
 
     @Column(nullable = false, unique = true)
     public String name;
+
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(nullable = false)
     public Picture picture;

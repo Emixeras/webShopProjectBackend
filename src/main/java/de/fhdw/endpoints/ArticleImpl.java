@@ -6,6 +6,7 @@ import de.fhdw.models.Article;
 import de.fhdw.models.Picture;
 import de.fhdw.util.PictureHandler;
 import io.quarkus.hibernate.orm.panache.PanacheQuery;
+import io.quarkus.panache.common.Sort;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.jboss.logging.Logger;
@@ -19,9 +20,12 @@ import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @ApplicationScoped
 @Path("article")
@@ -70,22 +74,35 @@ public class ArticleImpl implements ArticleInterface {
         return Article.listAll();
     }
 
+
     @GET
     @Override
     @Path("range")
-    @Operation(summary = "returns a Range of ArticleForm Objects, including Pictures", description = "example: http://localhost:8080/article/range;start=0;end=20")
-    public List<ArticleDownloadForm> getArticleRange(@MatrixParam("start") int start, @MatrixParam("end") int end) {
-        PanacheQuery<Article> panacheQuery = Article.findAll();
-        panacheQuery.range(start, end);
-        List<Article> articles = panacheQuery.list();
-        List<ArticleDownloadForm> articleDownloadForms = new ArrayList<>();
-        articles.forEach(i -> {
-            ArticleDownloadForm articleDownloadForm = new ArticleDownloadForm();
-            articleDownloadForm.article = i;
-            articleDownloadForm.file = Base64.getEncoder().encodeToString(i.picture.thumbnail);
-            articleDownloadForms.add(articleDownloadForm);
-        });
-        return articleDownloadForms;
+    @Operation(summary = "returns a Range of ArticleForm Objects, including Pictures", description = "example: http://localhost:8080/article/range;start=0;end=20;quality=500 quality is optional")
+    public List<ArticleDownloadForm> getArticleRange(@MatrixParam("start") int start, @MatrixParam("end") int end, @MatrixParam("quality") int quality) {
+        PanacheQuery<Article> panacheQuery = Article.findAll(Sort.by("id"));
+        PictureHandler pictureHandler = new PictureHandler();
+        return panacheQuery
+                .range(start - 1, end - 1)
+                .list()
+                .parallelStream().map(
+                        article -> {
+                            ArticleDownloadForm articleDownloadForm = new ArticleDownloadForm();
+                            articleDownloadForm.article = article;
+                            if (quality != 0) {
+                                try {
+                                    articleDownloadForm.file = Base64.getEncoder().encodeToString(pictureHandler.scaleImage(new ByteArrayInputStream(article.picture.rawData), quality));
+                                } catch (Exception e) {
+                                    LOG.error("input Failed");
+                                    throw new WebApplicationException(Response.Status.BAD_REQUEST);
+                                }
+                            } else {
+                                articleDownloadForm.file = Base64.getEncoder().encodeToString(article.picture.thumbnail);
+                            }
+                            return articleDownloadForm;
+                        }
+                ).collect(Collectors.toList());
+
     }
 
     @Override
@@ -137,6 +154,9 @@ public class ArticleImpl implements ArticleInterface {
     @Operation(summary = "changes a Article Object", description = "needs a Multipart Form Picture can be empty")
     @Transactional
     public Article changeArticle(@MultipartForm ArticleUploadForm data) {
+        if (data.article.id == -1) {
+            throw new WebApplicationException(Response.Status.BAD_REQUEST);
+        }
         Article article = Article.findById(data.article.id);
         if (article == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
@@ -153,8 +173,7 @@ public class ArticleImpl implements ArticleInterface {
                 article.picture.rawData = data.getFile();
                 article.picture.thumbnail = pictureHandler.scaleImage(data.getFileAsStream());
             } catch (Exception e) {
-                LOG.error(e.toString());
-                throw new WebApplicationException(Response.Status.BAD_REQUEST);
+                LOG.debug("Bild nicht upgedatet" + e.toString());
             }
         }
         return article;

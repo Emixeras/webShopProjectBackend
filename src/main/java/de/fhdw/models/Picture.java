@@ -26,7 +26,4 @@ public class Picture extends PanacheEntityBase {
         this.thumbnail = thumbnail;
     }
 
-
-
-
 }
