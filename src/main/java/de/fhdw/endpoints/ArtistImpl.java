@@ -33,6 +33,7 @@ public class ArtistImpl implements ArtistInterface {
         if (a == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
+        LOG.debug("requested: "+a.toString());
         return a;
     }
 
@@ -54,6 +55,7 @@ public class ArtistImpl implements ArtistInterface {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
         old.name = artist.name;
+        LOG.debug("edited: "+old.toString());
         return old;
     }
 
@@ -66,6 +68,7 @@ public class ArtistImpl implements ArtistInterface {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
         artist.persist();
+        LOG.debug("added: "+artist.toString());
         return Response.accepted().build();
     }
 
@@ -82,6 +85,7 @@ public class ArtistImpl implements ArtistInterface {
         }
         try {
             deletedID.delete();
+            LOG.debug("deleted: "+deletedID.toString());
             return Response.ok().build();
         } catch (Exception e) {
             throw new WebApplicationException(Response.Status.EXPECTATION_FAILED);
