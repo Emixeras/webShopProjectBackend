@@ -12,6 +12,7 @@ import org.jboss.logging.Logger;
 import org.jboss.resteasy.annotations.cache.Cache;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
+
 import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.ApplicationScoped;
 import javax.transaction.Transactional;
@@ -41,12 +42,12 @@ public class ArticleImpl implements ArticleInterface {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
         PictureHandler pictureHandler = new PictureHandler();
-       Article article = new Article();
+        Article article = new Article();
         try {
             Picture picture = new Picture(data.getFile(), pictureHandler.scaleImage(data.getFileAsStream()));
             picture.persist();
             article.picture = picture;
-            article.artists =data.article.artists;
+            article.artists = data.article.artists;
             article.genre = data.article.genre;
             article.title = data.article.title;
             article.description = data.article.description;
@@ -140,23 +141,23 @@ public class ArticleImpl implements ArticleInterface {
         if (article == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
-
-        article.artists = data.article.artists;
-        article.genre = data.article.genre;
-        article.title = data.article.title;
+        article.artists = data.article.artists != null ? data.article.artists : article.artists;
+        article.genre = data.article.genre != null ? data.article.genre : article.genre;
+        article.title = data.article.title != null ? data.article.title : article.title;
         article.price = data.article.price;
         article.ean = data.article.ean;
         article.description = data.article.description;
-        try {
-            PictureHandler pictureHandler = new PictureHandler();
-            article.picture.rawData = data.getFile();
-            article.picture.thumbnail = pictureHandler.scaleImage(data.getFileAsStream());
-        } catch (Exception e) {
-
-            LOG.error(e.toString());
-            throw new WebApplicationException(Response.Status.BAD_REQUEST);
+        if (data.getFile() != null) {
+            try {
+                PictureHandler pictureHandler = new PictureHandler();
+                article.picture.rawData = data.getFile();
+                article.picture.thumbnail = pictureHandler.scaleImage(data.getFileAsStream());
+            } catch (Exception e) {
+                LOG.error(e.toString());
+                throw new WebApplicationException(Response.Status.BAD_REQUEST);
+            }
         }
-        return Article.findById(data.article.id);
+        return article;
     }
 
 

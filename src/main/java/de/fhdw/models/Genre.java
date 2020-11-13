@@ -1,6 +1,8 @@
 package de.fhdw.models;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 
 @Entity
@@ -12,11 +14,6 @@ public class Genre extends PanacheEntityBase {
 
     @Column(nullable = false, unique = true)
     public String name;
-
-    public Picture getPicture() {
-        return picture;
-    }
-
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(nullable = false)
     public Picture picture;
@@ -35,6 +32,15 @@ public class Genre extends PanacheEntityBase {
 
     public static Genre findByName(String name) {
         return find("name", name).firstResult();
+    }
+
+    @JsonbTransient
+    public Picture getPicture() {
+        return picture;
+    }
+
+    public void setPicture(Picture picture) {
+        this.picture = picture;
     }
 
     @Override

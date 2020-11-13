@@ -200,6 +200,7 @@ public class SysInit {
                 article.title = i.title;
                 article.genre = i.genre;
                 article.artists = i.artists;
+                article.description = i.description;
                 article.price = i.price;
                 article.ean = i.ean;
                 article.persist();

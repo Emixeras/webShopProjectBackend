@@ -17,7 +17,6 @@ services:
       dockerfile: src/main/docker/Dockerfile.fast-jar
     environment:
       - quarkus.datasource.jdbc.url=jdbc:postgresql://postgres:5432/shop
-      - quarkus.hibernate-orm.database.generation=update
       - quarkus.log.level=INFO
       - demo.data=true
     depends_on:

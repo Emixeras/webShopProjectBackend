@@ -9,7 +9,7 @@ public class PictureHandler {
 
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         Thumbnails.of(source)
-                .size(200, 200)
+                .size(300, 300)
                 .outputFormat("png")
                 .toOutputStream(byteArrayOutputStream);
         return byteArrayOutputStream.toByteArray();
