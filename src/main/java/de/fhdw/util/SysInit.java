@@ -175,9 +175,8 @@ public class SysInit {
     public boolean initArticles() {
         try (Jsonb jsonb = JsonbBuilder.create()) {
             //put Article Pictures in DB
-            IntStream.range(1, 11).forEach(i -> {
-                String name = "/TestData/Images/cat" + i + ".jpg";
-
+            IntStream.range(1, 501).forEach(i -> {
+                String name = "/TestData/Images/cover (" + i + ").jpg";
                 LOG.debug(i + " " + name);
                 PictureHandler pictureHandler = new PictureHandler();
                 Picture picture = null;
@@ -188,7 +187,9 @@ public class SysInit {
                 }
                 assert picture != null;
                 picture.persist();
+                LOG.debug(name);
             });
+
             LOG.debug(Picture.count() + " Bilder angelegt");
             //add Articles
             List<Article> articles = jsonb.fromJson(getClass().getResourceAsStream("/TestData/article.json"), new ArrayList<Article>() {

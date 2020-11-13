@@ -34,7 +34,7 @@ public class Article extends PanacheEntityBase {
     @JoinColumn(nullable = false)
     public Picture picture;
 
-    @JsonbTransient
+   // @JsonbTransient
     public Picture getPicture() {
         return picture;
     }

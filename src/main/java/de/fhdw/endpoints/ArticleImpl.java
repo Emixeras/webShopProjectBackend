@@ -75,6 +75,7 @@ public class ArticleImpl implements ArticleInterface {
     }
 
 
+
     @GET
     @Override
     @Path("range")

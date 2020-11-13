@@ -13,6 +13,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import java.util.List;
+import java.util.Optional;
 
 
 @Produces(MediaType.APPLICATION_JSON)
@@ -29,12 +30,11 @@ public class ArtistImpl implements ArtistInterface {
     @Path("{id}")
     @Operation(summary = "gets a Single  Artist Object identified by id")
     public Artist get(@PathParam long id) {
-        Artist a = Artist.findById(id);
-        if (a == null) {
-            throw new WebApplicationException(Response.Status.NOT_FOUND);
-        }
-        LOG.debug("requested: "+a.toString());
-        return a;
+        Optional<Artist> optional = Artist.findByIdOptional(id);
+        Artist artist = optional.orElseThrow(() -> new WebApplicationException(Response.Status.BAD_REQUEST));
+
+        LOG.debug("requested: "+artist.toString());
+        return artist;
     }
 
     @Override
@@ -49,8 +49,8 @@ public class ArtistImpl implements ArtistInterface {
     @RolesAllowed({"employee", "admin"})
     @Operation(summary = "gets a Single Object identified by id", description = "Returns a MultiPart Object")
     public Artist changeArtist(Artist artist, @Context SecurityContext securityContext) {
-
-        Artist old = Artist.findById(artist.id);
+        Optional<Artist> optional = Artist.findByIdOptional(artist.id);
+        Artist old = optional.orElseThrow(() -> new WebApplicationException(Response.Status.BAD_REQUEST));
         if (old == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
@@ -78,11 +78,9 @@ public class ArtistImpl implements ArtistInterface {
     @Path("{id}")
     @Operation(summary = "delete Artist identified by ID", description = "only allowed by Admins and Employees")
     public Response deleteArtist(@PathParam long id, @Context SecurityContext securityContext) {
-        Artist deletedID;
-        deletedID = Artist.findById(id);
-        if (deletedID == null) {
-            throw new WebApplicationException(Response.Status.NOT_ACCEPTABLE);
-        }
+        Optional<Artist> optional = Artist.findByIdOptional(id);
+        Artist deletedID = optional.orElseThrow(() -> new WebApplicationException(Response.Status.BAD_REQUEST));
+
         try {
             deletedID.delete();
             LOG.debug("deleted: "+deletedID.toString());
