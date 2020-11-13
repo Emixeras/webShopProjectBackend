@@ -1,5 +1,6 @@
 package de.fhdw.endpoints;
 
+import de.fhdw.forms.ArticleDownloadForm;
 import de.fhdw.forms.ArticleUploadForm;
 import de.fhdw.models.Article;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
@@ -15,12 +16,11 @@ public interface ArticleInterface {
 
     Article changeArticle(@MultipartForm ArticleUploadForm data) throws IOException;
 
-    ArticleUploadForm getSIngleArticle(@PathParam long id);
+    ArticleDownloadForm getSingleArticle(@PathParam long id);
 
     List<Article> getAllArticlesAsJson();
 
-    List<ArticleUploadForm> getArticleRange(int start, int end);
-
+    List<ArticleDownloadForm> getArticleRange(int start, int end);
 
     Long countAllArticles();
 

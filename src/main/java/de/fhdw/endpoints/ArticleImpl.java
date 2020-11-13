@@ -1,5 +1,6 @@
 package de.fhdw.endpoints;
 
+import de.fhdw.forms.ArticleDownloadForm;
 import de.fhdw.forms.ArticleUploadForm;
 import de.fhdw.models.Article;
 import de.fhdw.models.Picture;
@@ -18,6 +19,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 @ApplicationScoped
@@ -71,18 +73,18 @@ public class ArticleImpl implements ArticleInterface {
     @Override
     @Path("range")
     @Operation(summary = "returns a Range of ArticleForm Objects, including Pictures", description = "example: http://localhost:8080/article/range;start=0;end=20")
-    public List<ArticleUploadForm> getArticleRange(@MatrixParam("start") int start, @MatrixParam("end") int end) {
+    public List<ArticleDownloadForm> getArticleRange(@MatrixParam("start") int start, @MatrixParam("end") int end) {
         PanacheQuery<Article> panacheQuery = Article.findAll();
         panacheQuery.range(start, end);
         List<Article> articles = panacheQuery.list();
-        List<ArticleUploadForm> articleUploadForms = new ArrayList<>();
+        List<ArticleDownloadForm> articleDownloadForms = new ArrayList<>();
         articles.forEach(i -> {
-            ArticleUploadForm articleUploadForm = new ArticleUploadForm();
-            articleUploadForm.article = i;
-            articleUploadForm.setFile(i.picture.thumbnail);
-            articleUploadForms.add(articleUploadForm);
+            ArticleDownloadForm articleDownloadForm = new ArticleDownloadForm();
+            articleDownloadForm.article = i;
+            articleDownloadForm.file = Base64.getEncoder().encodeToString(i.picture.thumbnail);
+            articleDownloadForms.add(articleDownloadForm);
         });
-        return articleUploadForms;
+        return articleDownloadForms;
     }
 
     @Override
@@ -97,15 +99,15 @@ public class ArticleImpl implements ArticleInterface {
     @GET
     @Path("{id}")
     @Operation(summary = "returns a single Article Object as Multipart Form including the Picture as Byte Array")
-    public ArticleUploadForm getSIngleArticle(@PathParam long id) {
+    public ArticleDownloadForm getSingleArticle(@PathParam long id) {
         Article article = Article.findById(id);
         if (article == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
-        ArticleUploadForm articleUploadForm = new ArticleUploadForm();
-        articleUploadForm.article = article;
-        articleUploadForm.setFile(article.picture.rawData);
-        return articleUploadForm;
+        ArticleDownloadForm articleDownloadForm = new ArticleDownloadForm();
+        articleDownloadForm.article = article;
+        articleDownloadForm.file = Base64.getEncoder().encodeToString(article.picture.rawData);
+        return articleDownloadForm;
     }
 
     @Override
