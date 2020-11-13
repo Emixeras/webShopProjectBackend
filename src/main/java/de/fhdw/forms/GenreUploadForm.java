@@ -10,7 +10,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class GenreForm {
+public class GenreUploadForm {
 
     @FormParam("Genre")
     @PartType(MediaType.APPLICATION_JSON)

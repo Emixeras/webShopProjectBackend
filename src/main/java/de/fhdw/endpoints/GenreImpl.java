@@ -1,6 +1,7 @@
 package de.fhdw.endpoints;
 
-import de.fhdw.forms.GenreForm;
+import de.fhdw.forms.GenreDownloadForm;
+import de.fhdw.forms.GenreUploadForm;
 import de.fhdw.models.Genre;
 import de.fhdw.models.Picture;
 import de.fhdw.util.PictureHandler;
@@ -15,6 +16,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,28 +32,28 @@ public class GenreImpl implements GenreInterface {
     @GET
     @Path("{id}")
     @Operation(summary = "gets a Single Object identified by id", description = "Returns a MultiPart Object")
-    public GenreForm get(long id) {
-        GenreForm genreForm = new GenreForm();
+    public GenreUploadForm get(long id) {
+        GenreUploadForm genreUploadForm = new GenreUploadForm();
         Genre genre = Genre.findById(id);
         if (genre == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
-        genreForm.genre = genre;
-        genreForm.setFile(genre.picture.rawData);
-        return genreForm;
+        genreUploadForm.genre = genre;
+        genreUploadForm.setFile(genre.picture.rawData);
+        return genreUploadForm;
     }
 
     @GET
     @Override
     @Operation(summary = "returns all Genres with Picture")
-    public Map<String, GenreForm> getAll() {
-        Map<String, GenreForm> map = new HashMap<String, GenreForm>();
+    public Map<String, GenreDownloadForm> getAll() {
+        Map<String, GenreDownloadForm> map = new HashMap<>();
         List<Genre> genres = Genre.listAll();
         for (Genre genre : genres) {
-            GenreForm genreForm = new GenreForm();
-            genreForm.setFile(genre.picture.rawData);
-            genreForm.genre = genre;
-            map.put(genre.id.toString(), genreForm);
+            GenreDownloadForm genreDownloadForm = new GenreDownloadForm();
+            genreDownloadForm.file = Base64.getEncoder().encodeToString(genre.picture.rawData);
+            genreDownloadForm.genre = genre;
+            map.put(genre.id.toString(), genreDownloadForm);
         }
         return map;
     }
@@ -60,7 +62,7 @@ public class GenreImpl implements GenreInterface {
     @PUT
     @RolesAllowed({"employee", "admin"})
     @Operation(summary = "modifes a Genre Object", description = "Accepts a Multipart Object")
-    public Genre updateGenre(@MultipartForm GenreForm data, @Context SecurityContext securityContext) {
+    public Genre updateGenre(@MultipartForm GenreUploadForm data, @Context SecurityContext securityContext) {
         Genre old = Genre.findById(data.genre.id);
         if (old == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
@@ -81,7 +83,7 @@ public class GenreImpl implements GenreInterface {
     @POST
     @RolesAllowed({"employee", "admin"})
     @Operation(summary = "creates a new Genre Object", description = "Accepts a Multipart Object")
-    public Response registerNewGenre(@MultipartForm GenreForm data, @Context SecurityContext securityContext) {
+    public Response registerNewGenre(@MultipartForm GenreUploadForm data, @Context SecurityContext securityContext) {
         if (data.genre == null) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
