@@ -1,6 +1,9 @@
 package de.fhdw.endpoints;
 
+import de.fhdw.forms.ArtistDownloadForm;
 import de.fhdw.models.Artist;
+import io.quarkus.hibernate.orm.panache.PanacheQuery;
+import io.quarkus.panache.common.Sort;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.jboss.logging.Logger;
@@ -12,8 +15,10 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Produces(MediaType.APPLICATION_JSON)
@@ -29,12 +34,27 @@ public class ArtistImpl implements ArtistInterface {
     @GET
     @Path("{id}")
     @Operation(summary = "gets a Single  Artist Object identified by id")
-    public Artist get(@PathParam long id) {
+    public ArtistDownloadForm get(@PathParam long id) {
         Optional<Artist> optional = Artist.findByIdOptional(id);
         Artist artist = optional.orElseThrow(() -> new WebApplicationException(Response.Status.BAD_REQUEST));
+        LOG.debug("requested: " + artist.toString());
+        return new ArtistDownloadForm(artist, Base64.getEncoder().encodeToString(artist.picture.rawData));
+    }
 
-        LOG.debug("requested: "+artist.toString());
-        return artist;
+    @Override
+    public ArtistDownloadForm getArtistRange(int start, int end) {
+        PanacheQuery<Artist> panacheQuery = Artist.findAll(Sort.by("id"));
+        return (ArtistDownloadForm) panacheQuery
+                .range(start - 1, end - 1)
+                .list()
+                .stream().map(
+                        artist -> {
+                            ArtistDownloadForm artistDownloadForm = new ArtistDownloadForm();
+                            artistDownloadForm.artist = artist;
+                            artistDownloadForm.file = Base64.getEncoder().encodeToString(artist.picture.thumbnail);
+                            return artistDownloadForm;
+                        }
+                ).collect(Collectors.toList());
     }
 
     @Override
@@ -55,7 +75,7 @@ public class ArtistImpl implements ArtistInterface {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
         old.name = artist.name;
-        LOG.debug("edited: "+old.toString());
+        LOG.debug("edited: " + old.toString());
         return old;
     }
 
@@ -68,7 +88,7 @@ public class ArtistImpl implements ArtistInterface {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
         artist.persist();
-        LOG.debug("added: "+artist.toString());
+        LOG.debug("added: " + artist.toString());
         return Response.accepted().build();
     }
 
@@ -83,7 +103,7 @@ public class ArtistImpl implements ArtistInterface {
 
         try {
             deletedID.delete();
-            LOG.debug("deleted: "+deletedID.toString());
+            LOG.debug("deleted: " + deletedID.toString());
             return Response.ok().build();
         } catch (Exception e) {
             throw new WebApplicationException(Response.Status.EXPECTATION_FAILED);

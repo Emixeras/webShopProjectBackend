@@ -1,7 +1,6 @@
 package de.fhdw.models;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
-import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 
 @Entity
@@ -32,15 +31,15 @@ public class Article extends PanacheEntityBase {
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(nullable = false)
-    public Picture picture;
+    public ArticlePicture articlePicture;
 
    // @JsonbTransient
-    public Picture getPicture() {
-        return picture;
+    public ArticlePicture getPicture() {
+        return articlePicture;
     }
 
-    public void setPicture(Picture picture) {
-        this.picture = picture;
+    public void setPicture(ArticlePicture articlePicture) {
+        this.articlePicture = articlePicture;
     }
 
     public static Artist findByName(String title) {

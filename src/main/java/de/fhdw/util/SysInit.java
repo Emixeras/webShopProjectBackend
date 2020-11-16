@@ -129,18 +129,18 @@ public class SysInit {
             List<Genre> genres = jsonb.fromJson(getClass().getResourceAsStream("/TestData/genre.json"), new ArrayList<Genre>() {
             }.getClass().getGenericSuperclass());
             genres.forEach(i -> {
-                String name = "/TestData/genre/genre" + i.id + ".png";
+                String name = "/TestData/GenreImages/genre" + i.id + ".png";
                 PictureHandler pictureHandler = new PictureHandler();
-                Picture picture = null;
+                GenrePicture genrePicture = null;
                 try {
-                    picture = new Picture(IOUtils.toByteArray(getClass().getResourceAsStream(name)), pictureHandler.scaleImage(getClass().getResourceAsStream(name)));
+                    genrePicture = new GenrePicture(IOUtils.toByteArray(getClass().getResourceAsStream(name)), pictureHandler.scaleImage(getClass().getResourceAsStream(name)));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                assert picture != null;
-                picture.persist();
+                assert genrePicture != null;
+                genrePicture.persist();
                 Genre genre = new Genre(i.name);
-                genre.picture = picture;
+                genre.picture = genrePicture;
                 genre.persist();
                 LOG.debug("added Genres: " + genre.toString());
             });
@@ -176,28 +176,28 @@ public class SysInit {
         try (Jsonb jsonb = JsonbBuilder.create()) {
             //put Article Pictures in DB
             IntStream.range(1, 501).forEach(i -> {
-                String name = "/TestData/Images/cover (" + i + ").jpg";
+                String name = "/TestData/ArticleImages/cover (" + i + ").jpg";
                 LOG.debug(i + " " + name);
                 PictureHandler pictureHandler = new PictureHandler();
-                Picture picture = null;
+                ArticlePicture articlePicture = null;
                 try {
-                    picture = new Picture(IOUtils.toByteArray(getClass().getResourceAsStream(name)), pictureHandler.scaleImage(getClass().getResourceAsStream(name)));
+                    articlePicture = new ArticlePicture(IOUtils.toByteArray(getClass().getResourceAsStream(name)), pictureHandler.scaleImage(getClass().getResourceAsStream(name)));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                assert picture != null;
-                picture.persist();
+                assert articlePicture != null;
+                articlePicture.persist();
                 LOG.debug(name);
             });
 
-            LOG.debug(Picture.count() + " Bilder angelegt");
+            LOG.debug(ArticlePicture.count() + " Bilder angelegt");
             //add Articles
             List<Article> articles = jsonb.fromJson(getClass().getResourceAsStream("/TestData/article.json"), new ArrayList<Article>() {
             }.getClass().getGenericSuperclass());
             articles.forEach(i -> {
                 Article article = new Article();
-                LOG.debug(i.picture);
-                article.picture = i.picture;
+                LOG.debug(i.articlePicture);
+                article.articlePicture = i.articlePicture;
                 article.title = i.title;
                 article.genre = i.genre;
                 article.artists = i.artists;

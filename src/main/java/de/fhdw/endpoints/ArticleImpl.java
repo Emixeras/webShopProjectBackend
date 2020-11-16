@@ -3,7 +3,7 @@ package de.fhdw.endpoints;
 import de.fhdw.forms.ArticleDownloadForm;
 import de.fhdw.forms.ArticleUploadForm;
 import de.fhdw.models.Article;
-import de.fhdw.models.Picture;
+import de.fhdw.models.ArticlePicture;
 import de.fhdw.util.PictureHandler;
 import io.quarkus.hibernate.orm.panache.PanacheQuery;
 import io.quarkus.panache.common.Sort;
@@ -21,9 +21,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.ByteArrayInputStream;
-import java.util.ArrayList;
 import java.util.Base64;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,9 +46,9 @@ public class ArticleImpl implements ArticleInterface {
         PictureHandler pictureHandler = new PictureHandler();
         Article article = new Article();
         try {
-            Picture picture = new Picture(data.getFile(), pictureHandler.scaleImage(data.getFileAsStream()));
-            picture.persist();
-            article.picture = picture;
+            ArticlePicture articlePicture = new ArticlePicture(data.getFile(), pictureHandler.scaleImage(data.getFileAsStream()));
+            articlePicture.persist();
+            article.articlePicture = articlePicture;
             article.artists = data.article.artists;
             article.genre = data.article.genre;
             article.title = data.article.title;
@@ -69,7 +67,7 @@ public class ArticleImpl implements ArticleInterface {
     @Override
     @GET
     @Cache(maxAge = 5)
-    @Operation(summary = "returns all Articles Objects as json with no picture")
+    @Operation(summary = "returns all Articles Objects as json with no articlePicture")
     public List<Article> getAllArticlesAsJson() {
         return Article.listAll();
     }
@@ -92,13 +90,13 @@ public class ArticleImpl implements ArticleInterface {
                             articleDownloadForm.article = article;
                             if (quality != 0) {
                                 try {
-                                    articleDownloadForm.file = Base64.getEncoder().encodeToString(pictureHandler.scaleImage(new ByteArrayInputStream(article.picture.rawData), quality));
+                                    articleDownloadForm.file = Base64.getEncoder().encodeToString(pictureHandler.scaleImage(new ByteArrayInputStream(article.articlePicture.rawData), quality));
                                 } catch (Exception e) {
                                     LOG.error("input Failed");
                                     throw new WebApplicationException(Response.Status.BAD_REQUEST);
                                 }
                             } else {
-                                articleDownloadForm.file = Base64.getEncoder().encodeToString(article.picture.thumbnail);
+                                articleDownloadForm.file = Base64.getEncoder().encodeToString(article.articlePicture.thumbnail);
                             }
                             return articleDownloadForm;
                         }
@@ -125,7 +123,7 @@ public class ArticleImpl implements ArticleInterface {
         }
         ArticleDownloadForm articleDownloadForm = new ArticleDownloadForm();
         articleDownloadForm.article = article;
-        articleDownloadForm.file = Base64.getEncoder().encodeToString(article.picture.rawData);
+        articleDownloadForm.file = Base64.getEncoder().encodeToString(article.articlePicture.rawData);
         return articleDownloadForm;
     }
 
@@ -140,8 +138,8 @@ public class ArticleImpl implements ArticleInterface {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
         try {
-            Picture picture = article.picture;
-            picture.delete();
+            ArticlePicture articlePicture = article.articlePicture;
+            articlePicture.delete();
             article.delete();
         } catch (Exception e) {
             throw new WebApplicationException(Response.Status.EXPECTATION_FAILED);
@@ -171,8 +169,8 @@ public class ArticleImpl implements ArticleInterface {
         if (data.getFile() != null) {
             try {
                 PictureHandler pictureHandler = new PictureHandler();
-                article.picture.rawData = data.getFile();
-                article.picture.thumbnail = pictureHandler.scaleImage(data.getFileAsStream());
+                article.articlePicture.rawData = data.getFile();
+                article.articlePicture.thumbnail = pictureHandler.scaleImage(data.getFileAsStream());
             } catch (Exception e) {
                 LOG.debug("Bild nicht upgedatet" + e.toString());
             }

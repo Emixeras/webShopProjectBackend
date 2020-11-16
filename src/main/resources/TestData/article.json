@@ -1,5 +1,8 @@
 [
   {
+    "articlePicture": {
+      "id": 1
+    },
     "artists": {
       "id": 10,
       "name": "Alligatoah"
@@ -12,12 +15,15 @@
     },
     "id": 1,
     "picture": {
-      "id": 17
+      "id": 1
     },
     "price": 14.24,
     "title": "Davis LLC"
   },
   {
+    "articlePicture": {
+      "id": 2
+    },
     "artists": {
       "id": 36,
       "name": "The Rolling Stones"
@@ -30,12 +36,15 @@
     },
     "id": 2,
     "picture": {
-      "id": 18
+      "id": 2
     },
     "price": 46.96,
     "title": "Wunsch-Crist"
   },
   {
+    "articlePicture": {
+      "id": 3
+    },
     "artists": {
       "id": 15,
       "name": "Avicci"
@@ -48,12 +57,15 @@
     },
     "id": 3,
     "picture": {
-      "id": 19
+      "id": 3
     },
     "price": 24.65,
     "title": "Gutmann-O'Conner"
   },
   {
+    "articlePicture": {
+      "id": 4
+    },
     "artists": {
       "id": 26,
       "name": "Pitbull"
@@ -66,12 +78,15 @@
     },
     "id": 4,
     "picture": {
-      "id": 20
+      "id": 4
     },
     "price": 31.91,
     "title": "Bernier-Paucek"
   },
   {
+    "articlePicture": {
+      "id": 5
+    },
     "artists": {
       "id": 41,
       "name": "Pink Floyd"
@@ -84,12 +99,15 @@
     },
     "id": 5,
     "picture": {
-      "id": 21
+      "id": 5
     },
     "price": 3.66,
     "title": "Kuvalis, Leffler and Thompson"
   },
   {
+    "articlePicture": {
+      "id": 6
+    },
     "artists": {
       "id": 20,
       "name": "Taylor Swift"
@@ -102,12 +120,15 @@
     },
     "id": 6,
     "picture": {
-      "id": 22
+      "id": 6
     },
     "price": 41.0,
     "title": "Okuneva-Kuhn"
   },
   {
+    "articlePicture": {
+      "id": 7
+    },
     "artists": {
       "id": 18,
       "name": "Kraftklub"
@@ -120,12 +141,15 @@
     },
     "id": 7,
     "picture": {
-      "id": 23
+      "id": 7
     },
     "price": 11.04,
     "title": "Walter, Predovic and Morar"
   },
   {
+    "articlePicture": {
+      "id": 8
+    },
     "artists": {
       "id": 3,
       "name": "Bon Jovi"
@@ -138,12 +162,15 @@
     },
     "id": 8,
     "picture": {
-      "id": 24
+      "id": 8
     },
     "price": 11.06,
     "title": "Cassin Inc"
   },
   {
+    "articlePicture": {
+      "id": 9
+    },
     "artists": {
       "id": 12,
       "name": "Sia"
@@ -156,12 +183,15 @@
     },
     "id": 9,
     "picture": {
-      "id": 25
+      "id": 9
     },
     "price": 5.26,
     "title": "Shields-Jast"
   },
   {
+    "articlePicture": {
+      "id": 10
+    },
     "artists": {
       "id": 10,
       "name": "Alligatoah"
@@ -174,12 +204,15 @@
     },
     "id": 10,
     "picture": {
-      "id": 26
+      "id": 10
     },
     "price": 44.85,
     "title": "Barrows-Satterfield"
   },
   {
+    "articlePicture": {
+      "id": 11
+    },
     "artists": {
       "id": 26,
       "name": "Pitbull"
@@ -192,12 +225,15 @@
     },
     "id": 11,
     "picture": {
-      "id": 27
+      "id": 11
     },
     "price": 46.11,
     "title": "Sipes and Sons"
   },
   {
+    "articlePicture": {
+      "id": 12
+    },
     "artists": {
       "id": 35,
       "name": "Bruce Springsteen"
@@ -210,12 +246,15 @@
     },
     "id": 12,
     "picture": {
-      "id": 28
+      "id": 12
     },
     "price": 17.12,
     "title": "Champlin-Lesch"
   },
   {
+    "articlePicture": {
+      "id": 13
+    },
     "artists": {
       "id": 1,
       "name": "Die Ärzte"
@@ -228,12 +267,15 @@
     },
     "id": 13,
     "picture": {
-      "id": 29
+      "id": 13
     },
     "price": 30.27,
     "title": "Beatty, Runolfsdottir and Becker"
   },
   {
+    "articlePicture": {
+      "id": 14
+    },
     "artists": {
       "id": 49,
       "name": "Stromae"
@@ -246,12 +288,15 @@
     },
     "id": 14,
     "picture": {
-      "id": 30
+      "id": 14
     },
     "price": 42.2,
     "title": "Lind, Hudson and Prosacco"
   },
   {
+    "articlePicture": {
+      "id": 15
+    },
     "artists": {
       "id": 39,
       "name": "Barbra Streisand"
@@ -264,12 +309,15 @@
     },
     "id": 15,
     "picture": {
-      "id": 31
+      "id": 15
     },
     "price": 32.79,
     "title": "Cremin, Ziemann and Heathcote"
   },
   {
+    "articlePicture": {
+      "id": 16
+    },
     "artists": {
       "id": 35,
       "name": "Bruce Springsteen"
@@ -282,12 +330,15 @@
     },
     "id": 16,
     "picture": {
-      "id": 32
+      "id": 16
     },
     "price": 21.14,
     "title": "Marquardt Inc"
   },
   {
+    "articlePicture": {
+      "id": 17
+    },
     "artists": {
       "id": 13,
       "name": "Deichkind"
@@ -300,12 +351,15 @@
     },
     "id": 17,
     "picture": {
-      "id": 33
+      "id": 17
     },
     "price": 23.75,
     "title": "Wisozk, O'Kon and Huels"
   },
   {
+    "articlePicture": {
+      "id": 18
+    },
     "artists": {
       "id": 41,
       "name": "Pink Floyd"
@@ -318,12 +372,15 @@
     },
     "id": 18,
     "picture": {
-      "id": 34
+      "id": 18
     },
     "price": 7.43,
     "title": "Weimann-Jast"
   },
   {
+    "articlePicture": {
+      "id": 19
+    },
     "artists": {
       "id": 35,
       "name": "Bruce Springsteen"
@@ -336,12 +393,15 @@
     },
     "id": 19,
     "picture": {
-      "id": 35
+      "id": 19
     },
     "price": 26.97,
     "title": "Schneider, Blick and Schimmel"
   },
   {
+    "articlePicture": {
+      "id": 20
+    },
     "artists": {
       "id": 8,
       "name": "Backstreet Boys"
@@ -354,12 +414,15 @@
     },
     "id": 20,
     "picture": {
-      "id": 36
+      "id": 20
     },
     "price": 39.41,
     "title": "Sanford, Schmidt and Dickinson"
   },
   {
+    "articlePicture": {
+      "id": 21
+    },
     "artists": {
       "id": 10,
       "name": "Alligatoah"
@@ -372,12 +435,15 @@
     },
     "id": 21,
     "picture": {
-      "id": 37
+      "id": 21
     },
     "price": 12.14,
     "title": "Russel-Stehr"
   },
   {
+    "articlePicture": {
+      "id": 22
+    },
     "artists": {
       "id": 28,
       "name": "Celine Dion"
@@ -390,12 +456,15 @@
     },
     "id": 22,
     "picture": {
-      "id": 38
+      "id": 22
     },
     "price": 9.53,
     "title": "Ratke, Jacobs and Anderson"
   },
   {
+    "articlePicture": {
+      "id": 23
+    },
     "artists": {
       "id": 47,
       "name": "Culcha Candela"
@@ -408,12 +477,15 @@
     },
     "id": 23,
     "picture": {
-      "id": 39
+      "id": 23
     },
     "price": 20.92,
     "title": "Botsford-Volkman"
   },
   {
+    "articlePicture": {
+      "id": 24
+    },
     "artists": {
       "id": 35,
       "name": "Bruce Springsteen"
@@ -426,12 +498,15 @@
     },
     "id": 24,
     "picture": {
-      "id": 40
+      "id": 24
     },
     "price": 32.09,
     "title": "Ankunding Inc"
   },
   {
+    "articlePicture": {
+      "id": 25
+    },
     "artists": {
       "id": 18,
       "name": "Kraftklub"
@@ -444,12 +519,15 @@
     },
     "id": 25,
     "picture": {
-      "id": 41
+      "id": 25
     },
     "price": 13.16,
     "title": "Brown and Sons"
   },
   {
+    "articlePicture": {
+      "id": 26
+    },
     "artists": {
       "id": 45,
       "name": "Billy Joel"
@@ -462,12 +540,15 @@
     },
     "id": 26,
     "picture": {
-      "id": 42
+      "id": 26
     },
     "price": 10.34,
     "title": "Lemke, Hagenes and Breitenberg"
   },
   {
+    "articlePicture": {
+      "id": 27
+    },
     "artists": {
       "id": 2,
       "name": "Britney Spears"
@@ -480,12 +561,15 @@
     },
     "id": 27,
     "picture": {
-      "id": 43
+      "id": 27
     },
     "price": 26.61,
     "title": "Beatty Group"
   },
   {
+    "articlePicture": {
+      "id": 28
+    },
     "artists": {
       "id": 4,
       "name": "Queen"
@@ -498,12 +582,15 @@
     },
     "id": 28,
     "picture": {
-      "id": 44
+      "id": 28
     },
     "price": 26.27,
     "title": "Pfannerstill Group"
   },
   {
+    "articlePicture": {
+      "id": 29
+    },
     "artists": {
       "id": 26,
       "name": "Pitbull"
@@ -516,12 +603,15 @@
     },
     "id": 29,
     "picture": {
-      "id": 45
+      "id": 29
     },
     "price": 38.51,
     "title": "Daugherty-Reinger"
   },
   {
+    "articlePicture": {
+      "id": 30
+    },
     "artists": {
       "id": 21,
       "name": "Eminem"
@@ -534,12 +624,15 @@
     },
     "id": 30,
     "picture": {
-      "id": 46
+      "id": 30
     },
     "price": 33.1,
     "title": "Ankunding and Sons"
   },
   {
+    "articlePicture": {
+      "id": 31
+    },
     "artists": {
       "id": 7,
       "name": "Tupac Shakur"
@@ -552,12 +645,15 @@
     },
     "id": 31,
     "picture": {
-      "id": 47
+      "id": 31
     },
     "price": 30.57,
     "title": "Reinger LLC"
   },
   {
+    "articlePicture": {
+      "id": 32
+    },
     "artists": {
       "id": 44,
       "name": "Michael Jackson"
@@ -570,12 +666,15 @@
     },
     "id": 32,
     "picture": {
-      "id": 48
+      "id": 32
     },
     "price": 3.54,
     "title": "Langworth, Armstrong and Reinger"
   },
   {
+    "articlePicture": {
+      "id": 33
+    },
     "artists": {
       "id": 39,
       "name": "Barbra Streisand"
@@ -588,12 +687,15 @@
     },
     "id": 33,
     "picture": {
-      "id": 49
+      "id": 33
     },
     "price": 39.42,
     "title": "Schowalter-Stokes"
   },
   {
+    "articlePicture": {
+      "id": 34
+    },
     "artists": {
       "id": 36,
       "name": "The Rolling Stones"
@@ -606,12 +708,15 @@
     },
     "id": 34,
     "picture": {
-      "id": 50
+      "id": 34
     },
     "price": 25.55,
     "title": "Wehner-Gleason"
   },
   {
+    "articlePicture": {
+      "id": 35
+    },
     "artists": {
       "id": 14,
       "name": "Imagine Dragons"
@@ -624,12 +729,15 @@
     },
     "id": 35,
     "picture": {
-      "id": 51
+      "id": 35
     },
     "price": 17.14,
     "title": "Daniel, Bartoletti and Cruickshank"
   },
   {
+    "articlePicture": {
+      "id": 36
+    },
     "artists": {
       "id": 35,
       "name": "Bruce Springsteen"
@@ -642,12 +750,15 @@
     },
     "id": 36,
     "picture": {
-      "id": 52
+      "id": 36
     },
     "price": 3.79,
     "title": "Luettgen Group"
   },
   {
+    "articlePicture": {
+      "id": 37
+    },
     "artists": {
       "id": 2,
       "name": "Britney Spears"
@@ -660,12 +771,15 @@
     },
     "id": 37,
     "picture": {
-      "id": 53
+      "id": 37
     },
     "price": 39.68,
     "title": "McKenzie Inc"
   },
   {
+    "articlePicture": {
+      "id": 38
+    },
     "artists": {
       "id": 4,
       "name": "Queen"
@@ -678,12 +792,15 @@
     },
     "id": 38,
     "picture": {
-      "id": 54
+      "id": 38
     },
     "price": 17.92,
     "title": "Bauch-Gusikowski"
   },
   {
+    "articlePicture": {
+      "id": 39
+    },
     "artists": {
       "id": 41,
       "name": "Pink Floyd"
@@ -696,12 +813,15 @@
     },
     "id": 39,
     "picture": {
-      "id": 55
+      "id": 39
     },
     "price": 25.29,
     "title": "Kirlin, Heidenreich and Jenkins"
   },
   {
+    "articlePicture": {
+      "id": 40
+    },
     "artists": {
       "id": 16,
       "name": "Adale"
@@ -714,12 +834,15 @@
     },
     "id": 40,
     "picture": {
-      "id": 56
+      "id": 40
     },
     "price": 20.17,
     "title": "Medhurst Inc"
   },
   {
+    "articlePicture": {
+      "id": 41
+    },
     "artists": {
       "id": 6,
       "name": "Bob Dylan"
@@ -732,12 +855,15 @@
     },
     "id": 41,
     "picture": {
-      "id": 57
+      "id": 41
     },
     "price": 14.04,
     "title": "Bosco-McLaughlin"
   },
   {
+    "articlePicture": {
+      "id": 42
+    },
     "artists": {
       "id": 38,
       "name": "DJ Snake"
@@ -750,12 +876,15 @@
     },
     "id": 42,
     "picture": {
-      "id": 58
+      "id": 42
     },
     "price": 31.07,
     "title": "Morissette-Rippin"
   },
   {
+    "articlePicture": {
+      "id": 43
+    },
     "artists": {
       "id": 15,
       "name": "Avicci"
@@ -768,12 +897,15 @@
     },
     "id": 43,
     "picture": {
-      "id": 59
+      "id": 43
     },
     "price": 4.6,
     "title": "Ferry-Jaskolski"
   },
   {
+    "articlePicture": {
+      "id": 44
+    },
     "artists": {
       "id": 34,
       "name": "Madonna"
@@ -786,12 +918,15 @@
     },
     "id": 44,
     "picture": {
-      "id": 60
+      "id": 44
     },
     "price": 44.74,
     "title": "Sauer Inc"
   },
   {
+    "articlePicture": {
+      "id": 45
+    },
     "artists": {
       "id": 7,
       "name": "Tupac Shakur"
@@ -804,12 +939,15 @@
     },
     "id": 45,
     "picture": {
-      "id": 61
+      "id": 45
     },
     "price": 27.13,
     "title": "Rath, Graham and Lowe"
   },
   {
+    "articlePicture": {
+      "id": 46
+    },
     "artists": {
       "id": 24,
       "name": "ABBA"
@@ -822,12 +960,15 @@
     },
     "id": 46,
     "picture": {
-      "id": 62
+      "id": 46
     },
     "price": 19.65,
     "title": "Erdman LLC"
   },
   {
+    "articlePicture": {
+      "id": 47
+    },
     "artists": {
       "id": 9,
       "name": "Linkin Park"
@@ -840,12 +981,15 @@
     },
     "id": 47,
     "picture": {
-      "id": 63
+      "id": 47
     },
     "price": 38.65,
     "title": "Baumbach-Hintz"
   },
   {
+    "articlePicture": {
+      "id": 48
+    },
     "artists": {
       "id": 39,
       "name": "Barbra Streisand"
@@ -858,12 +1002,15 @@
     },
     "id": 48,
     "picture": {
-      "id": 64
+      "id": 48
     },
     "price": 1.94,
     "title": "Bruen and Sons"
   },
   {
+    "articlePicture": {
+      "id": 49
+    },
     "artists": {
       "id": 35,
       "name": "Bruce Springsteen"
@@ -876,12 +1023,15 @@
     },
     "id": 49,
     "picture": {
-      "id": 65
+      "id": 49
     },
     "price": 37.67,
     "title": "Hodkiewicz-Hirthe"
   },
   {
+    "articlePicture": {
+      "id": 50
+    },
     "artists": {
       "id": 35,
       "name": "Bruce Springsteen"
@@ -894,12 +1044,15 @@
     },
     "id": 50,
     "picture": {
-      "id": 66
+      "id": 50
     },
     "price": 2.61,
     "title": "Kiehn-Roberts"
   },
   {
+    "articlePicture": {
+      "id": 51
+    },
     "artists": {
       "id": 6,
       "name": "Bob Dylan"
@@ -912,12 +1065,15 @@
     },
     "id": 51,
     "picture": {
-      "id": 67
+      "id": 51
     },
     "price": 48.29,
     "title": "Dare Group"
   },
   {
+    "articlePicture": {
+      "id": 52
+    },
     "artists": {
       "id": 13,
       "name": "Deichkind"
@@ -930,12 +1086,15 @@
     },
     "id": 52,
     "picture": {
-      "id": 68
+      "id": 52
     },
     "price": 22.9,
     "title": "Rath-Windler"
   },
   {
+    "articlePicture": {
+      "id": 53
+    },
     "artists": {
       "id": 48,
       "name": "Elvis Presley"
@@ -948,12 +1107,15 @@
     },
     "id": 53,
     "picture": {
-      "id": 69
+      "id": 53
     },
     "price": 23.32,
     "title": "Kreiger-Jacobi"
   },
   {
+    "articlePicture": {
+      "id": 54
+    },
     "artists": {
       "id": 38,
       "name": "DJ Snake"
@@ -966,12 +1128,15 @@
     },
     "id": 54,
     "picture": {
-      "id": 70
+      "id": 54
     },
     "price": 6.55,
     "title": "Nikolaus, Runolfsson and Krajcik"
   },
   {
+    "articlePicture": {
+      "id": 55
+    },
     "artists": {
       "id": 23,
       "name": "Falco"
@@ -984,12 +1149,15 @@
     },
     "id": 55,
     "picture": {
-      "id": 71
+      "id": 55
     },
     "price": 39.73,
     "title": "Weber, Wolf and MacGyver"
   },
   {
+    "articlePicture": {
+      "id": 56
+    },
     "artists": {
       "id": 26,
       "name": "Pitbull"
@@ -1002,12 +1170,15 @@
     },
     "id": 56,
     "picture": {
-      "id": 72
+      "id": 56
     },
     "price": 35.78,
     "title": "Beer-Walker"
   },
   {
+    "articlePicture": {
+      "id": 57
+    },
     "artists": {
       "id": 7,
       "name": "Tupac Shakur"
@@ -1020,12 +1191,15 @@
     },
     "id": 57,
     "picture": {
-      "id": 73
+      "id": 57
     },
     "price": 44.69,
     "title": "Jones LLC"
   },
   {
+    "articlePicture": {
+      "id": 58
+    },
     "artists": {
       "id": 4,
       "name": "Queen"
@@ -1038,12 +1212,15 @@
     },
     "id": 58,
     "picture": {
-      "id": 74
+      "id": 58
     },
     "price": 3.58,
     "title": "Lueilwitz LLC"
   },
   {
+    "articlePicture": {
+      "id": 59
+    },
     "artists": {
       "id": 41,
       "name": "Pink Floyd"
@@ -1056,12 +1233,15 @@
     },
     "id": 59,
     "picture": {
-      "id": 75
+      "id": 59
     },
     "price": 34.13,
     "title": "Kuhlman-Stokes"
   },
   {
+    "articlePicture": {
+      "id": 60
+    },
     "artists": {
       "id": 2,
       "name": "Britney Spears"
@@ -1074,12 +1254,15 @@
     },
     "id": 60,
     "picture": {
-      "id": 76
+      "id": 60
     },
     "price": 11.84,
     "title": "Hegmann-Stroman"
   },
   {
+    "articlePicture": {
+      "id": 61
+    },
     "artists": {
       "id": 37,
       "name": "Peter Fox"
@@ -1092,12 +1275,15 @@
     },
     "id": 61,
     "picture": {
-      "id": 77
+      "id": 61
     },
     "price": 30.05,
     "title": "Quigley, Waelchi and Mitchell"
   },
   {
+    "articlePicture": {
+      "id": 62
+    },
     "artists": {
       "id": 39,
       "name": "Barbra Streisand"
@@ -1110,12 +1296,15 @@
     },
     "id": 62,
     "picture": {
-      "id": 78
+      "id": 62
     },
     "price": 8.27,
     "title": "Reichel-Hamill"
   },
   {
+    "articlePicture": {
+      "id": 63
+    },
     "artists": {
       "id": 3,
       "name": "Bon Jovi"
@@ -1128,12 +1317,15 @@
     },
     "id": 63,
     "picture": {
-      "id": 79
+      "id": 63
     },
     "price": 12.74,
     "title": "Wehner-Olson"
   },
   {
+    "articlePicture": {
+      "id": 64
+    },
     "artists": {
       "id": 6,
       "name": "Bob Dylan"
@@ -1146,12 +1338,15 @@
     },
     "id": 64,
     "picture": {
-      "id": 80
+      "id": 64
     },
     "price": 49.25,
     "title": "Weissnat Inc"
   },
   {
+    "articlePicture": {
+      "id": 65
+    },
     "artists": {
       "id": 47,
       "name": "Culcha Candela"
@@ -1164,12 +1359,15 @@
     },
     "id": 65,
     "picture": {
-      "id": 81
+      "id": 65
     },
     "price": 37.67,
     "title": "Greenfelder-Paucek"
   },
   {
+    "articlePicture": {
+      "id": 66
+    },
     "artists": {
       "id": 33,
       "name": "Metallica"
@@ -1182,12 +1380,15 @@
     },
     "id": 66,
     "picture": {
-      "id": 82
+      "id": 66
     },
     "price": 45.95,
     "title": "Nienow, Maggio and Senger"
   },
   {
+    "articlePicture": {
+      "id": 67
+    },
     "artists": {
       "id": 29,
       "name": "U2"
@@ -1200,12 +1401,15 @@
     },
     "id": 67,
     "picture": {
-      "id": 83
+      "id": 67
     },
     "price": 28.55,
     "title": "Hills, Armstrong and Langworth"
   },
   {
+    "articlePicture": {
+      "id": 68
+    },
     "artists": {
       "id": 5,
       "name": "Rammstein"
@@ -1218,12 +1422,15 @@
     },
     "id": 68,
     "picture": {
-      "id": 84
+      "id": 68
     },
     "price": 22.34,
     "title": "Jacobs-Lowe"
   },
   {
+    "articlePicture": {
+      "id": 69
+    },
     "artists": {
       "id": 12,
       "name": "Sia"
@@ -1236,12 +1443,15 @@
     },
     "id": 69,
     "picture": {
-      "id": 85
+      "id": 69
     },
     "price": 39.36,
     "title": "Windler, Ortiz and Schmidt"
   },
   {
+    "articlePicture": {
+      "id": 70
+    },
     "artists": {
       "id": 34,
       "name": "Madonna"
@@ -1254,12 +1464,15 @@
     },
     "id": 70,
     "picture": {
-      "id": 86
+      "id": 70
     },
     "price": 33.13,
     "title": "Prohaska Inc"
   },
   {
+    "articlePicture": {
+      "id": 71
+    },
     "artists": {
       "id": 2,
       "name": "Britney Spears"
@@ -1272,12 +1485,15 @@
     },
     "id": 71,
     "picture": {
-      "id": 87
+      "id": 71
     },
     "price": 29.42,
     "title": "Franecki and Sons"
   },
   {
+    "articlePicture": {
+      "id": 72
+    },
     "artists": {
       "id": 45,
       "name": "Billy Joel"
@@ -1290,12 +1506,15 @@
     },
     "id": 72,
     "picture": {
-      "id": 88
+      "id": 72
     },
     "price": 45.1,
     "title": "Moore, Stokes and Gusikowski"
   },
   {
+    "articlePicture": {
+      "id": 73
+    },
     "artists": {
       "id": 1,
       "name": "Die Ärzte"
@@ -1308,12 +1527,15 @@
     },
     "id": 73,
     "picture": {
-      "id": 89
+      "id": 73
     },
     "price": 40.42,
     "title": "Parker-Bins"
   },
   {
+    "articlePicture": {
+      "id": 74
+    },
     "artists": {
       "id": 19,
       "name": "Rick Astley"
@@ -1326,12 +1548,15 @@
     },
     "id": 74,
     "picture": {
-      "id": 90
+      "id": 74
     },
     "price": 10.69,
     "title": "Farrell-Marks"
   },
   {
+    "articlePicture": {
+      "id": 75
+    },
     "artists": {
       "id": 3,
       "name": "Bon Jovi"
@@ -1344,12 +1569,15 @@
     },
     "id": 75,
     "picture": {
-      "id": 91
+      "id": 75
     },
     "price": 1.13,
     "title": "Herzog, Kirlin and Carter"
   },
   {
+    "articlePicture": {
+      "id": 76
+    },
     "artists": {
       "id": 34,
       "name": "Madonna"
@@ -1362,12 +1590,15 @@
     },
     "id": 76,
     "picture": {
-      "id": 92
+      "id": 76
     },
     "price": 1.13,
     "title": "Nitzsche-Conroy"
   },
   {
+    "articlePicture": {
+      "id": 77
+    },
     "artists": {
       "id": 46,
       "name": "Led Zeppelin"
@@ -1380,12 +1611,15 @@
     },
     "id": 77,
     "picture": {
-      "id": 93
+      "id": 77
     },
     "price": 8.81,
     "title": "Crist-Stracke"
   },
   {
+    "articlePicture": {
+      "id": 78
+    },
     "artists": {
       "id": 7,
       "name": "Tupac Shakur"
@@ -1398,12 +1632,15 @@
     },
     "id": 78,
     "picture": {
-      "id": 94
+      "id": 78
     },
     "price": 6.4,
     "title": "Kulas-Wyman"
   },
   {
+    "articlePicture": {
+      "id": 79
+    },
     "artists": {
       "id": 7,
       "name": "Tupac Shakur"
@@ -1416,12 +1653,15 @@
     },
     "id": 79,
     "picture": {
-      "id": 95
+      "id": 79
     },
     "price": 24.65,
     "title": "Oberbrunner, Rau and Hauck"
   },
   {
+    "articlePicture": {
+      "id": 80
+    },
     "artists": {
       "id": 32,
       "name": "Whitney Houston"
@@ -1434,12 +1674,15 @@
     },
     "id": 80,
     "picture": {
-      "id": 96
+      "id": 80
     },
     "price": 39.56,
     "title": "Trantow, Fisher and Harris"
   },
   {
+    "articlePicture": {
+      "id": 81
+    },
     "artists": {
       "id": 10,
       "name": "Alligatoah"
@@ -1452,12 +1695,15 @@
     },
     "id": 81,
     "picture": {
-      "id": 97
+      "id": 81
     },
     "price": 26.0,
     "title": "VonRueden, Wisozk and Will"
   },
   {
+    "articlePicture": {
+      "id": 82
+    },
     "artists": {
       "id": 17,
       "name": "Shakira"
@@ -1470,12 +1716,15 @@
     },
     "id": 82,
     "picture": {
-      "id": 98
+      "id": 82
     },
     "price": 2.08,
     "title": "Torphy, Monahan and Hand"
   },
   {
+    "articlePicture": {
+      "id": 83
+    },
     "artists": {
       "id": 42,
       "name": "ACDC"
@@ -1488,12 +1737,15 @@
     },
     "id": 83,
     "picture": {
-      "id": 99
+      "id": 83
     },
     "price": 31.69,
     "title": "Gorczany, Wilderman and Johnston"
   },
   {
+    "articlePicture": {
+      "id": 84
+    },
     "artists": {
       "id": 31,
       "name": "Van Halen"
@@ -1506,12 +1758,15 @@
     },
     "id": 84,
     "picture": {
-      "id": 100
+      "id": 84
     },
     "price": 14.46,
     "title": "Stiedemann, Osinski and Ferry"
   },
   {
+    "articlePicture": {
+      "id": 85
+    },
     "artists": {
       "id": 50,
       "name": "The Beatles"
@@ -1524,12 +1779,15 @@
     },
     "id": 85,
     "picture": {
-      "id": 101
+      "id": 85
     },
     "price": 19.31,
     "title": "Mosciski LLC"
   },
   {
+    "articlePicture": {
+      "id": 86
+    },
     "artists": {
       "id": 30,
       "name": "Rihanna"
@@ -1542,12 +1800,15 @@
     },
     "id": 86,
     "picture": {
-      "id": 102
+      "id": 86
     },
     "price": 20.72,
     "title": "VonRueden, Cronin and Crist"
   },
   {
+    "articlePicture": {
+      "id": 87
+    },
     "artists": {
       "id": 5,
       "name": "Rammstein"
@@ -1560,12 +1821,15 @@
     },
     "id": 87,
     "picture": {
-      "id": 103
+      "id": 87
     },
     "price": 12.96,
     "title": "Crona, Davis and Christiansen"
   },
   {
+    "articlePicture": {
+      "id": 88
+    },
     "artists": {
       "id": 3,
       "name": "Bon Jovi"
@@ -1578,12 +1842,15 @@
     },
     "id": 88,
     "picture": {
-      "id": 104
+      "id": 88
     },
     "price": 33.86,
     "title": "Boyer Group"
   },
   {
+    "articlePicture": {
+      "id": 89
+    },
     "artists": {
       "id": 8,
       "name": "Backstreet Boys"
@@ -1596,12 +1863,15 @@
     },
     "id": 89,
     "picture": {
-      "id": 105
+      "id": 89
     },
     "price": 13.28,
     "title": "Crona, Schoen and Nikolaus"
   },
   {
+    "articlePicture": {
+      "id": 90
+    },
     "artists": {
       "id": 22,
       "name": "Dua Lipa"
@@ -1614,12 +1884,15 @@
     },
     "id": 90,
     "picture": {
-      "id": 106
+      "id": 90
     },
     "price": 38.72,
     "title": "Vandervort, Wehner and Rutherford"
   },
   {
+    "articlePicture": {
+      "id": 91
+    },
     "artists": {
       "id": 39,
       "name": "Barbra Streisand"
@@ -1632,12 +1905,15 @@
     },
     "id": 91,
     "picture": {
-      "id": 107
+      "id": 91
     },
     "price": 32.71,
     "title": "Watsica-Friesen"
   },
   {
+    "articlePicture": {
+      "id": 92
+    },
     "artists": {
       "id": 49,
       "name": "Stromae"
@@ -1650,12 +1926,15 @@
     },
     "id": 92,
     "picture": {
-      "id": 108
+      "id": 92
     },
     "price": 21.39,
     "title": "Bartell-Quitzon"
   },
   {
+    "articlePicture": {
+      "id": 93
+    },
     "artists": {
       "id": 50,
       "name": "The Beatles"
@@ -1668,12 +1947,15 @@
     },
     "id": 93,
     "picture": {
-      "id": 109
+      "id": 93
     },
     "price": 9.7,
     "title": "Farrell, Kreiger and Armstrong"
   },
   {
+    "articlePicture": {
+      "id": 94
+    },
     "artists": {
       "id": 38,
       "name": "DJ Snake"
@@ -1686,12 +1968,15 @@
     },
     "id": 94,
     "picture": {
-      "id": 110
+      "id": 94
     },
     "price": 42.34,
     "title": "Thompson, Little and Donnelly"
   },
   {
+    "articlePicture": {
+      "id": 95
+    },
     "artists": {
       "id": 35,
       "name": "Bruce Springsteen"
@@ -1704,12 +1989,15 @@
     },
     "id": 95,
     "picture": {
-      "id": 111
+      "id": 95
     },
     "price": 29.62,
     "title": "Lockman, Spinka and Toy"
   },
   {
+    "articlePicture": {
+      "id": 96
+    },
     "artists": {
       "id": 37,
       "name": "Peter Fox"
@@ -1722,12 +2010,15 @@
     },
     "id": 96,
     "picture": {
-      "id": 112
+      "id": 96
     },
     "price": 34.73,
     "title": "Lesch Inc"
   },
   {
+    "articlePicture": {
+      "id": 97
+    },
     "artists": {
       "id": 41,
       "name": "Pink Floyd"
@@ -1740,12 +2031,15 @@
     },
     "id": 97,
     "picture": {
-      "id": 113
+      "id": 97
     },
     "price": 15.5,
     "title": "Gutmann, Larkin and Mante"
   },
   {
+    "articlePicture": {
+      "id": 98
+    },
     "artists": {
       "id": 38,
       "name": "DJ Snake"
@@ -1758,12 +2052,15 @@
     },
     "id": 98,
     "picture": {
-      "id": 114
+      "id": 98
     },
     "price": 1.21,
     "title": "Schamberger-Harvey"
   },
   {
+    "articlePicture": {
+      "id": 99
+    },
     "artists": {
       "id": 16,
       "name": "Adale"
@@ -1776,12 +2073,15 @@
     },
     "id": 99,
     "picture": {
-      "id": 115
+      "id": 99
     },
     "price": 45.18,
     "title": "Harris-Becker"
   },
   {
+    "articlePicture": {
+      "id": 100
+    },
     "artists": {
       "id": 8,
       "name": "Backstreet Boys"
@@ -1794,12 +2094,15 @@
     },
     "id": 100,
     "picture": {
-      "id": 116
+      "id": 100
     },
     "price": 34.93,
     "title": "Stehr-Rutherford"
   },
   {
+    "articlePicture": {
+      "id": 101
+    },
     "artists": {
       "id": 2,
       "name": "Britney Spears"
@@ -1812,12 +2115,15 @@
     },
     "id": 101,
     "picture": {
-      "id": 117
+      "id": 101
     },
     "price": 5.29,
     "title": "Armstrong-Feeney"
   },
   {
+    "articlePicture": {
+      "id": 102
+    },
     "artists": {
       "id": 1,
       "name": "Die Ärzte"
@@ -1830,12 +2136,15 @@
     },
     "id": 102,
     "picture": {
-      "id": 118
+      "id": 102
     },
     "price": 13.66,
     "title": "Koss Inc"
   },
   {
+    "articlePicture": {
+      "id": 103
+    },
     "artists": {
       "id": 49,
       "name": "Stromae"
@@ -1848,12 +2157,15 @@
     },
     "id": 103,
     "picture": {
-      "id": 119
+      "id": 103
     },
     "price": 40.45,
     "title": "Langworth-Oberbrunner"
   },
   {
+    "articlePicture": {
+      "id": 104
+    },
     "artists": {
       "id": 44,
       "name": "Michael Jackson"
@@ -1866,12 +2178,15 @@
     },
     "id": 104,
     "picture": {
-      "id": 120
+      "id": 104
     },
     "price": 27.46,
     "title": "Maggio Group"
   },
   {
+    "articlePicture": {
+      "id": 105
+    },
     "artists": {
       "id": 48,
       "name": "Elvis Presley"
@@ -1884,12 +2199,15 @@
     },
     "id": 105,
     "picture": {
-      "id": 121
+      "id": 105
     },
     "price": 1.43,
     "title": "Goyette Group"
   },
   {
+    "articlePicture": {
+      "id": 106
+    },
     "artists": {
       "id": 39,
       "name": "Barbra Streisand"
@@ -1902,12 +2220,15 @@
     },
     "id": 106,
     "picture": {
-      "id": 122
+      "id": 106
     },
     "price": 38.17,
     "title": "Johnston Inc"
   },
   {
+    "articlePicture": {
+      "id": 107
+    },
     "artists": {
       "id": 39,
       "name": "Barbra Streisand"
@@ -1920,12 +2241,15 @@
     },
     "id": 107,
     "picture": {
-      "id": 123
+      "id": 107
     },
     "price": 2.9,
     "title": "Hackett-Hahn"
   },
   {
+    "articlePicture": {
+      "id": 108
+    },
     "artists": {
       "id": 15,
       "name": "Avicci"
@@ -1938,12 +2262,15 @@
     },
     "id": 108,
     "picture": {
-      "id": 124
+      "id": 108
     },
     "price": 10.33,
     "title": "Miller-Blanda"
   },
   {
+    "articlePicture": {
+      "id": 109
+    },
     "artists": {
       "id": 18,
       "name": "Kraftklub"
@@ -1956,12 +2283,15 @@
     },
     "id": 109,
     "picture": {
-      "id": 125
+      "id": 109
     },
     "price": 13.47,
     "title": "Dicki-Kunze"
   },
   {
+    "articlePicture": {
+      "id": 110
+    },
     "artists": {
       "id": 19,
       "name": "Rick Astley"
@@ -1974,12 +2304,15 @@
     },
     "id": 110,
     "picture": {
-      "id": 126
+      "id": 110
     },
     "price": 15.12,
     "title": "Heathcote, Hane and Lynch"
   },
   {
+    "articlePicture": {
+      "id": 111
+    },
     "artists": {
       "id": 5,
       "name": "Rammstein"
@@ -1992,12 +2325,15 @@
     },
     "id": 111,
     "picture": {
-      "id": 127
+      "id": 111
     },
     "price": 11.05,
     "title": "Schaefer-Torphy"
   },
   {
+    "articlePicture": {
+      "id": 112
+    },
     "artists": {
       "id": 45,
       "name": "Billy Joel"
@@ -2010,12 +2346,15 @@
     },
     "id": 112,
     "picture": {
-      "id": 128
+      "id": 112
     },
     "price": 1.03,
     "title": "Hills and Sons"
   },
   {
+    "articlePicture": {
+      "id": 113
+    },
     "artists": {
       "id": 5,
       "name": "Rammstein"
@@ -2028,12 +2367,15 @@
     },
     "id": 113,
     "picture": {
-      "id": 129
+      "id": 113
     },
     "price": 20.58,
     "title": "Zemlak, Wisoky and Medhurst"
   },
   {
+    "articlePicture": {
+      "id": 114
+    },
     "artists": {
       "id": 8,
       "name": "Backstreet Boys"
@@ -2046,12 +2388,15 @@
     },
     "id": 114,
     "picture": {
-      "id": 130
+      "id": 114
     },
     "price": 42.22,
     "title": "Moen and Sons"
   },
   {
+    "articlePicture": {
+      "id": 115
+    },
     "artists": {
       "id": 31,
       "name": "Van Halen"
@@ -2064,12 +2409,15 @@
     },
     "id": 115,
     "picture": {
-      "id": 131
+      "id": 115
     },
     "price": 33.33,
     "title": "Dare-Veum"
   },
   {
+    "articlePicture": {
+      "id": 116
+    },
     "artists": {
       "id": 10,
       "name": "Alligatoah"
@@ -2082,12 +2430,15 @@
     },
     "id": 116,
     "picture": {
-      "id": 132
+      "id": 116
     },
     "price": 49.15,
     "title": "Zemlak-Goyette"
   },
   {
+    "articlePicture": {
+      "id": 117
+    },
     "artists": {
       "id": 25,
       "name": "257ers"
@@ -2100,12 +2451,15 @@
     },
     "id": 117,
     "picture": {
-      "id": 133
+      "id": 117
     },
     "price": 24.04,
     "title": "Breitenberg, Russel and Beahan"
   },
   {
+    "articlePicture": {
+      "id": 118
+    },
     "artists": {
       "id": 15,
       "name": "Avicci"
@@ -2118,12 +2472,15 @@
     },
     "id": 118,
     "picture": {
-      "id": 134
+      "id": 118
     },
     "price": 42.58,
     "title": "Lesch LLC"
   },
   {
+    "articlePicture": {
+      "id": 119
+    },
     "artists": {
       "id": 8,
       "name": "Backstreet Boys"
@@ -2136,12 +2493,15 @@
     },
     "id": 119,
     "picture": {
-      "id": 135
+      "id": 119
     },
     "price": 47.05,
     "title": "Feeney-Davis"
   },
   {
+    "articlePicture": {
+      "id": 120
+    },
     "artists": {
       "id": 32,
       "name": "Whitney Houston"
@@ -2154,12 +2514,15 @@
     },
     "id": 120,
     "picture": {
-      "id": 136
+      "id": 120
     },
     "price": 45.95,
     "title": "Hills LLC"
   },
   {
+    "articlePicture": {
+      "id": 121
+    },
     "artists": {
       "id": 48,
       "name": "Elvis Presley"
@@ -2172,12 +2535,15 @@
     },
     "id": 121,
     "picture": {
-      "id": 137
+      "id": 121
     },
     "price": 28.13,
     "title": "McCullough, Greenholt and Fisher"
   },
   {
+    "articlePicture": {
+      "id": 122
+    },
     "artists": {
       "id": 9,
       "name": "Linkin Park"
@@ -2190,12 +2556,15 @@
     },
     "id": 122,
     "picture": {
-      "id": 138
+      "id": 122
     },
     "price": 22.06,
     "title": "Predovic, Will and Wolff"
   },
   {
+    "articlePicture": {
+      "id": 123
+    },
     "artists": {
       "id": 17,
       "name": "Shakira"
@@ -2208,12 +2577,15 @@
     },
     "id": 123,
     "picture": {
-      "id": 139
+      "id": 123
     },
     "price": 4.03,
     "title": "Stracke-Littel"
   },
   {
+    "articlePicture": {
+      "id": 124
+    },
     "artists": {
       "id": 2,
       "name": "Britney Spears"
@@ -2226,12 +2598,15 @@
     },
     "id": 124,
     "picture": {
-      "id": 140
+      "id": 124
     },
     "price": 12.65,
     "title": "Morar and Sons"
   },
   {
+    "articlePicture": {
+      "id": 125
+    },
     "artists": {
       "id": 41,
       "name": "Pink Floyd"
@@ -2244,12 +2619,15 @@
     },
     "id": 125,
     "picture": {
-      "id": 141
+      "id": 125
     },
     "price": 20.15,
     "title": "Jast, Osinski and Gusikowski"
   },
   {
+    "articlePicture": {
+      "id": 126
+    },
     "artists": {
       "id": 50,
       "name": "The Beatles"
@@ -2262,12 +2640,15 @@
     },
     "id": 126,
     "picture": {
-      "id": 142
+      "id": 126
     },
     "price": 39.7,
     "title": "Koelpin and Sons"
   },
   {
+    "articlePicture": {
+      "id": 127
+    },
     "artists": {
       "id": 30,
       "name": "Rihanna"
@@ -2280,12 +2661,15 @@
     },
     "id": 127,
     "picture": {
-      "id": 143
+      "id": 127
     },
     "price": 46.36,
     "title": "Braun-Daugherty"
   },
   {
+    "articlePicture": {
+      "id": 128
+    },
     "artists": {
       "id": 22,
       "name": "Dua Lipa"
@@ -2298,12 +2682,15 @@
     },
     "id": 128,
     "picture": {
-      "id": 144
+      "id": 128
     },
     "price": 43.41,
     "title": "Padberg LLC"
   },
   {
+    "articlePicture": {
+      "id": 129
+    },
     "artists": {
       "id": 14,
       "name": "Imagine Dragons"
@@ -2316,12 +2703,15 @@
     },
     "id": 129,
     "picture": {
-      "id": 145
+      "id": 129
     },
     "price": 35.83,
     "title": "Paucek, Hartmann and Turner"
   },
   {
+    "articlePicture": {
+      "id": 130
+    },
     "artists": {
       "id": 5,
       "name": "Rammstein"
@@ -2334,12 +2724,15 @@
     },
     "id": 130,
     "picture": {
-      "id": 146
+      "id": 130
     },
     "price": 9.81,
     "title": "Casper-Mueller"
   },
   {
+    "articlePicture": {
+      "id": 131
+    },
     "artists": {
       "id": 38,
       "name": "DJ Snake"
@@ -2352,12 +2745,15 @@
     },
     "id": 131,
     "picture": {
-      "id": 147
+      "id": 131
     },
     "price": 47.36,
     "title": "Connelly, Ankunding and Connelly"
   },
   {
+    "articlePicture": {
+      "id": 132
+    },
     "artists": {
       "id": 16,
       "name": "Adale"
@@ -2370,12 +2766,15 @@
     },
     "id": 132,
     "picture": {
-      "id": 148
+      "id": 132
     },
     "price": 3.92,
     "title": "Gleichner-Kulas"
   },
   {
+    "articlePicture": {
+      "id": 133
+    },
     "artists": {
       "id": 39,
       "name": "Barbra Streisand"
@@ -2388,12 +2787,15 @@
     },
     "id": 133,
     "picture": {
-      "id": 149
+      "id": 133
     },
     "price": 28.44,
     "title": "Haag-Cummerata"
   },
   {
+    "articlePicture": {
+      "id": 134
+    },
     "artists": {
       "id": 24,
       "name": "ABBA"
@@ -2406,12 +2808,15 @@
     },
     "id": 134,
     "picture": {
-      "id": 150
+      "id": 134
     },
     "price": 43.69,
     "title": "Rath-Greenholt"
   },
   {
+    "articlePicture": {
+      "id": 135
+    },
     "artists": {
       "id": 37,
       "name": "Peter Fox"
@@ -2424,12 +2829,15 @@
     },
     "id": 135,
     "picture": {
-      "id": 151
+      "id": 135
     },
     "price": 11.0,
     "title": "Wuckert-Schuppe"
   },
   {
+    "articlePicture": {
+      "id": 136
+    },
     "artists": {
       "id": 26,
       "name": "Pitbull"
@@ -2442,12 +2850,15 @@
     },
     "id": 136,
     "picture": {
-      "id": 152
+      "id": 136
     },
     "price": 40.47,
     "title": "Hammes, Skiles and Connelly"
   },
   {
+    "articlePicture": {
+      "id": 137
+    },
     "artists": {
       "id": 39,
       "name": "Barbra Streisand"
@@ -2460,12 +2871,15 @@
     },
     "id": 137,
     "picture": {
-      "id": 153
+      "id": 137
     },
     "price": 26.06,
     "title": "Spinka and Sons"
   },
   {
+    "articlePicture": {
+      "id": 138
+    },
     "artists": {
       "id": 19,
       "name": "Rick Astley"
@@ -2478,12 +2892,15 @@
     },
     "id": 138,
     "picture": {
-      "id": 154
+      "id": 138
     },
     "price": 49.06,
     "title": "Blanda, Casper and Langosh"
   },
   {
+    "articlePicture": {
+      "id": 139
+    },
     "artists": {
       "id": 23,
       "name": "Falco"
@@ -2496,12 +2913,15 @@
     },
     "id": 139,
     "picture": {
-      "id": 155
+      "id": 139
     },
     "price": 42.72,
     "title": "Kuhlman-Kessler"
   },
   {
+    "articlePicture": {
+      "id": 140
+    },
     "artists": {
       "id": 32,
       "name": "Whitney Houston"
@@ -2514,12 +2934,15 @@
     },
     "id": 140,
     "picture": {
-      "id": 156
+      "id": 140
     },
     "price": 44.68,
     "title": "Schneider Group"
   },
   {
+    "articlePicture": {
+      "id": 141
+    },
     "artists": {
       "id": 34,
       "name": "Madonna"
@@ -2532,12 +2955,15 @@
     },
     "id": 141,
     "picture": {
-      "id": 157
+      "id": 141
     },
     "price": 26.42,
     "title": "Rice LLC"
   },
   {
+    "articlePicture": {
+      "id": 142
+    },
     "artists": {
       "id": 39,
       "name": "Barbra Streisand"
@@ -2550,12 +2976,15 @@
     },
     "id": 142,
     "picture": {
-      "id": 158
+      "id": 142
     },
     "price": 28.91,
     "title": "Gorczany, Howe and King"
   },
   {
+    "articlePicture": {
+      "id": 143
+    },
     "artists": {
       "id": 12,
       "name": "Sia"
@@ -2568,12 +2997,15 @@
     },
     "id": 143,
     "picture": {
-      "id": 159
+      "id": 143
     },
     "price": 2.19,
     "title": "Legros, Parisian and Bahringer"
   },
   {
+    "articlePicture": {
+      "id": 144
+    },
     "artists": {
       "id": 19,
       "name": "Rick Astley"
@@ -2586,12 +3018,15 @@
     },
     "id": 144,
     "picture": {
-      "id": 160
+      "id": 144
     },
     "price": 20.89,
     "title": "Grady, Lueilwitz and Kozey"
   },
   {
+    "articlePicture": {
+      "id": 145
+    },
     "artists": {
       "id": 15,
       "name": "Avicci"
@@ -2604,12 +3039,15 @@
     },
     "id": 145,
     "picture": {
-      "id": 161
+      "id": 145
     },
     "price": 9.13,
     "title": "Hermann LLC"
   },
   {
+    "articlePicture": {
+      "id": 146
+    },
     "artists": {
       "id": 30,
       "name": "Rihanna"
@@ -2622,12 +3060,15 @@
     },
     "id": 146,
     "picture": {
-      "id": 162
+      "id": 146
     },
     "price": 37.54,
     "title": "Gottlieb and Sons"
   },
   {
+    "articlePicture": {
+      "id": 147
+    },
     "artists": {
       "id": 40,
       "name": "Macklemore"
@@ -2640,12 +3081,15 @@
     },
     "id": 147,
     "picture": {
-      "id": 163
+      "id": 147
     },
     "price": 12.92,
     "title": "Becker, Crist and Kohler"
   },
   {
+    "articlePicture": {
+      "id": 148
+    },
     "artists": {
       "id": 37,
       "name": "Peter Fox"
@@ -2658,12 +3102,15 @@
     },
     "id": 148,
     "picture": {
-      "id": 164
+      "id": 148
     },
     "price": 24.2,
     "title": "Halvorson-Kreiger"
   },
   {
+    "articlePicture": {
+      "id": 149
+    },
     "artists": {
       "id": 16,
       "name": "Adale"
@@ -2676,12 +3123,15 @@
     },
     "id": 149,
     "picture": {
-      "id": 165
+      "id": 149
     },
     "price": 44.31,
     "title": "Littel-Stroman"
   },
   {
+    "articlePicture": {
+      "id": 150
+    },
     "artists": {
       "id": 49,
       "name": "Stromae"
@@ -2694,12 +3144,15 @@
     },
     "id": 150,
     "picture": {
-      "id": 166
+      "id": 150
     },
     "price": 6.29,
     "title": "Hermiston Group"
   },
   {
+    "articlePicture": {
+      "id": 151
+    },
     "artists": {
       "id": 20,
       "name": "Taylor Swift"
@@ -2712,12 +3165,15 @@
     },
     "id": 151,
     "picture": {
-      "id": 167
+      "id": 151
     },
     "price": 4.01,
     "title": "Bosco-Carter"
   },
   {
+    "articlePicture": {
+      "id": 152
+    },
     "artists": {
       "id": 21,
       "name": "Eminem"
@@ -2730,12 +3186,15 @@
     },
     "id": 152,
     "picture": {
-      "id": 168
+      "id": 152
     },
     "price": 16.29,
     "title": "Gutkowski-Zemlak"
   },
   {
+    "articlePicture": {
+      "id": 153
+    },
     "artists": {
       "id": 28,
       "name": "Celine Dion"
@@ -2748,12 +3207,15 @@
     },
     "id": 153,
     "picture": {
-      "id": 169
+      "id": 153
     },
     "price": 15.11,
     "title": "Abshire-Thiel"
   },
   {
+    "articlePicture": {
+      "id": 154
+    },
     "artists": {
       "id": 33,
       "name": "Metallica"
@@ -2766,12 +3228,15 @@
     },
     "id": 154,
     "picture": {
-      "id": 170
+      "id": 154
     },
     "price": 38.66,
     "title": "McDermott and Sons"
   },
   {
+    "articlePicture": {
+      "id": 155
+    },
     "artists": {
       "id": 6,
       "name": "Bob Dylan"
@@ -2784,12 +3249,15 @@
     },
     "id": 155,
     "picture": {
-      "id": 171
+      "id": 155
     },
     "price": 6.78,
     "title": "Torp, Schiller and Kuhlman"
   },
   {
+    "articlePicture": {
+      "id": 156
+    },
     "artists": {
       "id": 46,
       "name": "Led Zeppelin"
@@ -2802,12 +3270,15 @@
     },
     "id": 156,
     "picture": {
-      "id": 172
+      "id": 156
     },
     "price": 35.15,
     "title": "Rath Inc"
   },
   {
+    "articlePicture": {
+      "id": 157
+    },
     "artists": {
       "id": 47,
       "name": "Culcha Candela"
@@ -2820,12 +3291,15 @@
     },
     "id": 157,
     "picture": {
-      "id": 173
+      "id": 157
     },
     "price": 10.16,
     "title": "Beatty, Wolff and Frami"
   },
   {
+    "articlePicture": {
+      "id": 158
+    },
     "artists": {
       "id": 34,
       "name": "Madonna"
@@ -2838,12 +3312,15 @@
     },
     "id": 158,
     "picture": {
-      "id": 174
+      "id": 158
     },
     "price": 31.02,
     "title": "Larkin-Price"
   },
   {
+    "articlePicture": {
+      "id": 159
+    },
     "artists": {
       "id": 36,
       "name": "The Rolling Stones"
@@ -2856,12 +3333,15 @@
     },
     "id": 159,
     "picture": {
-      "id": 175
+      "id": 159
     },
     "price": 17.17,
     "title": "D'Amore-Walsh"
   },
   {
+    "articlePicture": {
+      "id": 160
+    },
     "artists": {
       "id": 1,
       "name": "Die Ärzte"
@@ -2874,12 +3354,15 @@
     },
     "id": 160,
     "picture": {
-      "id": 176
+      "id": 160
     },
     "price": 7.6,
     "title": "Keebler, Hammes and Schmidt"
   },
   {
+    "articlePicture": {
+      "id": 161
+    },
     "artists": {
       "id": 23,
       "name": "Falco"
@@ -2892,12 +3375,15 @@
     },
     "id": 161,
     "picture": {
-      "id": 177
+      "id": 161
     },
     "price": 5.54,
     "title": "Roberts and Sons"
   },
   {
+    "articlePicture": {
+      "id": 162
+    },
     "artists": {
       "id": 40,
       "name": "Macklemore"
@@ -2910,12 +3396,15 @@
     },
     "id": 162,
     "picture": {
-      "id": 178
+      "id": 162
     },
     "price": 10.76,
     "title": "Schinner, Upton and Howell"
   },
   {
+    "articlePicture": {
+      "id": 163
+    },
     "artists": {
       "id": 5,
       "name": "Rammstein"
@@ -2928,12 +3417,15 @@
     },
     "id": 163,
     "picture": {
-      "id": 179
+      "id": 163
     },
     "price": 40.38,
     "title": "Wuckert LLC"
   },
   {
+    "articlePicture": {
+      "id": 164
+    },
     "artists": {
       "id": 38,
       "name": "DJ Snake"
@@ -2946,12 +3438,15 @@
     },
     "id": 164,
     "picture": {
-      "id": 180
+      "id": 164
     },
     "price": 17.39,
     "title": "Sipes, Considine and Kertzmann"
   },
   {
+    "articlePicture": {
+      "id": 165
+    },
     "artists": {
       "id": 9,
       "name": "Linkin Park"
@@ -2964,12 +3459,15 @@
     },
     "id": 165,
     "picture": {
-      "id": 181
+      "id": 165
     },
     "price": 3.89,
     "title": "Hilpert, Hagenes and Bayer"
   },
   {
+    "articlePicture": {
+      "id": 166
+    },
     "artists": {
       "id": 34,
       "name": "Madonna"
@@ -2982,12 +3480,15 @@
     },
     "id": 166,
     "picture": {
-      "id": 182
+      "id": 166
     },
     "price": 45.47,
     "title": "Conn-Hegmann"
   },
   {
+    "articlePicture": {
+      "id": 167
+    },
     "artists": {
       "id": 5,
       "name": "Rammstein"
@@ -3000,12 +3501,15 @@
     },
     "id": 167,
     "picture": {
-      "id": 183
+      "id": 167
     },
     "price": 4.17,
     "title": "Von, Heathcote and Ernser"
   },
   {
+    "articlePicture": {
+      "id": 168
+    },
     "artists": {
       "id": 24,
       "name": "ABBA"
@@ -3018,12 +3522,15 @@
     },
     "id": 168,
     "picture": {
-      "id": 184
+      "id": 168
     },
     "price": 21.75,
     "title": "Gottlieb and Sons"
   },
   {
+    "articlePicture": {
+      "id": 169
+    },
     "artists": {
       "id": 9,
       "name": "Linkin Park"
@@ -3036,12 +3543,15 @@
     },
     "id": 169,
     "picture": {
-      "id": 185
+      "id": 169
     },
     "price": 5.26,
     "title": "Collier-Halvorson"
   },
   {
+    "articlePicture": {
+      "id": 170
+    },
     "artists": {
       "id": 18,
       "name": "Kraftklub"
@@ -3054,12 +3564,15 @@
     },
     "id": 170,
     "picture": {
-      "id": 186
+      "id": 170
     },
     "price": 41.25,
     "title": "Bogisich, Gislason and Shanahan"
   },
   {
+    "articlePicture": {
+      "id": 171
+    },
     "artists": {
       "id": 3,
       "name": "Bon Jovi"
@@ -3072,12 +3585,15 @@
     },
     "id": 171,
     "picture": {
-      "id": 187
+      "id": 171
     },
     "price": 41.48,
     "title": "Rosenbaum-Runte"
   },
   {
+    "articlePicture": {
+      "id": 172
+    },
     "artists": {
       "id": 6,
       "name": "Bob Dylan"
@@ -3090,12 +3606,15 @@
     },
     "id": 172,
     "picture": {
-      "id": 188
+      "id": 172
     },
     "price": 3.61,
     "title": "Pollich-Leuschke"
   },
   {
+    "articlePicture": {
+      "id": 173
+    },
     "artists": {
       "id": 32,
       "name": "Whitney Houston"
@@ -3108,12 +3627,15 @@
     },
     "id": 173,
     "picture": {
-      "id": 189
+      "id": 173
     },
     "price": 42.84,
     "title": "Dooley Inc"
   },
   {
+    "articlePicture": {
+      "id": 174
+    },
     "artists": {
       "id": 7,
       "name": "Tupac Shakur"
@@ -3126,12 +3648,15 @@
     },
     "id": 174,
     "picture": {
-      "id": 190
+      "id": 174
     },
     "price": 28.18,
     "title": "Spinka, Altenwerth and Lebsack"
   },
   {
+    "articlePicture": {
+      "id": 175
+    },
     "artists": {
       "id": 9,
       "name": "Linkin Park"
@@ -3144,12 +3669,15 @@
     },
     "id": 175,
     "picture": {
-      "id": 191
+      "id": 175
     },
     "price": 16.46,
     "title": "Reichel-Schmidt"
   },
   {
+    "articlePicture": {
+      "id": 176
+    },
     "artists": {
       "id": 48,
       "name": "Elvis Presley"
@@ -3162,12 +3690,15 @@
     },
     "id": 176,
     "picture": {
-      "id": 192
+      "id": 176
     },
     "price": 25.99,
     "title": "Schulist-Padberg"
   },
   {
+    "articlePicture": {
+      "id": 177
+    },
     "artists": {
       "id": 4,
       "name": "Queen"
@@ -3180,12 +3711,15 @@
     },
     "id": 177,
     "picture": {
-      "id": 193
+      "id": 177
     },
     "price": 3.95,
     "title": "Tremblay, Rempel and Stamm"
   },
   {
+    "articlePicture": {
+      "id": 178
+    },
     "artists": {
       "id": 19,
       "name": "Rick Astley"
@@ -3198,12 +3732,15 @@
     },
     "id": 178,
     "picture": {
-      "id": 194
+      "id": 178
     },
     "price": 10.78,
     "title": "Gutkowski, Boehm and Zemlak"
   },
   {
+    "articlePicture": {
+      "id": 179
+    },
     "artists": {
       "id": 47,
       "name": "Culcha Candela"
@@ -3216,12 +3753,15 @@
     },
     "id": 179,
     "picture": {
-      "id": 195
+      "id": 179
     },
     "price": 25.47,
     "title": "Smitham and Sons"
   },
   {
+    "articlePicture": {
+      "id": 180
+    },
     "artists": {
       "id": 24,
       "name": "ABBA"
@@ -3234,12 +3774,15 @@
     },
     "id": 180,
     "picture": {
-      "id": 196
+      "id": 180
     },
     "price": 29.99,
     "title": "Maggio-Smitham"
   },
   {
+    "articlePicture": {
+      "id": 181
+    },
     "artists": {
       "id": 46,
       "name": "Led Zeppelin"
@@ -3252,12 +3795,15 @@
     },
     "id": 181,
     "picture": {
-      "id": 197
+      "id": 181
     },
     "price": 12.37,
     "title": "Kuhic Group"
   },
   {
+    "articlePicture": {
+      "id": 182
+    },
     "artists": {
       "id": 50,
       "name": "The Beatles"
@@ -3270,12 +3816,15 @@
     },
     "id": 182,
     "picture": {
-      "id": 198
+      "id": 182
     },
     "price": 22.89,
     "title": "Blanda, Hilll and Torp"
   },
   {
+    "articlePicture": {
+      "id": 183
+    },
     "artists": {
       "id": 33,
       "name": "Metallica"
@@ -3288,12 +3837,15 @@
     },
     "id": 183,
     "picture": {
-      "id": 199
+      "id": 183
     },
     "price": 39.43,
     "title": "Ward, Herzog and Reichel"
   },
   {
+    "articlePicture": {
+      "id": 184
+    },
     "artists": {
       "id": 21,
       "name": "Eminem"
@@ -3306,12 +3858,15 @@
     },
     "id": 184,
     "picture": {
-      "id": 200
+      "id": 184
     },
     "price": 2.49,
     "title": "Weimann, Hermann and Becker"
   },
   {
+    "articlePicture": {
+      "id": 185
+    },
     "artists": {
       "id": 41,
       "name": "Pink Floyd"
@@ -3324,12 +3879,15 @@
     },
     "id": 185,
     "picture": {
-      "id": 201
+      "id": 185
     },
     "price": 28.63,
     "title": "Pagac-Koch"
   },
   {
+    "articlePicture": {
+      "id": 186
+    },
     "artists": {
       "id": 24,
       "name": "ABBA"
@@ -3342,12 +3900,15 @@
     },
     "id": 186,
     "picture": {
-      "id": 202
+      "id": 186
     },
     "price": 34.27,
     "title": "Waters, Kozey and Murphy"
   },
   {
+    "articlePicture": {
+      "id": 187
+    },
     "artists": {
       "id": 23,
       "name": "Falco"
@@ -3360,12 +3921,15 @@
     },
     "id": 187,
     "picture": {
-      "id": 203
+      "id": 187
     },
     "price": 46.31,
     "title": "Hegmann-Orn"
   },
   {
+    "articlePicture": {
+      "id": 188
+    },
     "artists": {
       "id": 25,
       "name": "257ers"
@@ -3378,12 +3942,15 @@
     },
     "id": 188,
     "picture": {
-      "id": 204
+      "id": 188
     },
     "price": 8.79,
     "title": "Ebert-Kerluke"
   },
   {
+    "articlePicture": {
+      "id": 189
+    },
     "artists": {
       "id": 1,
       "name": "Die Ärzte"
@@ -3396,12 +3963,15 @@
     },
     "id": 189,
     "picture": {
-      "id": 205
+      "id": 189
     },
     "price": 8.57,
     "title": "Kunze and Sons"
   },
   {
+    "articlePicture": {
+      "id": 190
+    },
     "artists": {
       "id": 6,
       "name": "Bob Dylan"
@@ -3414,12 +3984,15 @@
     },
     "id": 190,
     "picture": {
-      "id": 206
+      "id": 190
     },
     "price": 7.63,
     "title": "Koch, Terry and Bahringer"
   },
   {
+    "articlePicture": {
+      "id": 191
+    },
     "artists": {
       "id": 28,
       "name": "Celine Dion"
@@ -3432,12 +4005,15 @@
     },
     "id": 191,
     "picture": {
-      "id": 207
+      "id": 191
     },
     "price": 28.82,
     "title": "Zieme-Botsford"
   },
   {
+    "articlePicture": {
+      "id": 192
+    },
     "artists": {
       "id": 43,
       "name": "Elton John"
@@ -3450,12 +4026,15 @@
     },
     "id": 192,
     "picture": {
-      "id": 208
+      "id": 192
     },
     "price": 34.27,
     "title": "Little and Sons"
   },
   {
+    "articlePicture": {
+      "id": 193
+    },
     "artists": {
       "id": 10,
       "name": "Alligatoah"
@@ -3468,12 +4047,15 @@
     },
     "id": 193,
     "picture": {
-      "id": 209
+      "id": 193
     },
     "price": 26.27,
     "title": "Simonis-Cummings"
   },
   {
+    "articlePicture": {
+      "id": 194
+    },
     "artists": {
       "id": 26,
       "name": "Pitbull"
@@ -3486,12 +4068,15 @@
     },
     "id": 194,
     "picture": {
-      "id": 210
+      "id": 194
     },
     "price": 45.95,
     "title": "Hilpert, Lockman and Crona"
   },
   {
+    "articlePicture": {
+      "id": 195
+    },
     "artists": {
       "id": 31,
       "name": "Van Halen"
@@ -3504,12 +4089,15 @@
     },
     "id": 195,
     "picture": {
-      "id": 211
+      "id": 195
     },
     "price": 43.14,
     "title": "Skiles Inc"
   },
   {
+    "articlePicture": {
+      "id": 196
+    },
     "artists": {
       "id": 45,
       "name": "Billy Joel"
@@ -3522,12 +4110,15 @@
     },
     "id": 196,
     "picture": {
-      "id": 212
+      "id": 196
     },
     "price": 15.62,
     "title": "Ebert, Reichel and Boyle"
   },
   {
+    "articlePicture": {
+      "id": 197
+    },
     "artists": {
       "id": 10,
       "name": "Alligatoah"
@@ -3540,12 +4131,15 @@
     },
     "id": 197,
     "picture": {
-      "id": 213
+      "id": 197
     },
     "price": 12.41,
     "title": "Harris and Sons"
   },
   {
+    "articlePicture": {
+      "id": 198
+    },
     "artists": {
       "id": 29,
       "name": "U2"
@@ -3558,12 +4152,15 @@
     },
     "id": 198,
     "picture": {
-      "id": 214
+      "id": 198
     },
     "price": 33.93,
     "title": "Quigley Inc"
   },
   {
+    "articlePicture": {
+      "id": 199
+    },
     "artists": {
       "id": 40,
       "name": "Macklemore"
@@ -3576,12 +4173,15 @@
     },
     "id": 199,
     "picture": {
-      "id": 215
+      "id": 199
     },
     "price": 28.03,
     "title": "Rutherford, Moore and VonRueden"
   },
   {
+    "articlePicture": {
+      "id": 200
+    },
     "artists": {
       "id": 8,
       "name": "Backstreet Boys"
@@ -3594,12 +4194,15 @@
     },
     "id": 200,
     "picture": {
-      "id": 216
+      "id": 200
     },
     "price": 11.81,
     "title": "Hirthe and Sons"
   },
   {
+    "articlePicture": {
+      "id": 201
+    },
     "artists": {
       "id": 9,
       "name": "Linkin Park"
@@ -3612,12 +4215,15 @@
     },
     "id": 201,
     "picture": {
-      "id": 217
+      "id": 201
     },
     "price": 23.2,
     "title": "Ankunding-Klein"
   },
   {
+    "articlePicture": {
+      "id": 202
+    },
     "artists": {
       "id": 44,
       "name": "Michael Jackson"
@@ -3630,12 +4236,15 @@
     },
     "id": 202,
     "picture": {
-      "id": 218
+      "id": 202
     },
     "price": 47.77,
     "title": "Powlowski, Lynch and Runte"
   },
   {
+    "articlePicture": {
+      "id": 203
+    },
     "artists": {
       "id": 31,
       "name": "Van Halen"
@@ -3648,12 +4257,15 @@
     },
     "id": 203,
     "picture": {
-      "id": 219
+      "id": 203
     },
     "price": 28.61,
     "title": "Cremin-Nikolaus"
   },
   {
+    "articlePicture": {
+      "id": 204
+    },
     "artists": {
       "id": 19,
       "name": "Rick Astley"
@@ -3666,12 +4278,15 @@
     },
     "id": 204,
     "picture": {
-      "id": 220
+      "id": 204
     },
     "price": 6.16,
     "title": "West-Corwin"
   },
   {
+    "articlePicture": {
+      "id": 205
+    },
     "artists": {
       "id": 39,
       "name": "Barbra Streisand"
@@ -3684,12 +4299,15 @@
     },
     "id": 205,
     "picture": {
-      "id": 221
+      "id": 205
     },
     "price": 27.32,
     "title": "Rowe, Blick and Crist"
   },
   {
+    "articlePicture": {
+      "id": 206
+    },
     "artists": {
       "id": 19,
       "name": "Rick Astley"
@@ -3702,12 +4320,15 @@
     },
     "id": 206,
     "picture": {
-      "id": 222
+      "id": 206
     },
     "price": 27.61,
     "title": "Connelly and Sons"
   },
   {
+    "articlePicture": {
+      "id": 207
+    },
     "artists": {
       "id": 44,
       "name": "Michael Jackson"
@@ -3720,12 +4341,15 @@
     },
     "id": 207,
     "picture": {
-      "id": 223
+      "id": 207
     },
     "price": 47.06,
     "title": "Simonis, Beier and Schuster"
   },
   {
+    "articlePicture": {
+      "id": 208
+    },
     "artists": {
       "id": 22,
       "name": "Dua Lipa"
@@ -3738,12 +4362,15 @@
     },
     "id": 208,
     "picture": {
-      "id": 224
+      "id": 208
     },
     "price": 13.14,
     "title": "Waelchi, O'Connell and Block"
   },
   {
+    "articlePicture": {
+      "id": 209
+    },
     "artists": {
       "id": 39,
       "name": "Barbra Streisand"
@@ -3756,12 +4383,15 @@
     },
     "id": 209,
     "picture": {
-      "id": 225
+      "id": 209
     },
     "price": 29.7,
     "title": "Cruickshank-Dickens"
   },
   {
+    "articlePicture": {
+      "id": 210
+    },
     "artists": {
       "id": 41,
       "name": "Pink Floyd"
@@ -3774,12 +4404,15 @@
     },
     "id": 210,
     "picture": {
-      "id": 226
+      "id": 210
     },
     "price": 26.54,
     "title": "Cassin-VonRueden"
   },
   {
+    "articlePicture": {
+      "id": 211
+    },
     "artists": {
       "id": 48,
       "name": "Elvis Presley"
@@ -3792,12 +4425,15 @@
     },
     "id": 211,
     "picture": {
-      "id": 227
+      "id": 211
     },
     "price": 22.8,
     "title": "Ziemann-Dickens"
   },
   {
+    "articlePicture": {
+      "id": 212
+    },
     "artists": {
       "id": 36,
       "name": "The Rolling Stones"
@@ -3810,12 +4446,15 @@
     },
     "id": 212,
     "picture": {
-      "id": 228
+      "id": 212
     },
     "price": 21.68,
     "title": "Schultz, Wunsch and Ritchie"
   },
   {
+    "articlePicture": {
+      "id": 213
+    },
     "artists": {
       "id": 3,
       "name": "Bon Jovi"
@@ -3828,12 +4467,15 @@
     },
     "id": 213,
     "picture": {
-      "id": 229
+      "id": 213
     },
     "price": 47.41,
     "title": "Schamberger-Brekke"
   },
   {
+    "articlePicture": {
+      "id": 214
+    },
     "artists": {
       "id": 32,
       "name": "Whitney Houston"
@@ -3846,12 +4488,15 @@
     },
     "id": 214,
     "picture": {
-      "id": 230
+      "id": 214
     },
     "price": 16.35,
     "title": "Langosh Group"
   },
   {
+    "articlePicture": {
+      "id": 215
+    },
     "artists": {
       "id": 30,
       "name": "Rihanna"
@@ -3864,12 +4509,15 @@
     },
     "id": 215,
     "picture": {
-      "id": 231
+      "id": 215
     },
     "price": 23.05,
     "title": "Ferry-Mante"
   },
   {
+    "articlePicture": {
+      "id": 216
+    },
     "artists": {
       "id": 26,
       "name": "Pitbull"
@@ -3882,12 +4530,15 @@
     },
     "id": 216,
     "picture": {
-      "id": 232
+      "id": 216
     },
     "price": 24.32,
     "title": "Wisoky, Veum and Ondricka"
   },
   {
+    "articlePicture": {
+      "id": 217
+    },
     "artists": {
       "id": 7,
       "name": "Tupac Shakur"
@@ -3900,12 +4551,15 @@
     },
     "id": 217,
     "picture": {
-      "id": 233
+      "id": 217
     },
     "price": 8.13,
     "title": "Ondricka Inc"
   },
   {
+    "articlePicture": {
+      "id": 218
+    },
     "artists": {
       "id": 25,
       "name": "257ers"
@@ -3918,12 +4572,15 @@
     },
     "id": 218,
     "picture": {
-      "id": 234
+      "id": 218
     },
     "price": 21.81,
     "title": "Kunze Inc"
   },
   {
+    "articlePicture": {
+      "id": 219
+    },
     "artists": {
       "id": 4,
       "name": "Queen"
@@ -3936,12 +4593,15 @@
     },
     "id": 219,
     "picture": {
-      "id": 235
+      "id": 219
     },
     "price": 9.87,
     "title": "Wiegand, Marks and Cummerata"
   },
   {
+    "articlePicture": {
+      "id": 220
+    },
     "artists": {
       "id": 50,
       "name": "The Beatles"
@@ -3954,12 +4614,15 @@
     },
     "id": 220,
     "picture": {
-      "id": 236
+      "id": 220
     },
     "price": 21.33,
     "title": "Johnston Group"
   },
   {
+    "articlePicture": {
+      "id": 221
+    },
     "artists": {
       "id": 46,
       "name": "Led Zeppelin"
@@ -3972,12 +4635,15 @@
     },
     "id": 221,
     "picture": {
-      "id": 237
+      "id": 221
     },
     "price": 15.3,
     "title": "Hagenes-Kohler"
   },
   {
+    "articlePicture": {
+      "id": 222
+    },
     "artists": {
       "id": 40,
       "name": "Macklemore"
@@ -3990,12 +4656,15 @@
     },
     "id": 222,
     "picture": {
-      "id": 238
+      "id": 222
     },
     "price": 43.65,
     "title": "Schamberger-Schmitt"
   },
   {
+    "articlePicture": {
+      "id": 223
+    },
     "artists": {
       "id": 49,
       "name": "Stromae"
@@ -4008,12 +4677,15 @@
     },
     "id": 223,
     "picture": {
-      "id": 239
+      "id": 223
     },
     "price": 13.91,
     "title": "Walker, Gislason and Kunze"
   },
   {
+    "articlePicture": {
+      "id": 224
+    },
     "artists": {
       "id": 22,
       "name": "Dua Lipa"
@@ -4026,12 +4698,15 @@
     },
     "id": 224,
     "picture": {
-      "id": 240
+      "id": 224
     },
     "price": 9.19,
     "title": "MacGyver and Sons"
   },
   {
+    "articlePicture": {
+      "id": 225
+    },
     "artists": {
       "id": 31,
       "name": "Van Halen"
@@ -4044,12 +4719,15 @@
     },
     "id": 225,
     "picture": {
-      "id": 241
+      "id": 225
     },
     "price": 12.82,
     "title": "Maggio and Sons"
   },
   {
+    "articlePicture": {
+      "id": 226
+    },
     "artists": {
       "id": 20,
       "name": "Taylor Swift"
@@ -4062,12 +4740,15 @@
     },
     "id": 226,
     "picture": {
-      "id": 242
+      "id": 226
     },
     "price": 12.88,
     "title": "Marquardt LLC"
   },
   {
+    "articlePicture": {
+      "id": 227
+    },
     "artists": {
       "id": 17,
       "name": "Shakira"
@@ -4080,12 +4761,15 @@
     },
     "id": 227,
     "picture": {
-      "id": 243
+      "id": 227
     },
     "price": 1.51,
     "title": "Keeling-Russel"
   },
   {
+    "articlePicture": {
+      "id": 228
+    },
     "artists": {
       "id": 27,
       "name": "Flo Rida"
@@ -4098,12 +4782,15 @@
     },
     "id": 228,
     "picture": {
-      "id": 244
+      "id": 228
     },
     "price": 27.96,
     "title": "Hauck, Hirthe and Flatley"
   },
   {
+    "articlePicture": {
+      "id": 229
+    },
     "artists": {
       "id": 5,
       "name": "Rammstein"
@@ -4116,12 +4803,15 @@
     },
     "id": 229,
     "picture": {
-      "id": 245
+      "id": 229
     },
     "price": 39.72,
     "title": "Price-Veum"
   },
   {
+    "articlePicture": {
+      "id": 230
+    },
     "artists": {
       "id": 48,
       "name": "Elvis Presley"
@@ -4134,12 +4824,15 @@
     },
     "id": 230,
     "picture": {
-      "id": 246
+      "id": 230
     },
     "price": 49.49,
     "title": "Gutkowski-McClure"
   },
   {
+    "articlePicture": {
+      "id": 231
+    },
     "artists": {
       "id": 35,
       "name": "Bruce Springsteen"
@@ -4152,12 +4845,15 @@
     },
     "id": 231,
     "picture": {
-      "id": 247
+      "id": 231
     },
     "price": 13.18,
     "title": "Moore LLC"
   },
   {
+    "articlePicture": {
+      "id": 232
+    },
     "artists": {
       "id": 33,
       "name": "Metallica"
@@ -4170,12 +4866,15 @@
     },
     "id": 232,
     "picture": {
-      "id": 248
+      "id": 232
     },
     "price": 11.01,
     "title": "Wilkinson-Ward"
   },
   {
+    "articlePicture": {
+      "id": 233
+    },
     "artists": {
       "id": 23,
       "name": "Falco"
@@ -4188,12 +4887,15 @@
     },
     "id": 233,
     "picture": {
-      "id": 249
+      "id": 233
     },
     "price": 37.86,
     "title": "Hammes-Bauch"
   },
   {
+    "articlePicture": {
+      "id": 234
+    },
     "artists": {
       "id": 39,
       "name": "Barbra Streisand"
@@ -4206,12 +4908,15 @@
     },
     "id": 234,
     "picture": {
-      "id": 250
+      "id": 234
     },
     "price": 46.73,
     "title": "Thiel-Welch"
   },
   {
+    "articlePicture": {
+      "id": 235
+    },
     "artists": {
       "id": 40,
       "name": "Macklemore"
@@ -4224,12 +4929,15 @@
     },
     "id": 235,
     "picture": {
-      "id": 251
+      "id": 235
     },
     "price": 13.12,
     "title": "Kerluke, Howell and Gerlach"
   },
   {
+    "articlePicture": {
+      "id": 236
+    },
     "artists": {
       "id": 6,
       "name": "Bob Dylan"
@@ -4242,12 +4950,15 @@
     },
     "id": 236,
     "picture": {
-      "id": 252
+      "id": 236
     },
     "price": 20.17,
     "title": "King-Roob"
   },
   {
+    "articlePicture": {
+      "id": 237
+    },
     "artists": {
       "id": 31,
       "name": "Van Halen"
@@ -4258,14 +4969,17 @@
       "id": 8,
       "name": "Metal"
     },
-    "id": 297,
+    "id": 237,
     "picture": {
-      "id": 313
+      "id": 237
     },
     "price": 28.68,
     "title": "Langworth Group"
   },
   {
+    "articlePicture": {
+      "id": 238
+    },
     "artists": {
       "id": 30,
       "name": "Rihanna"
@@ -4276,14 +4990,17 @@
       "id": 2,
       "name": "Country"
     },
-    "id": 237,
+    "id": 238,
     "picture": {
-      "id": 253
+      "id": 238
     },
     "price": 19.29,
     "title": "McCullough and Sons"
   },
   {
+    "articlePicture": {
+      "id": 239
+    },
     "artists": {
       "id": 41,
       "name": "Pink Floyd"
@@ -4294,14 +5011,17 @@
       "id": 2,
       "name": "Country"
     },
-    "id": 238,
+    "id": 239,
     "picture": {
-      "id": 254
+      "id": 239
     },
     "price": 35.17,
     "title": "Little LLC"
   },
   {
+    "articlePicture": {
+      "id": 240
+    },
     "artists": {
       "id": 32,
       "name": "Whitney Houston"
@@ -4312,14 +5032,17 @@
       "id": 2,
       "name": "Country"
     },
-    "id": 239,
+    "id": 240,
     "picture": {
-      "id": 255
+      "id": 240
     },
     "price": 42.37,
     "title": "Hane, Konopelski and Bauch"
   },
   {
+    "articlePicture": {
+      "id": 241
+    },
     "artists": {
       "id": 29,
       "name": "U2"
@@ -4330,14 +5053,17 @@
       "id": 16,
       "name": "Industrial"
     },
-    "id": 240,
+    "id": 241,
     "picture": {
-      "id": 256
+      "id": 241
     },
     "price": 15.17,
     "title": "Roob, Emard and Hagenes"
   },
   {
+    "articlePicture": {
+      "id": 242
+    },
     "artists": {
       "id": 42,
       "name": "ACDC"
@@ -4348,14 +5074,17 @@
       "id": 15,
       "name": "Reggae"
     },
-    "id": 241,
+    "id": 242,
     "picture": {
-      "id": 257
+      "id": 242
     },
     "price": 41.64,
     "title": "Pagac Group"
   },
   {
+    "articlePicture": {
+      "id": 243
+    },
     "artists": {
       "id": 36,
       "name": "The Rolling Stones"
@@ -4366,14 +5095,17 @@
       "id": 3,
       "name": "Electronic dance music"
     },
-    "id": 242,
+    "id": 243,
     "picture": {
-      "id": 258
+      "id": 243
     },
     "price": 25.21,
     "title": "Torphy, Ziemann and Mills"
   },
   {
+    "articlePicture": {
+      "id": 244
+    },
     "artists": {
       "id": 49,
       "name": "Stromae"
@@ -4384,14 +5116,17 @@
       "id": 1,
       "name": "Classical"
     },
-    "id": 243,
+    "id": 244,
     "picture": {
-      "id": 259
+      "id": 244
     },
     "price": 31.32,
     "title": "Kutch, Kris and Donnelly"
   },
   {
+    "articlePicture": {
+      "id": 245
+    },
     "artists": {
       "id": 5,
       "name": "Rammstein"
@@ -4402,14 +5137,17 @@
       "id": 7,
       "name": "K-pop"
     },
-    "id": 244,
+    "id": 245,
     "picture": {
-      "id": 260
+      "id": 245
     },
     "price": 20.36,
     "title": "Tremblay, Huel and Langworth"
   },
   {
+    "articlePicture": {
+      "id": 246
+    },
     "artists": {
       "id": 32,
       "name": "Whitney Houston"
@@ -4420,14 +5158,17 @@
       "id": 3,
       "name": "Electronic dance music"
     },
-    "id": 245,
+    "id": 246,
     "picture": {
-      "id": 261
+      "id": 246
     },
     "price": 43.31,
     "title": "Wiza-Trantow"
   },
   {
+    "articlePicture": {
+      "id": 247
+    },
     "artists": {
       "id": 47,
       "name": "Culcha Candela"
@@ -4438,14 +5179,17 @@
       "id": 14,
       "name": "Techno"
     },
-    "id": 246,
+    "id": 247,
     "picture": {
-      "id": 262
+      "id": 247
     },
     "price": 21.64,
     "title": "Heller-Cole"
   },
   {
+    "articlePicture": {
+      "id": 248
+    },
     "artists": {
       "id": 24,
       "name": "ABBA"
@@ -4456,14 +5200,17 @@
       "id": 1,
       "name": "Classical"
     },
-    "id": 247,
+    "id": 248,
     "picture": {
-      "id": 263
+      "id": 248
     },
     "price": 7.52,
     "title": "Crooks-Kuhlman"
   },
   {
+    "articlePicture": {
+      "id": 249
+    },
     "artists": {
       "id": 5,
       "name": "Rammstein"
@@ -4474,14 +5221,17 @@
       "id": 11,
       "name": "Rap"
     },
-    "id": 248,
+    "id": 249,
     "picture": {
-      "id": 264
+      "id": 249
     },
     "price": 17.63,
     "title": "Rutherford, Greenfelder and Lubowitz"
   },
   {
+    "articlePicture": {
+      "id": 250
+    },
     "artists": {
       "id": 30,
       "name": "Rihanna"
@@ -4492,14 +5242,17 @@
       "id": 8,
       "name": "Metal"
     },
-    "id": 249,
+    "id": 250,
     "picture": {
-      "id": 265
+      "id": 250
     },
     "price": 20.99,
     "title": "Littel and Sons"
   },
   {
+    "articlePicture": {
+      "id": 251
+    },
     "artists": {
       "id": 21,
       "name": "Eminem"
@@ -4510,14 +5263,17 @@
       "id": 8,
       "name": "Metal"
     },
-    "id": 250,
+    "id": 251,
     "picture": {
-      "id": 266
+      "id": 251
     },
     "price": 26.53,
     "title": "Howe, Ritchie and Schimmel"
   },
   {
+    "articlePicture": {
+      "id": 252
+    },
     "artists": {
       "id": 40,
       "name": "Macklemore"
@@ -4528,14 +5284,17 @@
       "id": 4,
       "name": "Hip-hop"
     },
-    "id": 251,
+    "id": 252,
     "picture": {
-      "id": 267
+      "id": 252
     },
     "price": 40.37,
     "title": "Towne Inc"
   },
   {
+    "articlePicture": {
+      "id": 253
+    },
     "artists": {
       "id": 29,
       "name": "U2"
@@ -4546,14 +5305,17 @@
       "id": 10,
       "name": "Pop"
     },
-    "id": 252,
+    "id": 253,
     "picture": {
-      "id": 268
+      "id": 253
     },
     "price": 45.25,
     "title": "Boyer, Wisozk and Buckridge"
   },
   {
+    "articlePicture": {
+      "id": 254
+    },
     "artists": {
       "id": 50,
       "name": "The Beatles"
@@ -4564,14 +5326,17 @@
       "id": 4,
       "name": "Hip-hop"
     },
-    "id": 253,
+    "id": 254,
     "picture": {
-      "id": 269
+      "id": 254
     },
     "price": 35.16,
     "title": "Gislason, White and Bode"
   },
   {
+    "articlePicture": {
+      "id": 255
+    },
     "artists": {
       "id": 49,
       "name": "Stromae"
@@ -4582,14 +5347,17 @@
       "id": 11,
       "name": "Rap"
     },
-    "id": 254,
+    "id": 255,
     "picture": {
-      "id": 270
+      "id": 255
     },
     "price": 19.26,
     "title": "Hills-Marks"
   },
   {
+    "articlePicture": {
+      "id": 256
+    },
     "artists": {
       "id": 45,
       "name": "Billy Joel"
@@ -4600,14 +5368,17 @@
       "id": 16,
       "name": "Industrial"
     },
-    "id": 255,
+    "id": 256,
     "picture": {
-      "id": 271
+      "id": 256
     },
     "price": 30.32,
     "title": "Gerlach, Bruen and Kuhn"
   },
   {
+    "articlePicture": {
+      "id": 257
+    },
     "artists": {
       "id": 39,
       "name": "Barbra Streisand"
@@ -4618,14 +5389,17 @@
       "id": 8,
       "name": "Metal"
     },
-    "id": 256,
+    "id": 257,
     "picture": {
-      "id": 272
+      "id": 257
     },
     "price": 1.54,
     "title": "D'Amore-Beier"
   },
   {
+    "articlePicture": {
+      "id": 258
+    },
     "artists": {
       "id": 43,
       "name": "Elton John"
@@ -4636,14 +5410,17 @@
       "id": 1,
       "name": "Classical"
     },
-    "id": 257,
+    "id": 258,
     "picture": {
-      "id": 273
+      "id": 258
     },
     "price": 9.0,
     "title": "Weissnat, Lakin and Jerde"
   },
   {
+    "articlePicture": {
+      "id": 259
+    },
     "artists": {
       "id": 6,
       "name": "Bob Dylan"
@@ -4654,14 +5431,17 @@
       "id": 4,
       "name": "Hip-hop"
     },
-    "id": 258,
+    "id": 259,
     "picture": {
-      "id": 274
+      "id": 259
     },
     "price": 49.46,
     "title": "Luettgen, Kling and Pollich"
   },
   {
+    "articlePicture": {
+      "id": 260
+    },
     "artists": {
       "id": 16,
       "name": "Adale"
@@ -4672,14 +5452,17 @@
       "id": 2,
       "name": "Country"
     },
-    "id": 259,
+    "id": 260,
     "picture": {
-      "id": 275
+      "id": 260
     },
     "price": 25.31,
     "title": "Borer-Hermiston"
   },
   {
+    "articlePicture": {
+      "id": 261
+    },
     "artists": {
       "id": 8,
       "name": "Backstreet Boys"
@@ -4690,14 +5473,17 @@
       "id": 14,
       "name": "Techno"
     },
-    "id": 260,
+    "id": 261,
     "picture": {
-      "id": 276
+      "id": 261
     },
     "price": 24.71,
     "title": "Langosh Group"
   },
   {
+    "articlePicture": {
+      "id": 262
+    },
     "artists": {
       "id": 39,
       "name": "Barbra Streisand"
@@ -4708,14 +5494,17 @@
       "id": 5,
       "name": "Indie rock"
     },
-    "id": 261,
+    "id": 262,
     "picture": {
-      "id": 277
+      "id": 262
     },
     "price": 33.85,
     "title": "Schamberger-Beier"
   },
   {
+    "articlePicture": {
+      "id": 263
+    },
     "artists": {
       "id": 14,
       "name": "Imagine Dragons"
@@ -4726,14 +5515,17 @@
       "id": 9,
       "name": "Oldies"
     },
-    "id": 262,
+    "id": 263,
     "picture": {
-      "id": 278
+      "id": 263
     },
     "price": 11.45,
     "title": "Collins LLC"
   },
   {
+    "articlePicture": {
+      "id": 264
+    },
     "artists": {
       "id": 9,
       "name": "Linkin Park"
@@ -4744,14 +5536,17 @@
       "id": 14,
       "name": "Techno"
     },
-    "id": 263,
+    "id": 264,
     "picture": {
-      "id": 279
+      "id": 264
     },
     "price": 6.74,
     "title": "Hayes, Nikolaus and Ziemann"
   },
   {
+    "articlePicture": {
+      "id": 265
+    },
     "artists": {
       "id": 45,
       "name": "Billy Joel"
@@ -4762,14 +5557,17 @@
       "id": 3,
       "name": "Electronic dance music"
     },
-    "id": 264,
+    "id": 265,
     "picture": {
-      "id": 280
+      "id": 265
     },
     "price": 7.12,
     "title": "Lubowitz-Deckow"
   },
   {
+    "articlePicture": {
+      "id": 266
+    },
     "artists": {
       "id": 34,
       "name": "Madonna"
@@ -4780,14 +5578,17 @@
       "id": 7,
       "name": "K-pop"
     },
-    "id": 265,
+    "id": 266,
     "picture": {
-      "id": 281
+      "id": 266
     },
     "price": 25.59,
     "title": "Beahan Group"
   },
   {
+    "articlePicture": {
+      "id": 267
+    },
     "artists": {
       "id": 43,
       "name": "Elton John"
@@ -4798,14 +5599,17 @@
       "id": 7,
       "name": "K-pop"
     },
-    "id": 266,
+    "id": 267,
     "picture": {
-      "id": 282
+      "id": 267
     },
     "price": 34.38,
     "title": "Sauer-Cassin"
   },
   {
+    "articlePicture": {
+      "id": 268
+    },
     "artists": {
       "id": 46,
       "name": "Led Zeppelin"
@@ -4816,14 +5620,17 @@
       "id": 8,
       "name": "Metal"
     },
-    "id": 267,
+    "id": 268,
     "picture": {
-      "id": 283
+      "id": 268
     },
     "price": 34.41,
     "title": "Rolfson, Waelchi and Konopelski"
   },
   {
+    "articlePicture": {
+      "id": 269
+    },
     "artists": {
       "id": 17,
       "name": "Shakira"
@@ -4834,14 +5641,17 @@
       "id": 13,
       "name": "Rock"
     },
-    "id": 268,
+    "id": 269,
     "picture": {
-      "id": 284
+      "id": 269
     },
     "price": 20.46,
     "title": "Gleichner and Sons"
   },
   {
+    "articlePicture": {
+      "id": 270
+    },
     "artists": {
       "id": 47,
       "name": "Culcha Candela"
@@ -4852,14 +5662,17 @@
       "id": 12,
       "name": "Rhythm and blues"
     },
-    "id": 269,
+    "id": 270,
     "picture": {
-      "id": 285
+      "id": 270
     },
     "price": 35.26,
     "title": "Schumm-Reichel"
   },
   {
+    "articlePicture": {
+      "id": 271
+    },
     "artists": {
       "id": 10,
       "name": "Alligatoah"
@@ -4870,14 +5683,17 @@
       "id": 11,
       "name": "Rap"
     },
-    "id": 270,
+    "id": 271,
     "picture": {
-      "id": 286
+      "id": 271
     },
     "price": 30.56,
     "title": "Turner-Douglas"
   },
   {
+    "articlePicture": {
+      "id": 272
+    },
     "artists": {
       "id": 48,
       "name": "Elvis Presley"
@@ -4888,14 +5704,17 @@
       "id": 4,
       "name": "Hip-hop"
     },
-    "id": 271,
+    "id": 272,
     "picture": {
-      "id": 287
+      "id": 272
     },
     "price": 10.37,
     "title": "Lockman-Ortiz"
   },
   {
+    "articlePicture": {
+      "id": 273
+    },
     "artists": {
       "id": 46,
       "name": "Led Zeppelin"
@@ -4906,14 +5725,17 @@
       "id": 14,
       "name": "Techno"
     },
-    "id": 272,
+    "id": 273,
     "picture": {
-      "id": 288
+      "id": 273
     },
     "price": 11.8,
     "title": "Ferry, Goyette and Quitzon"
   },
   {
+    "articlePicture": {
+      "id": 274
+    },
     "artists": {
       "id": 35,
       "name": "Bruce Springsteen"
@@ -4924,14 +5746,17 @@
       "id": 15,
       "name": "Reggae"
     },
-    "id": 273,
+    "id": 274,
     "picture": {
-      "id": 289
+      "id": 274
     },
     "price": 33.39,
     "title": "Hand-Marquardt"
   },
   {
+    "articlePicture": {
+      "id": 275
+    },
     "artists": {
       "id": 48,
       "name": "Elvis Presley"
@@ -4942,14 +5767,17 @@
       "id": 8,
       "name": "Metal"
     },
-    "id": 274,
+    "id": 275,
     "picture": {
-      "id": 290
+      "id": 275
     },
     "price": 28.19,
     "title": "Block and Sons"
   },
   {
+    "articlePicture": {
+      "id": 276
+    },
     "artists": {
       "id": 13,
       "name": "Deichkind"
@@ -4960,14 +5788,17 @@
       "id": 15,
       "name": "Reggae"
     },
-    "id": 275,
+    "id": 276,
     "picture": {
-      "id": 291
+      "id": 276
     },
     "price": 8.79,
     "title": "Welch and Sons"
   },
   {
+    "articlePicture": {
+      "id": 277
+    },
     "artists": {
       "id": 30,
       "name": "Rihanna"
@@ -4978,14 +5809,17 @@
       "id": 15,
       "name": "Reggae"
     },
-    "id": 276,
+    "id": 277,
     "picture": {
-      "id": 292
+      "id": 277
     },
     "price": 19.62,
     "title": "Hand and Sons"
   },
   {
+    "articlePicture": {
+      "id": 278
+    },
     "artists": {
       "id": 46,
       "name": "Led Zeppelin"
@@ -4996,14 +5830,17 @@
       "id": 12,
       "name": "Rhythm and blues"
     },
-    "id": 277,
+    "id": 278,
     "picture": {
-      "id": 293
+      "id": 278
     },
     "price": 44.41,
     "title": "Volkman, McDermott and Rogahn"
   },
   {
+    "articlePicture": {
+      "id": 279
+    },
     "artists": {
       "id": 39,
       "name": "Barbra Streisand"
@@ -5014,14 +5851,17 @@
       "id": 3,
       "name": "Electronic dance music"
     },
-    "id": 278,
+    "id": 279,
     "picture": {
-      "id": 294
+      "id": 279
     },
     "price": 27.95,
     "title": "Ziemann, Medhurst and Leannon"
   },
   {
+    "articlePicture": {
+      "id": 280
+    },
     "artists": {
       "id": 9,
       "name": "Linkin Park"
@@ -5032,14 +5872,17 @@
       "id": 13,
       "name": "Rock"
     },
-    "id": 279,
+    "id": 280,
     "picture": {
-      "id": 295
+      "id": 280
     },
     "price": 16.31,
     "title": "Osinski Group"
   },
   {
+    "articlePicture": {
+      "id": 281
+    },
     "artists": {
       "id": 2,
       "name": "Britney Spears"
@@ -5050,14 +5893,17 @@
       "id": 16,
       "name": "Industrial"
     },
-    "id": 280,
+    "id": 281,
     "picture": {
-      "id": 296
+      "id": 281
     },
     "price": 26.41,
     "title": "Cremin, Haag and O'Reilly"
   },
   {
+    "articlePicture": {
+      "id": 282
+    },
     "artists": {
       "id": 14,
       "name": "Imagine Dragons"
@@ -5068,14 +5914,17 @@
       "id": 9,
       "name": "Oldies"
     },
-    "id": 281,
+    "id": 282,
     "picture": {
-      "id": 297
+      "id": 282
     },
     "price": 34.15,
     "title": "Mosciski-Kemmer"
   },
   {
+    "articlePicture": {
+      "id": 283
+    },
     "artists": {
       "id": 26,
       "name": "Pitbull"
@@ -5086,14 +5935,17 @@
       "id": 4,
       "name": "Hip-hop"
     },
-    "id": 282,
+    "id": 283,
     "picture": {
-      "id": 298
+      "id": 283
     },
     "price": 49.68,
     "title": "Abbott, Halvorson and Hegmann"
   },
   {
+    "articlePicture": {
+      "id": 284
+    },
     "artists": {
       "id": 36,
       "name": "The Rolling Stones"
@@ -5104,14 +5956,17 @@
       "id": 2,
       "name": "Country"
     },
-    "id": 283,
+    "id": 284,
     "picture": {
-      "id": 299
+      "id": 284
     },
     "price": 20.37,
     "title": "Jaskolski, Kulas and Steuber"
   },
   {
+    "articlePicture": {
+      "id": 285
+    },
     "artists": {
       "id": 29,
       "name": "U2"
@@ -5122,14 +5977,17 @@
       "id": 5,
       "name": "Indie rock"
     },
-    "id": 284,
+    "id": 285,
     "picture": {
-      "id": 300
+      "id": 285
     },
     "price": 11.45,
     "title": "Johnson, Schulist and Will"
   },
   {
+    "articlePicture": {
+      "id": 286
+    },
     "artists": {
       "id": 17,
       "name": "Shakira"
@@ -5140,14 +5998,17 @@
       "id": 7,
       "name": "K-pop"
     },
-    "id": 285,
+    "id": 286,
     "picture": {
-      "id": 301
+      "id": 286
     },
     "price": 44.63,
     "title": "Pouros Group"
   },
   {
+    "articlePicture": {
+      "id": 287
+    },
     "artists": {
       "id": 25,
       "name": "257ers"
@@ -5158,14 +6019,17 @@
       "id": 3,
       "name": "Electronic dance music"
     },
-    "id": 286,
+    "id": 287,
     "picture": {
-      "id": 302
+      "id": 287
     },
     "price": 45.73,
     "title": "Wiegand, Bechtelar and Armstrong"
   },
   {
+    "articlePicture": {
+      "id": 288
+    },
     "artists": {
       "id": 35,
       "name": "Bruce Springsteen"
@@ -5176,14 +6040,17 @@
       "id": 2,
       "name": "Country"
     },
-    "id": 287,
+    "id": 288,
     "picture": {
-      "id": 303
+      "id": 288
     },
     "price": 16.71,
     "title": "Stehr, Konopelski and Huels"
   },
   {
+    "articlePicture": {
+      "id": 289
+    },
     "artists": {
       "id": 13,
       "name": "Deichkind"
@@ -5194,14 +6061,17 @@
       "id": 4,
       "name": "Hip-hop"
     },
-    "id": 288,
+    "id": 289,
     "picture": {
-      "id": 304
+      "id": 289
     },
     "price": 15.77,
     "title": "Denesik-Howe"
   },
   {
+    "articlePicture": {
+      "id": 290
+    },
     "artists": {
       "id": 45,
       "name": "Billy Joel"
@@ -5212,14 +6082,17 @@
       "id": 10,
       "name": "Pop"
     },
-    "id": 289,
+    "id": 290,
     "picture": {
-      "id": 305
+      "id": 290
     },
     "price": 10.89,
     "title": "Greenfelder, Bauch and Jones"
   },
   {
+    "articlePicture": {
+      "id": 291
+    },
     "artists": {
       "id": 40,
       "name": "Macklemore"
@@ -5230,14 +6103,17 @@
       "id": 10,
       "name": "Pop"
     },
-    "id": 290,
+    "id": 291,
     "picture": {
-      "id": 306
+      "id": 291
     },
     "price": 1.15,
     "title": "Daugherty Group"
   },
   {
+    "articlePicture": {
+      "id": 292
+    },
     "artists": {
       "id": 31,
       "name": "Van Halen"
@@ -5248,14 +6124,17 @@
       "id": 11,
       "name": "Rap"
     },
-    "id": 291,
+    "id": 292,
     "picture": {
-      "id": 307
+      "id": 292
     },
     "price": 18.44,
     "title": "Shanahan-Heaney"
   },
   {
+    "articlePicture": {
+      "id": 293
+    },
     "artists": {
       "id": 28,
       "name": "Celine Dion"
@@ -5266,14 +6145,17 @@
       "id": 7,
       "name": "K-pop"
     },
-    "id": 292,
+    "id": 293,
     "picture": {
-      "id": 308
+      "id": 293
     },
     "price": 17.07,
     "title": "Moen Inc"
   },
   {
+    "articlePicture": {
+      "id": 294
+    },
     "artists": {
       "id": 47,
       "name": "Culcha Candela"
@@ -5284,14 +6166,17 @@
       "id": 8,
       "name": "Metal"
     },
-    "id": 293,
+    "id": 294,
     "picture": {
-      "id": 309
+      "id": 294
     },
     "price": 11.57,
     "title": "Kemmer, Leffler and Barton"
   },
   {
+    "articlePicture": {
+      "id": 295
+    },
     "artists": {
       "id": 35,
       "name": "Bruce Springsteen"
@@ -5302,14 +6187,17 @@
       "id": 12,
       "name": "Rhythm and blues"
     },
-    "id": 294,
+    "id": 295,
     "picture": {
-      "id": 310
+      "id": 295
     },
     "price": 10.86,
     "title": "Kovacek Group"
   },
   {
+    "articlePicture": {
+      "id": 296
+    },
     "artists": {
       "id": 14,
       "name": "Imagine Dragons"
@@ -5320,14 +6208,17 @@
       "id": 12,
       "name": "Rhythm and blues"
     },
-    "id": 295,
+    "id": 296,
     "picture": {
-      "id": 311
+      "id": 296
     },
     "price": 1.93,
     "title": "Medhurst, Kling and Flatley"
   },
   {
+    "articlePicture": {
+      "id": 297
+    },
     "artists": {
       "id": 30,
       "name": "Rihanna"
@@ -5338,14 +6229,17 @@
       "id": 10,
       "name": "Pop"
     },
-    "id": 296,
+    "id": 297,
     "picture": {
-      "id": 312
+      "id": 297
     },
     "price": 11.25,
     "title": "Krajcik-Gleichner"
   },
   {
+    "articlePicture": {
+      "id": 298
+    },
     "artists": {
       "id": 24,
       "name": "ABBA"
@@ -5358,12 +6252,15 @@
     },
     "id": 298,
     "picture": {
-      "id": 314
+      "id": 298
     },
     "price": 16.19,
     "title": "Dicki, Wiza and Goodwin"
   },
   {
+    "articlePicture": {
+      "id": 299
+    },
     "artists": {
       "id": 36,
       "name": "The Rolling Stones"
@@ -5376,12 +6273,15 @@
     },
     "id": 299,
     "picture": {
-      "id": 315
+      "id": 299
     },
     "price": 47.82,
     "title": "Kuvalis-Shanahan"
   },
   {
+    "articlePicture": {
+      "id": 300
+    },
     "artists": {
       "id": 25,
       "name": "257ers"
@@ -5394,12 +6294,15 @@
     },
     "id": 300,
     "picture": {
-      "id": 316
+      "id": 300
     },
     "price": 13.34,
     "title": "Schmidt, Orn and Zulauf"
   },
   {
+    "articlePicture": {
+      "id": 301
+    },
     "artists": {
       "id": 45,
       "name": "Billy Joel"
@@ -5412,12 +6315,15 @@
     },
     "id": 301,
     "picture": {
-      "id": 317
+      "id": 301
     },
     "price": 27.62,
     "title": "Schmeler, Keebler and Fadel"
   },
   {
+    "articlePicture": {
+      "id": 302
+    },
     "artists": {
       "id": 39,
       "name": "Barbra Streisand"
@@ -5430,12 +6336,15 @@
     },
     "id": 302,
     "picture": {
-      "id": 318
+      "id": 302
     },
     "price": 31.91,
     "title": "Barton-Crona"
   },
   {
+    "articlePicture": {
+      "id": 303
+    },
     "artists": {
       "id": 41,
       "name": "Pink Floyd"
@@ -5448,12 +6357,15 @@
     },
     "id": 303,
     "picture": {
-      "id": 319
+      "id": 303
     },
     "price": 41.99,
     "title": "Hoppe, Strosin and Effertz"
   },
   {
+    "articlePicture": {
+      "id": 304
+    },
     "artists": {
       "id": 13,
       "name": "Deichkind"
@@ -5466,12 +6378,15 @@
     },
     "id": 304,
     "picture": {
-      "id": 320
+      "id": 304
     },
     "price": 45.56,
     "title": "Klein LLC"
   },
   {
+    "articlePicture": {
+      "id": 305
+    },
     "artists": {
       "id": 50,
       "name": "The Beatles"
@@ -5484,12 +6399,15 @@
     },
     "id": 305,
     "picture": {
-      "id": 321
+      "id": 305
     },
     "price": 12.13,
     "title": "Kiehn Group"
   },
   {
+    "articlePicture": {
+      "id": 306
+    },
     "artists": {
       "id": 28,
       "name": "Celine Dion"
@@ -5502,12 +6420,15 @@
     },
     "id": 306,
     "picture": {
-      "id": 322
+      "id": 306
     },
     "price": 22.31,
     "title": "Graham, Howell and Schmitt"
   },
   {
+    "articlePicture": {
+      "id": 307
+    },
     "artists": {
       "id": 43,
       "name": "Elton John"
@@ -5520,12 +6441,15 @@
     },
     "id": 307,
     "picture": {
-      "id": 323
+      "id": 307
     },
     "price": 14.1,
     "title": "Howe and Sons"
   },
   {
+    "articlePicture": {
+      "id": 308
+    },
     "artists": {
       "id": 26,
       "name": "Pitbull"
@@ -5538,12 +6462,15 @@
     },
     "id": 308,
     "picture": {
-      "id": 324
+      "id": 308
     },
     "price": 45.25,
     "title": "McClure, Maggio and Baumbach"
   },
   {
+    "articlePicture": {
+      "id": 309
+    },
     "artists": {
       "id": 13,
       "name": "Deichkind"
@@ -5556,12 +6483,15 @@
     },
     "id": 309,
     "picture": {
-      "id": 325
+      "id": 309
     },
     "price": 12.63,
     "title": "Ferry, Ankunding and Roberts"
   },
   {
+    "articlePicture": {
+      "id": 310
+    },
     "artists": {
       "id": 27,
       "name": "Flo Rida"
@@ -5574,12 +6504,15 @@
     },
     "id": 310,
     "picture": {
-      "id": 326
+      "id": 310
     },
     "price": 34.33,
     "title": "Olson-Cummings"
   },
   {
+    "articlePicture": {
+      "id": 311
+    },
     "artists": {
       "id": 20,
       "name": "Taylor Swift"
@@ -5592,12 +6525,15 @@
     },
     "id": 311,
     "picture": {
-      "id": 327
+      "id": 311
     },
     "price": 34.09,
     "title": "Hane, Crist and Donnelly"
   },
   {
+    "articlePicture": {
+      "id": 312
+    },
     "artists": {
       "id": 21,
       "name": "Eminem"
@@ -5610,12 +6546,15 @@
     },
     "id": 312,
     "picture": {
-      "id": 328
+      "id": 312
     },
     "price": 49.49,
     "title": "Kuhn, Bayer and Goyette"
   },
   {
+    "articlePicture": {
+      "id": 313
+    },
     "artists": {
       "id": 3,
       "name": "Bon Jovi"
@@ -5628,12 +6567,15 @@
     },
     "id": 313,
     "picture": {
-      "id": 329
+      "id": 313
     },
     "price": 22.5,
     "title": "Schmidt Inc"
   },
   {
+    "articlePicture": {
+      "id": 314
+    },
     "artists": {
       "id": 29,
       "name": "U2"
@@ -5646,12 +6588,15 @@
     },
     "id": 314,
     "picture": {
-      "id": 330
+      "id": 314
     },
     "price": 14.9,
     "title": "Lang, Mueller and Moore"
   },
   {
+    "articlePicture": {
+      "id": 315
+    },
     "artists": {
       "id": 15,
       "name": "Avicci"
@@ -5664,12 +6609,15 @@
     },
     "id": 315,
     "picture": {
-      "id": 331
+      "id": 315
     },
     "price": 21.96,
     "title": "Cremin and Sons"
   },
   {
+    "articlePicture": {
+      "id": 316
+    },
     "artists": {
       "id": 6,
       "name": "Bob Dylan"
@@ -5682,12 +6630,15 @@
     },
     "id": 316,
     "picture": {
-      "id": 332
+      "id": 316
     },
     "price": 27.53,
     "title": "Rolfson, Heller and Mayer"
   },
   {
+    "articlePicture": {
+      "id": 317
+    },
     "artists": {
       "id": 21,
       "name": "Eminem"
@@ -5700,12 +6651,15 @@
     },
     "id": 317,
     "picture": {
-      "id": 333
+      "id": 317
     },
     "price": 28.36,
     "title": "McGlynn Group"
   },
   {
+    "articlePicture": {
+      "id": 318
+    },
     "artists": {
       "id": 46,
       "name": "Led Zeppelin"
@@ -5718,12 +6672,15 @@
     },
     "id": 318,
     "picture": {
-      "id": 334
+      "id": 318
     },
     "price": 44.13,
     "title": "Ziemann Inc"
   },
   {
+    "articlePicture": {
+      "id": 319
+    },
     "artists": {
       "id": 23,
       "name": "Falco"
@@ -5736,12 +6693,15 @@
     },
     "id": 319,
     "picture": {
-      "id": 335
+      "id": 319
     },
     "price": 3.14,
     "title": "Mayert-Nikolaus"
   },
   {
+    "articlePicture": {
+      "id": 320
+    },
     "artists": {
       "id": 44,
       "name": "Michael Jackson"
@@ -5754,12 +6714,15 @@
     },
     "id": 320,
     "picture": {
-      "id": 336
+      "id": 320
     },
     "price": 16.36,
     "title": "Spinka LLC"
   },
   {
+    "articlePicture": {
+      "id": 321
+    },
     "artists": {
       "id": 38,
       "name": "DJ Snake"
@@ -5772,12 +6735,15 @@
     },
     "id": 321,
     "picture": {
-      "id": 337
+      "id": 321
     },
     "price": 44.46,
     "title": "Stamm-Wilderman"
   },
   {
+    "articlePicture": {
+      "id": 322
+    },
     "artists": {
       "id": 48,
       "name": "Elvis Presley"
@@ -5790,12 +6756,15 @@
     },
     "id": 322,
     "picture": {
-      "id": 338
+      "id": 322
     },
     "price": 16.58,
     "title": "Fay Inc"
   },
   {
+    "articlePicture": {
+      "id": 323
+    },
     "artists": {
       "id": 22,
       "name": "Dua Lipa"
@@ -5808,12 +6777,15 @@
     },
     "id": 323,
     "picture": {
-      "id": 339
+      "id": 323
     },
     "price": 45.0,
     "title": "Turcotte Inc"
   },
   {
+    "articlePicture": {
+      "id": 324
+    },
     "artists": {
       "id": 27,
       "name": "Flo Rida"
@@ -5826,12 +6798,15 @@
     },
     "id": 324,
     "picture": {
-      "id": 340
+      "id": 324
     },
     "price": 8.85,
     "title": "Batz and Sons"
   },
   {
+    "articlePicture": {
+      "id": 325
+    },
     "artists": {
       "id": 18,
       "name": "Kraftklub"
@@ -5844,12 +6819,15 @@
     },
     "id": 325,
     "picture": {
-      "id": 341
+      "id": 325
     },
     "price": 43.36,
     "title": "Johns Inc"
   },
   {
+    "articlePicture": {
+      "id": 326
+    },
     "artists": {
       "id": 19,
       "name": "Rick Astley"
@@ -5862,12 +6840,15 @@
     },
     "id": 326,
     "picture": {
-      "id": 342
+      "id": 326
     },
     "price": 26.2,
     "title": "Roberts LLC"
   },
   {
+    "articlePicture": {
+      "id": 327
+    },
     "artists": {
       "id": 49,
       "name": "Stromae"
@@ -5880,12 +6861,15 @@
     },
     "id": 327,
     "picture": {
-      "id": 343
+      "id": 327
     },
     "price": 27.34,
     "title": "Koch, Stanton and Kutch"
   },
   {
+    "articlePicture": {
+      "id": 328
+    },
     "artists": {
       "id": 17,
       "name": "Shakira"
@@ -5898,12 +6882,15 @@
     },
     "id": 328,
     "picture": {
-      "id": 344
+      "id": 328
     },
     "price": 25.25,
     "title": "Fritsch Group"
   },
   {
+    "articlePicture": {
+      "id": 329
+    },
     "artists": {
       "id": 26,
       "name": "Pitbull"
@@ -5916,12 +6903,15 @@
     },
     "id": 329,
     "picture": {
-      "id": 345
+      "id": 329
     },
     "price": 5.78,
     "title": "Veum-Macejkovic"
   },
   {
+    "articlePicture": {
+      "id": 330
+    },
     "artists": {
       "id": 31,
       "name": "Van Halen"
@@ -5934,12 +6924,15 @@
     },
     "id": 330,
     "picture": {
-      "id": 346
+      "id": 330
     },
     "price": 5.43,
     "title": "Volkman-Luettgen"
   },
   {
+    "articlePicture": {
+      "id": 331
+    },
     "artists": {
       "id": 10,
       "name": "Alligatoah"
@@ -5952,12 +6945,15 @@
     },
     "id": 331,
     "picture": {
-      "id": 347
+      "id": 331
     },
     "price": 36.51,
     "title": "Okuneva and Sons"
   },
   {
+    "articlePicture": {
+      "id": 332
+    },
     "artists": {
       "id": 41,
       "name": "Pink Floyd"
@@ -5970,12 +6966,15 @@
     },
     "id": 332,
     "picture": {
-      "id": 348
+      "id": 332
     },
     "price": 17.25,
     "title": "Gerhold-Simonis"
   },
   {
+    "articlePicture": {
+      "id": 333
+    },
     "artists": {
       "id": 13,
       "name": "Deichkind"
@@ -5988,12 +6987,15 @@
     },
     "id": 333,
     "picture": {
-      "id": 349
+      "id": 333
     },
     "price": 46.44,
     "title": "Gusikowski LLC"
   },
   {
+    "articlePicture": {
+      "id": 334
+    },
     "artists": {
       "id": 35,
       "name": "Bruce Springsteen"
@@ -6006,12 +7008,15 @@
     },
     "id": 334,
     "picture": {
-      "id": 350
+      "id": 334
     },
     "price": 16.18,
     "title": "Bosco-Schuppe"
   },
   {
+    "articlePicture": {
+      "id": 335
+    },
     "artists": {
       "id": 17,
       "name": "Shakira"
@@ -6024,12 +7029,15 @@
     },
     "id": 335,
     "picture": {
-      "id": 351
+      "id": 335
     },
     "price": 46.36,
     "title": "Ziemann Inc"
   },
   {
+    "articlePicture": {
+      "id": 336
+    },
     "artists": {
       "id": 1,
       "name": "Die Ärzte"
@@ -6042,12 +7050,15 @@
     },
     "id": 336,
     "picture": {
-      "id": 352
+      "id": 336
     },
     "price": 20.33,
     "title": "Lebsack, Carter and Cremin"
   },
   {
+    "articlePicture": {
+      "id": 337
+    },
     "artists": {
       "id": 45,
       "name": "Billy Joel"
@@ -6060,12 +7071,15 @@
     },
     "id": 337,
     "picture": {
-      "id": 353
+      "id": 337
     },
     "price": 28.78,
     "title": "Crona LLC"
   },
   {
+    "articlePicture": {
+      "id": 338
+    },
     "artists": {
       "id": 3,
       "name": "Bon Jovi"
@@ -6078,12 +7092,15 @@
     },
     "id": 338,
     "picture": {
-      "id": 354
+      "id": 338
     },
     "price": 34.17,
     "title": "Cassin, Wiegand and Hills"
   },
   {
+    "articlePicture": {
+      "id": 339
+    },
     "artists": {
       "id": 18,
       "name": "Kraftklub"
@@ -6096,12 +7113,15 @@
     },
     "id": 339,
     "picture": {
-      "id": 355
+      "id": 339
     },
     "price": 26.25,
     "title": "Cruickshank-Cummerata"
   },
   {
+    "articlePicture": {
+      "id": 340
+    },
     "artists": {
       "id": 6,
       "name": "Bob Dylan"
@@ -6114,12 +7134,15 @@
     },
     "id": 340,
     "picture": {
-      "id": 356
+      "id": 340
     },
     "price": 34.14,
     "title": "Stokes, Lueilwitz and McGlynn"
   },
   {
+    "articlePicture": {
+      "id": 341
+    },
     "artists": {
       "id": 34,
       "name": "Madonna"
@@ -6132,12 +7155,15 @@
     },
     "id": 341,
     "picture": {
-      "id": 357
+      "id": 341
     },
     "price": 35.75,
     "title": "Upton, Bradtke and Dickinson"
   },
   {
+    "articlePicture": {
+      "id": 342
+    },
     "artists": {
       "id": 15,
       "name": "Avicci"
@@ -6150,12 +7176,15 @@
     },
     "id": 342,
     "picture": {
-      "id": 358
+      "id": 342
     },
     "price": 34.44,
     "title": "Parisian-Bogan"
   },
   {
+    "articlePicture": {
+      "id": 343
+    },
     "artists": {
       "id": 12,
       "name": "Sia"
@@ -6168,12 +7197,15 @@
     },
     "id": 343,
     "picture": {
-      "id": 359
+      "id": 343
     },
     "price": 20.92,
     "title": "Auer Group"
   },
   {
+    "articlePicture": {
+      "id": 344
+    },
     "artists": {
       "id": 11,
       "name": "David Guetta"
@@ -6186,12 +7218,15 @@
     },
     "id": 344,
     "picture": {
-      "id": 360
+      "id": 344
     },
     "price": 20.56,
     "title": "Shields-Simonis"
   },
   {
+    "articlePicture": {
+      "id": 345
+    },
     "artists": {
       "id": 11,
       "name": "David Guetta"
@@ -6204,12 +7239,15 @@
     },
     "id": 345,
     "picture": {
-      "id": 361
+      "id": 345
     },
     "price": 35.05,
     "title": "Ruecker, Koss and Volkman"
   },
   {
+    "articlePicture": {
+      "id": 346
+    },
     "artists": {
       "id": 17,
       "name": "Shakira"
@@ -6222,12 +7260,15 @@
     },
     "id": 346,
     "picture": {
-      "id": 362
+      "id": 346
     },
     "price": 34.21,
     "title": "Zemlak-Collier"
   },
   {
+    "articlePicture": {
+      "id": 347
+    },
     "artists": {
       "id": 39,
       "name": "Barbra Streisand"
@@ -6240,12 +7281,15 @@
     },
     "id": 347,
     "picture": {
-      "id": 363
+      "id": 347
     },
     "price": 1.95,
     "title": "Bogan Group"
   },
   {
+    "articlePicture": {
+      "id": 348
+    },
     "artists": {
       "id": 49,
       "name": "Stromae"
@@ -6258,12 +7302,15 @@
     },
     "id": 348,
     "picture": {
-      "id": 364
+      "id": 348
     },
     "price": 13.69,
     "title": "Fritsch-Welch"
   },
   {
+    "articlePicture": {
+      "id": 349
+    },
     "artists": {
       "id": 17,
       "name": "Shakira"
@@ -6276,12 +7323,15 @@
     },
     "id": 349,
     "picture": {
-      "id": 365
+      "id": 349
     },
     "price": 30.86,
     "title": "Goodwin, Hauck and Prohaska"
   },
   {
+    "articlePicture": {
+      "id": 350
+    },
     "artists": {
       "id": 10,
       "name": "Alligatoah"
@@ -6294,12 +7344,15 @@
     },
     "id": 350,
     "picture": {
-      "id": 366
+      "id": 350
     },
     "price": 31.14,
     "title": "Nitzsche, O'Reilly and Nikolaus"
   },
   {
+    "articlePicture": {
+      "id": 351
+    },
     "artists": {
       "id": 23,
       "name": "Falco"
@@ -6312,12 +7365,15 @@
     },
     "id": 351,
     "picture": {
-      "id": 367
+      "id": 351
     },
     "price": 16.83,
     "title": "Witting, Bashirian and Grimes"
   },
   {
+    "articlePicture": {
+      "id": 352
+    },
     "artists": {
       "id": 50,
       "name": "The Beatles"
@@ -6330,12 +7386,15 @@
     },
     "id": 352,
     "picture": {
-      "id": 368
+      "id": 352
     },
     "price": 18.84,
     "title": "Wisoky, Wilkinson and Vandervort"
   },
   {
+    "articlePicture": {
+      "id": 353
+    },
     "artists": {
       "id": 45,
       "name": "Billy Joel"
@@ -6348,12 +7407,15 @@
     },
     "id": 353,
     "picture": {
-      "id": 369
+      "id": 353
     },
     "price": 44.97,
     "title": "Kilback-Krajcik"
   },
   {
+    "articlePicture": {
+      "id": 354
+    },
     "artists": {
       "id": 17,
       "name": "Shakira"
@@ -6366,12 +7428,15 @@
     },
     "id": 354,
     "picture": {
-      "id": 370
+      "id": 354
     },
     "price": 17.58,
     "title": "Johnston-Hane"
   },
   {
+    "articlePicture": {
+      "id": 355
+    },
     "artists": {
       "id": 50,
       "name": "The Beatles"
@@ -6384,12 +7449,15 @@
     },
     "id": 355,
     "picture": {
-      "id": 371
+      "id": 355
     },
     "price": 16.74,
     "title": "Durgan, Nolan and Reinger"
   },
   {
+    "articlePicture": {
+      "id": 356
+    },
     "artists": {
       "id": 45,
       "name": "Billy Joel"
@@ -6402,12 +7470,15 @@
     },
     "id": 356,
     "picture": {
-      "id": 372
+      "id": 356
     },
     "price": 39.61,
     "title": "Witting Inc"
   },
   {
+    "articlePicture": {
+      "id": 357
+    },
     "artists": {
       "id": 21,
       "name": "Eminem"
@@ -6420,12 +7491,15 @@
     },
     "id": 357,
     "picture": {
-      "id": 373
+      "id": 357
     },
     "price": 37.07,
     "title": "Heidenreich, Hilll and O'Keefe"
   },
   {
+    "articlePicture": {
+      "id": 358
+    },
     "artists": {
       "id": 18,
       "name": "Kraftklub"
@@ -6438,12 +7512,15 @@
     },
     "id": 358,
     "picture": {
-      "id": 374
+      "id": 358
     },
     "price": 1.97,
     "title": "Schuppe Inc"
   },
   {
+    "articlePicture": {
+      "id": 359
+    },
     "artists": {
       "id": 45,
       "name": "Billy Joel"
@@ -6456,12 +7533,15 @@
     },
     "id": 359,
     "picture": {
-      "id": 375
+      "id": 359
     },
     "price": 39.21,
     "title": "Hirthe and Sons"
   },
   {
+    "articlePicture": {
+      "id": 360
+    },
     "artists": {
       "id": 43,
       "name": "Elton John"
@@ -6474,12 +7554,15 @@
     },
     "id": 360,
     "picture": {
-      "id": 376
+      "id": 360
     },
     "price": 19.63,
     "title": "Bruen, Schneider and Gusikowski"
   },
   {
+    "articlePicture": {
+      "id": 361
+    },
     "artists": {
       "id": 5,
       "name": "Rammstein"
@@ -6492,12 +7575,15 @@
     },
     "id": 361,
     "picture": {
-      "id": 377
+      "id": 361
     },
     "price": 1.36,
     "title": "Bayer-Willms"
   },
   {
+    "articlePicture": {
+      "id": 362
+    },
     "artists": {
       "id": 40,
       "name": "Macklemore"
@@ -6510,12 +7596,15 @@
     },
     "id": 362,
     "picture": {
-      "id": 378
+      "id": 362
     },
     "price": 46.45,
     "title": "Buckridge, Fritsch and Lueilwitz"
   },
   {
+    "articlePicture": {
+      "id": 363
+    },
     "artists": {
       "id": 45,
       "name": "Billy Joel"
@@ -6528,12 +7617,15 @@
     },
     "id": 363,
     "picture": {
-      "id": 379
+      "id": 363
     },
     "price": 17.8,
     "title": "Bins-Doyle"
   },
   {
+    "articlePicture": {
+      "id": 364
+    },
     "artists": {
       "id": 45,
       "name": "Billy Joel"
@@ -6546,12 +7638,15 @@
     },
     "id": 364,
     "picture": {
-      "id": 380
+      "id": 364
     },
     "price": 30.7,
     "title": "Goodwin, Hane and Gaylord"
   },
   {
+    "articlePicture": {
+      "id": 365
+    },
     "artists": {
       "id": 2,
       "name": "Britney Spears"
@@ -6564,12 +7659,15 @@
     },
     "id": 365,
     "picture": {
-      "id": 381
+      "id": 365
     },
     "price": 5.95,
     "title": "Cruickshank-McClure"
   },
   {
+    "articlePicture": {
+      "id": 366
+    },
     "artists": {
       "id": 10,
       "name": "Alligatoah"
@@ -6582,12 +7680,15 @@
     },
     "id": 366,
     "picture": {
-      "id": 382
+      "id": 366
     },
     "price": 14.93,
     "title": "Stark Group"
   },
   {
+    "articlePicture": {
+      "id": 367
+    },
     "artists": {
       "id": 21,
       "name": "Eminem"
@@ -6600,12 +7701,15 @@
     },
     "id": 367,
     "picture": {
-      "id": 383
+      "id": 367
     },
     "price": 39.57,
     "title": "Pouros, Strosin and Will"
   },
   {
+    "articlePicture": {
+      "id": 368
+    },
     "artists": {
       "id": 31,
       "name": "Van Halen"
@@ -6618,12 +7722,15 @@
     },
     "id": 368,
     "picture": {
-      "id": 384
+      "id": 368
     },
     "price": 28.15,
     "title": "Schaefer and Sons"
   },
   {
+    "articlePicture": {
+      "id": 369
+    },
     "artists": {
       "id": 24,
       "name": "ABBA"
@@ -6636,12 +7743,15 @@
     },
     "id": 369,
     "picture": {
-      "id": 385
+      "id": 369
     },
     "price": 5.3,
     "title": "Runolfsdottir, Huel and Bednar"
   },
   {
+    "articlePicture": {
+      "id": 370
+    },
     "artists": {
       "id": 34,
       "name": "Madonna"
@@ -6654,12 +7764,15 @@
     },
     "id": 370,
     "picture": {
-      "id": 386
+      "id": 370
     },
     "price": 3.72,
     "title": "Hyatt Group"
   },
   {
+    "articlePicture": {
+      "id": 371
+    },
     "artists": {
       "id": 15,
       "name": "Avicci"
@@ -6672,12 +7785,15 @@
     },
     "id": 371,
     "picture": {
-      "id": 387
+      "id": 371
     },
     "price": 21.63,
     "title": "Eichmann, Stracke and Predovic"
   },
   {
+    "articlePicture": {
+      "id": 372
+    },
     "artists": {
       "id": 21,
       "name": "Eminem"
@@ -6690,12 +7806,15 @@
     },
     "id": 372,
     "picture": {
-      "id": 388
+      "id": 372
     },
     "price": 8.17,
     "title": "Dare-Veum"
   },
   {
+    "articlePicture": {
+      "id": 373
+    },
     "artists": {
       "id": 48,
       "name": "Elvis Presley"
@@ -6708,12 +7827,15 @@
     },
     "id": 373,
     "picture": {
-      "id": 389
+      "id": 373
     },
     "price": 40.9,
     "title": "Murray LLC"
   },
   {
+    "articlePicture": {
+      "id": 374
+    },
     "artists": {
       "id": 2,
       "name": "Britney Spears"
@@ -6726,12 +7848,15 @@
     },
     "id": 374,
     "picture": {
-      "id": 390
+      "id": 374
     },
     "price": 11.67,
     "title": "Predovic Inc"
   },
   {
+    "articlePicture": {
+      "id": 375
+    },
     "artists": {
       "id": 13,
       "name": "Deichkind"
@@ -6744,12 +7869,15 @@
     },
     "id": 375,
     "picture": {
-      "id": 391
+      "id": 375
     },
     "price": 36.48,
     "title": "Luettgen-Wolff"
   },
   {
+    "articlePicture": {
+      "id": 376
+    },
     "artists": {
       "id": 47,
       "name": "Culcha Candela"
@@ -6762,12 +7890,15 @@
     },
     "id": 376,
     "picture": {
-      "id": 392
+      "id": 376
     },
     "price": 33.02,
     "title": "Murray, Pacocha and Altenwerth"
   },
   {
+    "articlePicture": {
+      "id": 377
+    },
     "artists": {
       "id": 8,
       "name": "Backstreet Boys"
@@ -6780,12 +7911,15 @@
     },
     "id": 377,
     "picture": {
-      "id": 393
+      "id": 377
     },
     "price": 6.92,
     "title": "Abbott, Torphy and Gusikowski"
   },
   {
+    "articlePicture": {
+      "id": 378
+    },
     "artists": {
       "id": 3,
       "name": "Bon Jovi"
@@ -6798,12 +7932,15 @@
     },
     "id": 378,
     "picture": {
-      "id": 394
+      "id": 378
     },
     "price": 42.0,
     "title": "Bins and Sons"
   },
   {
+    "articlePicture": {
+      "id": 379
+    },
     "artists": {
       "id": 43,
       "name": "Elton John"
@@ -6816,12 +7953,15 @@
     },
     "id": 379,
     "picture": {
-      "id": 395
+      "id": 379
     },
     "price": 27.53,
     "title": "Adams, Swift and Harber"
   },
   {
+    "articlePicture": {
+      "id": 380
+    },
     "artists": {
       "id": 21,
       "name": "Eminem"
@@ -6834,12 +7974,15 @@
     },
     "id": 380,
     "picture": {
-      "id": 396
+      "id": 380
     },
     "price": 14.17,
     "title": "Metz, Cruickshank and Mitchell"
   },
   {
+    "articlePicture": {
+      "id": 381
+    },
     "artists": {
       "id": 4,
       "name": "Queen"
@@ -6852,12 +7995,15 @@
     },
     "id": 381,
     "picture": {
-      "id": 397
+      "id": 381
     },
     "price": 31.17,
     "title": "Ward-Greenholt"
   },
   {
+    "articlePicture": {
+      "id": 382
+    },
     "artists": {
       "id": 37,
       "name": "Peter Fox"
@@ -6870,12 +8016,15 @@
     },
     "id": 382,
     "picture": {
-      "id": 398
+      "id": 382
     },
     "price": 30.24,
     "title": "Dickinson Group"
   },
   {
+    "articlePicture": {
+      "id": 383
+    },
     "artists": {
       "id": 25,
       "name": "257ers"
@@ -6888,12 +8037,15 @@
     },
     "id": 383,
     "picture": {
-      "id": 399
+      "id": 383
     },
     "price": 44.52,
     "title": "D'Amore-Lakin"
   },
   {
+    "articlePicture": {
+      "id": 384
+    },
     "artists": {
       "id": 39,
       "name": "Barbra Streisand"
@@ -6906,12 +8058,15 @@
     },
     "id": 384,
     "picture": {
-      "id": 400
+      "id": 384
     },
     "price": 13.3,
     "title": "Gerhold-Turcotte"
   },
   {
+    "articlePicture": {
+      "id": 385
+    },
     "artists": {
       "id": 35,
       "name": "Bruce Springsteen"
@@ -6924,12 +8079,15 @@
     },
     "id": 385,
     "picture": {
-      "id": 401
+      "id": 385
     },
     "price": 45.89,
     "title": "Hirthe, Moen and Kassulke"
   },
   {
+    "articlePicture": {
+      "id": 386
+    },
     "artists": {
       "id": 44,
       "name": "Michael Jackson"
@@ -6942,12 +8100,15 @@
     },
     "id": 386,
     "picture": {
-      "id": 402
+      "id": 386
     },
     "price": 32.23,
     "title": "Skiles, Witting and Roberts"
   },
   {
+    "articlePicture": {
+      "id": 387
+    },
     "artists": {
       "id": 4,
       "name": "Queen"
@@ -6960,12 +8121,15 @@
     },
     "id": 387,
     "picture": {
-      "id": 403
+      "id": 387
     },
     "price": 24.2,
     "title": "Larson LLC"
   },
   {
+    "articlePicture": {
+      "id": 388
+    },
     "artists": {
       "id": 50,
       "name": "The Beatles"
@@ -6978,12 +8142,15 @@
     },
     "id": 388,
     "picture": {
-      "id": 404
+      "id": 388
     },
     "price": 15.22,
     "title": "Goyette-Dietrich"
   },
   {
+    "articlePicture": {
+      "id": 389
+    },
     "artists": {
       "id": 34,
       "name": "Madonna"
@@ -6996,12 +8163,15 @@
     },
     "id": 389,
     "picture": {
-      "id": 405
+      "id": 389
     },
     "price": 23.36,
     "title": "Schultz Group"
   },
   {
+    "articlePicture": {
+      "id": 390
+    },
     "artists": {
       "id": 11,
       "name": "David Guetta"
@@ -7014,12 +8184,15 @@
     },
     "id": 390,
     "picture": {
-      "id": 406
+      "id": 390
     },
     "price": 34.32,
     "title": "Wehner-Leffler"
   },
   {
+    "articlePicture": {
+      "id": 391
+    },
     "artists": {
       "id": 21,
       "name": "Eminem"
@@ -7032,12 +8205,15 @@
     },
     "id": 391,
     "picture": {
-      "id": 407
+      "id": 391
     },
     "price": 15.82,
     "title": "Schmeler-Welch"
   },
   {
+    "articlePicture": {
+      "id": 392
+    },
     "artists": {
       "id": 39,
       "name": "Barbra Streisand"
@@ -7050,12 +8226,15 @@
     },
     "id": 392,
     "picture": {
-      "id": 408
+      "id": 392
     },
     "price": 38.93,
     "title": "Zboncak-Murazik"
   },
   {
+    "articlePicture": {
+      "id": 393
+    },
     "artists": {
       "id": 21,
       "name": "Eminem"
@@ -7068,12 +8247,15 @@
     },
     "id": 393,
     "picture": {
-      "id": 409
+      "id": 393
     },
     "price": 24.62,
     "title": "Murray-Erdman"
   },
   {
+    "articlePicture": {
+      "id": 394
+    },
     "artists": {
       "id": 43,
       "name": "Elton John"
@@ -7086,12 +8268,15 @@
     },
     "id": 394,
     "picture": {
-      "id": 410
+      "id": 394
     },
     "price": 24.08,
     "title": "Greenfelder Inc"
   },
   {
+    "articlePicture": {
+      "id": 395
+    },
     "artists": {
       "id": 6,
       "name": "Bob Dylan"
@@ -7104,12 +8289,15 @@
     },
     "id": 395,
     "picture": {
-      "id": 411
+      "id": 395
     },
     "price": 23.36,
     "title": "Doyle, Nolan and Grimes"
   },
   {
+    "articlePicture": {
+      "id": 396
+    },
     "artists": {
       "id": 30,
       "name": "Rihanna"
@@ -7122,12 +8310,15 @@
     },
     "id": 396,
     "picture": {
-      "id": 412
+      "id": 396
     },
     "price": 31.39,
     "title": "Kuhlman, Rempel and Keeling"
   },
   {
+    "articlePicture": {
+      "id": 397
+    },
     "artists": {
       "id": 27,
       "name": "Flo Rida"
@@ -7140,12 +8331,15 @@
     },
     "id": 397,
     "picture": {
-      "id": 413
+      "id": 397
     },
     "price": 23.51,
     "title": "Jacobs, Upton and Halvorson"
   },
   {
+    "articlePicture": {
+      "id": 398
+    },
     "artists": {
       "id": 34,
       "name": "Madonna"
@@ -7158,12 +8352,15 @@
     },
     "id": 398,
     "picture": {
-      "id": 414
+      "id": 398
     },
     "price": 6.54,
     "title": "Shanahan Group"
   },
   {
+    "articlePicture": {
+      "id": 399
+    },
     "artists": {
       "id": 35,
       "name": "Bruce Springsteen"
@@ -7176,12 +8373,15 @@
     },
     "id": 399,
     "picture": {
-      "id": 415
+      "id": 399
     },
     "price": 46.88,
     "title": "Collins-Rau"
   },
   {
+    "articlePicture": {
+      "id": 400
+    },
     "artists": {
       "id": 18,
       "name": "Kraftklub"
@@ -7194,12 +8394,15 @@
     },
     "id": 400,
     "picture": {
-      "id": 416
+      "id": 400
     },
     "price": 24.56,
     "title": "McCullough, Little and Veum"
   },
   {
+    "articlePicture": {
+      "id": 401
+    },
     "artists": {
       "id": 11,
       "name": "David Guetta"
@@ -7212,12 +8415,15 @@
     },
     "id": 401,
     "picture": {
-      "id": 417
+      "id": 401
     },
     "price": 20.88,
     "title": "Wolff, Skiles and Lesch"
   },
   {
+    "articlePicture": {
+      "id": 402
+    },
     "artists": {
       "id": 32,
       "name": "Whitney Houston"
@@ -7230,12 +8436,15 @@
     },
     "id": 402,
     "picture": {
-      "id": 418
+      "id": 402
     },
     "price": 30.7,
     "title": "Sawayn, Green and Upton"
   },
   {
+    "articlePicture": {
+      "id": 403
+    },
     "artists": {
       "id": 6,
       "name": "Bob Dylan"
@@ -7248,12 +8457,15 @@
     },
     "id": 403,
     "picture": {
-      "id": 419
+      "id": 403
     },
     "price": 22.74,
     "title": "Dickens, Kautzer and Johnson"
   },
   {
+    "articlePicture": {
+      "id": 404
+    },
     "artists": {
       "id": 18,
       "name": "Kraftklub"
@@ -7266,12 +8478,15 @@
     },
     "id": 404,
     "picture": {
-      "id": 420
+      "id": 404
     },
     "price": 44.75,
     "title": "Keebler, Gutmann and Herman"
   },
   {
+    "articlePicture": {
+      "id": 405
+    },
     "artists": {
       "id": 37,
       "name": "Peter Fox"
@@ -7284,12 +8499,15 @@
     },
     "id": 405,
     "picture": {
-      "id": 421
+      "id": 405
     },
     "price": 45.97,
     "title": "Simonis, O'Hara and Marks"
   },
   {
+    "articlePicture": {
+      "id": 406
+    },
     "artists": {
       "id": 17,
       "name": "Shakira"
@@ -7302,12 +8520,15 @@
     },
     "id": 406,
     "picture": {
-      "id": 422
+      "id": 406
     },
     "price": 23.67,
     "title": "Cole LLC"
   },
   {
+    "articlePicture": {
+      "id": 407
+    },
     "artists": {
       "id": 48,
       "name": "Elvis Presley"
@@ -7320,12 +8541,15 @@
     },
     "id": 407,
     "picture": {
-      "id": 423
+      "id": 407
     },
     "price": 48.33,
     "title": "Schultz Inc"
   },
   {
+    "articlePicture": {
+      "id": 408
+    },
     "artists": {
       "id": 21,
       "name": "Eminem"
@@ -7338,12 +8562,15 @@
     },
     "id": 408,
     "picture": {
-      "id": 424
+      "id": 408
     },
     "price": 2.06,
     "title": "Hoppe, Gutkowski and Pfannerstill"
   },
   {
+    "articlePicture": {
+      "id": 409
+    },
     "artists": {
       "id": 33,
       "name": "Metallica"
@@ -7356,12 +8583,15 @@
     },
     "id": 409,
     "picture": {
-      "id": 425
+      "id": 409
     },
     "price": 9.1,
     "title": "Cremin and Sons"
   },
   {
+    "articlePicture": {
+      "id": 410
+    },
     "artists": {
       "id": 22,
       "name": "Dua Lipa"
@@ -7374,12 +8604,15 @@
     },
     "id": 410,
     "picture": {
-      "id": 426
+      "id": 410
     },
     "price": 46.39,
     "title": "Parker, Stracke and Cole"
   },
   {
+    "articlePicture": {
+      "id": 411
+    },
     "artists": {
       "id": 2,
       "name": "Britney Spears"
@@ -7392,12 +8625,15 @@
     },
     "id": 411,
     "picture": {
-      "id": 427
+      "id": 411
     },
     "price": 8.55,
     "title": "Wiza Inc"
   },
   {
+    "articlePicture": {
+      "id": 412
+    },
     "artists": {
       "id": 3,
       "name": "Bon Jovi"
@@ -7410,12 +8646,15 @@
     },
     "id": 412,
     "picture": {
-      "id": 428
+      "id": 412
     },
     "price": 11.74,
     "title": "Treutel-Friesen"
   },
   {
+    "articlePicture": {
+      "id": 413
+    },
     "artists": {
       "id": 43,
       "name": "Elton John"
@@ -7428,12 +8667,15 @@
     },
     "id": 413,
     "picture": {
-      "id": 429
+      "id": 413
     },
     "price": 10.92,
     "title": "Konopelski and Sons"
   },
   {
+    "articlePicture": {
+      "id": 414
+    },
     "artists": {
       "id": 50,
       "name": "The Beatles"
@@ -7446,12 +8688,15 @@
     },
     "id": 414,
     "picture": {
-      "id": 430
+      "id": 414
     },
     "price": 31.19,
     "title": "Senger and Sons"
   },
   {
+    "articlePicture": {
+      "id": 415
+    },
     "artists": {
       "id": 37,
       "name": "Peter Fox"
@@ -7464,12 +8709,15 @@
     },
     "id": 415,
     "picture": {
-      "id": 431
+      "id": 415
     },
     "price": 14.28,
     "title": "Padberg Group"
   },
   {
+    "articlePicture": {
+      "id": 416
+    },
     "artists": {
       "id": 1,
       "name": "Die Ärzte"
@@ -7482,12 +8730,15 @@
     },
     "id": 416,
     "picture": {
-      "id": 432
+      "id": 416
     },
     "price": 10.0,
     "title": "Gleason-Becker"
   },
   {
+    "articlePicture": {
+      "id": 417
+    },
     "artists": {
       "id": 27,
       "name": "Flo Rida"
@@ -7500,12 +8751,15 @@
     },
     "id": 417,
     "picture": {
-      "id": 433
+      "id": 417
     },
     "price": 22.94,
     "title": "Considine, Murray and Crooks"
   },
   {
+    "articlePicture": {
+      "id": 418
+    },
     "artists": {
       "id": 36,
       "name": "The Rolling Stones"
@@ -7518,12 +8772,15 @@
     },
     "id": 418,
     "picture": {
-      "id": 434
+      "id": 418
     },
     "price": 11.38,
     "title": "Hane, Bechtelar and Parker"
   },
   {
+    "articlePicture": {
+      "id": 419
+    },
     "artists": {
       "id": 13,
       "name": "Deichkind"
@@ -7536,12 +8793,15 @@
     },
     "id": 419,
     "picture": {
-      "id": 435
+      "id": 419
     },
     "price": 43.39,
     "title": "Boehm and Sons"
   },
   {
+    "articlePicture": {
+      "id": 420
+    },
     "artists": {
       "id": 15,
       "name": "Avicci"
@@ -7554,12 +8814,15 @@
     },
     "id": 420,
     "picture": {
-      "id": 436
+      "id": 420
     },
     "price": 18.85,
     "title": "Hudson Inc"
   },
   {
+    "articlePicture": {
+      "id": 421
+    },
     "artists": {
       "id": 17,
       "name": "Shakira"
@@ -7572,12 +8835,15 @@
     },
     "id": 421,
     "picture": {
-      "id": 437
+      "id": 421
     },
     "price": 9.83,
     "title": "Balistreri, Cronin and Hyatt"
   },
   {
+    "articlePicture": {
+      "id": 422
+    },
     "artists": {
       "id": 3,
       "name": "Bon Jovi"
@@ -7590,12 +8856,15 @@
     },
     "id": 422,
     "picture": {
-      "id": 438
+      "id": 422
     },
     "price": 35.76,
     "title": "Dickens Group"
   },
   {
+    "articlePicture": {
+      "id": 423
+    },
     "artists": {
       "id": 39,
       "name": "Barbra Streisand"
@@ -7608,12 +8877,15 @@
     },
     "id": 423,
     "picture": {
-      "id": 439
+      "id": 423
     },
     "price": 26.58,
     "title": "Batz Group"
   },
   {
+    "articlePicture": {
+      "id": 424
+    },
     "artists": {
       "id": 17,
       "name": "Shakira"
@@ -7626,12 +8898,15 @@
     },
     "id": 424,
     "picture": {
-      "id": 440
+      "id": 424
     },
     "price": 9.47,
     "title": "Moen, Keebler and Kilback"
   },
   {
+    "articlePicture": {
+      "id": 425
+    },
     "artists": {
       "id": 13,
       "name": "Deichkind"
@@ -7644,12 +8919,15 @@
     },
     "id": 425,
     "picture": {
-      "id": 441
+      "id": 425
     },
     "price": 20.64,
     "title": "Ondricka-Romaguera"
   },
   {
+    "articlePicture": {
+      "id": 426
+    },
     "artists": {
       "id": 45,
       "name": "Billy Joel"
@@ -7662,12 +8940,15 @@
     },
     "id": 426,
     "picture": {
-      "id": 442
+      "id": 426
     },
     "price": 30.8,
     "title": "Crona-Sipes"
   },
   {
+    "articlePicture": {
+      "id": 427
+    },
     "artists": {
       "id": 39,
       "name": "Barbra Streisand"
@@ -7680,12 +8961,15 @@
     },
     "id": 427,
     "picture": {
-      "id": 443
+      "id": 427
     },
     "price": 13.74,
     "title": "Braun Inc"
   },
   {
+    "articlePicture": {
+      "id": 428
+    },
     "artists": {
       "id": 12,
       "name": "Sia"
@@ -7698,12 +8982,15 @@
     },
     "id": 428,
     "picture": {
-      "id": 444
+      "id": 428
     },
     "price": 33.44,
     "title": "Reichel Inc"
   },
   {
+    "articlePicture": {
+      "id": 429
+    },
     "artists": {
       "id": 26,
       "name": "Pitbull"
@@ -7716,12 +9003,15 @@
     },
     "id": 429,
     "picture": {
-      "id": 445
+      "id": 429
     },
     "price": 47.74,
     "title": "Mayer Inc"
   },
   {
+    "articlePicture": {
+      "id": 430
+    },
     "artists": {
       "id": 2,
       "name": "Britney Spears"
@@ -7734,12 +9024,15 @@
     },
     "id": 430,
     "picture": {
-      "id": 446
+      "id": 430
     },
     "price": 14.08,
     "title": "Harris, Yost and Jacobs"
   },
   {
+    "articlePicture": {
+      "id": 431
+    },
     "artists": {
       "id": 14,
       "name": "Imagine Dragons"
@@ -7752,12 +9045,15 @@
     },
     "id": 431,
     "picture": {
-      "id": 447
+      "id": 431
     },
     "price": 37.39,
     "title": "Osinski-Reilly"
   },
   {
+    "articlePicture": {
+      "id": 432
+    },
     "artists": {
       "id": 33,
       "name": "Metallica"
@@ -7770,12 +9066,15 @@
     },
     "id": 432,
     "picture": {
-      "id": 448
+      "id": 432
     },
     "price": 47.6,
     "title": "Gaylord Group"
   },
   {
+    "articlePicture": {
+      "id": 433
+    },
     "artists": {
       "id": 18,
       "name": "Kraftklub"
@@ -7788,12 +9087,15 @@
     },
     "id": 433,
     "picture": {
-      "id": 449
+      "id": 433
     },
     "price": 43.58,
     "title": "Lowe Group"
   },
   {
+    "articlePicture": {
+      "id": 434
+    },
     "artists": {
       "id": 1,
       "name": "Die Ärzte"
@@ -7806,12 +9108,15 @@
     },
     "id": 434,
     "picture": {
-      "id": 450
+      "id": 434
     },
     "price": 14.75,
     "title": "Emard-Harvey"
   },
   {
+    "articlePicture": {
+      "id": 435
+    },
     "artists": {
       "id": 46,
       "name": "Led Zeppelin"
@@ -7824,12 +9129,15 @@
     },
     "id": 435,
     "picture": {
-      "id": 451
+      "id": 435
     },
     "price": 46.53,
     "title": "Hermann-Bogisich"
   },
   {
+    "articlePicture": {
+      "id": 436
+    },
     "artists": {
       "id": 27,
       "name": "Flo Rida"
@@ -7842,12 +9150,15 @@
     },
     "id": 436,
     "picture": {
-      "id": 452
+      "id": 436
     },
     "price": 49.1,
     "title": "Murazik Inc"
   },
   {
+    "articlePicture": {
+      "id": 437
+    },
     "artists": {
       "id": 30,
       "name": "Rihanna"
@@ -7860,12 +9171,15 @@
     },
     "id": 437,
     "picture": {
-      "id": 453
+      "id": 437
     },
     "price": 29.93,
     "title": "Oberbrunner-Waelchi"
   },
   {
+    "articlePicture": {
+      "id": 438
+    },
     "artists": {
       "id": 49,
       "name": "Stromae"
@@ -7878,12 +9192,15 @@
     },
     "id": 438,
     "picture": {
-      "id": 454
+      "id": 438
     },
     "price": 15.24,
     "title": "Bradtke Group"
   },
   {
+    "articlePicture": {
+      "id": 439
+    },
     "artists": {
       "id": 26,
       "name": "Pitbull"
@@ -7896,12 +9213,15 @@
     },
     "id": 439,
     "picture": {
-      "id": 455
+      "id": 439
     },
     "price": 45.0,
     "title": "O'Hara Group"
   },
   {
+    "articlePicture": {
+      "id": 440
+    },
     "artists": {
       "id": 41,
       "name": "Pink Floyd"
@@ -7914,12 +9234,15 @@
     },
     "id": 440,
     "picture": {
-      "id": 456
+      "id": 440
     },
     "price": 22.93,
     "title": "Kreiger, Nicolas and Corwin"
   },
   {
+    "articlePicture": {
+      "id": 441
+    },
     "artists": {
       "id": 30,
       "name": "Rihanna"
@@ -7932,12 +9255,15 @@
     },
     "id": 441,
     "picture": {
-      "id": 457
+      "id": 441
     },
     "price": 5.55,
     "title": "O'Keefe and Sons"
   },
   {
+    "articlePicture": {
+      "id": 442
+    },
     "artists": {
       "id": 33,
       "name": "Metallica"
@@ -7950,12 +9276,15 @@
     },
     "id": 442,
     "picture": {
-      "id": 458
+      "id": 442
     },
     "price": 20.18,
     "title": "Towne, Stamm and Stanton"
   },
   {
+    "articlePicture": {
+      "id": 443
+    },
     "artists": {
       "id": 22,
       "name": "Dua Lipa"
@@ -7968,12 +9297,15 @@
     },
     "id": 443,
     "picture": {
-      "id": 459
+      "id": 443
     },
     "price": 34.24,
     "title": "Cassin, Conroy and O'Connell"
   },
   {
+    "articlePicture": {
+      "id": 444
+    },
     "artists": {
       "id": 14,
       "name": "Imagine Dragons"
@@ -7986,12 +9318,15 @@
     },
     "id": 444,
     "picture": {
-      "id": 460
+      "id": 444
     },
     "price": 10.43,
     "title": "Wolff-Mitchell"
   },
   {
+    "articlePicture": {
+      "id": 445
+    },
     "artists": {
       "id": 5,
       "name": "Rammstein"
@@ -8004,12 +9339,15 @@
     },
     "id": 445,
     "picture": {
-      "id": 461
+      "id": 445
     },
     "price": 25.93,
     "title": "Yundt-Champlin"
   },
   {
+    "articlePicture": {
+      "id": 446
+    },
     "artists": {
       "id": 7,
       "name": "Tupac Shakur"
@@ -8022,12 +9360,15 @@
     },
     "id": 446,
     "picture": {
-      "id": 462
+      "id": 446
     },
     "price": 36.65,
     "title": "Lehner, Hoppe and Runolfsdottir"
   },
   {
+    "articlePicture": {
+      "id": 447
+    },
     "artists": {
       "id": 33,
       "name": "Metallica"
@@ -8040,12 +9381,15 @@
     },
     "id": 447,
     "picture": {
-      "id": 463
+      "id": 447
     },
     "price": 13.81,
     "title": "Schimmel LLC"
   },
   {
+    "articlePicture": {
+      "id": 448
+    },
     "artists": {
       "id": 21,
       "name": "Eminem"
@@ -8058,12 +9402,15 @@
     },
     "id": 448,
     "picture": {
-      "id": 464
+      "id": 448
     },
     "price": 46.12,
     "title": "Muller and Sons"
   },
   {
+    "articlePicture": {
+      "id": 449
+    },
     "artists": {
       "id": 44,
       "name": "Michael Jackson"
@@ -8076,12 +9423,15 @@
     },
     "id": 449,
     "picture": {
-      "id": 465
+      "id": 449
     },
     "price": 25.9,
     "title": "Heathcote Group"
   },
   {
+    "articlePicture": {
+      "id": 450
+    },
     "artists": {
       "id": 8,
       "name": "Backstreet Boys"
@@ -8094,12 +9444,15 @@
     },
     "id": 450,
     "picture": {
-      "id": 466
+      "id": 450
     },
     "price": 48.7,
     "title": "Friesen, Koepp and Blick"
   },
   {
+    "articlePicture": {
+      "id": 451
+    },
     "artists": {
       "id": 28,
       "name": "Celine Dion"
@@ -8112,12 +9465,15 @@
     },
     "id": 451,
     "picture": {
-      "id": 467
+      "id": 451
     },
     "price": 25.81,
     "title": "Bruen-Kertzmann"
   },
   {
+    "articlePicture": {
+      "id": 452
+    },
     "artists": {
       "id": 49,
       "name": "Stromae"
@@ -8130,12 +9486,15 @@
     },
     "id": 452,
     "picture": {
-      "id": 468
+      "id": 452
     },
     "price": 27.46,
     "title": "Fahey, Hickle and Collier"
   },
   {
+    "articlePicture": {
+      "id": 453
+    },
     "artists": {
       "id": 45,
       "name": "Billy Joel"
@@ -8148,12 +9507,15 @@
     },
     "id": 453,
     "picture": {
-      "id": 469
+      "id": 453
     },
     "price": 23.83,
     "title": "Schuster-Feil"
   },
   {
+    "articlePicture": {
+      "id": 454
+    },
     "artists": {
       "id": 32,
       "name": "Whitney Houston"
@@ -8166,12 +9528,15 @@
     },
     "id": 454,
     "picture": {
-      "id": 470
+      "id": 454
     },
     "price": 8.56,
     "title": "Schaden Group"
   },
   {
+    "articlePicture": {
+      "id": 455
+    },
     "artists": {
       "id": 2,
       "name": "Britney Spears"
@@ -8184,12 +9549,15 @@
     },
     "id": 455,
     "picture": {
-      "id": 471
+      "id": 455
     },
     "price": 45.04,
     "title": "Schinner and Sons"
   },
   {
+    "articlePicture": {
+      "id": 456
+    },
     "artists": {
       "id": 31,
       "name": "Van Halen"
@@ -8202,12 +9570,15 @@
     },
     "id": 456,
     "picture": {
-      "id": 472
+      "id": 456
     },
     "price": 44.23,
     "title": "Williamson-Wisozk"
   },
   {
+    "articlePicture": {
+      "id": 457
+    },
     "artists": {
       "id": 2,
       "name": "Britney Spears"
@@ -8220,12 +9591,15 @@
     },
     "id": 457,
     "picture": {
-      "id": 473
+      "id": 457
     },
     "price": 2.03,
     "title": "Ratke, D'Amore and Bins"
   },
   {
+    "articlePicture": {
+      "id": 458
+    },
     "artists": {
       "id": 40,
       "name": "Macklemore"
@@ -8238,12 +9612,15 @@
     },
     "id": 458,
     "picture": {
-      "id": 474
+      "id": 458
     },
     "price": 22.31,
     "title": "Bins, Koelpin and Littel"
   },
   {
+    "articlePicture": {
+      "id": 459
+    },
     "artists": {
       "id": 7,
       "name": "Tupac Shakur"
@@ -8256,12 +9633,15 @@
     },
     "id": 459,
     "picture": {
-      "id": 475
+      "id": 459
     },
     "price": 5.11,
     "title": "Hane Group"
   },
   {
+    "articlePicture": {
+      "id": 460
+    },
     "artists": {
       "id": 34,
       "name": "Madonna"
@@ -8274,12 +9654,15 @@
     },
     "id": 460,
     "picture": {
-      "id": 476
+      "id": 460
     },
     "price": 26.75,
     "title": "Cole, Johnson and Goldner"
   },
   {
+    "articlePicture": {
+      "id": 461
+    },
     "artists": {
       "id": 45,
       "name": "Billy Joel"
@@ -8292,12 +9675,15 @@
     },
     "id": 461,
     "picture": {
-      "id": 477
+      "id": 461
     },
     "price": 45.43,
     "title": "Kreiger-Schowalter"
   },
   {
+    "articlePicture": {
+      "id": 462
+    },
     "artists": {
       "id": 49,
       "name": "Stromae"
@@ -8310,12 +9696,15 @@
     },
     "id": 462,
     "picture": {
-      "id": 478
+      "id": 462
     },
     "price": 18.31,
     "title": "Hermann-Kuhn"
   },
   {
+    "articlePicture": {
+      "id": 463
+    },
     "artists": {
       "id": 35,
       "name": "Bruce Springsteen"
@@ -8328,12 +9717,15 @@
     },
     "id": 463,
     "picture": {
-      "id": 479
+      "id": 463
     },
     "price": 20.65,
     "title": "Wiza, Nitzsche and Schamberger"
   },
   {
+    "articlePicture": {
+      "id": 464
+    },
     "artists": {
       "id": 34,
       "name": "Madonna"
@@ -8346,12 +9738,15 @@
     },
     "id": 464,
     "picture": {
-      "id": 480
+      "id": 464
     },
     "price": 42.67,
     "title": "Bayer LLC"
   },
   {
+    "articlePicture": {
+      "id": 465
+    },
     "artists": {
       "id": 17,
       "name": "Shakira"
@@ -8364,12 +9759,15 @@
     },
     "id": 465,
     "picture": {
-      "id": 481
+      "id": 465
     },
     "price": 22.61,
     "title": "Zemlak, Heaney and Romaguera"
   },
   {
+    "articlePicture": {
+      "id": 466
+    },
     "artists": {
       "id": 17,
       "name": "Shakira"
@@ -8382,12 +9780,15 @@
     },
     "id": 466,
     "picture": {
-      "id": 482
+      "id": 466
     },
     "price": 42.99,
     "title": "Altenwerth, Blanda and Heller"
   },
   {
+    "articlePicture": {
+      "id": 467
+    },
     "artists": {
       "id": 30,
       "name": "Rihanna"
@@ -8400,12 +9801,15 @@
     },
     "id": 467,
     "picture": {
-      "id": 483
+      "id": 467
     },
     "price": 9.27,
     "title": "Walter Group"
   },
   {
+    "articlePicture": {
+      "id": 468
+    },
     "artists": {
       "id": 3,
       "name": "Bon Jovi"
@@ -8418,12 +9822,15 @@
     },
     "id": 468,
     "picture": {
-      "id": 484
+      "id": 468
     },
     "price": 1.84,
     "title": "Bruen, Hessel and Hermiston"
   },
   {
+    "articlePicture": {
+      "id": 469
+    },
     "artists": {
       "id": 3,
       "name": "Bon Jovi"
@@ -8436,12 +9843,15 @@
     },
     "id": 469,
     "picture": {
-      "id": 485
+      "id": 469
     },
     "price": 43.64,
     "title": "Huel, O'Reilly and Boyle"
   },
   {
+    "articlePicture": {
+      "id": 470
+    },
     "artists": {
       "id": 6,
       "name": "Bob Dylan"
@@ -8454,12 +9864,15 @@
     },
     "id": 470,
     "picture": {
-      "id": 486
+      "id": 470
     },
     "price": 27.47,
     "title": "Gibson, Raynor and Skiles"
   },
   {
+    "articlePicture": {
+      "id": 471
+    },
     "artists": {
       "id": 26,
       "name": "Pitbull"
@@ -8472,12 +9885,15 @@
     },
     "id": 471,
     "picture": {
-      "id": 487
+      "id": 471
     },
     "price": 10.43,
     "title": "Howe, Wiza and Harber"
   },
   {
+    "articlePicture": {
+      "id": 472
+    },
     "artists": {
       "id": 5,
       "name": "Rammstein"
@@ -8490,12 +9906,15 @@
     },
     "id": 472,
     "picture": {
-      "id": 488
+      "id": 472
     },
     "price": 41.37,
     "title": "Grant-Reinger"
   },
   {
+    "articlePicture": {
+      "id": 473
+    },
     "artists": {
       "id": 23,
       "name": "Falco"
@@ -8508,12 +9927,15 @@
     },
     "id": 473,
     "picture": {
-      "id": 489
+      "id": 473
     },
     "price": 17.3,
     "title": "Boyer-Schneider"
   },
   {
+    "articlePicture": {
+      "id": 474
+    },
     "artists": {
       "id": 38,
       "name": "DJ Snake"
@@ -8526,12 +9948,15 @@
     },
     "id": 474,
     "picture": {
-      "id": 490
+      "id": 474
     },
     "price": 2.73,
     "title": "Schinner, Green and Hermiston"
   },
   {
+    "articlePicture": {
+      "id": 475
+    },
     "artists": {
       "id": 32,
       "name": "Whitney Houston"
@@ -8544,12 +9969,15 @@
     },
     "id": 475,
     "picture": {
-      "id": 491
+      "id": 475
     },
     "price": 9.58,
     "title": "Jaskolski Inc"
   },
   {
+    "articlePicture": {
+      "id": 476
+    },
     "artists": {
       "id": 30,
       "name": "Rihanna"
@@ -8562,12 +9990,15 @@
     },
     "id": 476,
     "picture": {
-      "id": 492
+      "id": 476
     },
     "price": 13.81,
     "title": "Russel-Koepp"
   },
   {
+    "articlePicture": {
+      "id": 477
+    },
     "artists": {
       "id": 37,
       "name": "Peter Fox"
@@ -8580,12 +10011,15 @@
     },
     "id": 477,
     "picture": {
-      "id": 493
+      "id": 477
     },
     "price": 2.03,
     "title": "Bosco Inc"
   },
   {
+    "articlePicture": {
+      "id": 478
+    },
     "artists": {
       "id": 30,
       "name": "Rihanna"
@@ -8598,12 +10032,15 @@
     },
     "id": 478,
     "picture": {
-      "id": 494
+      "id": 478
     },
     "price": 42.43,
     "title": "Cremin, Hirthe and Sauer"
   },
   {
+    "articlePicture": {
+      "id": 479
+    },
     "artists": {
       "id": 47,
       "name": "Culcha Candela"
@@ -8616,12 +10053,15 @@
     },
     "id": 479,
     "picture": {
-      "id": 495
+      "id": 479
     },
     "price": 11.95,
     "title": "Hilll-Kunde"
   },
   {
+    "articlePicture": {
+      "id": 480
+    },
     "artists": {
       "id": 12,
       "name": "Sia"
@@ -8634,12 +10074,15 @@
     },
     "id": 480,
     "picture": {
-      "id": 496
+      "id": 480
     },
     "price": 20.23,
     "title": "Dooley, Streich and Stamm"
   },
   {
+    "articlePicture": {
+      "id": 481
+    },
     "artists": {
       "id": 39,
       "name": "Barbra Streisand"
@@ -8652,12 +10095,15 @@
     },
     "id": 481,
     "picture": {
-      "id": 497
+      "id": 481
     },
     "price": 27.57,
     "title": "Upton-Metz"
   },
   {
+    "articlePicture": {
+      "id": 482
+    },
     "artists": {
       "id": 33,
       "name": "Metallica"
@@ -8670,12 +10116,15 @@
     },
     "id": 482,
     "picture": {
-      "id": 498
+      "id": 482
     },
     "price": 34.48,
     "title": "Mraz Group"
   },
   {
+    "articlePicture": {
+      "id": 483
+    },
     "artists": {
       "id": 48,
       "name": "Elvis Presley"
@@ -8688,12 +10137,15 @@
     },
     "id": 483,
     "picture": {
-      "id": 499
+      "id": 483
     },
     "price": 13.6,
     "title": "Ferry-Braun"
   },
   {
+    "articlePicture": {
+      "id": 484
+    },
     "artists": {
       "id": 34,
       "name": "Madonna"
@@ -8706,12 +10158,15 @@
     },
     "id": 484,
     "picture": {
-      "id": 500
+      "id": 484
     },
     "price": 13.64,
     "title": "Monahan Inc"
   },
   {
+    "articlePicture": {
+      "id": 485
+    },
     "artists": {
       "id": 40,
       "name": "Macklemore"
@@ -8724,12 +10179,15 @@
     },
     "id": 485,
     "picture": {
-      "id": 501
+      "id": 485
     },
     "price": 49.12,
     "title": "Walker, O'Reilly and Krajcik"
   },
   {
+    "articlePicture": {
+      "id": 486
+    },
     "artists": {
       "id": 47,
       "name": "Culcha Candela"
@@ -8742,12 +10200,15 @@
     },
     "id": 486,
     "picture": {
-      "id": 502
+      "id": 486
     },
     "price": 43.79,
     "title": "Olson, Greenfelder and Kiehn"
   },
   {
+    "articlePicture": {
+      "id": 487
+    },
     "artists": {
       "id": 26,
       "name": "Pitbull"
@@ -8760,12 +10221,15 @@
     },
     "id": 487,
     "picture": {
-      "id": 503
+      "id": 487
     },
     "price": 44.87,
     "title": "Cormier, Waters and Roberts"
   },
   {
+    "articlePicture": {
+      "id": 488
+    },
     "artists": {
       "id": 11,
       "name": "David Guetta"
@@ -8778,12 +10242,15 @@
     },
     "id": 488,
     "picture": {
-      "id": 504
+      "id": 488
     },
     "price": 11.72,
     "title": "Nikolaus-Schaden"
   },
   {
+    "articlePicture": {
+      "id": 489
+    },
     "artists": {
       "id": 33,
       "name": "Metallica"
@@ -8796,12 +10263,15 @@
     },
     "id": 489,
     "picture": {
-      "id": 505
+      "id": 489
     },
     "price": 19.45,
     "title": "Kassulke, Langworth and Kautzer"
   },
   {
+    "articlePicture": {
+      "id": 490
+    },
     "artists": {
       "id": 13,
       "name": "Deichkind"
@@ -8814,12 +10284,15 @@
     },
     "id": 490,
     "picture": {
-      "id": 506
+      "id": 490
     },
     "price": 32.06,
     "title": "Ortiz-Gleason"
   },
   {
+    "articlePicture": {
+      "id": 491
+    },
     "artists": {
       "id": 5,
       "name": "Rammstein"
@@ -8832,12 +10305,15 @@
     },
     "id": 491,
     "picture": {
-      "id": 507
+      "id": 491
     },
     "price": 43.63,
     "title": "Daniel-Dickinson"
   },
   {
+    "articlePicture": {
+      "id": 492
+    },
     "artists": {
       "id": 46,
       "name": "Led Zeppelin"
@@ -8850,12 +10326,15 @@
     },
     "id": 492,
     "picture": {
-      "id": 508
+      "id": 492
     },
     "price": 8.85,
     "title": "Boyer-Russel"
   },
   {
+    "articlePicture": {
+      "id": 493
+    },
     "artists": {
       "id": 33,
       "name": "Metallica"
@@ -8868,12 +10347,15 @@
     },
     "id": 493,
     "picture": {
-      "id": 509
+      "id": 493
     },
     "price": 23.45,
     "title": "Wyman Inc"
   },
   {
+    "articlePicture": {
+      "id": 494
+    },
     "artists": {
       "id": 37,
       "name": "Peter Fox"
@@ -8886,12 +10368,15 @@
     },
     "id": 494,
     "picture": {
-      "id": 510
+      "id": 494
     },
     "price": 49.93,
     "title": "Smith, Emmerich and Kuphal"
   },
   {
+    "articlePicture": {
+      "id": 495
+    },
     "artists": {
       "id": 35,
       "name": "Bruce Springsteen"
@@ -8904,12 +10389,15 @@
     },
     "id": 495,
     "picture": {
-      "id": 511
+      "id": 495
     },
     "price": 3.31,
     "title": "Bruen-Senger"
   },
   {
+    "articlePicture": {
+      "id": 496
+    },
     "artists": {
       "id": 2,
       "name": "Britney Spears"
@@ -8922,12 +10410,15 @@
     },
     "id": 496,
     "picture": {
-      "id": 512
+      "id": 496
     },
     "price": 25.87,
     "title": "Flatley, Toy and Gerlach"
   },
   {
+    "articlePicture": {
+      "id": 497
+    },
     "artists": {
       "id": 20,
       "name": "Taylor Swift"
@@ -8940,12 +10431,15 @@
     },
     "id": 497,
     "picture": {
-      "id": 513
+      "id": 497
     },
     "price": 25.26,
     "title": "Schimmel, Harvey and Cassin"
   },
   {
+    "articlePicture": {
+      "id": 498
+    },
     "artists": {
       "id": 6,
       "name": "Bob Dylan"
@@ -8958,12 +10452,15 @@
     },
     "id": 498,
     "picture": {
-      "id": 514
+      "id": 498
     },
     "price": 45.76,
     "title": "Nolan and Sons"
   },
   {
+    "articlePicture": {
+      "id": 499
+    },
     "artists": {
       "id": 11,
       "name": "David Guetta"
@@ -8976,12 +10473,15 @@
     },
     "id": 499,
     "picture": {
-      "id": 515
+      "id": 499
     },
     "price": 19.06,
     "title": "Johns, Brakus and Boyle"
   },
   {
+    "articlePicture": {
+      "id": 500
+    },
     "artists": {
       "id": 12,
       "name": "Sia"
@@ -8994,7 +10494,7 @@
     },
     "id": 500,
     "picture": {
-      "id": 516
+      "id": 500
     },
     "price": 15.34,
     "title": "Jacobs-Lakin"

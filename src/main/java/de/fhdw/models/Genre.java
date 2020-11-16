@@ -16,12 +16,12 @@ public class Genre extends PanacheEntityBase {
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(nullable = false)
-    public Picture picture;
+    public GenrePicture picture;
 
     public Genre() {
     }
 
-    public Genre(String name, Picture image) {
+    public Genre(String name, GenrePicture image) {
         this.name = name;
         this.picture = image;
     }
@@ -35,12 +35,12 @@ public class Genre extends PanacheEntityBase {
     }
 
     @JsonbTransient
-    public Picture getPicture() {
+    public GenrePicture getPicture() {
         return picture;
     }
 
-    public void setPicture(Picture picture) {
-        this.picture = picture;
+    public void setPicture(GenrePicture genrePicture) {
+        this.picture = genrePicture;
     }
 
     @Override

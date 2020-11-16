@@ -1,5 +1,6 @@
 package de.fhdw.endpoints;
 
+import de.fhdw.forms.ArtistDownloadForm;
 import de.fhdw.models.Artist;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
@@ -10,7 +11,9 @@ import javax.ws.rs.core.SecurityContext;
 import java.util.List;
 
 public interface ArtistInterface {
-    Artist get(@PathParam long id);
+    ArtistDownloadForm get(@PathParam long id);
+
+    ArtistDownloadForm getArtistRange(int start, int end);
 
     List<Artist> get();
 

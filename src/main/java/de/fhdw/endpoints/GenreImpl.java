@@ -3,7 +3,7 @@ package de.fhdw.endpoints;
 import de.fhdw.forms.GenreDownloadForm;
 import de.fhdw.forms.GenreUploadForm;
 import de.fhdw.models.Genre;
-import de.fhdw.models.Picture;
+import de.fhdw.models.GenrePicture;
 import de.fhdw.util.PictureHandler;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
@@ -89,9 +89,9 @@ public class GenreImpl implements GenreInterface {
         }
         try {
             PictureHandler pictureHandler = new PictureHandler();
-            Picture picture = new Picture(data.getFile(), pictureHandler.scaleImage(data.getFileAsStream()));
-            picture.persist();
-            data.genre.picture = picture;
+            GenrePicture genrePicture = new GenrePicture(data.getFile(), pictureHandler.scaleImage(data.getFileAsStream()));
+            genrePicture.persist();
+            data.genre.picture = genrePicture;
             data.genre.persist();
             LOG.info("added: " + data.genre.toString());
             return Response.accepted(data.genre.id).build();

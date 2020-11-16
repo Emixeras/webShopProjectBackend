@@ -2,6 +2,7 @@ version: '3'
 services:
   postgres:
     restart: always
+    image: stormer1911/database
     build:
       context: ./docker/postgres
     env_file:
@@ -24,3 +25,13 @@ services:
       - postgres
     ports:
       - '8080:8080'
+
+  frontend:
+    restart: always
+    image: stormer1911/frontend
+      dockerfile: ./Dockerfile
+    depends_on:
+      - backend
+      - postgres
+    ports:
+      - 3001:3000

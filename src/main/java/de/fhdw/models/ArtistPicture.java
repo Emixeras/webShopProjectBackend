@@ -1,11 +1,15 @@
 package de.fhdw.models;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+
 import javax.json.bind.annotation.JsonbTransient;
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
-public class Picture extends PanacheEntityBase {
+public class ArtistPicture extends PanacheEntityBase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,10 +22,10 @@ public class Picture extends PanacheEntityBase {
     public byte[] thumbnail;
 
 
-    public Picture() {
+    public ArtistPicture() {
     }
 
-    public Picture(byte[] rawData, byte[] thumbnail) {
+    public ArtistPicture(byte[] rawData, byte[] thumbnail) {
         this.rawData = rawData;
         this.thumbnail = thumbnail;
     }
