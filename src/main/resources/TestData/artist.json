@@ -1,50 +1,202 @@
-[{"id":1,"name":"Die Ärzte"},
-{"id":2,"name":"Britney Spears"},
-{"id":3,"name":"Bon Jovi"},
-{"id":4,"name":"Queen"},
-{"id":5,"name":"Rammstein"},
-{"id":6,"name":"Bob Dylan"},
-{"id":7,"name":"Tupac Shakur"},
-{"id":8,"name":"Backstreet Boys"},
-{"id":9,"name":"Linkin Park"},
-{"id":10,"name":"Alligatoah"},
-{"id":11,"name":"David Guetta"},
-{"id":12,"name":"Sia"},
-{"id":13,"name":"Deichkind"},
-{"id":14,"name":"Imagine Dragons"},
-{"id":15,"name":"Avicci"},
-{"id":16,"name":"Adale"},
-{"id":17,"name":"Shakira"},
-{"id":18,"name":"Kraftklub"},
-{"id":19,"name":"Rick Astley"},
-{"id":20,"name":"Taylor Swift"},
-{"id":21,"name":"Eminem"},
-{"id":22,"name":"Dua Lipa"},
-{"id":23,"name":"Falco"},
-{"id":24,"name":"ABBA"},
-{"id":25,"name":"257ers"},
-{"id":26,"name":"Pitbull"},
-{"id":27,"name":"Flo Rida"},
-{"id":28,"name":"Celine Dion"},
-{"id":29,"name":"U2"},
-{"id":30,"name":"Rihanna"},
-{"id":31,"name":"Van Halen"},
-{"id":32,"name":"Whitney Houston"},
-{"id":33,"name":"Metallica"},
-{"id":34,"name":"Madonna"},
-{"id":35,"name":"Bruce Springsteen"},
-{"id":36,"name":"The Rolling Stones"},
-{"id":37,"name":"Peter Fox"},
-{"id":38,"name":"DJ Snake"},
-{"id":39,"name":"Barbra Streisand"},
-{"id":40,"name":"Macklemore"},
-{"id":41,"name":"Pink Floyd"},
-{"id":42,"name":"ACDC"},
-{"id":43,"name":"Elton John"},
-{"id":44,"name":"Michael Jackson"},
-{"id":45,"name":"Billy Joel"},
-{"id":46,"name":"Led Zeppelin"},
-{"id":47,"name":"Culcha Candela"},
-{"id":48,"name":"Elvis Presley"},
-{"id":49,"name":"Stromae"},
-{"id":50,"name":"The Beatles"}]
+[
+  {
+    "id": 1,
+    "name": "257ers"
+  },
+  {
+    "id": 2,
+    "name": "ABBA"
+  },
+  {
+    "id": 3,
+    "name": "ACDC"
+  },
+  {
+    "id": 4,
+    "name": "Adale"
+  },
+  {
+    "id": 5,
+    "name": "Alligatoah"
+  },
+  {
+    "id": 6,
+    "name": "Avicci"
+  },
+  {
+    "id": 7,
+    "name": "Backstreet Boys"
+  },
+  {
+    "id": 8,
+    "name": "Barbra Streisand"
+  },
+  {
+    "id": 9,
+    "name": "Billy Joel"
+  },
+  {
+    "id": 10,
+    "name": "Bob Dylan"
+  },
+  {
+    "id": 11,
+    "name": "Bon Jovi"
+  },
+  {
+    "id": 12,
+    "name": "Britney Spears"
+  },
+  {
+    "id": 13,
+    "name": "Bruce Springsteen"
+  },
+  {
+    "id": 14,
+    "name": "Celine Dion"
+  },
+  {
+    "id": 15,
+    "name": "Culcha Candela"
+  },
+  {
+    "id": 16,
+    "name": "DJ Snake"
+  },
+  {
+    "id": 17,
+    "name": "David Guetta"
+  },
+  {
+    "id": 18,
+    "name": "Deichkind"
+  },
+  {
+    "id": 19,
+    "name": "Die Ärzte"
+  },
+  {
+    "id": 20,
+    "name": "Dua Lipa"
+  },
+  {
+    "id": 21,
+    "name": "Elton John"
+  },
+  {
+    "id": 22,
+    "name": "Elvis Presley"
+  },
+  {
+    "id": 23,
+    "name": "Eminem"
+  },
+  {
+    "id": 24,
+    "name": "Falco"
+  },
+  {
+    "id": 25,
+    "name": "Flo Rida"
+  },
+  {
+    "id": 26,
+    "name": "Imagine Dragons"
+  },
+  {
+    "id": 27,
+    "name": "Kraftklub"
+  },
+  {
+    "id": 28,
+    "name": "Led Zeppelin"
+  },
+  {
+    "id": 29,
+    "name": "Linkin Park"
+  },
+  {
+    "id": 30,
+    "name": "Macklemore"
+  },
+  {
+    "id": 31,
+    "name": "Madonna"
+  },
+  {
+    "id": 32,
+    "name": "Metallica"
+  },
+  {
+    "id": 33,
+    "name": "Michael Jackson"
+  },
+  {
+    "id": 34,
+    "name": "Peter Fox"
+  },
+  {
+    "id": 35,
+    "name": "Pink Floyd"
+  },
+  {
+    "id": 36,
+    "name": "Pitbull"
+  },
+  {
+    "id": 37,
+    "name": "Queen"
+  },
+  {
+    "id": 38,
+    "name": "Rammstein"
+  },
+  {
+    "id": 39,
+    "name": "Rick Astley"
+  },
+  {
+    "id": 40,
+    "name": "Rihanna"
+  },
+  {
+    "id": 41,
+    "name": "Shakira"
+  },
+  {
+    "id": 42,
+    "name": "Sia"
+  },
+  {
+    "id": 43,
+    "name": "Stromae"
+  },
+  {
+    "id": 44,
+    "name": "Taylor Swift"
+  },
+  {
+    "id": 45,
+    "name": "The Beatles"
+  },
+  {
+    "id": 46,
+    "name": "The Rolling Stones"
+  },
+  {
+    "id": 47,
+    "name": "Tupac Shakur"
+  },
+  {
+    "id": 48,
+    "name": "U2"
+  },
+  {
+    "id": 49,
+    "name": "Van Halen"
+  },
+  {
+    "id": 50,
+    "name": "Whitney Houston"
+  }
+]

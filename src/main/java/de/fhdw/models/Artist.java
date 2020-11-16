@@ -15,6 +15,7 @@ public class Artist extends PanacheEntityBase {
     public String name;
 
     @ManyToOne
+  //  @JoinColumn(nullable = false)
     public ArtistPicture picture;
 
     public Artist(String name) {
@@ -22,6 +23,11 @@ public class Artist extends PanacheEntityBase {
     }
 
     public Artist() {
+    }
+
+    public Artist(String name, ArtistPicture picture) {
+        this.name = name;
+        this.picture = picture;
     }
 
     public static Artist findByName(String name) {
@@ -44,4 +50,6 @@ public class Artist extends PanacheEntityBase {
                 ", name='" + name + '\'' +
                 '}';
     }
+
+
 }

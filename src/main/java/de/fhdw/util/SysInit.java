@@ -159,9 +159,19 @@ public class SysInit {
             List<Artist> artists = jsonb.fromJson(getClass().getResourceAsStream("/TestData/artist.json"), new ArrayList<Artist>() {
             }.getClass().getGenericSuperclass());
             artists.forEach(i -> {
-                Artist artist = new Artist(i.name);
+                String name = "/TestData/ArtistImages/artist (" + i.id + ").jpg";
+                PictureHandler pictureHandler = new PictureHandler();
+                ArtistPicture artistPicture = null;
+                try {
+                    artistPicture = new ArtistPicture(IOUtils.toByteArray(getClass().getResourceAsStream(name)), pictureHandler.scaleImage(getClass().getResourceAsStream(name)));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                assert artistPicture != null;
+                artistPicture.persist();
+                Artist artist = new Artist(i.name, artistPicture );
                 artist.persist();
-                LOG.debug("added Genres: " + artist.toString());
+                LOG.debug("added Artist: " + artist.toString());
             });
             LOG.info(Artist.count() + " Artists angelegt");
         } catch (Exception e) {
@@ -169,6 +179,7 @@ public class SysInit {
             return false;
         }
         return true;
+
     }
 
     @Transactional

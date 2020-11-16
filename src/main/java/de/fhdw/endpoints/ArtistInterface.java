@@ -13,7 +13,7 @@ import java.util.List;
 public interface ArtistInterface {
     ArtistDownloadForm get(@PathParam long id);
 
-    ArtistDownloadForm getArtistRange(int start, int end);
+    List<ArtistDownloadForm> getArtistRange(int start, int end);
 
     List<Artist> get();
 

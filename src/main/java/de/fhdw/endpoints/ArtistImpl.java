@@ -1,7 +1,10 @@
 package de.fhdw.endpoints;
 
+import de.fhdw.forms.ArticleDownloadForm;
 import de.fhdw.forms.ArtistDownloadForm;
+import de.fhdw.models.Article;
 import de.fhdw.models.Artist;
+import de.fhdw.util.PictureHandler;
 import io.quarkus.hibernate.orm.panache.PanacheQuery;
 import io.quarkus.panache.common.Sort;
 import org.eclipse.microprofile.openapi.annotations.Operation;
@@ -15,6 +18,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
+import java.io.ByteArrayInputStream;
 import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
@@ -42,12 +46,14 @@ public class ArtistImpl implements ArtistInterface {
     }
 
     @Override
-    public ArtistDownloadForm getArtistRange(int start, int end) {
+    @GET
+    @Path("range")
+    public List<ArtistDownloadForm> getArtistRange(@MatrixParam("start") int start, @MatrixParam("end") int end) {
         PanacheQuery<Artist> panacheQuery = Artist.findAll(Sort.by("id"));
-        return (ArtistDownloadForm) panacheQuery
+        return panacheQuery
                 .range(start - 1, end - 1)
                 .list()
-                .stream().map(
+                .parallelStream().map(
                         artist -> {
                             ArtistDownloadForm artistDownloadForm = new ArtistDownloadForm();
                             artistDownloadForm.artist = artist;
@@ -61,7 +67,7 @@ public class ArtistImpl implements ArtistInterface {
     @GET
     @Operation(summary = "returns all Artists")
     public List<Artist> get() {
-        return Artist.listAll();
+        return Artist.findAll(Sort.by("name")).list();
     }
 
     @Override

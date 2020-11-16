@@ -14,7 +14,6 @@ public class PictureHandler {
                 .outputFormat("png")
                 .toOutputStream(byteArrayOutputStream);
         return byteArrayOutputStream.toByteArray();
-
     }
 
     public byte[] scaleImage(InputStream source, int quality) throws IOException {
@@ -27,7 +26,6 @@ public class PictureHandler {
                 .outputFormat("png")
                 .toOutputStream(byteArrayOutputStream);
         return byteArrayOutputStream.toByteArray();
-
     }
 
 
