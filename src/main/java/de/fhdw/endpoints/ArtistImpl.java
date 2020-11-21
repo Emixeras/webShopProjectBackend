@@ -1,24 +1,24 @@
 package de.fhdw.endpoints;
 
-import de.fhdw.forms.ArticleDownloadForm;
 import de.fhdw.forms.ArtistDownloadForm;
-import de.fhdw.models.Article;
+import de.fhdw.forms.ArtistUploadForm;
 import de.fhdw.models.Artist;
-import de.fhdw.util.PictureHandler;
+import de.fhdw.models.ArtistPicture;
 import io.quarkus.hibernate.orm.panache.PanacheQuery;
 import io.quarkus.panache.common.Sort;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.jboss.logging.Logger;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
+import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
 import javax.annotation.security.RolesAllowed;
+import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
-import java.io.ByteArrayInputStream;
 import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
@@ -57,7 +57,7 @@ public class ArtistImpl implements ArtistInterface {
                         artist -> {
                             ArtistDownloadForm artistDownloadForm = new ArtistDownloadForm();
                             artistDownloadForm.artist = artist;
-                            artistDownloadForm.file = Base64.getEncoder().encodeToString(artist.picture.thumbnail);
+                            artistDownloadForm.file = Base64.getEncoder().encodeToString(artist.picture.rawData);
                             return artistDownloadForm;
                         }
                 ).collect(Collectors.toList());
@@ -88,14 +88,27 @@ public class ArtistImpl implements ArtistInterface {
     @Override
     @POST
     @RolesAllowed({"employee", "admin"})
+    @Transactional
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Operation(summary = "reggister new Artist", description = "only allowed by Admins and Employees")
-    public Response registerNewArtist(Artist artist, @Context SecurityContext securityContext) {
-        if (artist == null) {
+    public Response registerNewArtist(@MultipartForm ArtistUploadForm data, @Context SecurityContext securityContext) {
+        if (data.artist == null) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
-        artist.persist();
-        LOG.debug("added: " + artist.toString());
-        return Response.accepted().build();
+        if (Artist.findByName(data.artist.name)!=null) {
+            throw new WebApplicationException(Response.Status.CONFLICT);
+        }
+        try {
+            ArtistPicture artistPicture = new ArtistPicture(data.getFile());
+            artistPicture.persist();
+            Artist artist = new Artist(data.artist.name, artistPicture);
+            artist.persist();
+            LOG.debug("added: " + artist.toString());
+        } catch (Exception e) {
+            LOG.info(e.toString());
+            throw new WebApplicationException(Response.Status.BAD_REQUEST);
+        }
+        return Response.accepted(data.artist).build();
     }
 
     @Override

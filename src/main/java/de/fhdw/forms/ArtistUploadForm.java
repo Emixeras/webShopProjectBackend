@@ -1,6 +1,6 @@
 package de.fhdw.forms;
 
-import de.fhdw.models.Genre;
+import de.fhdw.models.Artist;
 import org.apache.commons.io.IOUtils;
 import org.jboss.resteasy.annotations.providers.multipart.PartType;
 
@@ -12,10 +12,12 @@ import java.io.InputStream;
 
 public class ArtistUploadForm {
 
-    @FormParam("Genre")
+    @FormParam("Artist")
     @PartType(MediaType.APPLICATION_JSON)
-    public Genre genre;
+    public Artist artist;
+
     @FormParam("Picture")
+    @PartType(MediaType.APPLICATION_OCTET_STREAM)
     private byte[] file;
 
     public byte[] getFile() {

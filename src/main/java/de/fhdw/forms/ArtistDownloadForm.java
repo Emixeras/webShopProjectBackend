@@ -9,7 +9,7 @@ import javax.ws.rs.core.MediaType;
 
 public class ArtistDownloadForm {
 
-    @FormParam("Genre")
+    @FormParam("Artist")
     @PartType(MediaType.APPLICATION_JSON)
     public Artist artist;
 

@@ -16,6 +16,7 @@ import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
 import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -33,6 +34,10 @@ import java.util.stream.Collectors;
 public class ArticleImpl implements ArticleInterface {
     private static final Logger LOG = Logger.getLogger(ArticleImpl.class);
 
+    @Inject
+    PictureHandler pictureHandler;
+
+
     @Override
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
@@ -43,7 +48,6 @@ public class ArticleImpl implements ArticleInterface {
         if (data.article == null) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
-        PictureHandler pictureHandler = new PictureHandler();
         Article article = new Article();
         try {
             ArticlePicture articlePicture = new ArticlePicture(data.getFile(), pictureHandler.scaleImage(data.getFileAsStream()));
@@ -73,14 +77,12 @@ public class ArticleImpl implements ArticleInterface {
     }
 
 
-
     @GET
     @Override
     @Path("range")
     @Operation(summary = "returns a Range of ArticleForm Objects, including Pictures", description = "example: http://localhost:8080/article/range;start=0;end=20;quality=500 quality is optional")
     public List<ArticleDownloadForm> getArticleRange(@MatrixParam("start") int start, @MatrixParam("end") int end, @MatrixParam("quality") int quality) {
         PanacheQuery<Article> panacheQuery = Article.findAll(Sort.by("id"));
-        PictureHandler pictureHandler = new PictureHandler();
         return panacheQuery
                 .range(start - 1, end - 1)
                 .list()
@@ -168,7 +170,6 @@ public class ArticleImpl implements ArticleInterface {
         article.description = data.article.description;
         if (data.getFile() != null) {
             try {
-                PictureHandler pictureHandler = new PictureHandler();
                 article.articlePicture.rawData = data.getFile();
                 article.articlePicture.thumbnail = pictureHandler.scaleImage(data.getFileAsStream());
             } catch (Exception e) {

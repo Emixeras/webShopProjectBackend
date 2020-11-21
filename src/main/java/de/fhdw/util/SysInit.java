@@ -160,10 +160,9 @@ public class SysInit {
             }.getClass().getGenericSuperclass());
             artists.forEach(i -> {
                 String name = "/TestData/ArtistImages/artist (" + i.id + ").jpg";
-                PictureHandler pictureHandler = new PictureHandler();
                 ArtistPicture artistPicture = null;
                 try {
-                    artistPicture = new ArtistPicture(IOUtils.toByteArray(getClass().getResourceAsStream(name)), pictureHandler.scaleImage(getClass().getResourceAsStream(name)));
+                    artistPicture = new ArtistPicture(IOUtils.toByteArray(getClass().getResourceAsStream(name)));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

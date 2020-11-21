@@ -1,6 +1,7 @@
 package de.fhdw.endpoints;
 
 import de.fhdw.forms.ArtistDownloadForm;
+import de.fhdw.forms.ArtistUploadForm;
 import de.fhdw.models.Artist;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
@@ -19,7 +20,7 @@ public interface ArtistInterface {
 
     Artist changeArtist(Artist artist, @Context SecurityContext securityContext);
 
-    Response registerNewArtist(Artist artist, @Context SecurityContext securityContext);
+    Response registerNewArtist(@MultipartForm  ArtistUploadForm data, @Context SecurityContext securityContext);
 
     Response deleteArtist(long id, @Context SecurityContext securityContext);
 }

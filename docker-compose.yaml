@@ -25,3 +25,12 @@ services:
       - postgres
     ports:
       - '8080:8080'
+
+  frontend:
+    restart: always
+    image: stormer1911/frontend
+    depends_on:
+      - backend
+      - postgres
+    ports:
+      - 3001:3000

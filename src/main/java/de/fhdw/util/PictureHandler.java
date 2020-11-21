@@ -2,8 +2,10 @@ package de.fhdw.util;
 
 import net.coobird.thumbnailator.Thumbnails;
 
+import javax.enterprise.context.ApplicationScoped;
 import java.io.*;
 
+@ApplicationScoped
 public class PictureHandler {
 
     public byte[] scaleImage(InputStream source) throws IOException {

@@ -15,7 +15,9 @@ public class GenreUploadForm {
     @FormParam("Genre")
     @PartType(MediaType.APPLICATION_JSON)
     public Genre genre;
+
     @FormParam("Picture")
+    @PartType(MediaType.APPLICATION_OCTET_STREAM)
     private byte[] file;
 
     public byte[] getFile() {

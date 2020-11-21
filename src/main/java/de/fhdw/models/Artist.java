@@ -15,7 +15,7 @@ public class Artist extends PanacheEntityBase {
     public String name;
 
     @ManyToOne
-  //  @JoinColumn(nullable = false)
+    @JoinColumn(nullable = false)
     public ArtistPicture picture;
 
     public Artist(String name) {

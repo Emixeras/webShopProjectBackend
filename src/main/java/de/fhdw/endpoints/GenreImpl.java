@@ -11,6 +11,7 @@ import org.jboss.logging.Logger;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
 import javax.annotation.security.RolesAllowed;
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -27,6 +28,9 @@ import java.util.Map;
 @Tag(name = "Genre", description = "Operations on Genre object")
 public class GenreImpl implements GenreInterface {
     private static final Logger LOG = Logger.getLogger(GenreImpl.class);
+
+    @Inject
+    PictureHandler pictureHandler;
 
     @Override
     @GET
@@ -69,7 +73,6 @@ public class GenreImpl implements GenreInterface {
         }
         try {
             old.name = data.genre.name;
-            PictureHandler pictureHandler = new PictureHandler();
             old.picture.rawData = data.getFile();
             old.picture.thumbnail = pictureHandler.scaleImage(data.getFileAsStream());
         } catch (Exception e) {
@@ -88,7 +91,6 @@ public class GenreImpl implements GenreInterface {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
         try {
-            PictureHandler pictureHandler = new PictureHandler();
             GenrePicture genrePicture = new GenrePicture(data.getFile(), pictureHandler.scaleImage(data.getFileAsStream()));
             genrePicture.persist();
             data.genre.picture = genrePicture;

@@ -18,16 +18,13 @@ public class ArtistPicture extends PanacheEntityBase {
     @JsonbTransient
     public byte[] rawData;
 
-    @JsonbTransient
-    public byte[] thumbnail;
 
 
     public ArtistPicture() {
     }
 
-    public ArtistPicture(byte[] rawData, byte[] thumbnail) {
+    public ArtistPicture(byte[] rawData) {
         this.rawData = rawData;
-        this.thumbnail = thumbnail;
     }
 
 }
