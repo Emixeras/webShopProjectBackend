@@ -92,11 +92,14 @@ public class ArtistImpl implements ArtistInterface {
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Operation(summary = "reggister new Artist", description = "only allowed by Admins and Employees")
     public Response registerNewArtist(@MultipartForm ArtistUploadForm data, @Context SecurityContext securityContext) {
-        if (data.artist == null) {
-            throw new WebApplicationException(Response.Status.BAD_REQUEST);
+        if (data.artist == null || data.getFile() == null) {
+            return Response.noContent().build();
         }
         if (Artist.findByName(data.artist.name)!=null) {
-            throw new WebApplicationException(Response.Status.CONFLICT);
+            return  Response
+                    .status(409)
+                    .entity(Artist.findByName(data.artist.name))
+                    .build();
         }
         try {
             ArtistPicture artistPicture = new ArtistPicture(data.getFile());
