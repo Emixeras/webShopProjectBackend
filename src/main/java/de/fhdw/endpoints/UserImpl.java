@@ -1,6 +1,7 @@
 package de.fhdw.endpoints;
 
 import de.fhdw.models.ShopUser;
+import de.fhdw.util.PermissionUtil;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.jboss.logging.Logger;
@@ -91,16 +92,15 @@ public class UserImpl implements UserInterface {
             changedUser.birth = newUserInformation.birth;
             LOG.info("new User: " + changedUser.toString());
         } else throw new WebApplicationException(Response.Status.FORBIDDEN);
-        //Prüfe ob Rollen im neuen Objekt differieren und ob Benutzer Admin oder Employee ist
-        if ((newUserInformation.role != changedUser.role) && (requestingUser.role == ShopUser.Role.ADMIN || requestingUser.role == ShopUser.Role.EMPLOYEE)) {
-            //Wenn neue Benutzerrolle Employee dann setze Sie einfach
-            if ((newUserInformation.role == ShopUser.Role.EMPLOYEE) || newUserInformation.role == ShopUser.Role.USER) {
+
+        PermissionUtil permissionUtil = new PermissionUtil(requestingUser, newUserInformation);
+        if (permissionUtil.checkIfRolesAreTheSame() && permissionUtil.checkIfAdminOrEmployee()) {
+            if (permissionUtil.checkIfNewRoleIsEmployee()) {
                 LOG.debug("Benutzer zu Employee promotet");
                 changedUser.role = newUserInformation.role;
                 return changedUser;
             }
-            //Wenn Benutzerrolle Admin ist, dann prüfe das erneut und setze es dann erst
-            else if (newUserInformation.role == ShopUser.Role.ADMIN && requestingUser.role == ShopUser.Role.ADMIN) {
+            else if (permissionUtil.checkIfNewRoleIsAdminAndRightsAreSufficient()) {
                 changedUser.role = ShopUser.Role.ADMIN;
                 LOG.debug("Benutzer zu Admin promotet");
                 return changedUser;

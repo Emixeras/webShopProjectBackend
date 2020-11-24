@@ -92,7 +92,7 @@ public class ArticleImpl implements ArticleInterface {
                             articleDownloadForm.article = article;
 
                                 try {
-                                    articleDownloadForm.file = Base64.getEncoder().encodeToString(pictureHandler.scaleImage(new ByteArrayInputStream(article.articlePicture.rawData), 100));
+                                    articleDownloadForm.file = Base64.getEncoder().encodeToString(pictureHandler.scaleImage(new ByteArrayInputStream(article.articlePicture.rawData), 300));
                                 } catch (Exception e) {
                                     LOG.error("input Failed");
                                     throw new WebApplicationException(Response.Status.BAD_REQUEST);
