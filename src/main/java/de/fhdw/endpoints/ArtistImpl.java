@@ -49,7 +49,7 @@ public class ArtistImpl implements ArtistInterface {
     @GET
     @Path("range")
     public List<ArtistDownloadForm> getArtistRange(@MatrixParam("start") int start, @MatrixParam("end") int end) {
-        PanacheQuery<Artist> panacheQuery = Artist.findAll(Sort.by("name"));
+        PanacheQuery<Artist> panacheQuery = Artist.findAll(Sort.by("id"));
 
         return panacheQuery
                 .range(start - 1, end - 1)
@@ -73,6 +73,8 @@ public class ArtistImpl implements ArtistInterface {
 
     @Override
     @PUT
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces(MediaType.MULTIPART_FORM_DATA)
     @Transactional
     @RolesAllowed({"employee", "admin"})
     @Operation(summary = "updates a Artist Object")
