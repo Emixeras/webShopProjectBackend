@@ -4,6 +4,7 @@ import de.fhdw.forms.ArtistDownloadForm;
 import de.fhdw.forms.ArtistUploadForm;
 import de.fhdw.models.Artist;
 import de.fhdw.models.ArtistPicture;
+import de.fhdw.util.PictureHandler;
 import io.quarkus.hibernate.orm.panache.PanacheQuery;
 import io.quarkus.panache.common.Sort;
 import org.eclipse.microprofile.openapi.annotations.Operation;
@@ -49,9 +50,10 @@ public class ArtistImpl implements ArtistInterface {
     @GET
     @Path("range")
     public List<ArtistDownloadForm> getArtistRange(@MatrixParam("start") int start, @MatrixParam("end") int end) {
-        PanacheQuery<Artist> panacheQuery = Artist.findAll(Sort.by("name"));
+        PanacheQuery<Artist> panacheQuery = Artist.findAll(Sort.by("id"));
+
         return panacheQuery
-                .range(start - 1, end - 1)
+                .range(start -1, end -1 )
                 .list()
                 .parallelStream().map(
                         artist -> {
@@ -74,7 +76,7 @@ public class ArtistImpl implements ArtistInterface {
     @PUT
     @Transactional
     @RolesAllowed({"employee", "admin"})
-    @Operation(summary = "updates a Artist Object", description = "")
+    @Operation(summary = "updates a Artist Object")
     public Response changeArtist(@MultipartForm ArtistUploadForm data, @Context SecurityContext securityContext) {
         Optional<Artist> optional = Artist.findByIdOptional(data.artist.id);
         Artist old = optional.orElseThrow(() -> new WebApplicationException(Response.Status.BAD_REQUEST));
@@ -151,7 +153,7 @@ public class ArtistImpl implements ArtistInterface {
         }
     }
 
-    private class RestError {
+    private static class RestError {
         public RestError(Artist artist, String message) {
         }
     }
