@@ -77,30 +77,29 @@ public class UserImpl implements UserInterface {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
 
-        LOG.info(changedUser.email);
-        //update Informations
-        if (requestingUser.role == ShopUser.Role.ADMIN || requestingUser.id.equals(newUserInformation.id)) {
-            changedUser.email = newUserInformation.email;
-            changedUser.lastName = newUserInformation.lastName;
-            changedUser.firstName = newUserInformation.firstName;
-            changedUser.postalCode = newUserInformation.postalCode;
-            changedUser.streetNumber = newUserInformation.streetNumber;
-            changedUser.street = newUserInformation.street;
-            changedUser.town = newUserInformation.town;
-            changedUser.title = newUserInformation.title;
-            changedUser.password = newUserInformation.password;
-            changedUser.birth = newUserInformation.birth;
-            LOG.info("new User: " + changedUser.toString());
-        } else throw new WebApplicationException(Response.Status.FORBIDDEN);
-
         PermissionUtil permissionUtil = new PermissionUtil(requestingUser, newUserInformation);
+        if (!changedUser.equals(newUserInformation)) {
+            if (permissionUtil.checkIfAdmin() || permissionUtil.checkIfUserIsSelf()) {
+                changedUser.email = newUserInformation.email;
+                changedUser.lastName = newUserInformation.lastName;
+                changedUser.firstName = newUserInformation.firstName;
+                changedUser.postalCode = newUserInformation.postalCode;
+                changedUser.streetNumber = newUserInformation.streetNumber;
+                changedUser.street = newUserInformation.street;
+                changedUser.town = newUserInformation.town;
+                changedUser.title = newUserInformation.title;
+                changedUser.password = newUserInformation.password;
+                changedUser.birth = newUserInformation.birth;
+                LOG.info("new User: " + changedUser.toString());
+            } else throw new WebApplicationException(Response.Status.FORBIDDEN);
+        }
+
         if (permissionUtil.checkIfRolesAreTheSame() && permissionUtil.checkIfAdminOrEmployee()) {
             if (permissionUtil.checkIfNewRoleIsEmployee()) {
                 LOG.debug("Benutzer zu Employee promotet");
                 changedUser.role = newUserInformation.role;
                 return changedUser;
-            }
-            else if (permissionUtil.checkIfNewRoleIsAdminAndRightsAreSufficient()) {
+            } else if (permissionUtil.checkIfNewRoleIsAdminAndRightsAreSufficient()) {
                 changedUser.role = ShopUser.Role.ADMIN;
                 LOG.debug("Benutzer zu Admin promotet");
                 return changedUser;
@@ -125,7 +124,6 @@ public class UserImpl implements UserInterface {
         }
         if (shopUser.role == ShopUser.Role.ADMIN || email.equals(deleted.email)) {
             try {
-
                 deleted.delete();
             } catch (Exception e) {
                 throw new WebApplicationException(Response.Status.EXPECTATION_FAILED);

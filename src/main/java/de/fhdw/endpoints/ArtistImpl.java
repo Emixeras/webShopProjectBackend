@@ -49,7 +49,7 @@ public class ArtistImpl implements ArtistInterface {
     @GET
     @Path("range")
     public List<ArtistDownloadForm> getArtistRange(@MatrixParam("start") int start, @MatrixParam("end") int end) {
-        PanacheQuery<Artist> panacheQuery = Artist.findAll(Sort.by("id"));
+        PanacheQuery<Artist> panacheQuery = Artist.findAll(Sort.by("name"));
         return panacheQuery
                 .range(start - 1, end - 1)
                 .list()

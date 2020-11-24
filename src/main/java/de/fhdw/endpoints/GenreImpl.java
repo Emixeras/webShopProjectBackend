@@ -49,15 +49,23 @@ public class GenreImpl implements GenreInterface {
 
     @GET
     @Override
-    @Operation(summary = "returns all Genres with Picture")
-    public Map<String, GenreDownloadForm> getAll() {
+    @Operation(summary = "returns all Genres with Picture", description = "returns Genres with or without Pictures Example: http://localhost:8080/genre;picture=true")
+    public Map<String, GenreDownloadForm> getAll(@MatrixParam("picture") boolean picture) {
         Map<String, GenreDownloadForm> map = new HashMap<>();
         List<Genre> genres = Genre.listAll();
-        for (Genre genre : genres) {
-            GenreDownloadForm genreDownloadForm = new GenreDownloadForm();
-            genreDownloadForm.file = Base64.getEncoder().encodeToString(genre.picture.rawData);
-            genreDownloadForm.genre = genre;
-            map.put(genre.id.toString(), genreDownloadForm);
+        if (picture) {
+            for (Genre genre : genres) {
+                GenreDownloadForm genreDownloadForm = new GenreDownloadForm();
+                genreDownloadForm.file = Base64.getEncoder().encodeToString(genre.picture.rawData);
+                genreDownloadForm.genre = genre;
+                map.put(genre.id.toString(), genreDownloadForm);
+            }
+        } else {
+            for (Genre genre : genres) {
+                GenreDownloadForm genreDownloadForm = new GenreDownloadForm();
+                genreDownloadForm.genre = genre;
+                map.put(genre.id.toString(), genreDownloadForm);
+            }
         }
         return map;
     }

@@ -4,10 +4,10 @@ import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
+import java.util.Objects;
 
 
 @Entity(name = "ShopUser")
-@Table(name = "shopuser")
 public class ShopUser extends PanacheEntityBase {
 
 
@@ -55,6 +55,30 @@ public class ShopUser extends PanacheEntityBase {
                 ", birth=" + birth +
                 ", role=" + role +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ShopUser)) return false;
+        ShopUser shopUser = (ShopUser) o;
+        return streetNumber == shopUser.streetNumber &&
+                postalCode == shopUser.postalCode &&
+                id.equals(shopUser.id) &&
+                email.equals(shopUser.email) &&
+                password.equals(shopUser.password) &&
+                title == shopUser.title &&
+                firstName.equals(shopUser.firstName) &&
+                lastName.equals(shopUser.lastName) &&
+                Objects.equals(street, shopUser.street) &&
+                Objects.equals(town, shopUser.town) &&
+                Objects.equals(birth, shopUser.birth) &&
+                role == shopUser.role;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, email, password, title, firstName, lastName, street, streetNumber, town, postalCode, birth, role);
     }
 
     public enum Role {
