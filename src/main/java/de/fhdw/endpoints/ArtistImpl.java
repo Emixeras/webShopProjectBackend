@@ -4,7 +4,6 @@ import de.fhdw.forms.ArtistDownloadForm;
 import de.fhdw.forms.ArtistUploadForm;
 import de.fhdw.models.Artist;
 import de.fhdw.models.ArtistPicture;
-import de.fhdw.util.PictureHandler;
 import io.quarkus.hibernate.orm.panache.PanacheQuery;
 import io.quarkus.panache.common.Sort;
 import org.eclipse.microprofile.openapi.annotations.Operation;
@@ -53,9 +52,9 @@ public class ArtistImpl implements ArtistInterface {
         PanacheQuery<Artist> panacheQuery = Artist.findAll(Sort.by("name"));
 
         return panacheQuery
-                .range(start -1, end -1 )
+                .range(start - 1, end - 1)
                 .list()
-                .parallelStream().map(
+                .stream().map(
                         artist -> {
                             ArtistDownloadForm artistDownloadForm = new ArtistDownloadForm();
                             artistDownloadForm.artist = artist;
@@ -114,7 +113,7 @@ public class ArtistImpl implements ArtistInterface {
                     .entity(Artist.findByName(data.artist.name))
                     .build();
 
-        if(data.getFile() == null){
+        if (data.getFile() == null) {
             return Response
                     .status(409)
                     .entity(new RestError(data.artist, "picture is missing"))
