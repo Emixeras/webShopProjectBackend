@@ -33,6 +33,7 @@ class UserImplTest {
     @BeforeAll
     @Transactional()
     static void setUp() {
+
         SysInit sysInit = new SysInit();
         sysInit.initUser();
     }
