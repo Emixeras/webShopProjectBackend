@@ -25,13 +25,7 @@ class OrderImplTest {
     @TestSecurity(user = "admin@admin.de", roles = {"admin"})
     void testGetAllOrdersForUser() {
 
-        given()
-                .contentType("application/json")
-                .body(stringObjectMap)
-                .when()
-                .post()
-                .then()
-                .statusCode(200);
+
 
     }
 
