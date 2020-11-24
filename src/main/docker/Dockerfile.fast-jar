@@ -3,7 +3,7 @@
 #
 # Before building the container image run:
 #
-# mvnw package -Dquarkus.package.type=fast-jar -DskipTests=true
+# mvnw package -Dquarkus.package.type=fast-jar -DskipTests=true && docker-compose build && docker-compose push
 #
 # Then, build the image with:
 #
