@@ -90,16 +90,14 @@ public class ArticleImpl implements ArticleInterface {
                         article -> {
                             ArticleDownloadForm articleDownloadForm = new ArticleDownloadForm();
                             articleDownloadForm.article = article;
-                            if (quality != 0) {
+
                                 try {
-                                    articleDownloadForm.file = Base64.getEncoder().encodeToString(pictureHandler.scaleImage(new ByteArrayInputStream(article.articlePicture.rawData), quality));
+                                    articleDownloadForm.file = Base64.getEncoder().encodeToString(pictureHandler.scaleImage(new ByteArrayInputStream(article.articlePicture.rawData), 100));
                                 } catch (Exception e) {
                                     LOG.error("input Failed");
                                     throw new WebApplicationException(Response.Status.BAD_REQUEST);
                                 }
-                            } else {
-                                articleDownloadForm.file = Base64.getEncoder().encodeToString(article.articlePicture.thumbnail);
-                            }
+
                             return articleDownloadForm;
                         }
                 ).collect(Collectors.toList());
