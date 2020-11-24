@@ -74,17 +74,27 @@ public class ArtistImpl implements ArtistInterface {
     @PUT
     @Transactional
     @RolesAllowed({"employee", "admin"})
-    @Operation(summary = "gets a Single Object identified by id", description = "Returns a MultiPart Object")
-    public Artist changeArtist(Artist artist, @Context SecurityContext securityContext) {
-        Optional<Artist> optional = Artist.findByIdOptional(artist.id);
+    @Operation(summary = "updates a Artist Object", description = "")
+    public Response changeArtist(@MultipartForm ArtistUploadForm data, @Context SecurityContext securityContext) {
+        Optional<Artist> optional = Artist.findByIdOptional(data.artist.id);
         Artist old = optional.orElseThrow(() -> new WebApplicationException(Response.Status.BAD_REQUEST));
         if (old == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
-        old.name = artist.name;
+        old.name = data.artist.name;
+
+        if (data.getFile() == null) {
+            old.picture.rawData = data.getFile();
+        }
+
         LOG.debug("edited: " + old.toString());
-        return old;
+        ArtistDownloadForm artistDownloadForm = new ArtistDownloadForm();
+        artistDownloadForm.artist = old;
+        artistDownloadForm.file = Base64.getEncoder().encodeToString(old.picture.rawData);
+
+        return Response.ok().entity(artistDownloadForm).build();
     }
+
 
     @Override
     @POST
@@ -93,15 +103,22 @@ public class ArtistImpl implements ArtistInterface {
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Operation(summary = "reggister new Artist", description = "only allowed by Admins and Employees")
     public Response registerNewArtist(@MultipartForm ArtistUploadForm data, @Context SecurityContext securityContext) {
-        if (data.artist == null || data.getFile() == null) {
+        if (data.artist == null || data.getFile() == null)
             return Response.noContent().build();
-        }
-        if (Artist.findByName(data.artist.name)!=null) {
-            return  Response
+
+        if (Artist.findByName(data.artist.name) != null)
+            return Response
                     .status(409)
                     .entity(Artist.findByName(data.artist.name))
                     .build();
+
+        if(data.getFile() == null){
+            return Response
+                    .status(409)
+                    .entity(new RestError(data.artist, "picture is missing"))
+                    .build();
         }
+
         try {
             ArtistPicture artistPicture = new ArtistPicture(data.getFile());
             artistPicture.persist();
@@ -131,6 +148,11 @@ public class ArtistImpl implements ArtistInterface {
             return Response.ok().build();
         } catch (Exception e) {
             throw new WebApplicationException(Response.Status.EXPECTATION_FAILED);
+        }
+    }
+
+    private class RestError {
+        public RestError(Artist artist, String message) {
         }
     }
 }

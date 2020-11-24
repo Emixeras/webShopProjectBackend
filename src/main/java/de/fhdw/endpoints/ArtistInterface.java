@@ -18,7 +18,7 @@ public interface ArtistInterface {
 
     List<Artist> get();
 
-    Artist changeArtist(Artist artist, @Context SecurityContext securityContext);
+    Response changeArtist(@MultipartForm  ArtistUploadForm data, @Context SecurityContext securityContext);
 
     Response registerNewArtist(@MultipartForm  ArtistUploadForm data, @Context SecurityContext securityContext);
 
