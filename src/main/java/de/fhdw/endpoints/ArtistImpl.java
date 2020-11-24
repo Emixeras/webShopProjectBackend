@@ -72,6 +72,7 @@ public class ArtistImpl implements ArtistInterface {
 
     @Override
     @PUT
+    @Transactional
     @RolesAllowed({"employee", "admin"})
     @Operation(summary = "gets a Single Object identified by id", description = "Returns a MultiPart Object")
     public Artist changeArtist(Artist artist, @Context SecurityContext securityContext) {
