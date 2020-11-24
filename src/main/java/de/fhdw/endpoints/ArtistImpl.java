@@ -116,6 +116,7 @@ public class ArtistImpl implements ArtistInterface {
 
     @Override
     @DELETE
+    @Transactional
     @RolesAllowed({"employee", "admin"})
     @Path("{id}")
     @Operation(summary = "delete Artist identified by ID", description = "only allowed by Admins and Employees")
