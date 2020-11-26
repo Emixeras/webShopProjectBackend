@@ -10,6 +10,8 @@ public class TestHelper {
         Article.listAll().forEach(PanacheEntityBase::delete);
         ArticlePicture.listAll().forEach(PanacheEntityBase::delete);
         Artist.listAll().forEach(PanacheEntityBase::delete);
+        ShopOrderEntry.deleteAll();
+        ShopOrder.deleteAll();
         ArtistPicture.listAll().forEach(PanacheEntityBase::delete);
         Genre.listAll().forEach(PanacheEntityBase::delete);
         GenrePicture.listAll().forEach(PanacheEntityBase::delete);
@@ -19,5 +21,10 @@ public class TestHelper {
 
     public  void emptyUserTable(){
         ShopUser.listAll().forEach(PanacheEntityBase::delete);
+    }
+
+    public void emptyArticleTable() {
+        Article.deleteAll();
+        ArticlePicture.deleteAll();
     }
 }

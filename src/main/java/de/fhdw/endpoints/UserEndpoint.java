@@ -41,7 +41,7 @@ public class UserEndpoint {
     @RolesAllowed({"admin", "user", "employee"})
     @Operation(summary = "Returns a single User identified by id")
     public ShopUser getCurrentUser(@Context SecurityContext securityContext) {
-        return ShopUser.findbyEmail(securityContext.getUserPrincipal().getName());
+        return ShopUser.findByEmail(securityContext.getUserPrincipal().getName());
     }
 
     @POST
@@ -49,7 +49,7 @@ public class UserEndpoint {
     @PermitAll
     @Operation(summary = "registers a new User in Database")
     public Response registerNewUser(@NotNull ShopUser shopUser) {
-        if (ShopUser.findbyEmail(shopUser.email) == null) {
+        if (ShopUser.findByEmail(shopUser.email) == null) {
             shopUser.role = ShopUser.Role.USER;
             if (!shopUser.checkIfUserIsCorrect()) {
                 return Response.status(Response.Status.BAD_REQUEST).entity(new RestError(shopUser, "Parameters are Missing")).build();
@@ -70,7 +70,7 @@ public class UserEndpoint {
         if (newUserInformation.id == null)
             return Response.status(Response.Status.BAD_REQUEST).entity(new RestError(newUserInformation, "id is missing")).build();
 
-        ShopUser requestingUser = ShopUser.findbyEmail(securityContext.getUserPrincipal().getName());
+        ShopUser requestingUser = ShopUser.findByEmail(securityContext.getUserPrincipal().getName());
         ShopUser changedUser;
 
         changedUser = ShopUser.findById(newUserInformation.id);
@@ -118,8 +118,8 @@ public class UserEndpoint {
     @Transactional
     @Operation(summary = "deletes a user identified by id if permissions are correct")
     public Boolean deleteUser(@PathParam String email, @Context SecurityContext securityContext) {
-        ShopUser deleted = ShopUser.findbyEmail(email);
-        ShopUser shopUser = ShopUser.findbyEmail(securityContext.getUserPrincipal().getName());
+        ShopUser deleted = ShopUser.findByEmail(email);
+        ShopUser shopUser = ShopUser.findByEmail(securityContext.getUserPrincipal().getName());
         if (deleted == null || shopUser == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }

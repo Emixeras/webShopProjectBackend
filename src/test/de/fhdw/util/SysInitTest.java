@@ -89,4 +89,32 @@ class SysInitTest {
         assertEquals(0, ArticlePicture.count());
     }
 
+    /*@Test
+    @TestTransaction
+    void checkSystableLazy() {
+        TestHelper testHelper = new TestHelper();
+        testHelper.emptyDatabase();
+
+        assertEquals(0, ShopUser.count());
+        assertEquals(0, ShopSys.count());
+        assertEquals(0, Genre.count());
+        assertEquals(0, GenrePicture.count());
+        assertEquals(0, Artist.count());
+        assertEquals(0, ArtistPicture.count());
+        assertEquals(0, Article.count());
+        assertEquals(0, ArticlePicture.count());
+
+        SysInit sysInit = new SysInit();
+        sysInit.demoData = true;
+        sysInit.lazyDemoData = true;
+        sysInit.initArticles();
+
+        int article = 50;
+        assertEquals(article, Article.count());
+
+        testHelper.emptyDatabase();
+
+
+    }*/
+
 }

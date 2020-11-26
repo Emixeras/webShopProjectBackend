@@ -3,6 +3,7 @@ package de.fhdw.models;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.Collection;
 import java.util.Date;
 import java.util.Objects;
 
@@ -41,7 +42,7 @@ public class ShopUser extends PanacheEntityBase {
 
     }
 
-    public static ShopUser findbyEmail(String name) {
+    public static ShopUser findByEmail(String name) {
         return find("email", name).firstResult();
     }
 
@@ -95,5 +96,16 @@ public class ShopUser extends PanacheEntityBase {
 
     public enum Title {
         HERR, FRAU, PROFESSOR, DOKTOR, BENUTZERDEFINIERT, APACHE
+    }
+
+    @OneToMany(mappedBy = "shopUser")
+    private Collection<ShopOrder> shopOrder;
+
+    public Collection<ShopOrder> getShopOrder() {
+        return shopOrder;
+    }
+
+    public void setShopOrder(Collection<ShopOrder> shopOrder) {
+        this.shopOrder = shopOrder;
     }
 }

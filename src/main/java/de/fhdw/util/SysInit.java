@@ -21,13 +21,16 @@ import java.util.stream.IntStream;
 public class SysInit {
     private static final Logger LOG = Logger.getLogger(SysInit.class);
 
+    @ConfigProperty(name = "demo.data.lazy", defaultValue = "true")
+    public boolean lazyDemoData;
+
     @ConfigProperty(name = "demo.data", defaultValue = "false")
-    boolean demoData;
+    public boolean demoData;
+
 
     @Transactional
     void onStart(@Observes StartupEvent event) {
         if (Boolean.TRUE.equals(demoData)) {
-            LOG.info("systable initialized: " + initSysTable());
             initDemoData();
         } else {
             LOG.info("demo data will not be initialized");
@@ -35,7 +38,8 @@ public class SysInit {
 
     }
 
-    private void initDemoData() {
+    public void initDemoData() {
+        LOG.info("systable initialized: " + initSysTable());
         List<ShopSys> shopSys = ShopSys.listAll();
         shopSys.forEach(i -> {
                     if (Boolean.TRUE.equals(i.initialized)) {
@@ -133,7 +137,7 @@ public class SysInit {
                 try {
                     genrePicture = new GenrePicture(IOUtils.toByteArray(getClass().getResourceAsStream(name)), pictureHandler.scaleImage(getClass().getResourceAsStream(name)));
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    LOG.error(e.toString());
                 }
                 assert genrePicture != null;
                 genrePicture.persist();
@@ -152,7 +156,6 @@ public class SysInit {
 
     public boolean initArtist() {
         try (Jsonb jsonb = JsonbBuilder.create()) {
-            //add Artists
             List<Artist> artists = jsonb.fromJson(getClass().getResourceAsStream("/TestData/artist.json"), new ArrayList<Artist>() {
             }.getClass().getGenericSuperclass());
             artists.forEach(i -> {
@@ -165,7 +168,7 @@ public class SysInit {
                 }
                 assert artistPicture != null;
                 artistPicture.persist();
-                Artist artist = new Artist(i.name, artistPicture );
+                Artist artist = new Artist(i.name, artistPicture);
                 artist.persist();
                 LOG.debug("added Artist: " + artist.toString());
             });
@@ -179,9 +182,12 @@ public class SysInit {
     }
 
     public boolean initArticles() {
+
+       int counter = lazyDemoData ? 50 : 500;
+
         try (Jsonb jsonb = JsonbBuilder.create()) {
             //put Article Pictures in DB
-            IntStream.range(1, 501).forEach(i -> {
+            IntStream.range(1, counter+1).forEach(i -> {
                 String name = "/TestData/ArticleImages/cover (" + i + ").jpg";
                 LOG.debug(i + " " + name);
                 PictureHandler pictureHandler = new PictureHandler();
@@ -200,7 +206,9 @@ public class SysInit {
             //add Articles
             List<Article> articles = jsonb.fromJson(getClass().getResourceAsStream("/TestData/article.json"), new ArrayList<Article>() {
             }.getClass().getGenericSuperclass());
-            articles.forEach(i -> {
+            articles
+                    .stream().takeWhile(n -> n.id <= counter)
+                    .forEach(i -> {
                 Article article = new Article();
                 LOG.debug(i.articlePicture);
                 article.articlePicture = i.articlePicture;
