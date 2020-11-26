@@ -4,6 +4,7 @@ import de.fhdw.forms.ArtistDownloadForm;
 import de.fhdw.forms.ArtistUploadForm;
 import de.fhdw.models.Artist;
 import de.fhdw.models.ArtistPicture;
+import de.fhdw.util.RestError;
 import io.quarkus.hibernate.orm.panache.PanacheQuery;
 import io.quarkus.panache.common.Sort;
 import org.eclipse.microprofile.openapi.annotations.Operation;
@@ -30,11 +31,10 @@ import java.util.stream.Collectors;
 @Tag(name = "Artist", description = "Operations on Artist object")
 
 @Path("artist")
-public class ArtistImpl implements ArtistInterface {
-    private static final Logger LOG = Logger.getLogger(ArtistImpl.class);
+public class ArtistEndpoint  {
+    private static final Logger LOG = Logger.getLogger(ArtistEndpoint.class);
 
 
-    @Override
     @GET
     @Path("{id}")
     @Operation(summary = "gets a Single  Artist Object identified by id")
@@ -45,7 +45,6 @@ public class ArtistImpl implements ArtistInterface {
         return new ArtistDownloadForm(artist, Base64.getEncoder().encodeToString(artist.picture.rawData));
     }
 
-    @Override
     @GET
     @Path("range")
     public List<ArtistDownloadForm> getArtistRange(@MatrixParam("start") int start, @MatrixParam("end") int end) {
@@ -64,14 +63,12 @@ public class ArtistImpl implements ArtistInterface {
                 ).collect(Collectors.toList());
     }
 
-    @Override
     @GET
     @Operation(summary = "returns all Artists")
     public List<Artist> get() {
         return Artist.findAll(Sort.by("name")).list();
     }
 
-    @Override
     @PUT
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.MULTIPART_FORM_DATA)
@@ -99,7 +96,6 @@ public class ArtistImpl implements ArtistInterface {
     }
 
 
-    @Override
     @POST
     @RolesAllowed({"employee", "admin"})
     @Transactional
@@ -135,7 +131,6 @@ public class ArtistImpl implements ArtistInterface {
         return Response.accepted(data.artist).build();
     }
 
-    @Override
     @DELETE
     @Transactional
     @RolesAllowed({"employee", "admin"})
@@ -154,8 +149,5 @@ public class ArtistImpl implements ArtistInterface {
         }
     }
 
-    private static class RestError {
-        public RestError(Artist artist, String message) {
-        }
-    }
+
 }

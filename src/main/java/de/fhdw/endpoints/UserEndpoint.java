@@ -2,6 +2,7 @@ package de.fhdw.endpoints;
 
 import de.fhdw.models.ShopUser;
 import de.fhdw.util.PermissionUtil;
+import de.fhdw.util.RestError;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.jboss.logging.Logger;
@@ -24,13 +25,12 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @Tag(name = "User", description = "Operations on User Object")
-public class UserImpl implements UserInterface {
-    private static final Logger LOG = Logger.getLogger(UserImpl.class);
+public class UserEndpoint {
+    private static final Logger LOG = Logger.getLogger(UserEndpoint.class);
 
     @GET
     @Path("all")
     @RolesAllowed("admin")
-    @Override
     @Operation(summary = "Returns all User as Json List")
     public List<ShopUser> getAllUser() {
         LOG.info("Liste Aller Benutzer abgefragt");
@@ -39,7 +39,6 @@ public class UserImpl implements UserInterface {
 
     @GET
     @RolesAllowed({"admin", "user", "employee"})
-    @Override
     @Operation(summary = "Returns a single User identified by id")
     public ShopUser getCurrentUser(@Context SecurityContext securityContext) {
         return ShopUser.findbyEmail(securityContext.getUserPrincipal().getName());
@@ -48,37 +47,39 @@ public class UserImpl implements UserInterface {
     @POST
     @Transactional
     @PermitAll
-    @Override
     @Operation(summary = "registers a new User in Database")
-    public ShopUser registerNewUser(@NotNull ShopUser shopUser) {
+    public Response registerNewUser(@NotNull ShopUser shopUser) {
         if (ShopUser.findbyEmail(shopUser.email) == null) {
             shopUser.role = ShopUser.Role.USER;
-            if (shopUser.firstName.equals("") || shopUser.lastName.equals("")) {
-                throw new WebApplicationException(Response.Status.NO_CONTENT);
+            if (!shopUser.checkIfUserIsCorrect()) {
+                return Response.status(Response.Status.BAD_REQUEST).entity(new RestError(shopUser, "Parameters are Missing")).build();
             }
             shopUser.persist();
             LOG.info("added: " + shopUser.toString());
-            return shopUser;
-        } else throw new WebApplicationException(Response.Status.valueOf("Benutzername bereits vorhanden"));
+            return Response.ok().entity(shopUser).build();
+        } else
+            return Response.status(Response.Status.CONFLICT).entity(new RestError(shopUser, "user Conflict")).build();
     }
 
     @PUT
     @Transactional
     @RolesAllowed({"user", "admin", "employee"})
-    @Override
     @Operation(summary = "modifies a User")
-    public ShopUser updateUser(@NotNull ShopUser newUserInformation, @Context SecurityContext securityContext) {
+    public Response updateUser(@NotNull ShopUser newUserInformation, @Context SecurityContext securityContext) {
+
+        if (newUserInformation.id == null)
+            return Response.status(Response.Status.BAD_REQUEST).entity(new RestError(newUserInformation, "id is missing")).build();
+
         ShopUser requestingUser = ShopUser.findbyEmail(securityContext.getUserPrincipal().getName());
         ShopUser changedUser;
-        LOG.info(newUserInformation.email);
 
         changedUser = ShopUser.findById(newUserInformation.id);
-        if (changedUser == null) {
-            throw new WebApplicationException(Response.Status.NOT_FOUND);
-        }
+        if (changedUser == null || requestingUser == null)
+            return Response.status(Response.Status.BAD_REQUEST).entity(new RestError(newUserInformation, "user not found")).build();
+
 
         PermissionUtil permissionUtil = new PermissionUtil(requestingUser, newUserInformation);
-        if (!changedUser.equals(newUserInformation)) {
+        if (!changedUser.equals(newUserInformation) && newUserInformation.checkIfUserIsCorrect()) {
             if (permissionUtil.checkIfAdmin() || permissionUtil.checkIfUserIsSelf()) {
                 changedUser.email = newUserInformation.email;
                 changedUser.lastName = newUserInformation.lastName;
@@ -91,26 +92,26 @@ public class UserImpl implements UserInterface {
                 changedUser.password = newUserInformation.password;
                 changedUser.birth = newUserInformation.birth;
                 LOG.info("new User: " + changedUser.toString());
-            } else throw new WebApplicationException(Response.Status.FORBIDDEN);
+            } else
+                return Response.status(Response.Status.FORBIDDEN).entity(new RestError(requestingUser, "insufficient privileges or incorrect Information provided")).build();
         }
 
         if (permissionUtil.checkIfRolesAreTheSame() && permissionUtil.checkIfAdminOrEmployee()) {
             if (permissionUtil.checkIfNewRoleIsEmployee()) {
                 LOG.debug("Benutzer zu Employee promotet");
                 changedUser.role = newUserInformation.role;
-                return changedUser;
+                return Response.ok().entity(changedUser).build();
             } else if (permissionUtil.checkIfNewRoleIsAdminAndRightsAreSufficient()) {
                 changedUser.role = ShopUser.Role.ADMIN;
                 LOG.debug("Benutzer zu Admin promotet");
-                return changedUser;
+                return Response.ok().entity(changedUser).build();
             } else {
                 throw new WebApplicationException(Response.Status.FORBIDDEN);
             }
         }
-        return changedUser;
+        return Response.ok().entity(changedUser).build();
     }
 
-    @Override
     @Path("{email}")
     @DELETE
     @RolesAllowed({"user", "admin", "employee"})

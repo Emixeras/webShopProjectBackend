@@ -13,7 +13,6 @@ public class ShopUser extends PanacheEntityBase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     public Long id;
     @NotBlank(message = "email may not be Blank")
     @Column(nullable = false, unique = true)
@@ -34,6 +33,13 @@ public class ShopUser extends PanacheEntityBase {
     public Date birth;
     @Column(nullable = false)
     public Role role;
+
+
+    public boolean checkIfUserIsCorrect() {
+
+        return (email != null && password != null && title != null && this.firstName != null && birth != null && role != null);
+
+    }
 
     public static ShopUser findbyEmail(String name) {
         return find("email", name).firstResult();
@@ -80,6 +86,8 @@ public class ShopUser extends PanacheEntityBase {
     public int hashCode() {
         return Objects.hash(id, email, password, title, firstName, lastName, street, streetNumber, town, postalCode, birth, role);
     }
+
+
 
     public enum Role {
         ADMIN, EMPLOYEE, USER

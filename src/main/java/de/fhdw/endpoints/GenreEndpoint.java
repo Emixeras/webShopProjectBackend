@@ -26,13 +26,12 @@ import java.util.Map;
 @Consumes(MediaType.APPLICATION_JSON)
 @Path("genre")
 @Tag(name = "Genre", description = "Operations on Genre object")
-public class GenreImpl implements GenreInterface {
-    private static final Logger LOG = Logger.getLogger(GenreImpl.class);
+public class GenreEndpoint  {
+    private static final Logger LOG = Logger.getLogger(GenreEndpoint.class);
 
     @Inject
     PictureHandler pictureHandler;
 
-    @Override
     @GET
     @Path("{id}")
     @Operation(summary = "gets a Single Object identified by id", description = "Returns a MultiPart Object")
@@ -48,7 +47,6 @@ public class GenreImpl implements GenreInterface {
     }
 
     @GET
-    @Override
     @Operation(summary = "returns all Genres with Picture", description = "returns Genres with or without Pictures Example: http://localhost:8080/genre;picture=true")
     public Map<String, GenreDownloadForm> getAll(@MatrixParam("picture") boolean picture) {
         Map<String, GenreDownloadForm> map = new HashMap<>();
@@ -70,7 +68,6 @@ public class GenreImpl implements GenreInterface {
         return map;
     }
 
-    @Override
     @PUT
     @RolesAllowed({"employee", "admin"})
     @Operation(summary = "modifes a Genre Object", description = "Accepts a Multipart Object")
@@ -90,7 +87,6 @@ public class GenreImpl implements GenreInterface {
         return old;
     }
 
-    @Override
     @POST
     @RolesAllowed({"employee", "admin"})
     @Operation(summary = "creates a new Genre Object", description = "Accepts a Multipart Object")
@@ -112,7 +108,6 @@ public class GenreImpl implements GenreInterface {
     }
 
 
-    @Override
     @DELETE
     @RolesAllowed({"employee", "admin"})
     @Operation(summary = "deletes a Genre Object", description = "Deletes an object identified by id")

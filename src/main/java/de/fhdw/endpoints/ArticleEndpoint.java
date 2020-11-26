@@ -31,14 +31,13 @@ import java.util.stream.Collectors;
 @Consumes(MediaType.MULTIPART_FORM_DATA)
 @Produces(MediaType.APPLICATION_JSON)
 @Tag(name = "Article", description = "Operations on Article object")
-public class ArticleImpl implements ArticleInterface {
-    private static final Logger LOG = Logger.getLogger(ArticleImpl.class);
+public class ArticleEndpoint {
+    private static final Logger LOG = Logger.getLogger(ArticleEndpoint.class);
 
     @Inject
     PictureHandler pictureHandler;
 
 
-    @Override
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @RolesAllowed({"admin", "employee"})
@@ -68,7 +67,6 @@ public class ArticleImpl implements ArticleInterface {
         return Response.accepted(article.id).build();
     }
 
-    @Override
     @GET
     @Cache(maxAge = 5)
     @Operation(summary = "returns all Articles Objects as json with no articlePicture")
@@ -78,7 +76,6 @@ public class ArticleImpl implements ArticleInterface {
 
 
     @GET
-    @Override
     @Path("range")
     @Operation(summary = "returns a Range of ArticleForm Objects, including Pictures", description = "example: http://localhost:8080/article/range;start=0;end=20;quality=500 quality is optional")
     public List<ArticleDownloadForm> getArticleRange(@MatrixParam("start") int start, @MatrixParam("end") int end, @MatrixParam("quality") int quality) {
@@ -91,12 +88,12 @@ public class ArticleImpl implements ArticleInterface {
                             ArticleDownloadForm articleDownloadForm = new ArticleDownloadForm();
                             articleDownloadForm.article = article;
 
-                                try {
-                                    articleDownloadForm.file = Base64.getEncoder().encodeToString(pictureHandler.scaleImage(new ByteArrayInputStream(article.articlePicture.rawData), 300));
-                                } catch (Exception e) {
-                                    LOG.error("input Failed");
-                                    throw new WebApplicationException(Response.Status.BAD_REQUEST);
-                                }
+                            try {
+                                articleDownloadForm.file = Base64.getEncoder().encodeToString(pictureHandler.scaleImage(new ByteArrayInputStream(article.articlePicture.rawData), 300));
+                            } catch (Exception e) {
+                                LOG.error("input Failed");
+                                throw new WebApplicationException(Response.Status.BAD_REQUEST);
+                            }
 
                             return articleDownloadForm;
                         }
@@ -104,7 +101,6 @@ public class ArticleImpl implements ArticleInterface {
 
     }
 
-    @Override
     @Path("count")
     @Operation(summary = "the total number of available Articles")
     @GET
@@ -112,7 +108,6 @@ public class ArticleImpl implements ArticleInterface {
         return Article.count();
     }
 
-    @Override
     @GET
     @Path("{id}")
     @Operation(summary = "returns a single Article Object as Multipart Form including the Picture as Byte Array")
@@ -127,7 +122,6 @@ public class ArticleImpl implements ArticleInterface {
         return articleDownloadForm;
     }
 
-    @Override
     @Path("{id}")
     @DELETE
     @Operation(summary = "removes an Article identified by the supplied ID")
@@ -147,7 +141,6 @@ public class ArticleImpl implements ArticleInterface {
         return Response.ok("true").build();
     }
 
-    @Override
     @PUT
     @RolesAllowed({"admin", "employee"})
     @Operation(summary = "changes a Article Object", description = "needs a Multipart Form Picture can be empty")

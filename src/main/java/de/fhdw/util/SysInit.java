@@ -26,8 +26,8 @@ public class SysInit {
 
     @Transactional
     void onStart(@Observes StartupEvent event) {
-        LOG.info("systable initialized: " + initSysTable());
         if (Boolean.TRUE.equals(demoData)) {
+            LOG.info("systable initialized: " + initSysTable());
             initDemoData();
         } else {
             LOG.info("demo data will not be initialized");
@@ -94,7 +94,6 @@ public class SysInit {
         return true;
     }
 
-    @Transactional
     public boolean initUser() {
         try (Jsonb jsonb = JsonbBuilder.create()) {
             //add Users
@@ -123,7 +122,6 @@ public class SysInit {
         return true;
     }
 
-    @Transactional
     public boolean initGenre() {
         try (Jsonb jsonb = JsonbBuilder.create()) {
             List<Genre> genres = jsonb.fromJson(getClass().getResourceAsStream("/TestData/genre.json"), new ArrayList<Genre>() {
@@ -152,7 +150,6 @@ public class SysInit {
         }
     }
 
-    @Transactional
     public boolean initArtist() {
         try (Jsonb jsonb = JsonbBuilder.create()) {
             //add Artists
@@ -181,7 +178,6 @@ public class SysInit {
 
     }
 
-    @Transactional
     public boolean initArticles() {
         try (Jsonb jsonb = JsonbBuilder.create()) {
             //put Article Pictures in DB
