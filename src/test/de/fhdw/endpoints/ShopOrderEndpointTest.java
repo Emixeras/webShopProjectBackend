@@ -1,9 +1,7 @@
 package de.fhdw.endpoints;
 
 import de.fhdw.TestHelper;
-import de.fhdw.models.Article;
-import de.fhdw.models.ShopOrderEntry;
-import de.fhdw.models.ShopUser;
+import de.fhdw.models.*;
 import de.fhdw.util.SysInit;
 import io.quarkus.test.TestTransaction;
 import io.quarkus.test.junit.QuarkusTest;
@@ -35,7 +33,6 @@ public class ShopOrderEndpointTest {
         SysInit sysInit = new SysInit();
         sysInit.lazyDemoData = true;
         sysInit.initDemoData();
-
     }
 
     SecurityContext securityContext = new SecurityContext() {
@@ -69,7 +66,7 @@ public class ShopOrderEndpointTest {
     @Transactional
     static void afterAll() {
         TestHelper testHelper = new TestHelper();
-        testHelper.emptyDatabase();
+       // testHelper.emptyDatabase();
     }
 
 
@@ -81,7 +78,10 @@ public class ShopOrderEndpointTest {
         shopUser = ShopUser.findByEmail("user@user.de");
         List<ShopOrderEntry> cartEntries = new ArrayList<>();
         IntStream.range(0,50).forEach(i->{
-            ShopOrderEntry shopOrderEntry = new ShopOrderEntry(Article.findById((Integer.toUnsignedLong(new Random().nextInt(49)+1))), (new Random().nextInt(9))+1);
+            ShopOrderCart shopOrderCart = new ShopOrderCart(Article.findById((Integer.toUnsignedLong(new Random().nextInt(49)+1))), (new Random().nextInt(9))+1);
+            ShopOrderArticle shopOrderArticle = new ShopOrderArticle(shopOrderCart.article);
+
+            ShopOrderEntry shopOrderEntry = new ShopOrderEntry(shopOrderArticle, i);
             cartEntries.add(shopOrderEntry);
         });
         orderEndpoint.createOrder(cartEntries, securityContext);

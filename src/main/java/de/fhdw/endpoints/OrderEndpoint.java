@@ -18,12 +18,9 @@ public class OrderEndpoint {
     @Transactional
     @RolesAllowed({"user", "employee", "admin"})
     public Response createOrder(List<ShopOrderEntry> cartEntries, @Context SecurityContext securityContext) {
-
         ShopUser shopUser = ShopUser.findByEmail(securityContext.getUserPrincipal().getName());
-
-        if(shopUser == null)
+        if (shopUser == null)
             return Response.status(Response.Status.FORBIDDEN).entity(new RestError(cartEntries, "Benutzer nicht gefunden")).build();
-
         ShopOrder shopOrder = new ShopOrder();
         shopOrder.shopUser = shopUser;
         shopOrder.persist();
@@ -31,7 +28,6 @@ public class OrderEndpoint {
             i.shopOrders = shopOrder;
             i.persist();
         });
-
         return Response.ok().entity(shopOrder).build();
     }
 

@@ -60,8 +60,6 @@ class ShopOrderTest {
     void createOrder() {
         Article article = Article.findById(1L);
 
-
-
         ShopUser shopUser = new ShopUser();
         shopUser.role = ShopUser.Role.ADMIN;
 

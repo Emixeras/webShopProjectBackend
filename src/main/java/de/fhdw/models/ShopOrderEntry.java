@@ -12,8 +12,9 @@ public class ShopOrderEntry extends PanacheEntityBase {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
     public ShopOrderArticle shopOrderArticle;
+
 
     public int quantity;
 

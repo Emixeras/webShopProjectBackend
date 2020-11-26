@@ -4,6 +4,7 @@ import de.fhdw.util.PictureHandler;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 public class ShopOrderArticle extends PanacheEntityBase {
@@ -47,5 +48,16 @@ public class ShopOrderArticle extends PanacheEntityBase {
     public void setPicture(byte[] bytes) {
         PictureHandler pictureHandler = new PictureHandler();
         this.picture = pictureHandler.scaleImage(bytes, 100);
+    }
+
+    @OneToMany(mappedBy = "shopOrderArticle")
+    private Collection<ShopOrderEntry> shopOrderEntry;
+
+    public Collection<ShopOrderEntry> getShopOrderEntry() {
+        return shopOrderEntry;
+    }
+
+    public void setShopOrderEntry(Collection<ShopOrderEntry> shopOrderEntry) {
+        this.shopOrderEntry = shopOrderEntry;
     }
 }

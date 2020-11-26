@@ -27,7 +27,6 @@ public class ShopOrderArticleTest {
     @Test
     @TestTransaction
     void create() {
-
         Article article = Article.findById(1L);
         ShopOrderArticle shopOrderArticle = new ShopOrderArticle(article);
         shopOrderArticle.persist();
