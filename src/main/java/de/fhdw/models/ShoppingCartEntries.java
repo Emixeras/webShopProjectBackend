@@ -6,11 +6,11 @@ public class ShoppingCartEntries {
 
     public Article article;
 
-    public int quantity;
+    public int count;
 
-    public ShoppingCartEntries(Article article, int quantity) {
+    public ShoppingCartEntries(Article article, int count) {
         this.article = article;
-        this.quantity = quantity;
+        this.count = count;
     }
 
     public ShoppingCartEntries() {

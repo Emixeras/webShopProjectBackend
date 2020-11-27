@@ -37,6 +37,6 @@ public class ShopOrder extends PanacheEntityBase {
 
 
     public enum paymentMethod {
-        VORKASSSE, RECHNUNG, KREDITKARTE, PAYPAL, BITCOINS
+        VORKASSE, RECHNUNG, KREDITKARTE, PAYPAL, BITCOINS
     }
 }

@@ -8,12 +8,12 @@ public class ShoppingCart {
 
     public ShopOrder.paymentMethod paymentMethod;
 
-    public ShopUser shopUser;
+    public double shipping;
 
-    public ShoppingCart(List<ShoppingCartEntries> shoppingCartEntries, ShopOrder.paymentMethod paymentMethod, ShopUser shopUser) {
+    public ShoppingCart(List<ShoppingCartEntries> shoppingCartEntries, ShopOrder.paymentMethod paymentMethod, int shipping) {
         this.shoppingCartEntries = shoppingCartEntries;
         this.paymentMethod = paymentMethod;
-        this.shopUser = shopUser;
+        this.shipping = shipping;
     }
 
     public ShoppingCart() {

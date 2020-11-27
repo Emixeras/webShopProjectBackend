@@ -61,4 +61,5 @@ public class ShopOrderArticle extends PanacheEntityBase {
 
 
 
+
 }

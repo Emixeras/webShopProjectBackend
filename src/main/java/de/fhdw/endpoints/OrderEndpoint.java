@@ -12,8 +12,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
-import java.util.ArrayList;
-import java.util.List;
 
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -35,7 +33,7 @@ public class OrderEndpoint {
         shopOrder.persist();
         shoppingCart.shoppingCartEntries.forEach(i -> {
             ShopOrderArticle shopOrderArticle = new ShopOrderArticle(Article.findById(i.article.id));
-            ShopOrderEntry shopOrderEntry = new ShopOrderEntry(shopOrderArticle, i.quantity);
+            ShopOrderEntry shopOrderEntry = new ShopOrderEntry(shopOrderArticle, i.count);
             shopOrderEntry.shopOrders = shopOrder;
             LOG.info(shopOrderEntry.toString());
             shopOrderEntry.persist();
@@ -48,14 +46,13 @@ public class OrderEndpoint {
     public Response getOrderForUser(@Context SecurityContext securityContext) {
         ShopUser requestingUser = ShopUser.findByEmail(securityContext.getUserPrincipal().getName());
         return Response.status(Response.Status.OK).entity(requestingUser.shopOrder).build();
-
     }
 
-  /*  @GET
+ /*   @GET
     public ShoppingCart shoppingCartEntries(){
         List<ShoppingCartEntries> shoppingCartEntriesArrayList = new ArrayList<>();
         ShoppingCartEntries shoppingCartEntries = new ShoppingCartEntries(Article.findById(1L), 5);
         shoppingCartEntriesArrayList.add(shoppingCartEntries);
-        return new ShoppingCart(shoppingCartEntriesArrayList, ShopOrder.paymentMethod.PAYPAL,ShopUser.findById(1L) );
+        return new ShoppingCart(shoppingCartEntriesArrayList, ShopOrder.paymentMethod.PAYPAL, 15 );
     }*/
 }

@@ -51,4 +51,10 @@ public class ShopOrderArticleTest {
         shopOrderArticle.persist();
     }
 
+    @Test
+    @TestTransaction
+    void checkForChanges(){
+        Article article = Article.findById(1L);
+    }
+
 }
