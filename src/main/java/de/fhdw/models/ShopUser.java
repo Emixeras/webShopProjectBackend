@@ -18,7 +18,6 @@ public class ShopUser extends PanacheEntityBase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
-    @NotBlank(message = "email may not be Blank")
     @Column(nullable = false, unique = true)
     public String email;
     @Column(nullable = false)

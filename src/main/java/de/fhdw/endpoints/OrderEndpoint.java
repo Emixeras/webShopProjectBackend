@@ -33,6 +33,8 @@ public class OrderEndpoint {
             return Response.status(Response.Status.FORBIDDEN).entity(new RestError(shoppingCart, "Benutzer nicht gefunden")).build();
         ShopOrder shopOrder = new ShopOrder();
         shopOrder.shopUser = shopUser;
+        shopOrder.shipping = shoppingCart.shipping;
+        shopOrder.payment = shoppingCart.paymentMethod;
         shopOrder.persist();
         shoppingCart.shoppingCartEntries.forEach(i -> {
             ShopOrderArticle shopOrderArticle = new ShopOrderArticle(Article.findById(i.article.id));

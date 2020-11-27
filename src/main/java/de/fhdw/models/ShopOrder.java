@@ -20,8 +20,11 @@ public class ShopOrder extends PanacheEntityBase {
     @OneToMany(mappedBy = "shopOrders", cascade = CascadeType.ALL)
     public List<ShopOrderEntry> shopOrderEntries;
 
+    public double shipping;
 
-    public ShopOrder(List<ShopOrderEntry> shopOrderEntries , ShopUser shopUser) {
+    public Payment payment;
+
+    public ShopOrder(List<ShopOrderEntry> shopOrderEntries, ShopUser shopUser) {
         this.shopOrderEntries = shopOrderEntries;
         this.shopUser = shopUser;
     }
@@ -34,9 +37,7 @@ public class ShopOrder extends PanacheEntityBase {
         return find("shopuser", shopUser).list();
     }
 
-
-
-    public enum paymentMethod {
+    public enum Payment {
         VORKASSE, RECHNUNG, KREDITKARTE, PAYPAL, BITCOINS
     }
 }

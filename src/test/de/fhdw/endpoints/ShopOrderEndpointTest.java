@@ -83,7 +83,7 @@ public class ShopOrderEndpointTest {
                 cartEntries.add(shoppingCartEntries);
             });
             shoppingCart.shoppingCartEntries = cartEntries;
-            shoppingCart.paymentMethod = ShopOrder.paymentMethod.VORKASSE;
+            shoppingCart.paymentMethod = ShopOrder.Payment.VORKASSE;
             shoppingCart.shipping = 15.99;
             orderEndpoint.createOrder(shoppingCart, securityContext);
         });
