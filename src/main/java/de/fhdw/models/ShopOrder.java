@@ -2,7 +2,6 @@ package de.fhdw.models;
 
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
-import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.List;
@@ -19,16 +18,22 @@ public class ShopOrder extends PanacheEntityBase {
     public ShopUser shopUser;
 
     @OneToMany(mappedBy = "shopOrders", cascade = CascadeType.ALL)
-    public List<ShopOrderEntry> cartEntries;
+    public List<ShopOrderEntry> shopOrderEntries;
 
 
-    public ShopOrder(List<ShopOrderEntry> cartEntries, ShopUser shopUser) {
-
+    public ShopOrder(List<ShopOrderEntry> shopOrderEntries , ShopUser shopUser) {
+        this.shopOrderEntries = shopOrderEntries;
+        this.shopUser = shopUser;
     }
 
     public ShopOrder() {
 
     }
+
+    public static List<ShopOrder> findByName(ShopUser shopUser) {
+        return find("shopuser", shopUser).list();
+    }
+
 
 
     public enum paymentMethod {

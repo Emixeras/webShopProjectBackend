@@ -41,6 +41,22 @@ class UserEndpointTest {
         Assertions.assertEquals(30, ShopUser.count());
     }
 
+    @AfterAll
+    @Transactional
+    static void afterAll() {
+        TestHelper testHelper = new TestHelper();
+        testHelper.emptyDatabase();
+
+        assertEquals(0, ShopUser.count());
+        assertEquals(0, ShopSys.count());
+        assertEquals(0, Genre.count());
+        assertEquals(0, GenrePicture.count());
+        assertEquals(0, Artist.count());
+        assertEquals(0, ArtistPicture.count());
+        assertEquals(0, Article.count());
+        assertEquals(0, ArticlePicture.count());
+    }
+
 
     @Test
     @TestHTTPEndpoint(UserEndpoint.class)

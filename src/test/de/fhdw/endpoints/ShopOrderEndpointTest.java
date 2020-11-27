@@ -3,38 +3,29 @@ package de.fhdw.endpoints;
 import de.fhdw.TestHelper;
 import de.fhdw.models.*;
 import de.fhdw.util.SysInit;
-import io.quarkus.test.TestTransaction;
 import io.quarkus.test.junit.QuarkusTest;
+import org.jboss.logging.Logger;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.wildfly.common.Assert;
 
 import javax.transaction.Transactional;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import java.nio.file.attribute.UserPrincipal;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 import java.util.stream.IntStream;
 
 @QuarkusTest
 public class ShopOrderEndpointTest {
+    private static final Logger LOG = Logger.getLogger(ShopOrderEndpointTest.class);
     ShopUser shopUser;
     OrderEndpoint orderEndpoint = new OrderEndpoint();
-
-
-    @BeforeAll
-    @Transactional
-    static void setUp() {
-        TestHelper testHelper = new TestHelper();
-        testHelper.emptyDatabase();
-        SysInit sysInit = new SysInit();
-        sysInit.lazyDemoData = true;
-        sysInit.initDemoData();
-    }
-
     SecurityContext securityContext = new SecurityContext() {
         @Override
         public Principal getUserPrincipal() {
@@ -62,35 +53,47 @@ public class ShopOrderEndpointTest {
         }
     };
 
+    @BeforeAll
+    @Transactional
+    static void setUp() {
+        TestHelper testHelper = new TestHelper();
+        testHelper.emptyDatabase();
+        SysInit sysInit = new SysInit();
+        sysInit.lazyDemoData = true;
+        sysInit.initDemoData();
+    }
+
     @AfterAll
     @Transactional
     static void afterAll() {
         TestHelper testHelper = new TestHelper();
-       // testHelper.emptyDatabase();
+        // testHelper.emptyDatabase();
     }
-
-
 
 
     @Test
     @Transactional
-    void createOrder(){
+    void createOrder() {
         shopUser = ShopUser.findByEmail("user@user.de");
-        List<ShopOrderEntry> cartEntries = new ArrayList<>();
-        IntStream.range(0,50).forEach(i->{
-            ShopOrderCart shopOrderCart = new ShopOrderCart(Article.findById((Integer.toUnsignedLong(new Random().nextInt(49)+1))), (new Random().nextInt(9))+1);
-            ShopOrderArticle shopOrderArticle = new ShopOrderArticle(shopOrderCart.article);
-
-            ShopOrderEntry shopOrderEntry = new ShopOrderEntry(shopOrderArticle, i);
-            cartEntries.add(shopOrderEntry);
+        List<ShoppingCartEntries> cartEntries = new ArrayList<>();
+        IntStream.range(0, 10).forEach(i -> {
+            IntStream.range(0, 2).forEach(n -> {
+                ShoppingCartEntries shoppingCartEntries = new ShoppingCartEntries(Article.findById((Integer.toUnsignedLong(new Random().nextInt(49) + 1))), (new Random().nextInt(9)) + 1);
+                cartEntries.add(shoppingCartEntries);
+            });
+            orderEndpoint.createOrder(cartEntries, securityContext);
         });
-        orderEndpoint.createOrder(cartEntries, securityContext);
+
 
     }
 
     @Test
-    void getOrderForUser(){
-        orderEndpoint.getOrder();
+    void getOrderForUser() {
+        shopUser = ShopUser.findByEmail("user@user.de");
+        Optional<ShopUser> optionalShopUser = Optional.ofNullable(shopUser);
+     //   Response order = orderEndpoint.getOrderForUser(securityContext);
+      //  Assert.assertNotNull(order);
+
     }
 
 

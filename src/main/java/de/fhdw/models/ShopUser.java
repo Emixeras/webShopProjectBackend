@@ -1,10 +1,13 @@
 package de.fhdw.models;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -99,13 +102,8 @@ public class ShopUser extends PanacheEntityBase {
     }
 
     @OneToMany(mappedBy = "shopUser")
-    private Collection<ShopOrder> shopOrder;
+    @JsonbTransient
+    public List<ShopOrder> shopOrder;
 
-    public Collection<ShopOrder> getShopOrder() {
-        return shopOrder;
-    }
 
-    public void setShopOrder(Collection<ShopOrder> shopOrder) {
-        this.shopOrder = shopOrder;
-    }
 }

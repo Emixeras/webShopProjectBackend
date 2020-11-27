@@ -17,20 +17,27 @@ public class ShopOrderEntry extends PanacheEntityBase {
 
 
     public int quantity;
-
+    @ManyToOne(optional = false)
+    @JsonbTransient
+    public ShopOrder shopOrders;
 
     public ShopOrderEntry(ShopOrderArticle shopOrderArticle, int i) {
         this.shopOrderArticle = shopOrderArticle;
         this.quantity = i;
     }
 
+
     public ShopOrderEntry() {
 
     }
 
-
-    @ManyToOne(optional = false)
-    @JsonbTransient
-    public ShopOrder shopOrders;
-
+    @Override
+    public String toString() {
+        return "ShopOrderEntry{" +
+                "id=" + id +
+                ", shopOrderArticle=" + shopOrderArticle +
+                ", quantity=" + quantity +
+                ", shopOrders=" + shopOrders +
+                '}';
+    }
 }

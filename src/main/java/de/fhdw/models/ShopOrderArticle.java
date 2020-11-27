@@ -3,8 +3,11 @@ package de.fhdw.models;
 import de.fhdw.util.PictureHandler;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Objects;
 
 @Entity
 public class ShopOrderArticle extends PanacheEntityBase {
@@ -41,6 +44,7 @@ public class ShopOrderArticle extends PanacheEntityBase {
 
     }
 
+    @JsonbTransient
     public byte[] getPicture() {
         return picture;
     }
@@ -51,13 +55,10 @@ public class ShopOrderArticle extends PanacheEntityBase {
     }
 
     @OneToMany(mappedBy = "shopOrderArticle")
+    @JsonbTransient
     private Collection<ShopOrderEntry> shopOrderEntry;
 
-    public Collection<ShopOrderEntry> getShopOrderEntry() {
-        return shopOrderEntry;
-    }
 
-    public void setShopOrderEntry(Collection<ShopOrderEntry> shopOrderEntry) {
-        this.shopOrderEntry = shopOrderEntry;
-    }
+
+
 }
