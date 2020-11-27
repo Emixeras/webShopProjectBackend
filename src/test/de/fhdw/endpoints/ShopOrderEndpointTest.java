@@ -76,12 +76,16 @@ public class ShopOrderEndpointTest {
     void createOrder() {
         shopUser = ShopUser.findByEmail("user@user.de");
         List<ShoppingCartEntries> cartEntries = new ArrayList<>();
+        ShoppingCart shoppingCart = new ShoppingCart();
         IntStream.range(0, 10).forEach(i -> {
             IntStream.range(0, 2).forEach(n -> {
                 ShoppingCartEntries shoppingCartEntries = new ShoppingCartEntries(Article.findById((Integer.toUnsignedLong(new Random().nextInt(49) + 1))), (new Random().nextInt(9)) + 1);
                 cartEntries.add(shoppingCartEntries);
             });
-            orderEndpoint.createOrder(cartEntries, securityContext);
+            shoppingCart.shoppingCartEntries = cartEntries;
+            shoppingCart.paymentMethod = ShopOrder.paymentMethod.VORKASSE;
+            shoppingCart.shipping = 15.99;
+            orderEndpoint.createOrder(shoppingCart, securityContext);
         });
 
 
@@ -91,8 +95,8 @@ public class ShopOrderEndpointTest {
     void getOrderForUser() {
         shopUser = ShopUser.findByEmail("user@user.de");
         Optional<ShopUser> optionalShopUser = Optional.ofNullable(shopUser);
-     //   Response order = orderEndpoint.getOrderForUser(securityContext);
-      //  Assert.assertNotNull(order);
+        Response order = orderEndpoint.getOrderForUser(securityContext);
+        Assert.assertNotNull(order);
 
     }
 
