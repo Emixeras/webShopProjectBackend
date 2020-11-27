@@ -24,7 +24,7 @@ public class ShopOrderArticle extends PanacheEntityBase {
     @Column(nullable = false)
     public String title;
     @Column(nullable = false)
-    public int ean;
+    public double ean;
     @Column(nullable = false)
     public double price;
     @Column(nullable = false)

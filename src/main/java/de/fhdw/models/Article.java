@@ -19,7 +19,7 @@ public class Article extends PanacheEntityBase {
     @Column(nullable = false)
     public double price;
 
-    public int ean;
+    public double ean;
 
     public String description;
 

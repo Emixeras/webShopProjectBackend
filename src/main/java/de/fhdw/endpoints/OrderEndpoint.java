@@ -56,11 +56,11 @@ public class OrderEndpoint {
         return Response.status(Response.Status.OK).entity(requestingUser.shopOrder).build();
     }
 
-    @GET
+  /*  @GET
     public ShoppingCart GetExampleShoppingCart() {
         List<ShoppingCartEntries> shoppingCartEntriesArrayList = new ArrayList<>();
         ShoppingCartEntries shoppingCartEntries = new ShoppingCartEntries(Article.findById(1L), 5);
         shoppingCartEntriesArrayList.add(shoppingCartEntries);
         return new ShoppingCart(shoppingCartEntriesArrayList, ShopOrder.paymentMethod.PAYPAL, 15);
-    }
+    }*/
 }

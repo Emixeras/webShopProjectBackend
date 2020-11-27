@@ -80,6 +80,7 @@ public class ArticleEndpoint {
     @Operation(summary = "returns a Range of ArticleForm Objects, including Pictures", description = "example: http://localhost:8080/article/range;start=0;end=20;quality=500 quality is optional")
     public List<ArticleDownloadForm> getArticleRange(@MatrixParam("start") int start, @MatrixParam("end") int end, @MatrixParam("quality") int quality) {
         PanacheQuery<Article> panacheQuery = Article.findAll(Sort.by("id"));
+        int qual  = quality != 0 ? quality : 200;
         return panacheQuery
                 .range(start - 1, end - 1)
                 .list()
@@ -89,7 +90,7 @@ public class ArticleEndpoint {
                             articleDownloadForm.article = article;
 
                             try {
-                                articleDownloadForm.file = Base64.getEncoder().encodeToString(pictureHandler.scaleImage(new ByteArrayInputStream(article.articlePicture.rawData), 300));
+                                articleDownloadForm.file = Base64.getEncoder().encodeToString(pictureHandler.scaleImage(new ByteArrayInputStream(article.articlePicture.rawData), qual));
                             } catch (Exception e) {
                                 LOG.error("input Failed");
                                 throw new WebApplicationException(Response.Status.BAD_REQUEST);
@@ -126,6 +127,7 @@ public class ArticleEndpoint {
     @DELETE
     @Operation(summary = "removes an Article identified by the supplied ID")
     @RolesAllowed({"admin", "employee"})
+    @Transactional
     public Response deleteArticle(@PathParam long id) {
         Article article = Article.findById(id);
         if (article == null) {
@@ -133,8 +135,8 @@ public class ArticleEndpoint {
         }
         try {
             ArticlePicture articlePicture = article.articlePicture;
-            articlePicture.delete();
             article.delete();
+            articlePicture.delete();
         } catch (Exception e) {
             throw new WebApplicationException(Response.Status.EXPECTATION_FAILED);
         }
