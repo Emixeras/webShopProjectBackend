@@ -6,6 +6,7 @@ import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.Collection;
 import java.util.Objects;
 
@@ -44,9 +45,8 @@ public class ShopOrderArticle extends PanacheEntityBase {
 
     }
 
-    @JsonbTransient
-    public byte[] getPicture() {
-        return picture;
+    public String getPicture() {
+        return Base64.getEncoder().encodeToString(picture);
     }
 
     public void setPicture(byte[] bytes) {

@@ -6,6 +6,7 @@ import org.jboss.logging.Logger;
 
 import javax.enterprise.context.ApplicationScoped;
 import java.io.*;
+import java.util.Base64;
 
 @ApplicationScoped
 public class PictureHandler {
@@ -42,6 +43,22 @@ public class PictureHandler {
                    .outputFormat("png")
                    .toOutputStream(byteArrayOutputStream);
            return byteArrayOutputStream.toByteArray();
+
+       }catch (Exception e){
+           LOG.error(e.toString());
+       }
+       return null;
+    }
+  public String scaleImageToString(byte[] source, int quality) {
+       try {
+           InputStream inputStream = new ByteArrayInputStream(source);
+           ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+
+           Thumbnails.of(inputStream)
+                   .size(quality, quality)
+                   .outputFormat("png")
+                   .toOutputStream(byteArrayOutputStream);
+           return Base64.getEncoder().encodeToString(byteArrayOutputStream.toByteArray());
 
        }catch (Exception e){
            LOG.error(e.toString());

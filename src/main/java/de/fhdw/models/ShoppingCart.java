@@ -10,6 +10,7 @@ public class ShoppingCart {
 
     public double shipping;
 
+
     public ShoppingCart(List<ShoppingCartEntries> shoppingCartEntries, ShopOrder.Payment paymentMethod, int shipping) {
         this.shoppingCartEntries = shoppingCartEntries;
         this.paymentMethod = paymentMethod;
