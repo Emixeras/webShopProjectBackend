@@ -3,6 +3,7 @@ package de.fhdw.endpoints;
 import de.fhdw.models.ShopUser;
 import de.fhdw.util.PermissionUtil;
 import de.fhdw.util.RestError;
+import io.quarkus.panache.common.Sort;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.jboss.logging.Logger;
@@ -34,7 +35,7 @@ public class UserEndpoint {
     @Operation(summary = "Returns all User as Json List")
     public List<ShopUser> getAllUser() {
         LOG.info("Liste Aller Benutzer abgefragt");
-        return ShopUser.listAll();
+        return ShopUser.listAll(Sort.by("id"));
     }
 
     @GET
@@ -96,8 +97,14 @@ public class UserEndpoint {
                 return Response.status(Response.Status.FORBIDDEN).entity(new RestError(requestingUser, "insufficient privileges or incorrect Information provided")).build();
         }
 
-        if(permissionUtil.checkIfAdmin() ){
-            changedUser.role = newUserInformation.role;
+        if(newUserInformation.role != changedUser.role)
+        {
+            if(permissionUtil.checkIfAdmin()){
+                changedUser.role = newUserInformation.role;
+            }
+            else {
+                return Response.status(Response.Status.FORBIDDEN).entity(newUserInformation).build();
+            }
         }
 
         return Response.ok().entity(ShopUser.findById(changedUser.id)).build();
