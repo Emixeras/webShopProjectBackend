@@ -1,6 +1,8 @@
 package de.fhdw.endpoints;
 
 import de.fhdw.TestHelper;
+import de.fhdw.forms.ShoppingCart;
+import de.fhdw.forms.ShoppingCartEntries;
 import de.fhdw.models.*;
 import de.fhdw.util.SysInit;
 import io.quarkus.test.junit.QuarkusTest;

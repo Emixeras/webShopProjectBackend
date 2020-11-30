@@ -4,13 +4,10 @@ import de.fhdw.forms.ArticleDownloadForm;
 import de.fhdw.forms.ArticleUploadForm;
 import de.fhdw.models.Article;
 import de.fhdw.models.ArticlePicture;
-import de.fhdw.models.Artist;
 import de.fhdw.util.PictureHandler;
 import io.quarkus.hibernate.orm.panache.PanacheQuery;
-import io.quarkus.panache.common.Sort;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
-import org.hibernate.annotations.NamedQuery;
 import org.jboss.logging.Logger;
 import org.jboss.resteasy.annotations.cache.Cache;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
@@ -79,19 +76,29 @@ public class ArticleEndpoint {
     @GET
     @Path("range")
     @Operation(summary = "returns a Range of ArticleForm Objects, including Pictures", description = "example: http://localhost:8080/article/range;start=0;end=20;quality=500 quality is optional")
-    public List<ArticleDownloadForm> getArticleRange(@MatrixParam("start") int start, @MatrixParam("end") int end, @MatrixParam("quality") int quality) {
+    public Response getArticleRange(@MatrixParam("start") int start, @MatrixParam("end") int end, @MatrixParam("quality") int quality) {
+        int qual = quality != 0 ? quality : 200;
 
         PanacheQuery<Article> panacheQuery;
-        if (start == end) panacheQuery = Article.findById(Integer.toUnsignedLong(start));
-        else {
+        if (start == end) {
+            ArticleDownloadForm articleDownloadForm = new ArticleDownloadForm();
+            Article article = Article.findById(Integer.toUnsignedLong(start));
+            articleDownloadForm.article = article;
+            try {
+                articleDownloadForm.file = Base64.getEncoder().encodeToString(pictureHandler.scaleImage(new ByteArrayInputStream(article.articlePicture.rawData), qual));
+            } catch (Exception e) {
+                LOG.error("input Failed");
+                throw new WebApplicationException(Response.Status.BAD_REQUEST);
+            }
+            return Response.ok().entity(articleDownloadForm).build();
+        } else {
             Map<String, Object> params = new HashMap<>();
             params.put("sID", Integer.toUnsignedLong(start));
             params.put("eID", Integer.toUnsignedLong(end));
             panacheQuery = Article.find("#Article.getRange", params);
         }
 
-        int qual = quality != 0 ? quality : 200;
-        return panacheQuery
+        return Response.ok().entity(panacheQuery
                 .stream()
                 .map(
                         article -> {
@@ -105,7 +112,7 @@ public class ArticleEndpoint {
                             }
                             return articleDownloadForm;
                         }
-                ).collect(Collectors.toList());
+                ).collect(Collectors.toList())).build();
 
     }
 

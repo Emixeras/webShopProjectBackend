@@ -101,8 +101,9 @@ public class ShopUser extends PanacheEntityBase {
     }
 
     @OneToMany(mappedBy = "shopUser")
-    @JsonbTransient
-    public List<ShopOrder> shopOrder;
+    public Collection<ShopOrder> shopOrder;
+
+
 
 
 }

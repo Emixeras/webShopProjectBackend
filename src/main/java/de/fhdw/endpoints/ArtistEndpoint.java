@@ -1,5 +1,6 @@
 package de.fhdw.endpoints;
 
+import de.fhdw.forms.ArticleDownloadForm;
 import de.fhdw.forms.ArtistDownloadForm;
 import de.fhdw.forms.ArtistUploadForm;
 import de.fhdw.models.Article;
@@ -21,6 +22,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
+import java.io.ByteArrayInputStream;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -46,19 +48,28 @@ public class ArtistEndpoint {
 
     @GET
     @Path("range")
-    public List<ArtistDownloadForm> getArtistRange(@MatrixParam("start") int start, @MatrixParam("end") int end) {
+    public Response getArtistRange(@MatrixParam("start") int start, @MatrixParam("end") int end) {
         PanacheQuery<Artist> panacheQuery;
 
-        if (start == end)
-            panacheQuery = Artist.findById(Integer.toUnsignedLong(start));
-        else {
+        if (start == end) {
+            ArtistDownloadForm artistDownloadForm = new ArtistDownloadForm();
+            Artist artist = Artist.findById(Integer.toUnsignedLong(start));
+            artistDownloadForm.artist = artist;
+            try {
+                artistDownloadForm.file = Base64.getEncoder().encodeToString(artist.picture.rawData);
+            } catch (Exception e) {
+                LOG.error("input Failed");
+                throw new WebApplicationException(Response.Status.BAD_REQUEST);
+            }
+            return Response.ok().entity(artistDownloadForm).build();
+        } else {
             Map<String, Object> params = new HashMap<>();
             params.put("sID", Integer.toUnsignedLong(start));
             params.put("eID", Integer.toUnsignedLong(end));
             panacheQuery = Artist.find("#Artist.getRange", params);
         }
 
-        return panacheQuery
+        return Response.ok().entity(panacheQuery
                 .list()
                 .stream()
                 .map(
@@ -68,7 +79,7 @@ public class ArtistEndpoint {
                             artistDownloadForm.file = Base64.getEncoder().encodeToString(artist.picture.rawData);
                             return artistDownloadForm;
                         }
-                ).collect(Collectors.toList());
+                ).collect(Collectors.toList())).build();
     }
 
     @GET

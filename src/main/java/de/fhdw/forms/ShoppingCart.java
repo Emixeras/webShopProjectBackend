@@ -1,4 +1,6 @@
-package de.fhdw.models;
+package de.fhdw.forms;
+
+import de.fhdw.models.ShopOrder;
 
 import java.util.List;
 

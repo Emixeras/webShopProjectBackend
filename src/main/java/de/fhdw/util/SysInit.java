@@ -1,6 +1,8 @@
 package de.fhdw.util;
 
 import de.fhdw.endpoints.OrderEndpoint;
+import de.fhdw.forms.ShoppingCart;
+import de.fhdw.forms.ShoppingCartEntries;
 import de.fhdw.models.*;
 import io.quarkus.runtime.StartupEvent;
 import org.apache.commons.io.IOUtils;
@@ -31,7 +33,7 @@ public class SysInit {
     @ConfigProperty(name = "demo.data", defaultValue = "false")
     public boolean demoData;
 
-@Transactional
+    @Transactional
     void onStart(@Observes StartupEvent event) {
         if (Boolean.TRUE.equals(demoData)) {
             initDemoData();
@@ -78,10 +80,10 @@ public class SysInit {
                                     LOG.info("DONE " + i.initialized);
                                 }
                                 break;
-                                case "order":
+                            case "order":
                                 if (Boolean.FALSE.equals(i.initialized)) {
                                     LOG.info("initializing Orders:");
-                         //           i.initialized = initOrders();
+                                    //           i.initialized = initOrders();
                                     LOG.info("DONE " + i.initialized);
                                 }
                                 break;
@@ -113,7 +115,7 @@ public class SysInit {
     public boolean initUser() {
         try (Jsonb jsonb = JsonbBuilder.create()) {
             //add Users
-            List<ShopUser> user =  jsonb.fromJson(getClass().getResourceAsStream("/TestData/user.json"), new ArrayList<ShopUser>() {
+            List<ShopUser> user = jsonb.fromJson(getClass().getResourceAsStream("/TestData/user.json"), new ArrayList<ShopUser>() {
             }.getClass().getGenericSuperclass());
             user.forEach(i -> {
                 ShopUser shopUser = new ShopUser();
@@ -258,7 +260,7 @@ public class SysInit {
                     return new Principal() {
                         @Override
                         public String getName() {
-                           return shopUser.email;
+                            return shopUser.email;
                         }
                     };
                 }

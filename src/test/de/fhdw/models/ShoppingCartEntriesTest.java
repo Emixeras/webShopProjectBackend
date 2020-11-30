@@ -1,5 +1,6 @@
 package de.fhdw.models;
 
+import de.fhdw.forms.ShoppingCartEntries;
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Test;
 import org.wildfly.common.Assert;

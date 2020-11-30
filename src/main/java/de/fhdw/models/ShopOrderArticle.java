@@ -1,6 +1,5 @@
 package de.fhdw.models;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import de.fhdw.util.PictureHandler;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
@@ -27,12 +26,14 @@ public class ShopOrderArticle extends PanacheEntityBase {
     @Column(nullable = false)
     private String genre;
     @Column(nullable = false)
+    @JsonbProperty("artists")
     private String artist;
     @Column(nullable = false)
     private byte[] picture;
     @OneToMany(mappedBy = "shopOrderArticle")
     @JsonbTransient
     private Collection<ShopOrderEntry> shopOrderEntry;
+
     public ShopOrderArticle(Article article) {
         this.setPicture(article.articlePicture.rawData);
         this.genre = article.genre.name;
@@ -42,6 +43,7 @@ public class ShopOrderArticle extends PanacheEntityBase {
         this.ean = article.ean;
         this.price = article.price;
     }
+
     public ShopOrderArticle() {
 
     }

@@ -1,6 +1,7 @@
-package de.fhdw.models;
+package de.fhdw.forms;
 
 
+import de.fhdw.models.Article;
 
 public class ShoppingCartEntries {
 

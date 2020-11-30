@@ -1,5 +1,6 @@
 package de.fhdw.endpoints;
 
+import de.fhdw.forms.ShoppingCart;
 import de.fhdw.models.*;
 import de.fhdw.util.RestError;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
@@ -31,6 +32,7 @@ public class OrderEndpoint {
         if (shopUser == null)
             return Response.status(Response.Status.FORBIDDEN).entity(new RestError(shoppingCart, "Benutzer nicht gefunden")).build();
         ShopOrder shopOrder = new ShopOrder();
+        shopOrder.shopOrderUser = new ShopOrderUser(shopUser);
         shopOrder.shopUser = shopUser;
         shopOrder.shipping = shoppingCart.shipping;
         shopOrder.payment = shoppingCart.paymentMethod;

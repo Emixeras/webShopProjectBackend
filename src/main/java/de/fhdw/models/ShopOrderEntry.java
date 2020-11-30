@@ -1,8 +1,6 @@
 package de.fhdw.models;
 
-import com.fasterxml.jackson.annotation.JsonRootName;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
-
 import javax.json.bind.annotation.JsonbProperty;
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
@@ -15,7 +13,7 @@ public class ShopOrderEntry extends PanacheEntityBase {
     public Long id;
 
     @ManyToOne(optional = false, cascade = CascadeType.ALL)
-    @JsonbProperty("count")
+    @JsonbProperty("article")
     public ShopOrderArticle shopOrderArticle;
 
 

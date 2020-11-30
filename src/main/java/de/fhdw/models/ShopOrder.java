@@ -3,6 +3,7 @@ package de.fhdw.models;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
+import javax.json.bind.annotation.JsonbProperty;
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import java.util.Date;
@@ -15,13 +16,18 @@ public class ShopOrder extends PanacheEntityBase {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(nullable = false)
+    public ShopOrderUser shopOrderUser;
 
     @ManyToOne
     @JoinColumn(nullable = false)
+    @JsonbTransient
     public ShopUser shopUser;
 
     @OneToMany(mappedBy = "shopOrders", cascade = CascadeType.ALL, orphanRemoval = true)
     @Column(nullable = false)
+    @JsonbProperty("entries")
     public List<ShopOrderEntry> shopOrderEntries;
 
     public Date orderDate;
@@ -29,9 +35,9 @@ public class ShopOrder extends PanacheEntityBase {
 
     public Payment payment;
 
-    public ShopOrder(List<ShopOrderEntry> shopOrderEntries, ShopUser shopUser) {
+    public ShopOrder(List<ShopOrderEntry> shopOrderEntries, ShopOrderUser shopUser) {
         this.shopOrderEntries = shopOrderEntries;
-        this.shopUser = shopUser;
+        this.shopOrderUser = shopUser;
     }
 
     public ShopOrder() {
