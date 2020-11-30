@@ -96,20 +96,11 @@ public class UserEndpoint {
                 return Response.status(Response.Status.FORBIDDEN).entity(new RestError(requestingUser, "insufficient privileges or incorrect Information provided")).build();
         }
 
-        if (permissionUtil.checkIfRolesAreTheSame() && permissionUtil.checkIfAdminOrEmployee()) {
-            if (permissionUtil.checkIfNewRoleIsEmployee()) {
-                LOG.debug("Benutzer zu Employee promotet");
-                changedUser.role = newUserInformation.role;
-                return Response.ok().entity(changedUser).build();
-            } else if (permissionUtil.checkIfNewRoleIsAdminAndRightsAreSufficient()) {
-                changedUser.role = ShopUser.Role.ADMIN;
-                LOG.debug("Benutzer zu Admin promotet");
-                return Response.ok().entity(changedUser).build();
-            } else {
-                throw new WebApplicationException(Response.Status.FORBIDDEN);
-            }
+        if(permissionUtil.checkIfAdmin() ){
+            changedUser.role = newUserInformation.role;
         }
-        return Response.ok().entity(changedUser).build();
+
+        return Response.ok().entity(ShopUser.findById(changedUser.id)).build();
     }
 
     @Path("{email}")

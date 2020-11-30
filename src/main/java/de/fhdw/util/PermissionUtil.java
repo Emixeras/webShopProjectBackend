@@ -2,8 +2,7 @@ package de.fhdw.util;
 
 import de.fhdw.models.ShopUser;
 
-import static de.fhdw.models.ShopUser.Role.ADMIN;
-import static de.fhdw.models.ShopUser.Role.EMPLOYEE;
+import static de.fhdw.models.ShopUser.Role.*;
 
 public class PermissionUtil {
 
@@ -45,5 +44,13 @@ public class PermissionUtil {
 
     public boolean checkIfRolesAreTheSame() {
         return requestingUser.role == newUserInformation.role;
+    }
+
+    public boolean checkIfNewRoleIsAdmin() {
+    return newUserInformation.role == ADMIN;
+    }
+
+    public boolean checkIfNewRoleIsEmployeeOrUser() {
+        return checkIfEmployee() || newUserInformation.role == USER;
     }
 }
