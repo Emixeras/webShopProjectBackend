@@ -12,10 +12,9 @@ public class ArticlePicture extends PanacheEntityBase {
     public Long id;
 
     @JsonbTransient
+    @Column(nullable = false)
     public byte[] rawData;
 
-    @JsonbTransient
-    public byte[] thumbnail;
 
 
     public ArticlePicture() {
@@ -23,7 +22,6 @@ public class ArticlePicture extends PanacheEntityBase {
 
     public ArticlePicture(byte[] rawData, byte[] thumbnail) {
         this.rawData = rawData;
-        this.thumbnail = thumbnail;
     }
 
 }

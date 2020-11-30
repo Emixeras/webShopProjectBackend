@@ -17,7 +17,6 @@ class ShoppingCartEntriesTest {
 
         Assert.assertNotNull(shoppingCartEntries);
 
-
     }
 
 }

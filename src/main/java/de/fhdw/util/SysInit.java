@@ -1,5 +1,6 @@
 package de.fhdw.util;
 
+import de.fhdw.endpoints.OrderEndpoint;
 import de.fhdw.models.*;
 import io.quarkus.runtime.StartupEvent;
 import org.apache.commons.io.IOUtils;
@@ -11,9 +12,12 @@ import javax.enterprise.event.Observes;
 import javax.json.bind.Jsonb;
 import javax.json.bind.JsonbBuilder;
 import javax.transaction.Transactional;
+import javax.ws.rs.core.SecurityContext;
 import java.io.*;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.IntStream;
 
 
@@ -27,8 +31,7 @@ public class SysInit {
     @ConfigProperty(name = "demo.data", defaultValue = "false")
     public boolean demoData;
 
-
-    @Transactional
+@Transactional
     void onStart(@Observes StartupEvent event) {
         if (Boolean.TRUE.equals(demoData)) {
             initDemoData();
@@ -49,6 +52,7 @@ public class SysInit {
                             case "user":
                                 if (Boolean.FALSE.equals(i.initialized)) {
                                     LOG.info("initializing user:");
+
                                     i.initialized = initUser();
                                     LOG.info("DONE " + i.initialized);
                                 }
@@ -74,6 +78,13 @@ public class SysInit {
                                     LOG.info("DONE " + i.initialized);
                                 }
                                 break;
+                                case "order":
+                                if (Boolean.FALSE.equals(i.initialized)) {
+                                    LOG.info("initializing Orders:");
+                         //           i.initialized = initOrders();
+                                    LOG.info("DONE " + i.initialized);
+                                }
+                                break;
                             default:
                                 LOG.error("Error in System Table" + i.value + "not recognized");
                                 System.exit(1);
@@ -90,6 +101,7 @@ public class SysInit {
         shopSys.add(ShopSys.findByName("artist") != null ? ShopSys.findByName("artist") : new ShopSys("artist", false));
         shopSys.add(ShopSys.findByName("genre") != null ? ShopSys.findByName("genre") : new ShopSys("genre", false));
         shopSys.add(ShopSys.findByName("article") != null ? ShopSys.findByName("article") : new ShopSys("article", false));
+        shopSys.add(ShopSys.findByName("order") != null ? ShopSys.findByName("order") : new ShopSys("order", false));
         shopSys.forEach(i -> {
             if (!i.isPersistent()) {
                 i.persist();
@@ -101,7 +113,7 @@ public class SysInit {
     public boolean initUser() {
         try (Jsonb jsonb = JsonbBuilder.create()) {
             //add Users
-            List<ShopUser> user = jsonb.fromJson(getClass().getResourceAsStream("/TestData/user.json"), new ArrayList<ShopUser>() {
+            List<ShopUser> user =  jsonb.fromJson(getClass().getResourceAsStream("/TestData/user.json"), new ArrayList<ShopUser>() {
             }.getClass().getGenericSuperclass());
             user.forEach(i -> {
                 ShopUser shopUser = new ShopUser();
@@ -181,13 +193,14 @@ public class SysInit {
 
     }
 
+
     public boolean initArticles() {
 
-       int counter = lazyDemoData ? 50 : 500;
+        int counter = lazyDemoData ? 150 : 500;
 
         try (Jsonb jsonb = JsonbBuilder.create()) {
             //put Article Pictures in DB
-            IntStream.range(1, counter+1).forEach(i -> {
+            IntStream.range(1, counter + 1).forEach(i -> {
                 String name = "/TestData/ArticleImages/cover (" + i + ").jpg";
                 LOG.debug(i + " " + name);
                 PictureHandler pictureHandler = new PictureHandler();
@@ -198,7 +211,7 @@ public class SysInit {
                     e.printStackTrace();
                 }
                 assert articlePicture != null;
-                articlePicture.persist();
+                articlePicture.persistAndFlush();
                 LOG.debug(name);
             });
 
@@ -209,18 +222,18 @@ public class SysInit {
             articles
                     .stream().takeWhile(n -> n.id <= counter)
                     .forEach(i -> {
-                Article article = new Article();
-                LOG.debug(i.articlePicture);
-                article.articlePicture = i.articlePicture;
-                article.title = i.title;
-                article.genre = i.genre;
-                article.artists = i.artists;
-                article.description = i.description;
-                article.price = i.price;
-                article.ean = i.ean;
-                article.persist();
-                LOG.debug("added article: " + article.toString());
-            });
+                        Article article = new Article();
+                        LOG.debug(i.articlePicture);
+                        article.articlePicture = i.articlePicture;
+                        article.title = i.title;
+                        article.genre = i.genre;
+                        article.artists = i.artists;
+                        article.description = i.description;
+                        article.price = i.price;
+                        article.ean = i.ean;
+                        article.persist();
+                        LOG.debug("added article: " + article.toString());
+                    });
             LOG.info(Article.count() + " Artikel angelegt");
         } catch (Exception e) {
             LOG.error("Fehler beim Artikel erstellen " + e.toString());
@@ -229,5 +242,56 @@ public class SysInit {
         return true;
     }
 
+    public boolean initOrders() {
+        int counter = lazyDemoData ? 10 : 30;
+        int ArticleCount = lazyDemoData ? 150 : 500;
+        OrderEndpoint orderEndpoint = new OrderEndpoint();
+
+
+        IntStream.range(0, counter).forEach(i -> {
+            ShopUser shopUser = ShopUser.findById(Integer.toUnsignedLong(new Random().nextInt(29) + 1));
+            List<ShoppingCartEntries> cartEntries = new ArrayList<>();
+            ShoppingCart shoppingCart = new ShoppingCart();
+            SecurityContext securityContext = new SecurityContext() {
+                @Override
+                public Principal getUserPrincipal() {
+                    return new Principal() {
+                        @Override
+                        public String getName() {
+                           return shopUser.email;
+                        }
+                    };
+                }
+
+                @Override
+                public boolean isUserInRole(String s) {
+                    return false;
+                }
+
+                @Override
+                public boolean isSecure() {
+                    return false;
+                }
+
+                @Override
+                public String getAuthenticationScheme() {
+                    return null;
+                }
+            };
+
+            IntStream.range(1, new Random().nextInt(10)).forEach(n -> {
+                ShoppingCartEntries shoppingCartEntries = new ShoppingCartEntries(Article.findById((Integer.toUnsignedLong(new Random().nextInt(ArticleCount) + 1))), (new Random().nextInt(9)) + 1);
+                cartEntries.add(shoppingCartEntries);
+                LOG.debug(shoppingCartEntries.toString());
+            });
+            shoppingCart.shoppingCartEntries = cartEntries;
+            shoppingCart.paymentMethod = ShopOrder.Payment.VORKASSE;
+            shoppingCart.shipping = 15.99;
+            LOG.debug(shoppingCart.toString());
+            orderEndpoint.createOrder(shoppingCart, securityContext);
+        });
+
+        return true;
+    }
 
 }

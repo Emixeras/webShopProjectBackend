@@ -18,7 +18,6 @@ public class ShopOrder extends PanacheEntityBase {
 
     @ManyToOne
     @JoinColumn(nullable = false)
-    @JsonbTransient
     public ShopUser shopUser;
 
     @OneToMany(mappedBy = "shopOrders", cascade = CascadeType.ALL, orphanRemoval = true)

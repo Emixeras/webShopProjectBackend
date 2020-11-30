@@ -6,6 +6,7 @@ import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 
 @Entity
+@NamedQuery(name = "Artist.getRange", query = "FROM Artist AS a WHERE a.id BETWEEN :sID and :eID")
 public class Artist extends PanacheEntityBase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

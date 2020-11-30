@@ -19,4 +19,13 @@ public class ShoppingCart {
 
     public ShoppingCart() {
     }
+
+    @Override
+    public String toString() {
+        return "ShoppingCart{" +
+                "shoppingCartEntries=" + shoppingCartEntries +
+                ", paymentMethod=" + paymentMethod +
+                ", shipping=" + shipping +
+                '}';
+    }
 }

@@ -2,6 +2,7 @@ package de.fhdw.endpoints;
 
 import de.fhdw.forms.ArtistDownloadForm;
 import de.fhdw.forms.ArtistUploadForm;
+import de.fhdw.models.Article;
 import de.fhdw.models.Artist;
 import de.fhdw.models.ArtistPicture;
 import de.fhdw.util.RestError;
@@ -20,9 +21,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
-import java.util.Base64;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -31,7 +30,7 @@ import java.util.stream.Collectors;
 @Tag(name = "Artist", description = "Operations on Artist object")
 
 @Path("artist")
-public class ArtistEndpoint  {
+public class ArtistEndpoint {
     private static final Logger LOG = Logger.getLogger(ArtistEndpoint.class);
 
 
@@ -48,12 +47,20 @@ public class ArtistEndpoint  {
     @GET
     @Path("range")
     public List<ArtistDownloadForm> getArtistRange(@MatrixParam("start") int start, @MatrixParam("end") int end) {
-        PanacheQuery<Artist> panacheQuery = Artist.findAll(Sort.by("id"));
+        PanacheQuery<Artist> panacheQuery;
+
+        if (start == end)
+            panacheQuery = Artist.findById(Integer.toUnsignedLong(start));
+        else {
+            Map<String, Object> params = new HashMap<>();
+            params.put("sID", Integer.toUnsignedLong(start));
+            params.put("eID", Integer.toUnsignedLong(end));
+            panacheQuery = Artist.find("#Artist.getRange", params);
+        }
 
         return panacheQuery
                 .list()
                 .stream()
-                .filter(i-> i.id >=start && i.id <= end)
                 .map(
                         artist -> {
                             ArtistDownloadForm artistDownloadForm = new ArtistDownloadForm();

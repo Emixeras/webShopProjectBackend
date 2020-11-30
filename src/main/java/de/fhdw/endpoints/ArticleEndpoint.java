@@ -4,11 +4,13 @@ import de.fhdw.forms.ArticleDownloadForm;
 import de.fhdw.forms.ArticleUploadForm;
 import de.fhdw.models.Article;
 import de.fhdw.models.ArticlePicture;
+import de.fhdw.models.Artist;
 import de.fhdw.util.PictureHandler;
 import io.quarkus.hibernate.orm.panache.PanacheQuery;
 import io.quarkus.panache.common.Sort;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
+import org.hibernate.annotations.NamedQuery;
 import org.jboss.logging.Logger;
 import org.jboss.resteasy.annotations.cache.Cache;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
@@ -22,9 +24,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.ByteArrayInputStream;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @ApplicationScoped
@@ -80,12 +80,19 @@ public class ArticleEndpoint {
     @Path("range")
     @Operation(summary = "returns a Range of ArticleForm Objects, including Pictures", description = "example: http://localhost:8080/article/range;start=0;end=20;quality=500 quality is optional")
     public List<ArticleDownloadForm> getArticleRange(@MatrixParam("start") int start, @MatrixParam("end") int end, @MatrixParam("quality") int quality) {
-        PanacheQuery<Article> panacheQuery = Article.findAll(Sort.by("id"));
 
-        int qual  = quality != 0 ? quality : 200;
+        PanacheQuery<Article> panacheQuery;
+        if (start == end) panacheQuery = Article.findById(Integer.toUnsignedLong(start));
+        else {
+            Map<String, Object> params = new HashMap<>();
+            params.put("sID", Integer.toUnsignedLong(start));
+            params.put("eID", Integer.toUnsignedLong(end));
+            panacheQuery = Article.find("#Article.getRange", params);
+        }
+
+        int qual = quality != 0 ? quality : 200;
         return panacheQuery
                 .stream()
-                .filter(i-> i.id >=start && i.id <= end)
                 .map(
                         article -> {
                             ArticleDownloadForm articleDownloadForm = new ArticleDownloadForm();
@@ -164,7 +171,6 @@ public class ArticleEndpoint {
         if (data.getFile() != null) {
             try {
                 article.articlePicture.rawData = data.getFile();
-                article.articlePicture.thumbnail = pictureHandler.scaleImage(data.getFileAsStream());
             } catch (Exception e) {
                 LOG.debug("Bild nicht upgedatet" + e.toString());
             }

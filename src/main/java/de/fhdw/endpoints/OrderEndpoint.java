@@ -40,7 +40,9 @@ public class OrderEndpoint {
             ShopOrderArticle shopOrderArticle = new ShopOrderArticle(Article.findById(i.article.id));
             ShopOrderEntry shopOrderEntry = new ShopOrderEntry(shopOrderArticle, i.count);
             shopOrderEntry.shopOrders = shopOrder;
+
             LOG.info(shopOrderEntry.toString());
+
             shopOrderEntry.persist();
         });
         return Response.ok().entity(shopOrder).build();

@@ -15,4 +15,12 @@ public class ShoppingCartEntries {
 
     public ShoppingCartEntries() {
     }
+
+    @Override
+    public String toString() {
+        return "ShoppingCartEntries{" +
+                "article=" + article +
+                ", count=" + count +
+                '}';
+    }
 }
