@@ -7,12 +7,12 @@ import org.jboss.logging.Logger;
 
 import javax.annotation.security.RolesAllowed;
 import javax.transaction.Transactional;
-import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
+import java.util.Date;
 
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -34,6 +34,7 @@ public class OrderEndpoint {
         shopOrder.shopUser = shopUser;
         shopOrder.shipping = shoppingCart.shipping;
         shopOrder.payment = shoppingCart.paymentMethod;
+        shopOrder.orderDate = new Date();
         shopOrder.persist();
         shoppingCart.shoppingCartEntries.forEach(i -> {
             ShopOrderArticle shopOrderArticle = new ShopOrderArticle(Article.findById(i.article.id));

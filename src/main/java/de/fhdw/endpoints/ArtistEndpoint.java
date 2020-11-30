@@ -51,9 +51,10 @@ public class ArtistEndpoint  {
         PanacheQuery<Artist> panacheQuery = Artist.findAll(Sort.by("id"));
 
         return panacheQuery
-                .range(start - 1, end - 1)
                 .list()
-                .stream().map(
+                .stream()
+                .filter(i-> i.id >=start && i.id <= end)
+                .map(
                         artist -> {
                             ArtistDownloadForm artistDownloadForm = new ArtistDownloadForm();
                             artistDownloadForm.artist = artist;
