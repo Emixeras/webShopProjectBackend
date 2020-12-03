@@ -35,15 +35,15 @@ public class GenreEndpoint  {
     @GET
     @Path("{id}")
     @Operation(summary = "gets a Single Object identified by id", description = "Returns a MultiPart Object")
-    public GenreUploadForm get(long id) {
-        GenreUploadForm genreUploadForm = new GenreUploadForm();
+    public GenreDownloadForm get(@org.jboss.resteasy.annotations.jaxrs.PathParam long id) {
+        GenreDownloadForm genreDownloadForm = new GenreDownloadForm();
         Genre genre = Genre.findById(id);
         if (genre == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
-        genreUploadForm.genre = genre;
-        genreUploadForm.setFile(genre.picture.rawData);
-        return genreUploadForm;
+        genreDownloadForm.genre = genre;
+        genreDownloadForm.file = Base64.getEncoder().encodeToString(genre.picture.rawData);
+        return genreDownloadForm;
     }
 
     @GET
